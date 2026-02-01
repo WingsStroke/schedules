@@ -31,7 +31,7 @@
   },
   {
     "version": "1.0.4",
-    "date": "2026-01-30",
+    "date": "2026-01-31",
     "changes": [
       "Se cambió el parámetro de detección de huecos horarios a minutos, ya no se usan bloques.",
       "Se arregló un bug de duplicación de viajes en el cálculo de transportes debido a la jornada nocturna.",
@@ -39,3 +39,4 @@
     ]
   }
 ]
+
