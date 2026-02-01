@@ -6,183 +6,254 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --bg:#ffffff;
-  --fg:#000000;
-  --gray:#f3f3f3;
+:root {
+  --bg: #ffffff;
+  --fg: #000000;
+  --gray: #f3f3f3;
 }
 
 *{
-  box-sizing:border-box;
-  font-family:"Inter", sans-serif;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--fg);
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
 }
 
-.view{
-  display:none;
-  min-height:100vh;
-  padding:30px;
+.view {
+  display: none;
+  min-height: 100vh;
+  padding: 30px;
 }
 
 .view.active{
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
 }
 
-#home header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:15px;
+#home header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-#home header button{
-  padding:10px 18px;
-  background:#000;
-  color:#fff;
-  border:none;
-  cursor:pointer;
-  font-weight:600;
+#home header button {
+  padding: 10px 18px;
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 #sortBar{
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 
-#sortBar select{
-  padding:6px 10px;
-  border:1px solid #000;
-  background:#fff;
-  font-weight:600;
+#sortBar select {
+  padding: 6px 10px;
+  border: 1px solid #000;
+  background: #fff;
+  font-weight: 600;
 }
 
-#scheduleList{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:15px;
+#scheduleList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+  gap: 15px;
 }
 
-.schedule-card{
-  border:2px solid #000;
-  padding:14px;
-  cursor:pointer;
-  transition:0.15s;
-  position:relative;
+.schedule-card {
+  border: 2px solid #000;
+  padding: 14px;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+  position: relative;
 }
 
 .schedule-card:hover{
-  background:#f5f5f5;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background: #f5f5f5;
 }
 
-.schedule-card h3{
-  margin:0;
-  font-size:16px;
+.schedule-card h3 {
+  margin: 0;
+  font-size: 16px;
 }
 
-.schedule-card span{
-  font-size:12px;
-  color:#444;
+.schedule-card span {
+  font-size: 12px;
+  color: #444;
 }
 
 .card-actions{
-  position:absolute;
-  top:6px;
-  right:6px;
-  display:flex;
-  gap:4px;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: flex;
+  gap: 4px;
 }
 
-.card-actions button{
+.card-actions button {
   border:1px solid #000;
-  background:#fff;
-  font-size:12px;
-  padding:2px 6px;
-  cursor:pointer;
-  font-weight:600;
+  background: #fff;
+  font-size: 12px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-#app header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
+#app header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-#app header button{
-  padding:6px 15px;
-  border:1px solid #000;
-  background:#fff;
-  cursor:pointer;
-  font-weight:600;
+#app header button {
+  padding: 6px 15px;
+  border: 1px solid #000;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-.actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:10px;
-  margin-bottom:10px;
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
-.actions button{
-  padding:8px 16px;
-  background:#000;
-  color:#fff;
-  border:none;
-  cursor:pointer;
-  font-weight:600;
+.actions button {
+  padding: 8px 16px;
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-table{
-  width:100%;
-  border-collapse:collapse;
-  table-layout:fixed;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
 }
 
 th, td{
-  border:1px solid #000;
-  text-align:center;
-  font-size:14px;
+  border: 1px solid #000;
+  text-align: center;
+  font-size: 14px;
 }
 
-th{
-  background:#000;
-  color:#fff;
-  padding:6px;
+th {
+  background: #000;
+  color: #fff;
+  padding: 6px;
 }
 
-.time{
-  font-weight:600;
-  background:#f4f4f4;
-  padding:6px;
+.time {
+  font-weight: 600;
+  background: #f4f4f4;
+  padding: 6px;
 }
 
-.cell{
-  cursor:pointer;
-  position:relative;
-  height:60px;
-  padding: 0;
-}
-
-.cell:hover{
-  background:#e6e6e6;
-}
-
-.subject {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  border-radius: 6px;
-  color: white;
-  font-size: 12px;
+.cell {
   cursor: pointer;
-  display: flex;
-  transition: height 0.15s ease, top 0.15s ease;
+  position: relative;
+  height: 60px;
+  padding: 0;
+  transition: background-color .15s ease, box-shadow .15s ease, transform .1s ease;
+  overflow: visible;
+}
+
+.cell:active {
+  transform: scale(0.97);
+}
+
+.cell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cell:hover::before {
+  background:rgba(0,0,0,0.1);
+  box-shadow: inset 0 0 0 3px rgba(0,0,0,0.35);
+  z-index: 1;
+}
+
+.cell.blocked {
+  border-top:none;
+  pointer-events:none;
+  background:transparent;
+}
+
+.cell.blocked::before,
+.cell.blocked::after {
+  display:none !important;
+}
+
+.cell:hover::after {
+  content:"+";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  font-weight:bold;
+  font-size:22px;
+  color:rgba(0,0,0,.4);
+}
+
+.cell.blocked:hover::after {
+  content:"";
+}
+
+.cell .subject{
+  pointer-events:auto;
+  z-index:10;
+}
+
+.cell::before{
+  z-index:1;
+}
+
+.subject { 
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  border-radius:6px;
+  color:white;
+  z-index: 10;
+  font-size:12px;
+  cursor:pointer;
+  display:flex;
+  transform-origin: center center;
+  will-change: transform;
+  transition:
+    height .15s ease,
+    top .15s ease,
+    transform .15s ease,
+    opacity .15s ease,
+    box-shadow .15s ease;
+}
+
+.subject:hover {
+  transform: scale(1.03);
+}
+
+.subject-hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .subject-content {
@@ -217,8 +288,20 @@ th{
   padding:20px 20px 24px 20px;
   width:320px;
   position:relative;
+  animation: modalIn .2s ease-out;
 }
 
+@keyframes modalIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1.0);
+    opacity: 1;
+  }
+}
 
 .modal-content h3{
   margin:0 0 10px 0;
@@ -262,19 +345,21 @@ th{
   padding-right:35px;
 }
 
+@keyframes ghostpulse {
+  from { opacity: 0.25; }
+
+  to { opacity: 0.45;}
+}
+
 .ghost-subject{
   position:absolute;
   inset:4px;
   border-radius:6px;
   opacity:0.4;
   pointer-events:none;
+  animation: ghostpulse 1s infinite alternate;
 }
 
-.cell.blocked{
-  border-top: none;
-  pointer-events:none;
-  background:#f0f0f0;
-}
 .input-error{
   border:2px solid #b00020 !important;
   background:#ffecec;
@@ -381,18 +466,6 @@ button:disabled{
   letter-spacing: 1px;
 }
 
-tr[data-jornada="diurna"] {
-  background: #ffffff;
-}
-
-tr[data-jornada="nocturna"] {
-  background: #f8f9ff;
-}
-
-.nocturna-divider {
-  border-top: 4px solid #000;
-}
-
 </style>
 </head>
 
@@ -437,7 +510,7 @@ tr[data-jornada="nocturna"] {
   </div>
 
   <div id="scheduleList">
-    <!--Cards de horarios-->
+    <!-- Cards de horarios -->
   </div>
 </div>
 
@@ -474,7 +547,7 @@ tr[data-jornada="nocturna"] {
 </div>
 </div>
 
-<!--MODAL NUEVO HORARIO-->
+<!-- MODAL NUEVO HORARIO -->
 <div class="modal" id="newScheduleModal">
   <div class="modal-content">
     <span class="close-btn">✕</span>
@@ -545,7 +618,7 @@ tr[data-jornada="nocturna"] {
   </div>
 </div>
 
-<!--AGUINALDO-->
+<!--MESADA-->
 
 <div class="modal" id="monthlyModal">
   <div class="modal-content">
@@ -567,11 +640,21 @@ tr[data-jornada="nocturna"] {
     <input type="number" id="transportCostInput" min="0" placeholder="Ej: 8000">
     <div class="error-text" id="transportError"></div>
 
-    <label>Mínimo de bloques para hueco</label>
-    <input type="number" id="gapBlocksInput" min="0" placeholder="Ej: 2">
+    
+    <label for="minGapMinutes">Minutos mínimos para considerar hueco</label>
+    <input
+      type="number"
+      id="minGapMinutes"
+      min="0"
+      step="5"
+      value="0"
+    />
+
+    <small>Si es 0, no se detectan huecos ni transportes extra</small>
+
     <div class="error-text" id="gapError"></div>
 
-    <button id="confirmMonthlyCalculation">Calcular</button>
+    <button id="confirmMonthlyBtn" type="button">Calcular</button>
       <div id="monthlyResult" style="
         margin-top:12px;
         border-top:1px solid #000;
@@ -651,12 +734,12 @@ const JORNADAS = {
   diurna: {
     start: "07:00",
     end: "18:00",
-    blockMinutes: 50
+    visualBlockMinutes: 50
   },
   nocturna: {
     start: "17:30",
     end: "22:00",
-    blockMinutes: 45
+    visualBlockMinutes: 45
   }
 };
 
@@ -767,19 +850,19 @@ function minutesToTime(min){
 }
 
 function generarBloques(jornada) {
-  const { start, end, blockMinutes } = JORNADAS[jornada];
+  const { start, end, visualBlockMinutes } = JORNADAS[jornada];
   const bloques = [];
   let actual = timeToMinutes(start);
   const limite = timeToMinutes(end);
 
-  while (actual + blockMinutes <= limite) {
+  while (actual + visualBlockMinutes <= limite) {
 
     bloques.push({
       start: minutesToTime(actual),
-      end: minutesToTime(actual + blockMinutes)
+      end: minutesToTime(actual + visualBlockMinutes)
     });
 
-    actual += blockMinutes;
+    actual += visualBlockMinutes;
 
     if (jornada === "diurna" && actual === timeToMinutes("12:50")) {
       actual += 10;
@@ -806,9 +889,6 @@ function createGhostSubject(subject, cell){
   div.className = "ghost-subject";
   div.style.background = subject.color;
   div.style.opacity = "0.35";
-  div.style.position = "absolute";
-  div.style.inset = "4px";
-  div.style.borderRadius = "6px";
   div.style.pointerEvents = "none";
 
   cell.appendChild(div);
@@ -861,13 +941,15 @@ function construirSeccion(titulo, bloques, jornada) {
         subject: null
       };
 
-      cell.onclick = () => {
+      cell.onclick = (e) => {
+        e.stopPropagation();
+
         if(duplicatingSubject){
           placeDuplicatedSubject(rowIndex, colIndex);
-        } 
-        else {
-          openSubjectModal(rowIndex, colIndex);
+          return;
         }
+
+        openSubjectModal(rowIndex, colIndex);
       };
 
         cell.onmouseenter = () => {
@@ -900,7 +982,7 @@ function construirHorario() {
   construirSeccion("Jornada Nocturna", bloquesNocturnos, "nocturna");
 }
 
-// JORDANAS - FINAL
+// JORNADAS - FINAL
 
 function resetSubjectModalState(){
   duplicatingSubject = null;
@@ -946,31 +1028,56 @@ function saveData(){
 
 // RENDER DE HORARIOS FUNCIONA YA
 
-function normalizeSubject(subject){
+function normalizeSubject(subject) {
   return {
-    id: subject.id || crypto.randomUUID(),
-    name: subject.name || "",
-    color: subject.color || "#1d4ed8",
+    id: subject.id ?? crypto.randomUUID(),
+    name: subject.name ?? "",
+    color: subject.color ?? "#1d4ed8",
     row: subject.row,
     col: subject.col,
     blocks: subject.blocks,
-    group: subject.group || "",
-    program: subject.program || "",
-    jornada: subject.jornada ?? null
+    group: subject.group ?? "",
+    program: subject.program ?? "",
+    jornada: subject.jornada,
+    day: subject.day,
+    startMinutes: subject.startMinutes,
+    endMinutes: subject.endMinutes
   };
 }
+
+function normalizeSubjectsForCalculation(subjects) {
+  return subjects
+    .filter(s =>
+      typeof s.day === "number" &&
+      typeof s.startMinutes === "number" &&
+      typeof s.endMinutes === "number"
+    )
+    .map(s => ({
+      day: s.day,
+      startMinutes: s.startMinutes,
+      endMinutes: s.endMinutes,
+      jornada: s.jornada
+    }));
+}
+
+const scheduleTitle = document.querySelector("#app h2");
 
 function openSchedule(index){
 
   if(index === null || schedules[index] === undefined) return;
 
   currentScheduleIndex = index;
-  scheduleTitle.textContent = schedules[index].name;
+
+  const currentSchedule = schedules[currentScheduleIndex];
+
+  scheduleTitle.textContent = currentSchedule.name;
 
   homeView.classList.remove("active");
   appView.classList.add("active");
 
-  schedules[index].subjects = schedules[index].subjects.map(normalizeSubject);
+  currentSchedule.subjects =
+    currentSchedule.subjects.map(normalizeSubject);
+
   saveData();
   buildScheduleTable();
 }
@@ -1088,7 +1195,9 @@ document.querySelectorAll(".close-btn").forEach(btn=>{
     modal.classList.remove("active");
 
     if(modal.id === "subjectModal"){
-      resetSubjectModalState();
+      if(!duplicatingSubject){
+        resetSubjectModalState();
+      }
       subjectNameInput.value = "";
       subjectBlocksInput.value = "1";
     }
@@ -1104,13 +1213,14 @@ sortSelect.onchange = ()=>{
 // ABRIR HORARIO
 
 const backHomeBtn = document.querySelector("#app header button");
-const scheduleTitle = document.querySelector("#app h2");
+
 
 // VOLVER AL HOME
 
 backHomeBtn.onclick = ()=>{
   appView.classList.remove("active");
   homeView.classList.add("active");
+  currentScheduleIndex = null;
 };
 
 renderSchedules();
@@ -1123,7 +1233,7 @@ function enforceMinZero(input){
 
 enforceMinZero(document.getElementById("snackCostInput"));
 enforceMinZero(document.getElementById("transportCostInput"));
-enforceMinZero(document.getElementById("gapBlocksInput"));
+enforceMinZero(document.getElementById("minGapMinutes"));
 
 loadChangelog();
 
@@ -1136,66 +1246,33 @@ loadChangelog();
 let editingSubjectIndex = null;
 let cellMatrix = [];
 
-// EXTRAER DIAS Y HORAS DE CELDA
-
-const fullDays = [
-  "Lunes",
-  "Martes",
-  "Miércoles",
-  "Jueves",
-  "Viernes",
-  "Sábado"
-];
-
-function getTimeFromRow(rowIndex) {
-  const rows = document.querySelectorAll("#schedule tbody tr");
-
-  if (!rows[rowIndex]) return null;
-
-  const timeText = rows[rowIndex].querySelector(".time").textContent;
-  const [start] = timeText.split(" - ");
-
-  return {
-    start: start.trim()
-  };
-}
-
-function getEndTimeFromRow(rowIndex) {
-  const rows = document.querySelectorAll("#schedule tbody tr");
-
-  if (!rows[rowIndex]) return null;
-
-  const timeText = rows[rowIndex].querySelector(".time").textContent;
-  const [, end] = timeText.split(" - ");
-
-  return end.trim();
-}
-
 function getSubjectScheduleText(subject) {
+  if (
+    typeof subject.startMinutes !== "number" ||
+    typeof subject.endMinutes !== "number"
+  ) {
+    return "Horario inválido";
+  }
 
-  const dayName = fullDays[subject.col] || "Día inválido";
+  const dayName = diasSemana[subject.day];
 
-  const startRow = subject.row;
-  const endRow = subject.row + subject.blocks - 1;
+  const start = minutesToTime(subject.startMinutes);
+  const end = minutesToTime(subject.endMinutes);
 
-  const startTime = getTimeFromRow(startRow)?.start;
-  const endTime = getEndTimeFromRow(endRow);
-
-  if (!startTime || !endTime) return "Horario inválido";
-
-  return `${dayName} ${startTime} - ${endTime}`;
+  return `${dayName} ${start} - ${end}`;
 }
 
 function buildSubjectsScheduleData() {
   if (currentScheduleIndex === null) return [];
 
-  const schedule = schedules[currentScheduleIndex];
   const map = {};
 
-  schedule.subjects.forEach(subject => {
+  const currentSchedule = schedules[currentScheduleIndex];
+
+  currentSchedule.subjects.forEach(subject => {
     const scheduleText = getSubjectScheduleText(subject);
 
-    const key = `${subject.name}||${subject.group}||${subject.program}||${subject.jornada}`;
+    const key = `${subject.name}||${subject.group}||${subject.program}||${subject.jornada}||${subject.color}`;
 
     if (!map[key]) {
       map[key] = {
@@ -1281,13 +1358,11 @@ const yearInput = document.getElementById("yearInput");
 
 const snackInput = document.getElementById("snackCostInput");
 const transportInput = document.getElementById("transportCostInput");
-const gapInput = document.getElementById("gapBlocksInput");
+const gapInput = document.getElementById("minGapMinutes");
 
 [yearInput, snackInput, transportInput, gapInput].forEach(input => {
   input.addEventListener("input", updateCalculateButtonState);
 });
-
-const confirmMonthlyBtn = document.getElementById("confirmMonthlyCalculation");
 
 function validateMonthlyInputs(showErrors = false){
 
@@ -1296,7 +1371,7 @@ function validateMonthlyInputs(showErrors = false){
   const year = document.getElementById("yearInput");
   const snack = document.getElementById("snackCostInput");
   const transport = document.getElementById("transportCostInput");
-  const gap = document.getElementById("gapBlocksInput");
+  const gap = document.getElementById("minGapMinutes");
 
   const yearError = document.getElementById("yearError");
   const snackError = document.getElementById("snackError");
@@ -1349,7 +1424,7 @@ function validateMonthlyInputs(showErrors = false){
 
     if(showErrors){
       gap.classList.add("input-error");
-      gapError.textContent = "El hueco mínimo no puede ser negativo.";
+      gapError.textContent = "Los minutos mínimos no pueden ser negativo.";
     }
     valid = false;
   }
@@ -1362,37 +1437,56 @@ function updateCalculateButtonState(){
   confirmMonthlyBtn.disabled = !isValid;
 }
 
-confirmMonthlyBtn.onclick = () => {
+function getCalculationConfig() {
+  return {
+    minGapMinutes: Number(gapInput.value) || 0,
+    transportCost: Number(transportInput.value) || 0,
+    snackCost: Number(snackInput.value) || 0,
+    year: Number(yearInput.value),
+    month: Number(monthSelect.value)
+  };
+}
 
-  if(!validateMonthlyInputs(true)) return;
+function calculateMonthlyCost(subjects, config) {
 
-  const result = calculateMonthlyCost();
+  const dailyMap = buildDailySubjects(subjects);
 
-  if(!result) return;
+  let totalTrips = 0;
+  let totalSnackDays = 0;
 
-  const monthName = months[monthSelect.value];
-  const year = yearInput.value;
+  const date = new Date(config.year, config.month, 1);
 
-  resultMonth.textContent = `Mes calculado: ${monthName} ${year}`;
-  resultTrips.textContent = `Total de viajes en el mes: ${result.trips}`;
+  while (date.getMonth() === config.month) {
+    const jsDay = date.getDay(); // 0 domingo
+    const dayIndex = jsDay - 1;  // lunes = 0
 
-  const snackFormatted = result.snackTotal.toLocaleString("es-CO");
+    if (dayIndex >= 0 && dayIndex <= 5 && !isHoliday(date)) {
+      
+      ["diurna", "nocturna"].forEach(jornada => {
+        const key = `${dayIndex}-${jornada}`;
+        const subjectsToday = dailyMap[key];
 
-  const oldSnack = monthlyResult.querySelector("#snackResult");
-  if(oldSnack) oldSnack.remove();
+        if(subjectsToday && subjectsToday.length > 0){
+          const trips = calculateTripsForDay(subjectsToday, config.minGapMinutes);
+          totalTrips += trips;
+          totalSnackDays++;
+        }
+      });
+    }
 
-  const resultSnack = document.createElement("p");
-  resultSnack.id = "snackResult";
-  resultSnack.textContent = `Total de merienda del mes: ${snackFormatted} COP`;
+    date.setDate(date.getDate() + 1);
+  }
 
-  monthlyResult.insertBefore(resultSnack, resultTotal);
+    const totalCost = totalTrips * config.transportCost + totalSnackDays * config.snackCost;
 
-  resultTotal.innerHTML = `
-    Total del mes: <strong>${result.total.toLocaleString("es-CO")} COP</strong>
-  `;
+    return {
+      totalTrips,
+      totalSnackDays,
+      totalCost
+    };
+}
 
-  monthlyResult.style.display = "block";
-};
+const confirmMonthlyBtn = document.getElementById("confirmMonthlyBtn");
 
 const months = [
   "Enero",
@@ -1465,30 +1559,50 @@ function openSubjectModal(row, col){
   subjectModal.classList.add("active");
 }
 
-function buildScheduleTable(){
+function buildScheduleTable() {
 
-  clearCurrentCell();
+  const currentSchedule = schedules[currentScheduleIndex];
+
+  if (currentScheduleIndex === null) return;
+
   construirHorario();
 
-  const schedule = schedules[currentScheduleIndex];
-
-  schedule.subjects.forEach(s => {
-    if (!s.jornada) {
-      const cell = cellMatrix[s.row]?.[s.col];
-      if (cell) {
-        s.jornada = cell.jornada;
-      }
-    }
-  });
-
-  saveData();
-
   renderSubjects();
+  saveData();
 }
 
 calculateBtn.onclick = () => {
+
+  if (currentScheduleIndex === null) {
+    alert("Abre un horario primero.");
+    return;
+  }
+
   monthlyModal.classList.add("active");
+  monthlyResult.style.display = "none";
   updateCalculateButtonState();
+};
+
+confirmMonthlyBtn.onclick = () => {
+
+  if (!validateMonthlyInputs(true)) return;
+
+  const config = getCalculationConfig();
+
+  const subjects = normalizeSubjectsForCalculation(
+    schedules[currentScheduleIndex].subjects
+  );
+
+  const result = calculateMonthlyCost(subjects, config);
+
+  if (!result) return;
+
+  monthlyResult.style.display = "block";
+
+  resultMonth.textContent = `Mes: ${months[config.month]} ${config.year}`;
+  resultTrips.textContent = `Viajes: ${result.totalTrips}`;
+  resultTotal.textContent =
+    `Total a pagar: ${result.totalCost.toLocaleString()} COP`;
 };
 
 // MODAL ASIGNATURA
@@ -1611,8 +1725,7 @@ subjectColorInput.oninput = () => {
 
 // GUARDAR ASIGNATURA
 
-function isCellOccupied(row, col, blocks, excludeSubject = null, jornada){
-  const schedule = schedules[currentScheduleIndex];
+function isCellOccupied(schedule, row, col, blocks, excludeSubject = null, jornada){
 
   for(let i = 0; i < blocks; i++){
     const r = row + i;
@@ -1653,14 +1766,15 @@ saveSubjectBtn.onclick = () => {
 
   if(!name) return alert("Nombre obligatorio");
 
-  const schedule = schedules[currentScheduleIndex];
-
   let editingSubject = null;
+  const currentSchedule = schedules[currentScheduleIndex];
+
   if(editingSubjectIndex !== null){
-    editingSubject = schedule.subjects[editingSubjectIndex];
+    editingSubject = currentSchedule.subjects[editingSubjectIndex];
   }
 
-  const maxRows = document.querySelectorAll("#schedule tbody tr").length;
+  const maxRows = cellMatrix.length;
+
   if(currentCell.row + blocks > maxRows){
     alert("La asignatura excede el horario disponible");
     return;
@@ -1669,11 +1783,25 @@ saveSubjectBtn.onclick = () => {
   const targetCell = cellMatrix[currentCell.row][currentCell.col];
   const jornada = targetCell.jornada;
 
-  if(isCellOccupied(currentCell.row, currentCell.col, blocks, editingSubject, jornada)){
+  if(isCellOccupied(
+    currentSchedule,
+    currentCell.row,
+    currentCell.col,
+    blocks,
+    editingSubject,
+    jornada
+    )){
+
     alert("Ese espacio ya está ocupado por otra asignatura");
     resetSubjectModalState();
     return;
   }
+
+  const startCell = cellMatrix[currentCell.row][currentCell.col];
+  const endCell = cellMatrix[currentCell.row + blocks - 1][currentCell.col];
+
+  const startMinutes = getAbsoluteMinutes(startCell.start);
+  const endMinutes = getAbsoluteMinutes(endCell.end);
 
   const newSubject = {
     id: editingSubject ? editingSubject.id : crypto.randomUUID(),
@@ -1681,18 +1809,21 @@ saveSubjectBtn.onclick = () => {
     color,
     row: currentCell.row,
     col: currentCell.col,
+    day: currentCell.col,
     blocks,
     group: subjectGroupInput.value.trim(),
     program: subjectProgramInput.value.trim(),
-    jornada
+    jornada,
+    startMinutes,
+    endMinutes
   };
 
-
   if(editingSubjectIndex !== null){
-    schedule.subjects.splice(editingSubjectIndex, 1);
+    currentSchedule.subjects.splice(editingSubjectIndex, 1);
   }
 
-  schedule.subjects.push(newSubject);
+  schedules[currentScheduleIndex].subjects.push(newSubject);
+
 
   saveData();
   subjectModal.classList.remove("active");
@@ -1709,10 +1840,11 @@ saveSubjectBtn.onclick = () => {
 };
 
 function deleteSubject(){
-  const schedule = schedules[currentScheduleIndex];
+
   if(editingSubjectIndex === null) return;
 
-  schedule.subjects.splice(editingSubjectIndex,1);
+  const currentSchedule = schedules[currentScheduleIndex];
+  currentSchedule.subjects.splice(editingSubjectIndex, 1);
   saveData();
 
   subjectModal.classList.remove("active");
@@ -1729,8 +1861,8 @@ function deleteSubject(){
 }
 
 function duplicateSubject(subject){
+
   subjectModal.classList.remove("active");
-  clearCurrentCell();
 
   duplicatingSubject = {
     name: subject.name,
@@ -1741,6 +1873,8 @@ function duplicateSubject(subject){
     jornada: subject.jornada
   };
 
+  editingSubjectIndex = null;
+  clearCurrentCell();
   setDuplicateCursor(true);
 }
 
@@ -1748,11 +1882,14 @@ setDuplicateCursor(false);
 
 function placeDuplicatedSubject(row, col){
 
-  const schedule = schedules[currentScheduleIndex];
+  if(!duplicatingSubject) return;
+
+  setCurrentCell(row, col);
 
   const blocks = duplicatingSubject.blocks;
+  const maxRows = cellMatrix.length;
 
-  if(row + blocks > document.querySelectorAll("#schedule tbody tr").length){
+  if(row + blocks > maxRows){
     alert("La asignatura excede el horario disponible");
     resetSubjectModalState();
     return;
@@ -1760,11 +1897,24 @@ function placeDuplicatedSubject(row, col){
 
   const targetCell = cellMatrix[row][col];
 
-  if(isCellOccupied(row, col, blocks, null, targetCell.jornada)){
+  if(isCellOccupied(
+    schedules[currentScheduleIndex],
+    row,
+    col,
+    blocks,
+    null,
+    targetCell.jornada
+  )){
     alert("Ese espacio ya está ocupado por otra asignatura");
     resetSubjectModalState();
     return;
   }
+
+  const startCell = cellMatrix[row][col];
+  const endCell = cellMatrix[row + blocks - 1][col];
+
+  const startMinutes = getAbsoluteMinutes(startCell.start);
+  const endMinutes = getAbsoluteMinutes(endCell.end);
 
   const newSubject = {
     id: crypto.randomUUID(),
@@ -1772,34 +1922,28 @@ function placeDuplicatedSubject(row, col){
     color: duplicatingSubject.color,
     row,
     col,
-    blocks: duplicatingSubject.blocks,
+    day: col,
+    blocks,
     group: duplicatingSubject.group || "",
     program: duplicatingSubject.program || "",
-    jornada: targetCell.jornada
+    jornada: targetCell.jornada,
+    startMinutes,
+    endMinutes
   };
 
-  schedule.subjects.push(newSubject);
+  schedules[currentScheduleIndex].subjects.push(newSubject);
+
   saveData();
   buildScheduleTable();
   resetSubjectModalState();
-
 }
 
 // DIBUJAR ASIGNATURAS
 
+const CELL_HEIGHT = 60;
+
 function getSubjectPixelHeight(subject){
-  let height = 0;
-
-  for(let i = 0; i < subject.blocks; i++){
-
-    const cell = cellMatrix[subject.row + i]?.[subject.col];
-
-    if(cell){
-      height += cell.element.offsetHeight;
-    }
-  }
-
-  return height;
+  return subject.blocks * CELL_HEIGHT;
 }
 
 function renderSubjects(){
@@ -1807,17 +1951,19 @@ function renderSubjects(){
   document.querySelectorAll(".subject").forEach(s => s.remove());
   document.querySelectorAll(".cell").forEach(c => {
     c.classList.remove("blocked");
-    c.style.borderTop = "";
+    c.style.borderTop = "1px solid #000";
   });
 
   if(currentScheduleIndex === null) return;
 
-  const schedule = schedules[currentScheduleIndex];
+  const currentSchedule = schedules[currentScheduleIndex];
 
-  schedule.subjects.forEach(sub => {
+  currentSchedule.subjects.forEach(sub => {
 
-    const baseCell = cellMatrix[sub.row]?.[sub.col];
-    if(!baseCell) return;
+    const row = sub.row;
+    const baseCell = cellMatrix[row]?.[sub.col];
+    
+    if (!baseCell) return;
     
     if(baseCell.jornada !== sub.jornada){
       console.warn("Asignatura con jornada inválida:", sub);
@@ -1842,57 +1988,23 @@ function renderSubjects(){
   
     div.style.height = getSubjectPixelHeight(sub) + "px";
     div.style.boxSizing = "border-box";
-    div.style.zIndex = "2";
 
     div.onclick = (e) => {
-    e.stopPropagation();
-    openEditSubjectModal(sub);
-  };
+      e.stopPropagation();
+      openEditSubjectModal(sub);
+    };
 
-  for(let i = 1; i < sub.blocks; i++){
+    for(let i = 1; i < sub.blocks; i++){
 
-    const coveredCell = cellMatrix[sub.row + i]?.[sub.col];
-    if(coveredCell){
-      coveredCell.element.classList.add("blocked");
-      coveredCell.element.style.borderTop = "none";
-    }
-
-  } 
-
-  baseCell.element.appendChild(div);
-
-  });
-}
-
-function calculateDayCost(dayIndex, snackCost, transportCost, minGapBlocks){
-  if(currentScheduleIndex === null) return { cost: 0, trips: 0 };
-
-  const schedule = schedules[currentScheduleIndex];
-  const daySubjects = schedule.subjects
-    .filter(s => s.col === dayIndex)
-    .sort((a,b) => a.row - b.row);
-
-  if(daySubjects.length === 0){
-    return { cost: 0, trips: 0 };
-  }
-
-  let trips = 1;
-
-  if(minGapBlocks !== null && minGapBlocks > 0){
-    for(let i = 0; i < daySubjects.length - 1; i++){
-      const currentEnd = daySubjects[i].row + daySubjects[i].blocks;
-      const nextStart = daySubjects[i + 1].row;
-      const gap = nextStart - currentEnd;
-
-      if(gap >= minGapBlocks){
-        trips++;
+      const coveredCell = cellMatrix[sub.row + i]?.[sub.col];
+      if(coveredCell){
+        coveredCell.element.classList.add("blocked");
+        coveredCell.element.style.borderTop = "none";
       }
-    }
-  }
+    } 
 
-  const cost = snackCost + (transportCost * trips);
-
-  return { cost, trips };
+    baseCell.element.appendChild(div);
+  });
 }
 
 function getEasterDate(year){
@@ -1970,59 +2082,53 @@ function isHoliday(date){
   );
 }
 
-function hasClassesThatDay(weekDayIndex){
-  const schedule = schedules[currentScheduleIndex];
-  return schedule.subjects.some(s => s.col === weekDayIndex);
+function getAbsoluteMinutes(timeStr) {
+  if (!timeStr) return null;
+
+  const [time, modifier] = timeStr.split(' ');
+  let [hours, minutes] = time.split(':').map(Number);
+
+  if (modifier === 'PM' && hours !== 12) hours += 12;
+  if (modifier === 'AM' && hours === 12) hours = 0;
+
+  return hours * 60 + minutes;
 }
 
-function calculateMonthlyCost(){
-  if(currentScheduleIndex === null) return;
+function buildDailySubjects(subjects) {
+  const map = {};
 
-  const month = parseInt(monthSelect.value);
-  const year = parseInt(yearInput.value);
+  subjects.forEach(s => {
+    const key = `${s.day}-${s.jornada}`;
+    if (!map[key]) map[key] = [];
+    map[key].push({
+      startMinutes: s.startMinutes,
+      endMinutes: s.endMinutes
+    });
+  });
 
-  const snackCost = parseFloat(document.getElementById("snackCostInput").value) || 0;
-  const transportCost = parseFloat(document.getElementById("transportCostInput").value) || 0;
-  const minGapBlocks = parseInt(document.getElementById("gapBlocksInput").value) || 0;
+  Object.values(map).forEach(list =>
+    list.sort((a, b) => a.startMinutes - b.startMinutes)
+  );
 
-  let total = 0;
-  let totalTrips = 0;
-  let totalSnack = 0;
+  return map;
+}
 
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
+function calculateTripsForDay(subjectsOfDay, minGapMinutes) {
+  if (!subjectsOfDay || subjectsOfDay.length === 0) return 0;
 
-  for(let day = 1; day <= daysInMonth; day++){
-    const date = new Date(year, month, day);
-    const weekDay = date.getDay(); 
+  let trips = 1;
 
-    if(weekDay === 0) continue;
+  for (let i = 0; i < subjectsOfDay.length - 1; i++) {
+    const gap =
+      subjectsOfDay[i + 1].startMinutes -
+      subjectsOfDay[i].endMinutes;
 
-    const scheduleDayIndex = weekDay - 1;
-
-    if(isHoliday(date)) continue;
-
-    if(!hasClassesThatDay(scheduleDayIndex)) continue;
-
-    totalSnack += snackCost;
-
-    const dayData = calculateDayCost(
-      scheduleDayIndex,
-      snackCost,
-      transportCost,
-      minGapBlocks > 0 ? minGapBlocks : null
-    );
-
-    total += dayData.cost;
-    totalTrips += dayData.trips;
-
+    if (minGapMinutes > 0 && gap >= minGapMinutes) {
+      trips++;
+    }
   }
 
-  return {
-    total,
-    trips: totalTrips,
-    snackTotal: totalSnack,
-  };
-
+  return trips;
 }
 
 // EXPORTAR JSON
@@ -2046,7 +2152,9 @@ document.getElementById("importFileInput").onchange = (e) => {
       }
 
       imported.forEach(schedule => {
-        schedule.subjects = schedule.subjects.map(normalizeSubject);
+        if (Array.isArray(schedule.subjects)) {
+          schedule.subjects = schedule.subjects.map(normalizeSubject);
+        }
       });
 
       imported.forEach(schedule => {
@@ -2084,14 +2192,16 @@ document.getElementById("exportScheduleBtn").onclick = () => {
     return;
   }
 
-  const schedule = schedules[currentScheduleIndex];
+  const currentSchedule = schedules[currentScheduleIndex];
+  const dataStr = JSON.stringify(currentSchedule, null, 2);
 
-  const dataStr = JSON.stringify(schedule, null, 2);
   const blob = new Blob([dataStr], { type: "application/json" });
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = `horario_${schedule.name || "sin_nombre"}.json`;
+
+  a.download = `horario_${currentSchedule.name || "sin_nombre"}.json`;
+
   a.click();
 
   URL.revokeObjectURL(a.href);
