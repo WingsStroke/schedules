@@ -44,7 +44,8 @@
     "changes": [
       "Se arregló un bug de exportación en el formato de matrículas que no exportaba los días y las horas correctamente.",
       "Se arregló un bug en el cálculo de transportes cuando se detectaban huecos horarios y había una asignatura en la jornada nocturna.",
-      "Se mejoró el sistema de detección de huecos horarios.",
+      "Se mejoró el sistema de detección de huecos horarios."
     ]
   }
 ]
+
