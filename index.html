@@ -214,6 +214,10 @@ th {
   color:rgba(0,0,0,.4);
 }
 
+.cell:has(.subject):hover::after {
+  content: "";
+}
+
 .cell.blocked:hover::after {
   content:"";
 }
@@ -380,6 +384,11 @@ button:disabled{
   outline: 3px solid #46E563;
   outline-offset: -2px;
   background-color: rgba(70, 229, 99, 0.15);
+}
+
+.cell.active-cell::before {
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .changelog-panel{
@@ -730,6 +739,48 @@ const closeChangelogBtn = document.getElementById("closeChangelogBtn");
 const changelogAlert = document.getElementById("changelogAlert");
 const LAST_VERSION_KEY = "lastSeenChangelogVersion";
 
+const editorState = {
+  currentScheduleIndex: null,
+  editingSubjectIndex: null,
+  duplicatingSubject: null,
+  currentCell: null,
+  cellMatrix: [],
+  ghostSubject: null,
+  globalRowIndex: 0
+};
+
+const state = {
+  resetEditor() {
+    editorState.editingSubjectIndex = null;
+    editorState.currentCell = null;
+    editorState.ghostSubject = null;
+  },
+
+  startDuplication(subject) {
+    editorState.duplicatingSubject = subject;
+    setDuplicateCursor(true);
+  },
+
+  cancelDuplication() {
+    editorState.duplicatingSubject = null;
+    removeGhostSubject();
+    clearDuplicateVisualState();
+    setDuplicateCursor(false);
+  },
+
+  isDuplicating() {
+    return editorState.duplicatingSubject !== null;
+  },
+
+  setCurrentCell(cell) {
+    editorState.currentCell = cell;
+  },
+
+  clearCurrentCell() {
+    editorState.currentCell = null;
+  }
+};
+
 const JORNADAS = {
   diurna: {
     start: "07:00",
@@ -858,8 +909,8 @@ function generarBloques(jornada) {
   while (actual + visualBlockMinutes <= limite) {
 
     bloques.push({
-      start: minutesToTime(actual),
-      end: minutesToTime(actual + visualBlockMinutes)
+      startMinutes: actual,
+      endMinutes: actual + visualBlockMinutes
     });
 
     actual += visualBlockMinutes;
@@ -872,16 +923,24 @@ function generarBloques(jornada) {
   return bloques;
 }
 
-let globalRowIndex = 0;
-let ghostSubject = null;
-
 function removeGhostSubject(){
-  if(ghostSubject){
-    ghostSubject.remove();
-    ghostSubject = null;
+  if(editorState.ghostSubject){
+    editorState.ghostSubject.remove();
+    editorState.ghostSubject = null;
   }
 }
 
+function clearDuplicateVisualState() {
+  if (editorState.ghostSubject) {
+    editorState.ghostSubject.remove();
+    editorState.ghostSubject = null;
+  }
+
+  document.querySelectorAll(".active-cell").forEach(cell => {
+    cell.classList.remove("active-cell");
+  });
+}
+  
 function createGhostSubject(subject, cell){
   removeGhostSubject();
 
@@ -892,7 +951,7 @@ function createGhostSubject(subject, cell){
   div.style.pointerEvents = "none";
 
   cell.appendChild(div);
-  ghostSubject = div;
+  editorState.ghostSubject = div;
 }
 
 function construirSeccion(titulo, bloques, jornada) {
@@ -911,8 +970,8 @@ function construirSeccion(titulo, bloques, jornada) {
   scheduleBody.appendChild(header);
 
   bloques.forEach((bloque) => {
-    const rowIndex = globalRowIndex;
-    globalRowIndex++;
+    const rowIndex = editorState.globalRowIndex;
+    editorState.globalRowIndex++;
 
     const row = document.createElement("tr");
     row.dataset.jornada = jornada;
@@ -920,7 +979,8 @@ function construirSeccion(titulo, bloques, jornada) {
     const matrixRow = [];
 
     const hourCell = document.createElement("td");
-    hourCell.textContent = `${bloque.start} - ${bloque.end}`;
+    hourCell.textContent =
+      `${minutesToTime(bloque.startMinutes)} - ${minutesToTime(bloque.endMinutes)}`;
     hourCell.classList.add("time");
     row.appendChild(hourCell);
 
@@ -928,23 +988,23 @@ function construirSeccion(titulo, bloques, jornada) {
       const cell = document.createElement("td");
       cell.classList.add("cell");
       cell.dataset.day = dia;
-      cell.dataset.start = bloque.start;
-      cell.dataset.end = bloque.end;
+      cell.dataset.startMinutes = bloque.startMinutes;
+      cell.dataset.endMinutes = bloque.endMinutes;
       cell.dataset.jornada = jornada;
 
       const matrixCell = {
         element: cell,
         day: dia,
-        start: bloque.start,
-        end: bloque.end,
-        jornada: jornada,
+        startMinutes: bloque.startMinutes,
+        endMinutes: bloque.endMinutes,
+        jornada,
         subject: null
       };
 
       cell.onclick = (e) => {
         e.stopPropagation();
 
-        if(duplicatingSubject){
+        if (state.isDuplicating()) {
           placeDuplicatedSubject(rowIndex, colIndex);
           return;
         }
@@ -953,9 +1013,10 @@ function construirSeccion(titulo, bloques, jornada) {
       };
 
         cell.onmouseenter = () => {
-          if(!duplicatingSubject) return;
-          if(cell.classList.contains("blocked")) return;
-          createGhostSubject(duplicatingSubject, cell);
+          if (!state.isDuplicating()) return;
+          if (cell.classList.contains("blocked")) return;
+          removeGhostSubject();
+          createGhostSubject(editorState.duplicatingSubject, cell);
         };
 
         cell.onmouseleave = () => {
@@ -967,28 +1028,38 @@ function construirSeccion(titulo, bloques, jornada) {
       row.appendChild(cell);
     });
 
-    cellMatrix.push(matrixRow);
+    editorState.cellMatrix.push(matrixRow);
     scheduleBody.appendChild(row);
   });
 }
 
 function construirHorario() {
 
-  scheduleBody.innerHTML = "";
-  cellMatrix = [];
-  globalRowIndex = 0;
+  state.cancelDuplication();
 
-  construirSeccion("Jornada Diurna", bloquesDiurnos, "diurna");
-  construirSeccion("Jornada Nocturna", bloquesNocturnos, "nocturna");
+  scheduleBody.innerHTML = "";
+  editorState.cellMatrix = [];
+  editorState.globalRowIndex = 0;
+
+  construirSeccion(
+    "JORNADA DIURNA",
+    bloquesDiurnos,
+    "diurna"
+  );
+
+  construirSeccion(
+    "JORNADA NOCTURNA",
+    bloquesNocturnos,
+    "nocturna"
+  );
 }
 
 // JORNADAS - FINAL
 
 function resetSubjectModalState(){
-  duplicatingSubject = null;
-  editingSubjectIndex = null;
+  state.cancelDuplication();
+  editorState.editingSubjectIndex = null;
   clearCurrentCell();
-  setDuplicateCursor(false);
   removeGhostSubject();
 }
 
@@ -1029,20 +1100,54 @@ function saveData(){
 // RENDER DE HORARIOS FUNCIONA YA
 
 function normalizeSubject(subject) {
-  return {
+
+  const day =
+    Number.isInteger(Number(subject.day))
+      ? Number(subject.day)
+      : Number(subject.col);
+
+  const normalized = {
     id: subject.id ?? crypto.randomUUID(),
     name: subject.name ?? "",
     color: subject.color ?? "#1d4ed8",
-    row: subject.row,
-    col: subject.col,
-    blocks: subject.blocks,
+    row: Number(subject.row),
+    col: Number(subject.col),
+    blocks: Number(subject.blocks),
     group: subject.group ?? "",
     program: subject.program ?? "",
     jornada: subject.jornada,
-    day: subject.day,
+    day: day,
     startMinutes: subject.startMinutes,
     endMinutes: subject.endMinutes
   };
+
+  if (
+    typeof normalized.startMinutes !== "number" ||
+    typeof normalized.endMinutes !== "number"
+  ) {
+    const bloques =
+      normalized.jornada === "nocturna"
+        ? bloquesNocturnos
+        : bloquesDiurnos;
+
+    if (
+      Number.isInteger(normalized.row) &&
+      Number.isInteger(normalized.blocks)
+    ) {
+      const timeRange =
+        ScheduleTimeModel.getSubjectTimeRange(
+          normalized,
+          bloques
+        );
+
+      if (timeRange) {
+        normalized.startMinutes = timeRange.startMinutes;
+        normalized.endMinutes = timeRange.endMinutes;
+      }
+    }
+  }
+
+  return normalized;
 }
 
 function normalizeSubjectsForCalculation(subjects) {
@@ -1064,6 +1169,8 @@ const scheduleTitle = document.querySelector("#app h2");
 
 function openSchedule(index){
 
+  state.cancelDuplication();
+
   if(index === null || schedules[index] === undefined) return;
 
   currentScheduleIndex = index;
@@ -1079,7 +1186,8 @@ function openSchedule(index){
     currentSchedule.subjects.map(normalizeSubject);
 
   saveData();
-  buildScheduleTable();
+
+  rebuildScheduleView();
 }
 
 function renderSchedules(){
@@ -1195,7 +1303,7 @@ document.querySelectorAll(".close-btn").forEach(btn=>{
     modal.classList.remove("active");
 
     if(modal.id === "subjectModal"){
-      if(!duplicatingSubject){
+      if(!editorState.duplicatingSubject){
         resetSubjectModalState();
       }
       subjectNameInput.value = "";
@@ -1243,9 +1351,6 @@ loadChangelog();
 
 // PARTE 3
 
-let editingSubjectIndex = null;
-let cellMatrix = [];
-
 function getSubjectScheduleText(subject) {
   if (
     typeof subject.startMinutes !== "number" ||
@@ -1255,7 +1360,6 @@ function getSubjectScheduleText(subject) {
   }
 
   const dayName = diasSemana[subject.day];
-
   const start = minutesToTime(subject.startMinutes);
   const end = minutesToTime(subject.endMinutes);
 
@@ -1457,21 +1561,22 @@ function calculateMonthlyCost(subjects, config) {
   const date = new Date(config.year, config.month, 1);
 
   while (date.getMonth() === config.month) {
-    const jsDay = date.getDay(); // 0 domingo
-    const dayIndex = jsDay - 1;  // lunes = 0
+    const jsDay = date.getDay();
+    const dayIndex = jsDay - 1;
 
     if (dayIndex >= 0 && dayIndex <= 5 && !isHoliday(date)) {
       
-      ["diurna", "nocturna"].forEach(jornada => {
-        const key = `${dayIndex}-${jornada}`;
-        const subjectsToday = dailyMap[key];
+      const subjectsToday = dailyMap[dayIndex];
 
-        if(subjectsToday && subjectsToday.length > 0){
-          const trips = calculateTripsForDay(subjectsToday, config.minGapMinutes);
-          totalTrips += trips;
-          totalSnackDays++;
-        }
-      });
+      if (subjectsToday && subjectsToday.length > 0) {
+        const trips = calculateTripsForDay(
+          subjectsToday,
+          config.minGapMinutes
+        );
+
+        totalTrips += trips;
+        totalSnackDays++;
+      }
     }
 
     date.setDate(date.getDate() + 1);
@@ -1537,7 +1642,10 @@ function cleanSubjectModalButtons(){
 }
 
 function openSubjectModal(row, col){
-  const cell = cellMatrix[row][col];
+
+  state.cancelDuplication();
+
+  const cell = editorState.cellMatrix[row][col];
 
   if(cell.element.classList.contains("blocked")){
     clearCurrentCell();
@@ -1545,7 +1653,7 @@ function openSubjectModal(row, col){
   }
 
   setCurrentCell(row, col);
-  editingSubjectIndex = null;
+  editorState.editingSubjectIndex = null;
 
   subjectNameInput.value = "";
   subjectGroupInput.value = "";
@@ -1559,16 +1667,17 @@ function openSubjectModal(row, col){
   subjectModal.classList.add("active");
 }
 
-function buildScheduleTable() {
-
-  const currentSchedule = schedules[currentScheduleIndex];
-
+function rebuildScheduleView() {
   if (currentScheduleIndex === null) return;
 
   construirHorario();
-
+  syncSubjectsWithGrid();
   renderSubjects();
-  saveData();
+}
+
+function buildScheduleTable() {
+  if (currentScheduleIndex === null) return;
+  rebuildScheduleView();
 }
 
 calculateBtn.onclick = () => {
@@ -1599,17 +1708,13 @@ confirmMonthlyBtn.onclick = () => {
 
   monthlyResult.style.display = "block";
 
-  resultMonth.textContent = `Mes: ${months[config.month]} ${config.year}`;
+  resultMonth.textContent = `${months[config.month]} ${config.year}`;
   resultTrips.textContent = `Viajes: ${result.totalTrips}`;
   resultTotal.textContent =
     `Total a pagar: ${result.totalCost.toLocaleString()} COP`;
 };
 
 // MODAL ASIGNATURA
-
-let duplicatingSubject = null;
-
-let currentCell = null;
 
 function highlightCurrentCell(subject = null) {
 
@@ -1619,7 +1724,7 @@ function highlightCurrentCell(subject = null) {
 
   if (subject) {
     for (let i = 0; i < subject.blocks; i++) {
-      const cell = cellMatrix[subject.row + i]?.[subject.col];
+      const cell = editorState.cellMatrix[subject.row + i]?.[subject.col];
       if (cell) {
         cell.element.classList.add("active-cell");
       }
@@ -1629,8 +1734,8 @@ function highlightCurrentCell(subject = null) {
 
   if (!hasCurrentCell()) return;
 
-  const { row, col } = currentCell;
-  const cell = cellMatrix[row]?.[col];
+  const { row, col } = editorState.currentCell;
+  const cell = editorState.cellMatrix[row]?.[col];
   if (cell) {
     cell.element.classList.add("active-cell");
   }
@@ -1644,12 +1749,12 @@ function setCurrentCell(row, col){
 
   }
 
-  currentCell = { row, col };
+  editorState.currentCell = { row, col };
   highlightCurrentCell();
 }
 
 function clearCurrentCell(){
-  currentCell = null;
+  editorState.currentCell = null;
 
   document
     .querySelectorAll(".cell.active-cell")
@@ -1657,7 +1762,7 @@ function clearCurrentCell(){
 }
 
 function hasCurrentCell(){
-  return currentCell !== null;
+  return editorState.currentCell !== null;
 }
 
 function setDuplicateCursor(active){
@@ -1687,9 +1792,10 @@ function createDuplicateButton(subject){
 
 function openEditSubjectModal(subject){
 
-  resetSubjectModalState();
+  state.cancelDuplication();
+  removeGhostSubject();
 
-  editingSubjectIndex = schedules[currentScheduleIndex].subjects.findIndex(
+  editorState.editingSubjectIndex = schedules[currentScheduleIndex].subjects.findIndex(
     s => s.id === subject.id
   );
 
@@ -1725,30 +1831,86 @@ subjectColorInput.oninput = () => {
 
 // GUARDAR ASIGNATURA
 
-function isCellOccupied(schedule, row, col, blocks, excludeSubject = null, jornada){
+const ScheduleLogic = {
 
-  for(let i = 0; i < blocks; i++){
-    const r = row + i;
+  canPlaceSubject({ schedule, row, col, blocks, jornada, excludeSubject }) {
+    for (let i = 0; i < blocks; i++) {
+      const r = row + i;
 
-    const conflict = schedule.subjects.some(s => {
-      if (excludeSubject && s.id === excludeSubject.id) return false;
+      const conflict = schedule.subjects.some(s => {
+        if (excludeSubject && s.id === excludeSubject.id) return false;
 
-      for(let b = 0; b < s.blocks; b++){
-        if(
-          s.col === col &&
-          s.row + b === r &&
-          s.jornada === jornada
-        ){
-          return true;
-        }
-      }
-      return false;
-    });
+        if (s.col !== col) return false;
+        if (s.jornada !== jornada) return false;
 
-    if(conflict) return true;
+        return r >= s.row && r < s.row + s.blocks;
+      });
+
+      if (conflict) return false;
+    }
+    return true;
+  },
+
+  exceedsJornadaLimit({ row, blocks, jornadaRowsLength }) {
+    return row + blocks > jornadaRowsLength;
   }
 
-  return false;
+};
+
+const ScheduleTimeModel = {
+
+  getSubjectTimeRange(subject, bloques) {
+    const startBlock = bloques[subject.row];
+    const endBlock = bloques[subject.row + subject.blocks - 1];
+
+    return {
+      startMinutes: startBlock.startMinutes,
+      endMinutes: endBlock.endMinutes
+    };
+  },
+
+  getScheduleDayTimeline(schedule, day, jornada, bloques) {
+    return schedule.subjects
+      .filter(s => s.day === day && s.jornada === jornada)
+      .map(s => {
+        const { startMinutes, endMinutes } =
+          this.getSubjectTimeRange(s, bloques);
+
+        return {
+          id: s.id,
+          startMinutes,
+          endMinutes
+        };
+      })
+      .sort((a, b) => a.startMinutes - b.startMinutes);
+  },
+
+  calculateGaps(timeline, minGapMinutes) {
+    let gaps = 0;
+
+    for (let i = 1; i < timeline.length; i++) {
+      const gap =
+        timeline[i].startMinutes -
+        timeline[i - 1].endMinutes;
+
+      if (gap >= minGapMinutes) {
+        gaps++;
+      }
+    }
+    return gaps;
+  }
+
+};
+
+function isCellOccupied(schedule, row, col, blocks, excludeSubject, jornada) {
+  return !ScheduleLogic.canPlaceSubject({
+    schedule,
+    row,
+    col,
+    blocks,
+    jornada,
+    excludeSubject
+  });
 }
 
 saveSubjectBtn.onclick = () => {
@@ -1769,47 +1931,71 @@ saveSubjectBtn.onclick = () => {
   let editingSubject = null;
   const currentSchedule = schedules[currentScheduleIndex];
 
-  if(editingSubjectIndex !== null){
-    editingSubject = currentSchedule.subjects[editingSubjectIndex];
+  if (editorState.editingSubjectIndex !== null) {
+    editingSubject = currentSchedule.subjects.splice(
+      editorState.editingSubjectIndex,
+      1
+    )[0];
+    editorState.editingSubjectIndex = null;
   }
 
-  const maxRows = cellMatrix.length;
+  const targetCell =
+    editorState.cellMatrix[editorState.currentCell.row][editorState.currentCell.col];
 
-  if(currentCell.row + blocks > maxRows){
+  const jornada = targetCell.jornada;
+
+  let lastValidRow = -1;
+
+  for (let r = editorState.currentCell.row; r < editorState.cellMatrix.length; r++) {
+    if (editorState.cellMatrix[r][0]?.jornada === jornada) {
+      lastValidRow = r;
+    }
+  }
+
+  let lastRowOfJornada = -1;
+
+  for (let r = 0; r < editorState.cellMatrix.length; r++) {
+    if (editorState.cellMatrix[r][0]?.jornada === jornada) {
+      lastRowOfJornada = r;
+    }
+  }
+
+  if (editorState.currentCell.row + blocks - 1 > lastRowOfJornada) {
     alert("La asignatura excede el horario disponible");
     return;
   }
 
-  const targetCell = cellMatrix[currentCell.row][currentCell.col];
-  const jornada = targetCell.jornada;
+ if (isCellOccupied(
+  currentSchedule,
+  editorState.currentCell.row,
+  editorState.currentCell.col,
+  blocks,
+  editingSubject,
+  jornada
+  )){
 
-  if(isCellOccupied(
-    currentSchedule,
-    currentCell.row,
-    currentCell.col,
-    blocks,
-    editingSubject,
-    jornada
-    )){
+    if (editingSubject) {
+      currentSchedule.subjects.push(editingSubject);
+    }
 
     alert("Ese espacio ya está ocupado por otra asignatura");
     resetSubjectModalState();
     return;
   }
 
-  const startCell = cellMatrix[currentCell.row][currentCell.col];
-  const endCell = cellMatrix[currentCell.row + blocks - 1][currentCell.col];
+  const startCell = editorState.cellMatrix[editorState.currentCell.row][editorState.currentCell.col];
+  const endCell = editorState.cellMatrix[editorState.currentCell.row + blocks - 1][editorState.currentCell.col];
 
-  const startMinutes = getAbsoluteMinutes(startCell.start);
-  const endMinutes = getAbsoluteMinutes(endCell.end);
+  const startMinutes = startCell.startMinutes;
+  const endMinutes = endCell.endMinutes;
 
   const newSubject = {
     id: editingSubject ? editingSubject.id : crypto.randomUUID(),
     name,
     color,
-    row: currentCell.row,
-    col: currentCell.col,
-    day: currentCell.col,
+    row: editorState.currentCell.row,
+    col: editorState.currentCell.col,
+    day: editorState.currentCell.col,
     blocks,
     group: subjectGroupInput.value.trim(),
     program: subjectProgramInput.value.trim(),
@@ -1818,17 +2004,13 @@ saveSubjectBtn.onclick = () => {
     endMinutes
   };
 
-  if(editingSubjectIndex !== null){
-    currentSchedule.subjects.splice(editingSubjectIndex, 1);
-  }
-
   schedules[currentScheduleIndex].subjects.push(newSubject);
 
 
   saveData();
   subjectModal.classList.remove("active");
   clearCurrentCell();
-  editingSubjectIndex = null;
+  editorState.editingSubjectIndex = null;
   saveSubjectBtn.textContent = "Guardar asignatura";
 
   cleanSubjectModalButtons();
@@ -1836,20 +2018,20 @@ saveSubjectBtn.onclick = () => {
   const duplicateBtn = subjectModal.querySelector("#duplicateSubjectBtn");
   if(duplicateBtn) duplicateBtn.remove();
 
-  buildScheduleTable();
+  rebuildScheduleView();
 };
 
 function deleteSubject(){
 
-  if(editingSubjectIndex === null) return;
+  if(editorState.editingSubjectIndex === null) return;
 
   const currentSchedule = schedules[currentScheduleIndex];
-  currentSchedule.subjects.splice(editingSubjectIndex, 1);
+  currentSchedule.subjects.splice(editorState.editingSubjectIndex, 1);
   saveData();
 
   subjectModal.classList.remove("active");
   clearCurrentCell();
-  editingSubjectIndex = null;
+  editorState.editingSubjectIndex = null;
   saveSubjectBtn.textContent = "Guardar asignatura";
 
   cleanSubjectModalButtons();
@@ -1857,37 +2039,35 @@ function deleteSubject(){
   const duplicateBtn = subjectModal.querySelector("#duplicateSubjectBtn");
   if(duplicateBtn) duplicateBtn.remove();
 
-  buildScheduleTable();
+  rebuildScheduleView();
 }
 
 function duplicateSubject(subject){
-
   subjectModal.classList.remove("active");
 
-  duplicatingSubject = {
+  state.startDuplication({
     name: subject.name,
     color: subject.color,
     blocks: subject.blocks,
     group: subject.group || "",
     program: subject.program || "",
     jornada: subject.jornada
-  };
+  });
 
-  editingSubjectIndex = null;
+  editorState.editingSubjectIndex = null;
   clearCurrentCell();
-  setDuplicateCursor(true);
 }
 
 setDuplicateCursor(false);
 
 function placeDuplicatedSubject(row, col){
 
-  if(!duplicatingSubject) return;
+  if(!editorState.duplicatingSubject) return;
 
   setCurrentCell(row, col);
 
-  const blocks = duplicatingSubject.blocks;
-  const maxRows = cellMatrix.length;
+  const blocks = editorState.duplicatingSubject.blocks;
+  const maxRows = editorState.cellMatrix.length;
 
   if(row + blocks > maxRows){
     alert("La asignatura excede el horario disponible");
@@ -1895,7 +2075,7 @@ function placeDuplicatedSubject(row, col){
     return;
   }
 
-  const targetCell = cellMatrix[row][col];
+  const targetCell = editorState.cellMatrix[row][col];
 
   if(isCellOccupied(
     schedules[currentScheduleIndex],
@@ -1910,22 +2090,22 @@ function placeDuplicatedSubject(row, col){
     return;
   }
 
-  const startCell = cellMatrix[row][col];
-  const endCell = cellMatrix[row + blocks - 1][col];
+  const startCell = editorState.cellMatrix[row][col];
+  const endCell = editorState.cellMatrix[row + blocks - 1][col];
 
-  const startMinutes = getAbsoluteMinutes(startCell.start);
-  const endMinutes = getAbsoluteMinutes(endCell.end);
+  const startMinutes = startCell.startMinutes;
+  const endMinutes = endCell.endMinutes;
 
   const newSubject = {
     id: crypto.randomUUID(),
-    name: duplicatingSubject.name,
-    color: duplicatingSubject.color,
+    name: editorState.duplicatingSubject.name,
+    color: editorState.duplicatingSubject.color,
     row,
     col,
     day: col,
     blocks,
-    group: duplicatingSubject.group || "",
-    program: duplicatingSubject.program || "",
+    group: editorState.duplicatingSubject.group || "",
+    program: editorState.duplicatingSubject.program || "",
     jornada: targetCell.jornada,
     startMinutes,
     endMinutes
@@ -1934,7 +2114,7 @@ function placeDuplicatedSubject(row, col){
   schedules[currentScheduleIndex].subjects.push(newSubject);
 
   saveData();
-  buildScheduleTable();
+  rebuildScheduleView();
   resetSubjectModalState();
 }
 
@@ -1944,6 +2124,31 @@ const CELL_HEIGHT = 60;
 
 function getSubjectPixelHeight(subject){
   return subject.blocks * CELL_HEIGHT;
+}
+
+function syncSubjectsWithGrid() {
+  const schedule = schedules[currentScheduleIndex];
+  if (!schedule) return;
+
+  schedule.subjects.forEach(sub => {
+    if (
+      typeof sub.row === "number" &&
+      typeof sub.col === "number"
+    ) return;
+
+    for (let r = 0; r < editorState.cellMatrix.length; r++) {
+      const cell = editorState.cellMatrix[r][sub.day];
+      if (
+        cell &&
+        cell.startMinutes === sub.startMinutes &&
+        cell.jornada === sub.jornada
+      ) {
+        sub.row = r;
+        sub.col = sub.day;
+        break;
+      }
+    }
+  });
 }
 
 function renderSubjects(){
@@ -1961,7 +2166,7 @@ function renderSubjects(){
   currentSchedule.subjects.forEach(sub => {
 
     const row = sub.row;
-    const baseCell = cellMatrix[row]?.[sub.col];
+    const baseCell = editorState.cellMatrix[row]?.[sub.col];
     
     if (!baseCell) return;
     
@@ -1991,12 +2196,18 @@ function renderSubjects(){
 
     div.onclick = (e) => {
       e.stopPropagation();
+
+      if (state.isDuplicating()) {
+        state.cancelDuplication();
+        return;
+      }
+
       openEditSubjectModal(sub);
     };
 
     for(let i = 1; i < sub.blocks; i++){
 
-      const coveredCell = cellMatrix[sub.row + i]?.[sub.col];
+      const coveredCell = editorState.cellMatrix[sub.row + i]?.[sub.col];
       if(coveredCell){
         coveredCell.element.classList.add("blocked");
         coveredCell.element.style.borderTop = "none";
@@ -2082,27 +2293,17 @@ function isHoliday(date){
   );
 }
 
-function getAbsoluteMinutes(timeStr) {
-  if (!timeStr) return null;
-
-  const [time, modifier] = timeStr.split(' ');
-  let [hours, minutes] = time.split(':').map(Number);
-
-  if (modifier === 'PM' && hours !== 12) hours += 12;
-  if (modifier === 'AM' && hours === 12) hours = 0;
-
-  return hours * 60 + minutes;
-}
-
 function buildDailySubjects(subjects) {
+
   const map = {};
 
   subjects.forEach(s => {
-    const key = `${s.day}-${s.jornada}`;
+    const key = s.day;
     if (!map[key]) map[key] = [];
     map[key].push({
       startMinutes: s.startMinutes,
-      endMinutes: s.endMinutes
+      endMinutes: s.endMinutes,
+      jornada: s.jornada
     });
   });
 
@@ -2114,16 +2315,26 @@ function buildDailySubjects(subjects) {
 }
 
 function calculateTripsForDay(subjectsOfDay, minGapMinutes) {
+
   if (!subjectsOfDay || subjectsOfDay.length === 0) return 0;
 
   let trips = 1;
 
-  for (let i = 0; i < subjectsOfDay.length - 1; i++) {
-    const gap =
-      subjectsOfDay[i + 1].startMinutes -
-      subjectsOfDay[i].endMinutes;
+  if (minGapMinutes <= 0) return trips;
 
-    if (minGapMinutes > 0 && gap >= minGapMinutes) {
+  for (let i = 0; i < subjectsOfDay.length - 1; i++) {
+    const current = subjectsOfDay[i];
+    const next = subjectsOfDay[i + 1];
+
+    const gap = next.startMinutes - current.endMinutes;
+
+    const bothNocturnal =
+      current.jornada === "nocturna" &&
+      next.jornada === "nocturna";
+
+    if (bothNocturnal) continue;
+
+    if (gap >= minGapMinutes) {
       trips++;
     }
   }
@@ -2171,7 +2382,7 @@ document.getElementById("importFileInput").onchange = (e) => {
       renderSchedules();
 
       if (currentScheduleIndex !== null) {
-        buildScheduleTable();
+        rebuildScheduleView();
       }
 
       alert("Horarios importados correctamente.");
@@ -2237,18 +2448,26 @@ document.getElementById("exportBtn").onclick = () => {
 };
 
 if(currentScheduleIndex !== null){
-  buildScheduleTable();
+  rebuildScheduleView();
 }
 
 document.addEventListener("keydown", e => {
-  if (e.key === "Escape" && duplicatingSubject) {
-    duplicatingSubject = null;
+  if (e.key === "Escape" && editorState.duplicatingSubject) {
+    state.cancelDuplication();
     setDuplicateCursor(false);
     removeGhostSubject();
+    clearDuplicateVisualState();
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    if (state.isDuplicating()) {
+      state.cancelDuplication();
+    }
   }
 });
 
 </script>
-
 </body>
 </html>
