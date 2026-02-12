@@ -46,6 +46,15 @@
       "Se arregló un bug en el cálculo de transportes cuando se detectaban huecos horarios y había una asignatura en la jornada nocturna.",
       "Se mejoró el sistema de detección de huecos horarios."
     ]
+  },
+  {
+    "version": "1.0.6",
+    "date": "11/02/2026",
+    "changes": [
+      "Se agregó opción para ver el detalle por día en el cálculo de transportes.",
+      "Se agregaron atajos de teclado para cerrar (ESC) y confirmar (ENTER) en menús.",
+      "Se optimizó el render de asignaturas.",
+      "Se agregaron validaciones más Rollback a la importación de horarios."
+    ]
   }
 ]
-
