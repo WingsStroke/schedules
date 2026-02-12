@@ -293,6 +293,7 @@ th {
   width:320px;
   position:relative;
   animation: modalIn .2s ease-out;
+  overflow: visible;
 }
 
 @keyframes modalIn {
@@ -380,16 +381,6 @@ button:disabled{
   cursor:not-allowed;
   opacity:0.6;
 }
-.cell.active-cell {
-  outline: 3px solid #46E563;
-  outline-offset: -2px;
-  background-color: rgba(70, 229, 99, 0.15);
-}
-
-.cell.active-cell::before {
-  background: transparent !important;
-  box-shadow: none !important;
-}
 
 .changelog-panel{
   position: fixed;
@@ -473,6 +464,179 @@ button:disabled{
   text-align: center;
   font-size: 14px;
   letter-spacing: 1px;
+}
+
+.cell.active-root {
+  position: relative;
+  z-index: 3;
+}
+
+.cell.active-root::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--active-height);
+  outline: 3px solid #46E563;
+  outline-offset: -2px;
+  background-color: rgba(70, 229, 99, 0.15);
+  pointer-events: none;
+  z-index: 20;
+}
+
+.aguinaldo-details {
+  margin-top: 10px;
+}
+
+.aguinaldo-details ul {
+  margin: 8px 0 0 18px;
+  padding: 0;
+}
+
+.aguinaldo-details li {
+  margin-bottom: 4px;
+}
+
+.gap-flag {
+  color: #c0392b;
+  font-weight: 600;
+  font-size: 11px;
+  white-space: nowrap;
+  background: #ffe6e6;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.aguinaldo-layout {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.aguinaldo-main {
+  flex: 1;
+  min-width: 220px;
+}
+
+.aguinaldo-side {
+  width: 260px;
+}
+
+.aguinaldo-details {
+  margin-top: 0;
+}
+
+.aguinaldo-details summary {
+  cursor: pointer;
+}
+
+.monthly-detail-panel {
+  position: absolute;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100%;
+  background: #ffffff;
+  color: #111;
+  padding: 14px;
+  box-shadow: 0 0 14px rgba(0,0,0,.25);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.monthly-detail-panel.hidden {
+  display: none;
+}
+
+.monthly-detail-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.monthly-detail-panel li {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  font-size: 14px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.monthly-detail-panel li:last-child {
+  border-bottom: none;
+}
+
+.monthly-detail-panel .day-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.monthly-detail-panel .day-date {
+  font-size: 12px;
+  color: #666;
+}
+
+.monthly-detail-panel .trip-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  text-align: right;
+}
+
+.monthly-detail-panel .trip-count {
+  font-weight: 600;
+  color: #000;
+}
+
+.aguinaldo-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.aguinaldo-switch input {
+  display: none;
+}
+
+.aguinaldo-switch .slider {
+  width: 42px;
+  height: 22px;
+  background: #ccc;
+  border-radius: 22px;
+  position: relative;
+  transition: background .2s;
+}
+
+.aguinaldo-switch .slider::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 2px;
+  left: 2px;
+  background: white;
+  border-radius: 50%;
+  transition: transform .2s;
+}
+
+.aguinaldo-switch input:checked + .slider {
+  background: #4caf50;
+}
+
+.aguinaldo-switch input:checked + .slider::before {
+  transform: translateX(20px);
+}
+
+.aguinaldo-switch .label-text {
+  font-size: 14px;
 }
 
 </style>
@@ -659,7 +823,7 @@ button:disabled{
       value="0"
     />
 
-    <small>Si es 0, no se detectan huecos ni transportes extra</small>
+    <small>Si es 0, no se detectan huecos ni transportes extra.</small>
 
     <div class="error-text" id="gapError"></div>
 
@@ -669,12 +833,14 @@ button:disabled{
         border-top:1px solid #000;
         padding-top:10px;
         display:none;
-    ">
+      ">
         <p id="resultMonth"></p>
         <p id="resultTrips"></p>
         <p id="resultTotal"></p>
         <button id="closeMonthlyResult">Cerrar</button>
-</div>
+      </div>
+
+    <div id="monthlyDetailPanel" class="monthly-detail-panel hidden"></div>
 
   </div>
 </div>
@@ -737,7 +903,9 @@ const changelogBtn = document.getElementById("changelogBtn");
 const changelogPanel = document.getElementById("changelogPanel");
 const closeChangelogBtn = document.getElementById("closeChangelogBtn");
 const changelogAlert = document.getElementById("changelogAlert");
-const LAST_VERSION_KEY = "lastSeenChangelogVersion";
+const lastVersionKey = "lastSeenChangelogVersion";
+const currentScheduleSchema = 3;
+const scheduleBody = document.querySelector("#schedule tbody");
 
 const editorState = {
   currentScheduleIndex: null,
@@ -748,6 +916,15 @@ const editorState = {
   ghostSubject: null,
   globalRowIndex: 0
 };
+
+const renderCache = {
+  renderedSubjects: new Map()
+};
+
+function setDuplicateCursor(active){
+  document.body.style.cursor = active ? "copy" : "default";
+  duplicateBar.style.display = active ? "flex" : "none";
+}
 
 const state = {
   resetEditor() {
@@ -794,6 +971,38 @@ const JORNADAS = {
   }
 };
 
+const JORNADA_BASE = {
+  diurna: {
+    startMinutes: 7 * 60,
+    blockMinutes: 100
+  },
+  nocturna: {
+    startMinutes: 17 * 60,
+    blockMinutes: 90
+  }
+};
+
+function getTimeRangePure(subject) {
+  if (
+    !subject ||
+    typeof subject.row !== "number" ||
+    typeof subject.blocks !== "number" ||
+    !JORNADA_BASE[subject.jornada]
+  ) {
+    return null;
+  }
+
+  const base = JORNADA_BASE[subject.jornada];
+
+  const startMinutes =
+    base.startMinutes + subject.row * base.blockMinutes;
+
+  const endMinutes =
+    startMinutes + subject.blocks * base.blockMinutes;
+
+  return { startMinutes, endMinutes };
+}
+
 const bloquesDiurnos = generarBloques("diurna");
 const bloquesNocturnos = generarBloques("nocturna");
 
@@ -806,7 +1015,7 @@ changelogBtn.addEventListener("click", async () => {
     const lastEntry = entries[entries.length - 1];
     const versionText = lastEntry.querySelector("h3").textContent;
     const version = versionText.replace("Versión ", "").trim();
-    localStorage.setItem(LAST_VERSION_KEY, version);
+    localStorage.setItem(lastVersionKey, version);
     changelogAlert.style.display = "none";
   }
 });
@@ -817,13 +1026,21 @@ closeChangelogBtn.addEventListener("click", () => {
 
 closeMonthlyResultBtn.onclick = () => {
   monthlyResult.style.display = "none";
+
+  const detailPanel = document.getElementById("monthlyDetailPanel");
+  if (detailPanel) {
+    detailPanel.classList.add("hidden");
+    detailPanel.innerHTML = "";
+  }
 };
 
 function renderChangelog(changelogData){
   const container = document.getElementById("changelogContent");
   container.innerHTML = "";
 
-  changelogData.forEach(entry => {
+  const reversedData = [...changelogData].reverse();
+
+  reversedData.forEach(entry => {
     const card = document.createElement("div");
     card.className = "changelog-entry";
 
@@ -852,8 +1069,8 @@ function renderChangelog(changelogData){
 function checkChangelogVersion(changelogData){
   if(!Array.isArray(changelogData) || changelogData.length === 0) return;
 
-  const latestVersion = changelogData[changelogData.length - 1].version;
-  const lastSeenVersion = localStorage.getItem(LAST_VERSION_KEY);
+  const latestVersion = changelogData[0].version;
+  const lastSeenVersion = localStorage.getItem(lastVersionKey);
 
   if(lastSeenVersion !== latestVersion){
     changelogAlert.style.display = "inline-flex";
@@ -936,8 +1153,9 @@ function clearDuplicateVisualState() {
     editorState.ghostSubject = null;
   }
 
-  document.querySelectorAll(".active-cell").forEach(cell => {
-    cell.classList.remove("active-cell");
+  document.querySelectorAll(".cell.active-root").forEach(c => {
+    c.classList.remove("active-root");
+    c.style.removeProperty("--active-height");
   });
 }
   
@@ -1068,6 +1286,13 @@ cancelDuplicateBtn.onclick = () => {
 };
 
 let schedules = JSON.parse(localStorage.getItem("schedules")) || [];
+
+schedules.forEach(schedule => {
+  if (typeof schedule.schemaVersion !== "number") {
+    schedule.schemaVersion = 1;
+  }
+});
+
 let currentScheduleIndex = null;
 
 // ELEMENTOS HOME
@@ -1137,7 +1362,6 @@ function normalizeSubject(subject) {
       const timeRange =
         ScheduleTimeModel.getSubjectTimeRange(
           normalized,
-          bloques
         );
 
       if (timeRange) {
@@ -1165,7 +1389,22 @@ function normalizeSubjectsForCalculation(subjects) {
     }));
 }
 
+function isLegacySchedule(schedule) {
+  return schedule.schemaVersion < currentScheduleSchema;
+}
+
 const scheduleTitle = document.querySelector("#app h2");
+
+function rebuildScheduleView() {
+
+  renderCache.renderedSubjects.clear();
+
+  if (currentScheduleIndex === null) return;
+
+  construirHorario();
+  syncSubjectsWithGrid();
+  renderSubjects();
+}
 
 function openSchedule(index){
 
@@ -1175,7 +1414,18 @@ function openSchedule(index){
 
   currentScheduleIndex = index;
 
-  const currentSchedule = schedules[currentScheduleIndex];
+  renderCache.renderedSubjects.clear();
+
+  let currentSchedule = schedules[currentScheduleIndex];
+
+  if (currentSchedule.schemaVersion < currentScheduleSchema) {
+    currentSchedule = migrateSchedule(currentSchedule);
+    schedules[index] = currentSchedule;
+
+    console.info(
+      `[Horarios] Horario "${currentSchedule.name}" migrado y guardado correctamente`
+    );
+  }
 
   scheduleTitle.textContent = currentSchedule.name;
 
@@ -1186,8 +1436,107 @@ function openSchedule(index){
     currentSchedule.subjects.map(normalizeSubject);
 
   saveData();
-
   rebuildScheduleView();
+}
+
+const legacySchedules = schedules.filter(isLegacySchedule);
+
+if (legacySchedules.length > 0) {
+  console.warn(
+    `[Horarios] ${legacySchedules.length} horario(s) creados con versiones antiguas:`,
+    legacySchedules.map(s => ({
+      name: s.name,
+      schemaVersion: s.schemaVersion
+    }))
+  );
+}
+
+function rebuildMinutesFromGrid(subject) {
+  const range = getTimeRangePure(subject);
+
+  if (!range) {
+    console.warn("[Migración] No se pudo reconstruir tiempo:", subject);
+    return null;
+  }
+
+  return {
+    ...subject,
+    startMinutes: range.startMinutes,
+    endMinutes: range.endMinutes
+  };
+}
+
+function migrateLegacySubject(subject) {
+  const normalized = normalizeSubject(subject);
+  const rebuilt = rebuildMinutesFromGrid(normalized);
+
+  if (!rebuilt) return null;
+
+  return rebuilt;
+}
+
+function migrateSchedule(schedule) {
+  console.info(
+    `[Horarios] Migrando horario "${schedule.name}" de v${schedule.schemaVersion} → v${currentScheduleSchema}`
+  );
+
+  return {
+    ...schedule,
+    schemaVersion: currentScheduleSchema,
+    subjects: schedule.subjects.map(migrateLegacySubject).filter(Boolean)
+  };
+}
+
+function validateScheduleSchema(schedule) {
+  if(!schedule || typeof schedule !== 'object') {
+    return "El horario debe ser un objeto válido";
+  }
+
+  if(!schedule.name || typeof schedule.name !== 'string') {
+    return "El horario debe tener un nombre válido";
+  }
+
+  if(typeof schedule.created !== 'number') {
+    return `Horario "${schedule.name}": falta fecha de creación`;
+  }
+
+  if(!Array.isArray(schedule.subjects)) {
+    return `Horario "${schedule.name}": subjects debe ser un array`;
+  }
+
+  for(let i = 0; i < schedule.subjects.length; i++) {
+    const sub = schedule.subjects[i];
+    
+    if(!sub.name || typeof sub.name !== 'string') {
+      return `Horario "${schedule.name}": asignatura #${i + 1} sin nombre`;
+    }
+
+    if(!sub.id) {
+      return `Horario "${schedule.name}": asignatura "${sub.name}" sin ID`;
+    }
+
+    if(typeof sub.row !== 'number' || sub.row < 0) {
+      return `Horario "${schedule.name}": asignatura "${sub.name}" con row inválida`;
+    }
+
+    if(typeof sub.col !== 'number' || sub.col < 0 || sub.col > 4) {
+      return `Horario "${schedule.name}": asignatura "${sub.name}" con columna inválida`;
+    }
+
+    if(typeof sub.blocks !== 'number' || sub.blocks < 1) {
+      return `Horario "${schedule.name}": asignatura "${sub.name}" debe tener al menos 1 bloque`;
+    }
+
+    if(!sub.jornada || (sub.jornada !== 'diurna' && sub.jornada !== 'nocturna')) {
+      return `Horario "${schedule.name}": asignatura "${sub.name}" con jornada inválida`;
+    }
+
+    if(!sub.color || typeof sub.color !== 'string') {
+      return `Horario "${schedule.name}": asignatura "${sub.name}" sin color`;
+    }
+  }
+
+  return null;
 }
 
 function renderSchedules(){
@@ -1248,7 +1597,7 @@ function renderSchedules(){
   });
 }
 
-// CREAR HORARIO BOBO POR FA FUNCIONA
+// CREAR HORARIO
 
 createScheduleBtn.onclick = ()=>{
   scheduleNameInput.value = "";
@@ -1262,7 +1611,8 @@ confirmCreateBtn.onclick = ()=>{
   schedules.push({
     name,
     created: Date.now(),
-    subjects: []
+    subjects: [],
+    schemaVersion: currentScheduleSchema
   });
 
   saveData();
@@ -1308,6 +1658,13 @@ document.querySelectorAll(".close-btn").forEach(btn=>{
       }
       subjectNameInput.value = "";
       subjectBlocksInput.value = "1";
+    }
+
+    if(modal.id === "monthlyModal"){
+      const toggle = document.getElementById("aguinaldoToggle");
+      const detailPanel = document.getElementById("monthlyDetailPanel");
+      if(toggle) toggle.checked = false;
+      if(detailPanel) detailPanel.classList.add("hidden");
     }
   };
 });
@@ -1455,83 +1812,62 @@ function exportUniversityPDF() {
 
 // CONSTRUCCION TABLA
 
-const scheduleBody = document.querySelector("#schedule tbody");
-
 const monthSelect = document.getElementById("monthSelect");
 const yearInput = document.getElementById("yearInput");
 
 const snackInput = document.getElementById("snackCostInput");
 const transportInput = document.getElementById("transportCostInput");
 const gapInput = document.getElementById("minGapMinutes");
+const resultadoAguinaldo = document.getElementById("monthlyResult");
 
 [yearInput, snackInput, transportInput, gapInput].forEach(input => {
   input.addEventListener("input", updateCalculateButtonState);
 });
 
 function validateMonthlyInputs(showErrors = false){
+  const fields = [
+    {
+      input: document.getElementById("yearInput"),
+      error: document.getElementById("yearError"),
+      validate: (val) => val !== "" && val >= 2020,
+      errorMsg: "El año debe ser 2020 o mayor."
+    },
+    {
+      input: document.getElementById("snackCostInput"),
+      error: document.getElementById("snackError"),
+      validate: (val) => val !== "" && val >= 0,
+      errorMsg: "La merienda no puede ser negativa."
+    },
+    {
+      input: document.getElementById("transportCostInput"),
+      error: document.getElementById("transportError"),
+      validate: (val) => val !== "" && val >= 0,
+      errorMsg: "El transporte no puede ser negativo."
+    },
+    {
+      input: document.getElementById("minGapMinutes"),
+      error: document.getElementById("gapError"),
+      validate: (val) => val !== "" && val >= 0,
+      errorMsg: "Los minutos mínimos no pueden ser negativos."
+    }
+  ];
 
   let valid = true;
 
-  const year = document.getElementById("yearInput");
-  const snack = document.getElementById("snackCostInput");
-  const transport = document.getElementById("transportCostInput");
-  const gap = document.getElementById("minGapMinutes");
-
-  const yearError = document.getElementById("yearError");
-  const snackError = document.getElementById("snackError");
-  const transportError = document.getElementById("transportError");
-  const gapError = document.getElementById("gapError");
-
-  [year, snack, transport, gap].forEach(i => {
+  fields.forEach(field => {
     if(showErrors){
-      i.classList.remove("input-error");
+      field.input.classList.remove("input-error");
+      field.error.textContent = "";
     }
-  });
 
-  [yearError, snackError, transportError, gapError].forEach(e => {
-    if(showErrors){
-      e.textContent = "";
-    }
-  });
-
-  if(year.value !== ""){
-    if(year.value < 2020){
+    if(!field.validate(field.input.value)){
       if(showErrors){
-        year.classList.add("input-error");
-        yearError.textContent = "El año debe ser 2020 o mayor.";
+        field.input.classList.add("input-error");
+        field.error.textContent = field.errorMsg;
       }
       valid = false;
     }
-  } 
-  else {
-    valid = false;
-  }
-
-  if(snack.value === "" || snack.value < 0){
-    if(showErrors){
-      snack.classList.add("input-error");
-      snackError.textContent = "La merienda no puede ser negativa.";
-    }
-    valid = false;
-  }
-
-  if(transport.value === "" || transport.value < 0){
-
-    if(showErrors){
-      transport.classList.add("input-error");
-      transportError.textContent = "El transporte no puede ser negativo.";
-    }
-    valid = false;
-  }
-
-  if(gap.value === "" || gap.value < 0){
-
-    if(showErrors){
-      gap.classList.add("input-error");
-      gapError.textContent = "Los minutos mínimos no pueden ser negativo.";
-    }
-    valid = false;
-  }
+  });
 
   return valid;
 }
@@ -1557,38 +1893,58 @@ function calculateMonthlyCost(subjects, config) {
 
   let totalTrips = 0;
   let totalSnackDays = 0;
+  const dailyDetails = [];
 
   const date = new Date(config.year, config.month, 1);
 
   while (date.getMonth() === config.month) {
+
     const jsDay = date.getDay();
     const dayIndex = jsDay - 1;
 
     if (dayIndex >= 0 && dayIndex <= 5 && !isHoliday(date)) {
-      
+
       const subjectsToday = dailyMap[dayIndex];
 
       if (subjectsToday && subjectsToday.length > 0) {
+
         const trips = calculateTripsForDay(
           subjectsToday,
           config.minGapMinutes
         );
 
+        const hasGaps =
+          config.minGapMinutes > 0 &&
+          ScheduleTimeModel.calculateGaps(
+            subjectsToday,
+            config.minGapMinutes
+          ) > 0;
+
         totalTrips += trips;
         totalSnackDays++;
+
+        dailyDetails.push({
+          date: new Date(date),
+          dayName: diasSemana[dayIndex],
+          trips,
+          hasGaps
+        });
       }
     }
 
     date.setDate(date.getDate() + 1);
   }
 
-    const totalCost = totalTrips * config.transportCost + totalSnackDays * config.snackCost;
+  const totalCost =
+    totalTrips * config.transportCost +
+    totalSnackDays * config.snackCost;
 
-    return {
-      totalTrips,
-      totalSnackDays,
-      totalCost
-    };
+  return {
+    totalTrips,
+    totalSnackDays,
+    totalCost,
+    dailyDetails
+  };
 }
 
 const confirmMonthlyBtn = document.getElementById("confirmMonthlyBtn");
@@ -1667,14 +2023,6 @@ function openSubjectModal(row, col){
   subjectModal.classList.add("active");
 }
 
-function rebuildScheduleView() {
-  if (currentScheduleIndex === null) return;
-
-  construirHorario();
-  syncSubjectsWithGrid();
-  renderSubjects();
-}
-
 function buildScheduleTable() {
   if (currentScheduleIndex === null) return;
   rebuildScheduleView();
@@ -1708,26 +2056,89 @@ confirmMonthlyBtn.onclick = () => {
 
   monthlyResult.style.display = "block";
 
-  resultMonth.textContent = `${months[config.month]} ${config.year}`;
-  resultTrips.textContent = `Viajes: ${result.totalTrips}`;
-  resultTotal.textContent =
-    `Total a pagar: ${result.totalCost.toLocaleString()} COP`;
+  resultadoAguinaldo.innerHTML = `
+    <div class="aguinaldo-layout">
+      
+      <div class="aguinaldo-main">
+        <p><strong>Total viajes:</strong> ${result.totalTrips}</p>
+        <p><strong>Días con clase:</strong> ${result.totalSnackDays}</p>
+        <p><strong>Total aguinaldo:</strong> $${result.totalCost.toLocaleString()}</p>
+
+        <label class="aguinaldo-switch">
+          <input type="checkbox" id="aguinaldoToggle">
+          <span class="slider"></span>
+          <span class="label-text">Ver detalle del cálculo</span>
+        </label>
+      </div>
+
+    </div>
+  `;
+
+  const toggle = document.getElementById("aguinaldoToggle");
+  const detailPanel = document.getElementById("monthlyDetailPanel");
+  const wasOpen = detailPanel && !detailPanel.classList.contains("hidden");
+
+  toggle.onchange = () => {
+    detailPanel.classList.toggle("hidden", !toggle.checked);
+  };
+
+  if(wasOpen) {
+    toggle.checked = true;
+    detailPanel.classList.remove("hidden");
+  } else {
+    toggle.checked = false;
+    detailPanel.classList.add("hidden");
+  }
+
+  detailPanel.innerHTML = `
+    <h4>Detalle por día</h4>
+    <ul>
+      ${result.dailyDetails.map(d => {
+        const monthName = d.date.toLocaleDateString('es-ES', { month: 'long' });
+        return `
+          <li>
+            <div class="day-info">
+              <strong>${d.dayName}</strong>
+              <span class="day-date">${d.date.getDate()} de ${monthName}</span>
+            </div>
+            <div class="trip-info">
+              <span class="trip-count">${d.trips} viaje${d.trips !== 1 ? "s" : ""}</span>
+              ${d.hasGaps ? "<span class='gap-flag'>Hueco</span>" : ""}
+            </div>
+          </li>
+        `;
+      }).join("")}
+    </ul>
+  `;
+
+  toggle.addEventListener("toggle", () => {
+    detailPanel.classList.toggle("hidden", !toggle.open);
+  });
 };
 
 // MODAL ASIGNATURA
 
+const CELL_HEIGHT = 60;
+
 function highlightCurrentCell(subject = null) {
 
   document
-    .querySelectorAll(".cell.active-cell")
-    .forEach(c => c.classList.remove("active-cell"));
+    .querySelectorAll(".cell.active-root")
+    .forEach(c => {
+      c.classList.remove("active-root");
+      c.style.removeProperty("--active-height");
+    });
 
   if (subject) {
-    for (let i = 0; i < subject.blocks; i++) {
-      const cell = editorState.cellMatrix[subject.row + i]?.[subject.col];
-      if (cell) {
-        cell.element.classList.add("active-cell");
-      }
+    const rootCell =
+      editorState.cellMatrix[subject.row]?.[subject.col];
+
+    if (rootCell) {
+      rootCell.element.classList.add("active-root");
+      rootCell.element.style.setProperty(
+        "--active-height",
+        `${subject.blocks * CELL_HEIGHT}px`
+      );
     }
     return;
   }
@@ -1736,8 +2147,13 @@ function highlightCurrentCell(subject = null) {
 
   const { row, col } = editorState.currentCell;
   const cell = editorState.cellMatrix[row]?.[col];
+
   if (cell) {
-    cell.element.classList.add("active-cell");
+    cell.element.classList.add("active-root");
+    cell.element.style.setProperty(
+      "--active-height",
+      `${CELL_HEIGHT}px`
+    );
   }
 }
 
@@ -1757,17 +2173,15 @@ function clearCurrentCell(){
   editorState.currentCell = null;
 
   document
-    .querySelectorAll(".cell.active-cell")
-    .forEach(c => c.classList.remove("active-cell"));
+    .querySelectorAll(".cell.active-root")
+    .forEach(c => {
+      c.classList.remove("active-root");
+      c.style.removeProperty("--active-height");
+    });
 }
 
 function hasCurrentCell(){
   return editorState.currentCell !== null;
-}
-
-function setDuplicateCursor(active){
-  document.body.style.cursor = active ? "copy" : "default";
-  duplicateBar.style.display = active ? "flex" : "none";
 }
 
 function createDeleteButton(){
@@ -1859,29 +2273,38 @@ const ScheduleLogic = {
 
 const ScheduleTimeModel = {
 
-  getSubjectTimeRange(subject, bloques) {
-    const startBlock = bloques[subject.row];
-    const endBlock = bloques[subject.row + subject.blocks - 1];
+  getSubjectTimeRange(subject) {
+    if (
+      typeof subject.startMinutes === "number" &&
+      typeof subject.endMinutes === "number"
+    ) {
+      return {
+        startMinutes: subject.startMinutes,
+        endMinutes: subject.endMinutes
+      };
+    }
 
-    return {
-      startMinutes: startBlock.startMinutes,
-      endMinutes: endBlock.endMinutes
-    };
+    const pure = getTimeRangePure(subject);
+    if (pure) return pure;
+
+    console.warn("[TimeModel] No se pudo calcular tiempo", subject);
+    return null;
   },
 
-  getScheduleDayTimeline(schedule, day, jornada, bloques) {
+  getScheduleDayTimeline(schedule, day, jornada) {
     return schedule.subjects
       .filter(s => s.day === day && s.jornada === jornada)
       .map(s => {
-        const { startMinutes, endMinutes } =
-          this.getSubjectTimeRange(s, bloques);
+        const range = this.getSubjectTimeRange(s);
+        if (!range) return null;
 
         return {
           id: s.id,
-          startMinutes,
-          endMinutes
+          startMinutes: range.startMinutes,
+          endMinutes: range.endMinutes
         };
       })
+      .filter(Boolean)
       .sort((a, b) => a.startMinutes - b.startMinutes);
   },
 
@@ -1899,7 +2322,6 @@ const ScheduleTimeModel = {
     }
     return gaps;
   }
-
 };
 
 function isCellOccupied(schedule, row, col, blocks, excludeSubject, jornada) {
@@ -2120,8 +2542,6 @@ function placeDuplicatedSubject(row, col){
 
 // DIBUJAR ASIGNATURAS
 
-const CELL_HEIGHT = 60;
-
 function getSubjectPixelHeight(subject){
   return subject.blocks * CELL_HEIGHT;
 }
@@ -2152,69 +2572,91 @@ function syncSubjectsWithGrid() {
 }
 
 function renderSubjects(){
-
-  document.querySelectorAll(".subject").forEach(s => s.remove());
-  document.querySelectorAll(".cell").forEach(c => {
-    c.classList.remove("blocked");
-    c.style.borderTop = "1px solid #000";
-  });
-
   if(currentScheduleIndex === null) return;
 
   const currentSchedule = schedules[currentScheduleIndex];
+  const currentSubjects = new Map(currentSchedule.subjects.map(s => [s.id, s]));
+  
+  renderCache.renderedSubjects.forEach((cachedSub, id) => {
+    if(!currentSubjects.has(id)){
+      const element = document.querySelector(`[data-subject-id="${id}"]`);
+      if(element) element.remove();
+      
+      for(let i = 1; i < cachedSub.blocks; i++){
+        const coveredCell = editorState.cellMatrix[cachedSub.row + i]?.[cachedSub.col];
+        if(coveredCell){
+          coveredCell.element.classList.remove("blocked");
+          coveredCell.element.style.borderTop = "1px solid #000";
+        }
+      }
+      
+      renderCache.renderedSubjects.delete(id);
+    }
+  });
 
   currentSchedule.subjects.forEach(sub => {
+    const cached = renderCache.renderedSubjects.get(sub.id);
+    const needsUpdate = !cached || 
+      cached.name !== sub.name ||
+      cached.color !== sub.color ||
+      cached.row !== sub.row ||
+      cached.col !== sub.col ||
+      cached.blocks !== sub.blocks ||
+      cached.jornada !== sub.jornada;
 
-    const row = sub.row;
-    const baseCell = editorState.cellMatrix[row]?.[sub.col];
-    
-    if (!baseCell) return;
-    
-    if(baseCell.jornada !== sub.jornada){
-      console.warn("Asignatura con jornada inválida:", sub);
-      return;
+    if(!needsUpdate) return;
+
+    const existingElement = document.querySelector(`[data-subject-id="${sub.id}"]`);
+    if(existingElement) existingElement.remove();
+
+    if(cached && cached.blocks){
+      for(let i = 1; i < cached.blocks; i++){
+        const coveredCell = editorState.cellMatrix[cached.row + i]?.[cached.col];
+        if(coveredCell){
+          coveredCell.element.classList.remove("blocked");
+          coveredCell.element.style.borderTop = "1px solid #000";
+        }
+      }
     }
 
+    const baseCell = editorState.cellMatrix[sub.row]?.[sub.col];
+    if(!baseCell || baseCell.jornada !== sub.jornada) return;
+
     const div = document.createElement("div");
-    div.style.width = "100%";
-    div.style.minHeight = "100%";
     div.className = "subject";
+    div.setAttribute("data-subject-id", sub.id);
+    div.style.position = "absolute";
+    div.style.top = "0px";
+    div.style.left = "0px";
+    div.style.width = "100%";
+    div.style.height = (sub.blocks * 60) + "px";
+    div.style.boxSizing = "border-box";
 
     const content = document.createElement("div");
     content.className = "subject-content";
     content.textContent = sub.name;
     content.style.background = sub.color;
-
     div.appendChild(content);
-
-    div.style.position = "absolute";
-    div.style.top = "0px";
-    div.style.left = "0px";
-  
-    div.style.height = getSubjectPixelHeight(sub) + "px";
-    div.style.boxSizing = "border-box";
 
     div.onclick = (e) => {
       e.stopPropagation();
-
-      if (state.isDuplicating()) {
+      if(state.isDuplicating()){
         state.cancelDuplication();
         return;
       }
-
       openEditSubjectModal(sub);
     };
 
     for(let i = 1; i < sub.blocks; i++){
-
       const coveredCell = editorState.cellMatrix[sub.row + i]?.[sub.col];
       if(coveredCell){
         coveredCell.element.classList.add("blocked");
         coveredCell.element.style.borderTop = "none";
       }
-    } 
+    }
 
     baseCell.element.appendChild(div);
+    renderCache.renderedSubjects.set(sub.id, {...sub});
   });
 }
 
@@ -2354,48 +2796,82 @@ document.getElementById("importFileInput").onchange = (e) => {
 
   const reader = new FileReader();
   reader.onload = (event) => {
+    const backup = JSON.parse(JSON.stringify(schedules));
+    
     try {
-
       let imported = JSON.parse(event.target.result);
 
-      if (!Array.isArray(imported)) {
+      if(!Array.isArray(imported)) {
         imported = [imported];
       }
 
-      imported.forEach(schedule => {
-        if (Array.isArray(schedule.subjects)) {
+      const validationErrors = [];
+      const validSchedules = [];
+
+      imported.forEach((schedule, index) => {
+        const error = validateScheduleSchema(schedule);
+        
+        if(error) {
+          validationErrors.push(`Horario #${index + 1}: ${error}`);
+          return;
+        }
+
+        if(Array.isArray(schedule.subjects)) {
           schedule.subjects = schedule.subjects.map(normalizeSubject);
         }
-      });
 
-      imported.forEach(schedule => {
         const exists = schedules.some(s =>
           s.name === schedule.name && s.created === schedule.created
         );
 
-        if (!exists) {
-          schedules.push(schedule);
+        if(!exists) {
+          validSchedules.push(schedule);
         }
+      });
+
+      if(validationErrors.length > 0) {
+        throw new Error(
+          `Se encontraron ${validationErrors.length} error(es):\n\n${validationErrors.join('\n')}`
+        );
+      }
+
+      if(validSchedules.length === 0) {
+        alert("No hay horarios nuevos para importar (ya existen todos).");
+        document.getElementById("importFileInput").value = "";
+        return;
+      }
+
+      validSchedules.forEach(schedule => {
+        schedules.push(schedule);
       });
 
       saveData();
       renderSchedules();
 
-      if (currentScheduleIndex !== null) {
+      if(currentScheduleIndex !== null) {
         rebuildScheduleView();
       }
 
-      alert("Horarios importados correctamente.");
+      alert(`${validSchedules.length} horario(s) importado(s) correctamente.`);
       document.getElementById("importFileInput").value = "";
     } 
-    catch (err) {
-      alert("Archivo inválido o corrupto.");
-      console.error(err);
+    catch(err) {
+      schedules.length = 0;
+      schedules.push(...backup);
+      
+      if(err instanceof SyntaxError) {
+        alert("Error: El archivo JSON está corrupto o mal formado.");
+      } else {
+        alert(`${err.message}`);
+      }
+      
+      console.error("Error de importación:", err);
+      document.getElementById("importFileInput").value = "";
     }
   };
 
   reader.readAsText(file);
-};
+}
 
 document.getElementById("exportScheduleBtn").onclick = () => {
   if (currentScheduleIndex === null) {
@@ -2451,19 +2927,46 @@ if(currentScheduleIndex !== null){
   rebuildScheduleView();
 }
 
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape" && editorState.duplicatingSubject) {
-    state.cancelDuplication();
-    setDuplicateCursor(false);
-    removeGhostSubject();
-    clearDuplicateVisualState();
-  }
-});
-
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     if (state.isDuplicating()) {
       state.cancelDuplication();
+      setDuplicateCursor(false);
+      removeGhostSubject();
+      clearDuplicateVisualState();
+      return;
+    }
+
+    const activeModal = document.querySelector(".modal.active");
+    if (activeModal) {
+      const closeBtn = activeModal.querySelector(".close-btn");
+      if (closeBtn) closeBtn.click();
+    }
+  }
+
+  if (e.key === "Enter") {
+    const activeModal = document.querySelector(".modal.active");
+    if (!activeModal) return;
+
+    if (activeModal.id === "subjectModal") {
+      e.preventDefault();
+      if (!saveSubjectBtn.disabled) {
+        saveSubjectBtn.click();
+      }
+    }
+
+    if (activeModal.id === "newScheduleModal") {
+      e.preventDefault();
+      if (scheduleNameInput.value.trim()) {
+        confirmCreateBtn.click();
+      }
+    }
+
+    if (activeModal.id === "renameScheduleModal") {
+      e.preventDefault();
+      if (renameInput.value.trim()) {
+        confirmRenameBtn.click();
+      }
     }
   }
 });
