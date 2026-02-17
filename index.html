@@ -108,6 +108,18 @@ body {
   font-weight: 600;
 }
 
+.subject-count {
+  display: block;
+  margin-top: 6px;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 3px;
+  width: fit-content;
+}
+
 #app header {
   display: flex;
   justify-content: space-between;
@@ -272,7 +284,7 @@ th {
   font-weight: bold;
 }
 
-.modal{
+.modal {
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.5);
@@ -282,8 +294,61 @@ th {
   z-index:50;
 }
 
-.modal.active{
+.modal.active {
   display:flex;
+}
+
+#monthlyDetailModal {
+  background: transparent;
+}
+
+#monthlyDetailContent ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#monthlyDetailContent li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+#monthlyDetailContent li:last-child {
+  border-bottom: none;
+}
+
+#monthlyDetailContent .day-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#monthlyDetailContent .day-date {
+  font-size: 12px;
+  color: #666;
+}
+
+#monthlyDetailContent .trip-info {
+  text-align: right;
+}
+
+#monthlyDetailContent .trip-count {
+  font-weight: 600;
+  color: #000;
+}
+
+#monthlyDetailContent .gap-flag {
+  display: inline-block;
+  background: #ffe6e6;
+  color: #b00020;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 4px;
 }
 
 .modal-content{
@@ -291,9 +356,78 @@ th {
   border:2px solid #000;
   padding:20px 20px 24px 20px;
   width:320px;
+  max-height: 90vh;
   position:relative;
   animation: modalIn .2s ease-out;
-  overflow: visible;
+  overflow-y: auto;
+  overflow-x: visible;
+}
+
+#dailyDetailModal .modal-content {
+  width: 520px;
+  max-width: 95vw;
+  position: relative;
+  padding: 60px 20px 20px 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#dailyDetailModal #backToResultBtn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  color: #000;
+  width: 30px;
+  height: 30px;
+  display: block;
+  z-index: 10;
+}
+
+#dailyDetailModal h3 {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 30px;
+  pointer-events: none;
+  padding: 0;
+}
+
+#monthlyModal .modal-content {
+  width: 480px;
+  max-width: 95vw;
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  margin-bottom: 4px;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
 }
 
 @keyframes modalIn {
@@ -532,15 +666,14 @@ button:disabled{
 }
 
 .monthly-detail-panel {
-  position: absolute;
-  top: 0;
-  right: -320px;
-  width: 300px;
-  height: 100%;
-  background: #ffffff;
+  width: 100%;
+  max-height: 300px;
+  background: #f9f9f9;
   color: #111;
   padding: 14px;
-  box-shadow: 0 0 14px rgba(0,0,0,.25);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 12px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -639,6 +772,259 @@ button:disabled{
   font-size: 14px;
 }
 
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  user-select: none;
+  min-height: 50px;
+}
+
+.calendar-day:hover:not(.calendar-day-disabled) {
+  background: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.calendar-day-disabled {
+  background: #f9f9f9;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.calendar-day-holiday {
+  background: #ffebee;
+  color: #c62828;
+  font-weight: 600;
+  cursor: not-allowed;
+}
+
+.calendar-day-excluded {
+  background: #fff9c4;
+  color: #f57f17;
+  font-weight: 600;
+  border: 2px solid #f57f17;
+}
+
+.calendar-day-header {
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  color: #666;
+  padding: 4px 0;
+}
+
+#excludeDaysModal {
+  background: transparent;
+}
+
+#dailyDetailModal {
+  background: transparent;
+}
+
+#excludeDaysModal .modal-content {
+  width: 520px;
+  max-width: 95vw;
+  position: relative;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+#excludeDaysModal #backToAguinaldoBtn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  color: #000;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+#excludeDaysModal .calendar-header {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+#excludeDaysModal .calendar-header-content {
+  text-align: center;
+}
+
+#excludeDaysModal .calendar-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 0;
+}
+
+#excludeDaysModal #excludeDaysCount {
+  color: #666;
+  font-size: 13px;
+  margin-top: 4px;
+  display: block;
+}
+
+#excludeDaysModal #calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+#excludeDaysModal .calendar-legend {
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: #666;
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: 4px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+#excludeDaysModal .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#excludeDaysModal .legend-box-festivos {
+  width: 16px;
+  height: 16px;
+  background: #ffebee;
+  border: 1px solid #d32f2f;
+}
+
+#excludeDaysModal .legend-box-excluidos {
+  width: 16px;
+  height: 16px;
+  background: #fff9c4;
+  border: 2px solid #f57f17;
+}
+
+#excludeDaysModal .calendar-note {
+  color: #666;
+  display: block;
+  text-align: center;
+  font-size: 13px;
+}
+
+/* Monthly Result */
+#monthlyResult {
+  margin-top: 12px;
+  border-top: 1px solid #000;
+  padding-top: 10px;
+  display: none;
+  position: relative;
+}
+
+#viewDailyDetailBtn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: #000;
+  text-decoration: underline;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Calendar Button */
+#openCalendarBtn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  height: 38px;
+  width: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#openCalendarBtn img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Duplicate Bar */
+#duplicateBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #0066cc;
+  color: white;
+  padding: 8px 12px;
+  font-weight: 600;
+  display: none;
+  z-index: 100;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#cancelDuplicateBtn {
+  background: #fff;
+  color: #0066cc;
+  border: none;
+  padding: 4px 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Changelog Alert */
+#changelogAlert {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #b00020;
+  color: white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 11px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+#dailyDetailModal {
+  background: transparent;
+}
+
+#openCalendarBtn {
+  transition: transform 0.15s ease;
+}
+
+#openCalendarBtn:hover {
+  transform: scale(1.1);
+}
+
+#openCalendarBtn:active {
+  transform: scale(0.98);
+}
+
 </style>
 </head>
 
@@ -654,21 +1040,7 @@ button:disabled{
       <input type="file" id="importFileInput" accept=".json" hidden>
       <button id="changelogBtn" style="position:relative;">
         Changelog
-        <span id="changelogAlert" style="
-          position:absolute;
-          top:-4px;
-          right:-4px;
-          background:#b00020;
-          color:white;
-          border-radius:50%;
-          width:16px;
-          height:16px;
-          font-size:11px;
-          display:none;
-          align-items:center;
-          justify-content:center;
-          font-weight:bold;
-        ">!</span>
+        <span id="changelogAlert">!</span>
       </button>
     </div>
   </header>
@@ -690,7 +1062,19 @@ button:disabled{
 <!--APP-->
 <div id="app" class="view">
   <header>
-    <h2>Horario actual</h2>
+    <div>
+      <h2>Horario actual</h2>
+      <div id="scheduleInfo" style="
+        font-size: 15px;
+        color: #4D4D4D;
+        margin-top: 2px;
+        font-weight: 400;
+      ">
+        <span id="subjectCountInfo">0 asignaturas</span>
+        <span style="margin: 0 6px;">·</span>
+        <span id="totalCreditsInfo">0 créditos</span>
+      </div>
+    </div>
     <button>← Volver</button>
   </header>
 
@@ -778,6 +1162,8 @@ button:disabled{
       </div>
     </div>
 
+    <label>Créditos</label>
+    <input type="number" id="subjectCreditsInput" min="0" placeholder="Ej: 3">
 
     <label>Bloques académicos</label>
     <select>
@@ -798,22 +1184,36 @@ button:disabled{
     <span class="close-btn">✕</span>
     <h3>Calcular Aguinaldo</h3>
 
-    <label>Mes</label>
-    <select id="monthSelect"></select>
+    <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; margin-bottom: 12px; align-items: end;">
+      <div class="input-group">
+        <label>Mes</label>
+        <select id="monthSelect"></select>
+      </div>
 
-    <label>Año</label>
-    <input type="number" id="yearInput" min="2020" placeholder="Ej: 2026">
-    <div class="error-text" id="yearError"></div>
+      <div class="input-group">
+        <label>Año</label>
+        <input type="number" id="yearInput" min="2020" placeholder="Ej: 2026">
+      </div>
+      <button type="button" id="openCalendarBtn" title="Excluir días específicos">
+          <img src="calendar.png?v=2" alt="Calendario">
+      </button>
+    </div>
 
-    <label>Merienda diaria (COP)</label>
-    <input type="number" id="snackCostInput" min="0" placeholder="Ej: 5000">
-    <div class="error-text" id="snackError"></div>
+      <div class="error-text" id="yearError"></div>
 
-    <label>Transporte ida + vuelta (COP)</label>
-    <input type="number" id="transportCostInput" min="0" placeholder="Ej: 8000">
-    <div class="error-text" id="transportError"></div>
+    <div class="input-row">
+      <div class="input-group">
+        <label>Merienda diaria</label>
+        <input type="number" id="snackCostInput" min="0" placeholder="Ej: 5000">
+        <div class="error-text" id="snackError"></div>
+      </div>
+      <div class="input-group">
+        <label>Transporte (ida+vuelta)</label>
+        <input type="number" id="transportCostInput" min="0" placeholder="Ej: 8000">
+        <div class="error-text" id="transportError"></div>
+      </div>
+    </div>
 
-    
     <label for="minGapMinutes">Minutos mínimos para considerar hueco</label>
     <input
       type="number"
@@ -828,46 +1228,96 @@ button:disabled{
     <div class="error-text" id="gapError"></div>
 
     <button id="confirmMonthlyBtn" type="button">Calcular</button>
-      <div id="monthlyResult" style="
-        margin-top:12px;
-        border-top:1px solid #000;
-        padding-top:10px;
-        display:none;
-      ">
-        <p id="resultMonth"></p>
-        <p id="resultTrips"></p>
-        <p id="resultTotal"></p>
-        <button id="closeMonthlyResult">Cerrar</button>
-      </div>
+    <div id="monthlyResult">
 
-    <div id="monthlyDetailPanel" class="monthly-detail-panel hidden"></div>
+      <p id="resultMonth"></p>
+      <p id="resultTrips"></p>
+      <p id="resultTotal"></p>
+      
+      <button type="button" id="viewDailyDetailBtn" title="Ver detalle">Ver detalle del cálculo →</button>
+            
+      <button id="closeMonthlyResult">Cerrar</button>
+    </div>
+    </div>
 
   </div>
 </div>
 
-<div id="duplicateBar" style="
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  background:#0066cc;
-  color:white;
-  padding:8px 12px;
-  font-weight:600;
-  display:none;
-  z-index:100;
-  justify-content:space-between;
-  align-items:center;
-">
+<!--EXCLUSIÓN DE DÍAS-->
+
+<div class="modal" id="excludeDaysModal">
+  <div class="modal-content">
+    
+    <button type="button" id="backToAguinaldoBtn" title="Volver">←</button>
+    
+    <div class="calendar-header">
+      <div class="calendar-header-content">
+        <h3>Días excluidos</h3>
+        <span id="excludeDaysCount">Ningún día excluido</span>
+      </div>
+    </div>
+    
+    <div id="calendarGrid"></div>
+    
+    <div class="calendar-legend">
+      <div class="legend-item">
+        <div class="legend-box-festivos"></div>
+        <span>Festivos</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box-excluidos"></div>
+        <span>Excluidos</span>
+      </div>
+    </div>
+    
+    <small class="calendar-note">
+      Haz clic en los días sin clases. Domingos y festivos ya están excluidos.
+    </small>
+  </div>
+</div>
+
+<!--DETALLE POR DÍA-->
+
+<div class="modal" id="dailyDetailModal">
+  <div class="modal-content">
+    
+    <button type="button" id="backToResultBtn" title="Volver">←</button>
+    
+    <h3>Detalle por día</h3>
+    
+    <div id="monthlyDetailContent"></div>
+    
+  </div>
+</div>
+
+<!--EXPORTAR IMAGEN-->
+
+<div class="modal" id="exportImageModal">
+  <div class="modal-content">
+    <span class="close-btn">✕</span>
+    <h3>Exportar como imagen</h3>
+    
+    <label style="display: block; margin-bottom: 12px; font-weight: 600;">
+      Jornadas a incluir:
+    </label>
+    
+    <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px; cursor: pointer; user-select: none;">
+      <input type="checkbox" id="exportDiurna" checked style="width: auto; cursor: pointer;">
+      <span>Jornada diurna</span>
+    </label>
+    
+    <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; cursor: pointer; user-select: none;">
+      <input type="checkbox" id="exportNocturna" checked style="width: auto; cursor: pointer;">
+      <span>Jornada nocturna</span>
+    </label>
+    
+    <button id="confirmExportImageBtn">Exportar</button>
+  </div>
+</div>
+
+<div id="duplicateBar">
   <span>Modo duplicación activo: selecciona una celda</span>
-  <button id="cancelDuplicateBtn" style="
-    background:#fff;
-    color:#0066cc;
-    border:none;
-    padding:4px 8px;
-    font-weight:600;
-    cursor:pointer;
-  ">Cancelar</button>
+  <button id="cancelDuplicateBtn">Cancelar</button>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -1340,6 +1790,7 @@ function normalizeSubject(subject) {
     blocks: Number(subject.blocks),
     group: subject.group ?? "",
     program: subject.program ?? "",
+    credits: subject.credits ?? 0,
     jornada: subject.jornada,
     day: day,
     startMinutes: subject.startMinutes,
@@ -1428,6 +1879,8 @@ function openSchedule(index){
   }
 
   scheduleTitle.textContent = currentSchedule.name;
+
+  updateScheduleInfo();
 
   homeView.classList.remove("active");
   appView.classList.add("active");
@@ -1565,9 +2018,16 @@ function renderSchedules(){
     const card = document.createElement("div");
     card.className = "schedule-card";
 
+    const uniqueSubjects = new Set(
+      (schedule.subjects || []).map(s => s.name.trim().toLowerCase())
+    );
+    const subjectCount = uniqueSubjects.size;
+    const subjectText = subjectCount === 1 ? "asignatura" : "asignaturas";
+
     card.innerHTML = `
       <h3>${schedule.name}</h3>
       <span>${new Date(schedule.created).toLocaleDateString()}</span>
+      <span class="subject-count">${subjectCount} ${subjectText}</span>
       <div class="card-actions">
         <button data-action="rename">✎</button>
         <button data-action="delete">🗑</button>
@@ -1596,6 +2056,7 @@ function renderSchedules(){
     scheduleList.appendChild(card);
   });
 }
+
 
 // CREAR HORARIO
 
@@ -1686,6 +2147,7 @@ backHomeBtn.onclick = ()=>{
   appView.classList.remove("active");
   homeView.classList.add("active");
   currentScheduleIndex = null;
+  renderSchedules();
 };
 
 renderSchedules();
@@ -1887,6 +2349,166 @@ function getCalculationConfig() {
   };
 }
 
+function saveCalculationConfig(config) {
+  const excludedDaysArray = Array.from(excludedDaysSet);
+  
+  localStorage.setItem("lastCalculationConfig", JSON.stringify({
+    minGapMinutes: config.minGapMinutes,
+    transportCost: config.transportCost,
+    snackCost: config.snackCost,
+    year: config.year,
+    month: config.month,
+    excludedDays: excludedDaysArray
+  }));
+}
+
+const excludedDaysSet = new Set();
+
+function openCalendarModal() {
+  const year = parseInt(yearInput.value) || new Date().getFullYear();
+  const month = parseInt(monthSelect.value);
+  
+  document.getElementById("excludeDaysModal").classList.add("active");
+  generateExcludeDaysCalendar(year, month);
+}
+
+function closeCalendarModal() {
+  document.getElementById("excludeDaysModal").classList.remove("active");
+}
+
+document.getElementById("openCalendarBtn").onclick = openCalendarModal;
+document.getElementById("backToAguinaldoBtn").onclick = closeCalendarModal;
+
+let dailyDetailData = null;
+
+function openDailyDetailModal() {
+  const detailContent = document.getElementById("monthlyDetailContent");
+  
+  detailContent.innerHTML = `
+    <ul>
+      ${dailyDetailData.map(d => {
+        const monthName = d.date.toLocaleDateString('es-ES', { month: 'long' });
+        return `
+          <li>
+            <div class="day-info">
+              <strong>${d.dayName}</strong>
+              <span class="day-date">${d.date.getDate()} de ${monthName}</span>
+            </div>
+            <div class="trip-info">
+              <div class="trip-count">${d.trips} viaje${d.trips !== 1 ? "s" : ""}</div>
+              ${d.hasGaps ? "<div class='gap-flag'>Hueco</div>" : ""}
+            </div>
+          </li>
+        `;
+      }).join("")}
+    </ul>
+  `;
+  
+  document.getElementById("dailyDetailModal").classList.add("active");
+}
+
+function closeDailyDetailModal() {
+  document.getElementById("dailyDetailModal").classList.remove("active");
+}
+
+document.getElementById("viewDailyDetailBtn").onclick = openDailyDetailModal;
+document.getElementById("backToResultBtn").onclick = closeDailyDetailModal;
+
+function generateExcludeDaysCalendar(year, month) {
+  const grid = document.getElementById("calendarGrid");
+  grid.innerHTML = "";
+  
+  const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"];
+  daysOfWeek.forEach(day => {
+    const header = document.createElement("div");
+    header.className = "calendar-day-header";
+    header.textContent = day;
+    grid.appendChild(header);
+  });
+  
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const daysInMonth = lastDay.getDate();
+  
+  let startDayOfWeek = firstDay.getDay();
+  startDayOfWeek = startDayOfWeek === 0 ? 6 : startDayOfWeek - 1;
+  
+  for (let i = 0; i < startDayOfWeek; i++) {
+    const emptyDay = document.createElement("div");
+    grid.appendChild(emptyDay);
+  }
+  
+  for (let day = 1; day <= daysInMonth; day++) {
+    const date = new Date(year, month, day);
+    const dayElement = document.createElement("div");
+    dayElement.className = "calendar-day";
+    dayElement.textContent = day;
+    
+    const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    const dayOfWeek = date.getDay();
+    
+    if (dayOfWeek === 0) {
+      dayElement.classList.add("calendar-day-disabled");
+      dayElement.title = "Domingo";
+    } else if (isHoliday(date)) {
+      dayElement.classList.add("calendar-day-holiday");
+      dayElement.title = "Festivo nacional";
+    } else {
+      if (excludedDaysSet.has(dateString)) {
+        dayElement.classList.add("calendar-day-excluded");
+      }
+      
+      dayElement.onclick = () => {
+        if (excludedDaysSet.has(dateString)) {
+          excludedDaysSet.delete(dateString);
+          dayElement.classList.remove("calendar-day-excluded");
+        } else {
+          excludedDaysSet.add(dateString);
+          dayElement.classList.add("calendar-day-excluded");
+        }
+        updateExcludedDaysCount();
+        
+        const currentConfig = getCalculationConfig();
+        saveCalculationConfig(currentConfig);
+      };
+    }
+    
+    grid.appendChild(dayElement);
+  }
+  
+  updateExcludedDaysCount();
+}
+
+function updateExcludedDaysCount() {
+  const count = excludedDaysSet.size;
+  const countElement = document.getElementById("excludeDaysCount");
+  
+  if (count === 0) {
+    countElement.textContent = "Ningún día excluido";
+  } else {
+    countElement.textContent = `${count} día${count !== 1 ? 's' : ''} excluido${count !== 1 ? 's' : ''}`;
+  }
+}
+
+function loadCalculationConfig() {
+  const saved = localStorage.getItem("lastCalculationConfig");
+  if (!saved) return null;
+  
+  try {
+    const config = JSON.parse(saved);
+    
+    if (config.excludedDays && Array.isArray(config.excludedDays)) {
+      excludedDaysSet.clear();
+      config.excludedDays.forEach(day => excludedDaysSet.add(day));
+    }
+    
+    return config;
+  } catch (e) {
+    console.error("Error al cargar configuración guardada:", e);
+    return null;
+  }
+}
+
 function calculateMonthlyCost(subjects, config) {
 
   const dailyMap = buildDailySubjects(subjects);
@@ -1903,7 +2525,15 @@ function calculateMonthlyCost(subjects, config) {
     const dayIndex = jsDay - 1;
 
     if (dayIndex >= 0 && dayIndex <= 5 && !isHoliday(date)) {
-
+      
+      const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1)
+        .padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+      
+      if (excludedDaysSet.has(dateString)) {
+        date.setDate(date.getDate() + 1);
+        continue;
+      }
+      
       const subjectsToday = dailyMap[dayIndex];
 
       if (subjectsToday && subjectsToday.length > 0) {
@@ -1985,6 +2615,7 @@ const subjectModal = document.getElementById("subjectModal");
 const subjectNameInput = subjectModal.querySelector("input[type='text']");
 const subjectGroupInput = document.getElementById("subjectGroupInput");
 const subjectProgramInput = document.getElementById("subjectProgramInput");
+const subjectCreditsInput = document.getElementById("subjectCreditsInput");
 const subjectColorInput = document.getElementById("subjectColorPicker");
 const colorPreview = document.getElementById("colorPreview");
 const subjectBlocksInput = subjectModal.querySelector("select");
@@ -2014,6 +2645,7 @@ function openSubjectModal(row, col){
   subjectNameInput.value = "";
   subjectGroupInput.value = "";
   subjectProgramInput.value = "";
+  subjectCreditsInput.value = "";
   subjectColorInput.value = "#1d4ed8";
   colorPreview.style.background = subjectColorInput.value;
   subjectBlocksInput.value = "1";
@@ -2035,6 +2667,16 @@ calculateBtn.onclick = () => {
     return;
   }
 
+  const savedConfig = loadCalculationConfig();
+  
+  if (savedConfig) {
+    if (savedConfig.year) yearInput.value = savedConfig.year;
+    if (savedConfig.month !== undefined) monthSelect.value = savedConfig.month;
+    if (savedConfig.snackCost !== undefined) snackInput.value = savedConfig.snackCost;
+    if (savedConfig.transportCost !== undefined) transportInput.value = savedConfig.transportCost;
+    if (savedConfig.minGapMinutes !== undefined) gapInput.value = savedConfig.minGapMinutes;
+  }
+
   monthlyModal.classList.add("active");
   monthlyResult.style.display = "none";
   updateCalculateButtonState();
@@ -2054,6 +2696,8 @@ confirmMonthlyBtn.onclick = () => {
 
   if (!result) return;
 
+  saveCalculationConfig(config);
+
   monthlyResult.style.display = "block";
 
   resultadoAguinaldo.innerHTML = `
@@ -2064,56 +2708,30 @@ confirmMonthlyBtn.onclick = () => {
         <p><strong>Días con clase:</strong> ${result.totalSnackDays}</p>
         <p><strong>Total aguinaldo:</strong> $${result.totalCost.toLocaleString()}</p>
 
-        <label class="aguinaldo-switch">
-          <input type="checkbox" id="aguinaldoToggle">
-          <span class="slider"></span>
-          <span class="label-text">Ver detalle del cálculo</span>
-        </label>
+        <button type="button" id="openDetailBtn" style="
+          background: transparent;
+          border: none;
+          color: #000;
+          text-decoration: underline;
+          cursor: pointer;
+          padding: 0;
+          font-size: 14px;
+          float: right;
+          margin-top: 8px;
+        ">Ver detalle por día →</button>
       </div>
 
     </div>
   `;
 
-  const toggle = document.getElementById("aguinaldoToggle");
-  const detailPanel = document.getElementById("monthlyDetailPanel");
-  const wasOpen = detailPanel && !detailPanel.classList.contains("hidden");
+  dailyDetailData = result.dailyDetails;
 
-  toggle.onchange = () => {
-    detailPanel.classList.toggle("hidden", !toggle.checked);
-  };
-
-  if(wasOpen) {
-    toggle.checked = true;
-    detailPanel.classList.remove("hidden");
-  } else {
-    toggle.checked = false;
-    detailPanel.classList.add("hidden");
-  }
-
-  detailPanel.innerHTML = `
-    <h4>Detalle por día</h4>
-    <ul>
-      ${result.dailyDetails.map(d => {
-        const monthName = d.date.toLocaleDateString('es-ES', { month: 'long' });
-        return `
-          <li>
-            <div class="day-info">
-              <strong>${d.dayName}</strong>
-              <span class="day-date">${d.date.getDate()} de ${monthName}</span>
-            </div>
-            <div class="trip-info">
-              <span class="trip-count">${d.trips} viaje${d.trips !== 1 ? "s" : ""}</span>
-              ${d.hasGaps ? "<span class='gap-flag'>Hueco</span>" : ""}
-            </div>
-          </li>
-        `;
-      }).join("")}
-    </ul>
-  `;
-
-  toggle.addEventListener("toggle", () => {
-    detailPanel.classList.toggle("hidden", !toggle.open);
-  });
+  setTimeout(() => {
+    const detailBtn = document.getElementById("openDetailBtn");
+    if (detailBtn) {
+      detailBtn.onclick = openDailyDetailModal;
+    }
+  }, 0);
 };
 
 // MODAL ASIGNATURA
@@ -2218,6 +2836,7 @@ function openEditSubjectModal(subject){
   subjectNameInput.value = subject.name;
   subjectGroupInput.value = subject.group || "";
   subjectProgramInput.value = subject.program || "";
+  subjectCreditsInput.value = subject.credits || "";
   subjectColorInput.value = subject.color;
   colorPreview.style.background = subject.color;
   subjectBlocksInput.value = subject.blocks;
@@ -2411,6 +3030,10 @@ saveSubjectBtn.onclick = () => {
   const startMinutes = startCell.startMinutes;
   const endMinutes = endCell.endMinutes;
 
+  const credits = subjectCreditsInput.value.trim() 
+    ? parseInt(subjectCreditsInput.value) 
+    : 0;
+
   const newSubject = {
     id: editingSubject ? editingSubject.id : crypto.randomUUID(),
     name,
@@ -2421,6 +3044,7 @@ saveSubjectBtn.onclick = () => {
     blocks,
     group: subjectGroupInput.value.trim(),
     program: subjectProgramInput.value.trim(),
+    credits,
     jornada,
     startMinutes,
     endMinutes
@@ -2441,6 +3065,7 @@ saveSubjectBtn.onclick = () => {
   if(duplicateBtn) duplicateBtn.remove();
 
   rebuildScheduleView();
+  updateScheduleInfo();
 };
 
 function deleteSubject(){
@@ -2462,6 +3087,7 @@ function deleteSubject(){
   if(duplicateBtn) duplicateBtn.remove();
 
   rebuildScheduleView();
+  updateScheduleInfo();
 }
 
 function duplicateSubject(subject){
@@ -2473,6 +3099,7 @@ function duplicateSubject(subject){
     blocks: subject.blocks,
     group: subject.group || "",
     program: subject.program || "",
+    credits: subject.credits || 0,
     jornada: subject.jornada
   });
 
@@ -2528,6 +3155,7 @@ function placeDuplicatedSubject(row, col){
     blocks,
     group: editorState.duplicatingSubject.group || "",
     program: editorState.duplicatingSubject.program || "",
+    credits: editorState.duplicatingSubject.credits || 0,
     jornada: targetCell.jornada,
     startMinutes,
     endMinutes
@@ -2537,6 +3165,7 @@ function placeDuplicatedSubject(row, col){
 
   saveData();
   rebuildScheduleView();
+  updateScheduleInfo();
   resetSubjectModalState();
 }
 
@@ -2660,6 +3289,38 @@ function renderSubjects(){
   });
 }
 
+function updateScheduleInfo() {
+  if (currentScheduleIndex === null) return;
+
+  const currentSchedule = schedules[currentScheduleIndex];
+  
+  const uniqueSubjects = new Map();
+  
+  currentSchedule.subjects.forEach(subject => {
+    const key = subject.name.trim().toLowerCase();
+    
+    if (!uniqueSubjects.has(key)) {
+      uniqueSubjects.set(key, {
+        name: subject.name,
+        credits: subject.credits || 0
+      });
+    }
+  });
+  
+  const uniqueCount = uniqueSubjects.size;
+  const totalCredits = Array.from(uniqueSubjects.values()).reduce((sum, subject) => {
+    return sum + subject.credits;
+  }, 0);
+
+  const subjectText = uniqueCount === 1 ? "asignatura" : "asignaturas";
+  const creditText = totalCredits === 1 ? "crédito" : "créditos";
+
+  document.getElementById("subjectCountInfo").textContent = 
+    `${uniqueCount} ${subjectText}`;
+  document.getElementById("totalCreditsInfo").textContent = 
+    `${totalCredits} ${creditText}`;
+}
+
 function getEasterDate(year){
   const f = Math.floor,
         G = year % 19,
@@ -2701,14 +3362,13 @@ function generateColombianHolidays(year){
 
   const easter = getEasterDate(year);
 
-  const holyThursday = new Date(easter);
-  holyThursday.setDate(easter.getDate() - 3);
+  // Semana Santa
 
-  const goodFriday = new Date(easter);
-  goodFriday.setDate(easter.getDate() - 2);
-
-  holidays.push(holyThursday);
-  holidays.push(goodFriday);
+  for (let i = 6; i >= 1; i--) {
+    const holyWeekDay = new Date(easter);
+    holyWeekDay.setDate(easter.getDate() - i);
+    holidays.push(holyWeekDay);
+  }
 
   const ascension = moveToMonday(new Date(easter.getTime() + 43 * 86400000));
   const corpusChristi = moveToMonday(new Date(easter.getTime() + 64 * 86400000));
@@ -2785,6 +3445,35 @@ function calculateTripsForDay(subjectsOfDay, minGapMinutes) {
 }
 
 // EXPORTAR JSON
+
+document.getElementById("exportScheduleBtn").onclick = () => {
+
+  if (currentScheduleIndex === null) {
+    alert("Abre un horario primero.");
+    return;
+  }
+
+  const currentSchedule = schedules[currentScheduleIndex];
+  
+  const jsonString = JSON.stringify([currentSchedule], null, 2);
+  
+  const blob = new Blob([jsonString], { type: "application/json" });
+  
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  
+  const fileName = currentSchedule.name
+    .replace(/[\\/:*?"<>|]/g, "")
+    .replace(/\s+/g, "_")
+    .toLowerCase();
+  
+  link.download = `${fileName}.json`;
+  
+  link.click();
+  
+  URL.revokeObjectURL(url);
+};
 
 document.getElementById("importSchedulesBtn").onclick = () => {
   document.getElementById("importFileInput").click();
@@ -2873,44 +3562,73 @@ document.getElementById("importFileInput").onchange = (e) => {
   reader.readAsText(file);
 }
 
-document.getElementById("exportScheduleBtn").onclick = () => {
-  if (currentScheduleIndex === null) {
-    alert("No hay ningún horario abierto para exportar.");
-    return;
-  }
-
-  const currentSchedule = schedules[currentScheduleIndex];
-  const dataStr = JSON.stringify(currentSchedule, null, 2);
-
-  const blob = new Blob([dataStr], { type: "application/json" });
-
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-
-  a.download = `horario_${currentSchedule.name || "sin_nombre"}.json`;
-
-  a.click();
-
-  URL.revokeObjectURL(a.href);
+document.getElementById("exportBtn").onclick = () => {
+  if (currentScheduleIndex === null) return;
+  document.getElementById("exportImageModal").classList.add("active");
 };
 
-// EXPORTAR FORMATO UdeC
+document.getElementById("confirmExportImageBtn").onclick = () => {
+  const includeDiurna = document.getElementById("exportDiurna").checked;
+  const includeNocturna = document.getElementById("exportNocturna").checked;
+  
+  if (!includeDiurna && !includeNocturna) {
+    alert("Selecciona al menos una jornada para exportar");
+    return;
+  }
+  
+  exportImageWithOptions(includeDiurna, includeNocturna);
+  document.getElementById("exportImageModal").classList.remove("active");
+};
 
-document.getElementById("exportPdfBtn").addEventListener("click", exportUniversityPDF);
-
-// EXPORTAR IMAGEN
-
-document.getElementById("exportBtn").onclick = () => {
+function exportImageWithOptions(includeDiurna, includeNocturna) {
   const target = document.getElementById("scheduleContainer");
-
-  if (currentScheduleIndex === null) return;
-
-  let scheduleName = schedules[currentScheduleIndex].name;
-
-  scheduleName = scheduleName
+  const scheduleName = schedules[currentScheduleIndex].name
     .replace(/[\\/:*?"<>|]/g, "")
     .replace(/\s+/g, "_")
     .toLowerCase();
+
+  const allRows = Array.from(document.querySelectorAll("#schedule tbody tr"));
+  const hiddenRows = [];
+  
+  let inDiurna = false;
+  let inNocturna = false;
+
+  allRows.forEach(row => {
+    const firstCell = row.querySelector("td");
+    if (!firstCell) return;
+
+    const cellText = firstCell.textContent.trim();
+    
+    if (cellText === "JORNADA DIURNA") {
+      inDiurna = true;
+      inNocturna = false;
+      if (!includeDiurna) {
+        row.style.display = "none";
+        hiddenRows.push(row);
+      }
+      return;
+    }
+    
+    if (cellText === "JORNADA NOCTURNA") {
+      inDiurna = false;
+      inNocturna = true;
+      if (!includeNocturna) {
+        row.style.display = "none";
+        hiddenRows.push(row);
+      }
+      return;
+    }
+
+    if (inDiurna && !includeDiurna) {
+      row.style.display = "none";
+      hiddenRows.push(row);
+    }
+    
+    if (inNocturna && !includeNocturna) {
+      row.style.display = "none";
+      hiddenRows.push(row);
+    }
+  });
 
   html2canvas(target, {
     backgroundColor: "#ffffff",
@@ -2920,20 +3638,45 @@ document.getElementById("exportBtn").onclick = () => {
     link.href = canvas.toDataURL("image/png");
     link.download = `${scheduleName}.png`;
     link.click();
+
+    hiddenRows.forEach(row => row.style.display = "");
+  }).catch(err => {
+    console.error("Error al exportar imagen:", err);
+    hiddenRows.forEach(row => row.style.display = "");
+    alert("Error al generar la imagen");
   });
-};
+}
+
+// EXPORTAR FORMATO UdeC
+
+document.getElementById("exportPdfBtn").addEventListener("click", exportUniversityPDF);
+
+// EXPORTAR IMAGEN
 
 if(currentScheduleIndex !== null){
   rebuildScheduleView();
 }
 
 document.addEventListener("keydown", (e) => {
+
   if (e.key === "Escape") {
     if (state.isDuplicating()) {
       state.cancelDuplication();
       setDuplicateCursor(false);
       removeGhostSubject();
       clearDuplicateVisualState();
+      return;
+    }
+
+    const dailyDetailModal = document.getElementById("dailyDetailModal");
+    if (dailyDetailModal && dailyDetailModal.classList.contains("active")) {
+      closeDailyDetailModal();
+      return;
+    }
+
+    const calendarModal = document.getElementById("excludeDaysModal");
+    if (calendarModal && calendarModal.classList.contains("active")) {
+      closeCalendarModal();
       return;
     }
 
