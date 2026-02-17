@@ -56,5 +56,18 @@
       "Se optimizó el render de asignaturas.",
       "Se agregaron validaciones más Rollback a la importación de horarios."
     ]
+  },
+  {
+    "version": "1.0.7",
+    "date": "16/02/2026",
+    "changes": [
+      "Se agregaron checkboxes en la opción de “Exportar como imagen” para desactivar las jornadas al momento de exportar el horario.",
+      "Se agregó contador de asignaturas y créditos.",
+      "Los datos del cálculo de aguinaldo más reciente se guardan en el navegador.",
+      "Se agregó opción para excluir días personalizados en el cálculo de aguinaldo.",
+      "Ahora la opción para ver el detalle por día del cálculo de aguinaldo tiene un modal independiente.",
+      "Se agregó Semana Santa al motor de festivos en el cálculo de aguinaldo.",
+      "Se optimizó la parte del CSS de la página."
+    ]
   }
 ]
