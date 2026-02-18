@@ -992,7 +992,6 @@ button:disabled{
   cursor: pointer;
 }
 
-/* Changelog Alert */
 #changelogAlert {
   position: absolute;
   top: -4px;
@@ -1458,14 +1457,11 @@ const bloquesNocturnos = generarBloques("nocturna");
 
 changelogBtn.addEventListener("click", async () => {
   changelogPanel.classList.add("open");
-  await loadChangelog();
+  const data = await loadChangelog();
 
-  const entries = document.querySelectorAll(".changelog-entry");
-  if(entries.length > 0){
-    const lastEntry = entries[entries.length - 1];
-    const versionText = lastEntry.querySelector("h3").textContent;
-    const version = versionText.replace("Versión ", "").trim();
-    localStorage.setItem(lastVersionKey, version);
+  if(data && Array.isArray(data) && data.length > 0){
+    const latestVersion = data[0].version;
+    localStorage.setItem(lastVersionKey, latestVersion);
     changelogAlert.style.display = "none";
   }
 });
@@ -1488,9 +1484,7 @@ function renderChangelog(changelogData){
   const container = document.getElementById("changelogContent");
   container.innerHTML = "";
 
-  const reversedData = [...changelogData].reverse();
-
-  reversedData.forEach(entry => {
+  changelogData.forEach(entry => {
     const card = document.createElement("div");
     card.className = "changelog-entry";
 
