@@ -5,7 +5,8 @@
     "changes": [
       "Se agregaron checkboxes en el modal de asignaturas para mostrar información sobre las asignaturas en las tarjetas del horario.",
       "Se arregló un bug con el modal del Changelog que aún era visible si se accedía a un horario.",
-      "Se optimizó la función del render de asignaturas."
+      "Se optimizó la función del render de asignaturas.",
+      "Se agregó un nuevo color referencial a la Semana Santa en el modal de exclusión de días."
     ]
   },
   {
