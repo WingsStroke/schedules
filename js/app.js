@@ -648,8 +648,14 @@ document.getElementById("backToResultBtn").onclick = closeDailyDetailModal;
 
 // Localiza esto en la sección 7 de app.js y reemplázalo:
 document.getElementById("openCalendarBtn").onclick = () => { 
-  renderCalendarGrid(); // Genera el contenido antes de mostrarlo
+  document.getElementById("monthlyModal").classList.remove("active"); 
+  renderCalendarGrid(); 
   document.getElementById("excludeDaysModal").classList.add("active"); 
+};
+
+document.getElementById("backToAguinaldoBtn").onclick = () => { 
+  document.getElementById("excludeDaysModal").classList.remove("active"); 
+  document.getElementById("monthlyModal").classList.add("active"); 
 };
 
 function renderCalendarGrid() {
@@ -778,7 +784,15 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     if (state.isDuplicating()) { state.cancelDuplication(); return; }
     if (typeof SidebarPanel !== "undefined" && SidebarPanel.isOpen) return;
+    
     const activeModal = document.querySelector(".modal.active");
-    if (activeModal) activeModal.querySelector(".close-btn")?.click();
+    if (activeModal) {
+      // Si es el calendario, usamos su botón de retroceso específico
+      if (activeModal.id === "excludeDaysModal") {
+        document.getElementById("backToAguinaldoBtn").click();
+      } else {
+        activeModal.querySelector(".close-btn")?.click();
+      }
+    }
   }
 });
