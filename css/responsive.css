@@ -1,0 +1,959 @@
+/* ── UTILIDADES ──────────────────────────────────────────── */
+
+.view {
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+
+  body.dark-mode::before {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  }
+}
+
+/* ============================================================
+   BREAKPOINT 768px
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* ── HOME ──────────────────────────────────────────────── */
+
+  #home header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  #home header h1 {
+    font-size: 22px;
+    flex: 1 1 100%;
+  }
+
+  #home header > div {
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+  }
+
+  #home header button {
+    padding: 8px 14px;
+    font-size: 13px;
+    flex: 1 1 auto;
+  }
+
+  #scheduleList {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  /* ── APP HEADER ────────────────────────────────────────── */
+
+  #app header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  #app header > div:first-child {
+    flex: 1 1 100%;
+  }
+
+  /* ── BARRA DE ACCIONES ─────────────────────────────────── */
+
+  .actions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .actions button {
+    flex: 1 1 calc(50% - 4px);
+    font-size: 13px;
+    padding: 8px 10px;
+    text-align: center;
+  }
+
+  /* ── TABLA DE HORARIO ──────────────────────────────────── */
+
+  #scheduleContainer {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+  }
+
+  /* Indicador de scroll: div con position:fixed posicionado por JS
+     para que siga siempre el borde derecho del contenedor en pantalla */
+  #scrollIndicator {
+    position: fixed;
+    right: 0;
+    width: 52px;
+    background: linear-gradient(to left, rgba(255,255,255,0.88), transparent);
+    pointer-events: none;
+    z-index: 200;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    border-radius: 0 8px 8px 0;
+    display: none; /* oculto en escritorio, JS lo muestra en móvil */
+  }
+
+  #scrollIndicator.scroll-end {
+    opacity: 0;
+  }
+
+  #schedule {
+    min-width: 600px;
+  }
+
+  /* Columnas de días más anchas para dar espacio a las tarjetas */
+  #schedule th:not(:first-child),
+  #schedule td:not(.time) {
+    min-width: 90px;
+  }
+
+  /* Columna de horas fija al hacer scroll horizontal */
+  .time {
+    position: sticky;
+    left: 0;
+    z-index: 20;
+    background: rgba(245, 245, 245, 0.97);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font-size: 9px;
+    padding: 3px 4px;
+    white-space: nowrap;
+    min-width: 58px;
+    border-right: 2px solid rgba(0, 0, 0, 0.2);
+  }
+
+  th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 21;
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+  th {
+    padding: 6px 3px;
+    font-size: 10px;
+  }
+
+  td {
+    font-size: 11px;
+    padding: 2px;
+  }
+
+  .cell {
+    height: 44px;
+    /* overflow debe ser visible para que subjects multibloque
+       se extiendan hacia las celdas bloqueadas de abajo */
+    overflow: visible;
+  }
+
+  .subject {
+    font-size: 10px;
+  }
+
+  /* subject-content: centrado con padding superior para los badges absolutos */
+  .subject-content {
+    padding: 16px 4px 2px 4px; /* top: espacio para grupo/créditos absolutos */
+    overflow: hidden;
+    justify-content: center;
+    gap: 1px;
+  }
+
+  /* Nombre: una sola línea con ellipsis */
+  .subject-content > div:first-child {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    font-size: 9px;
+    line-height: 1.2;
+  }
+
+  /* Programa: puede tomar múltiples líneas, sin corte */
+  .subject-program {
+    font-size: 7px;
+    padding: 1px 3px;
+    max-width: 100%;
+    align-self: center;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    line-height: 1.2;
+  }
+
+  /* Aula: una línea con ellipsis si es necesario */
+  .subject-aula {
+    font-size: 7px;
+    padding: 1px 3px;
+    max-width: 100%;
+    align-self: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Grupo y créditos: más pequeños pero legibles */
+  .subject-info {
+    font-size: 7px;
+    padding: 1px 3px;
+  }
+
+  /* ── SIDEBAR ───────────────────────────────────────────── */
+
+  .sidebar-panel {
+    width: 100vw;
+    right: -100vw;
+  }
+
+  .sidebar-panel.active {
+    right: 0;
+  }
+
+  /* ── MODALES GENERALES ─────────────────────────────────── */
+
+  .modal {
+    height: 100dvh;
+  }
+
+  .modal-content {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    padding: 16px;
+    margin: 0 auto;
+  }
+
+  /* ── BOTÓN CERRAR ──────────────────────────────────────── */
+
+  .close-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    top: 12px;
+    left: 12px;
+  }
+
+  /* ── MODAL ASIGNATURA — bottom sheet ──────────────────── */
+
+  #subjectModal {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  #subjectModal .modal-content {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    /* Cambio crítico: Porcentaje basado en el contenedor fijo, no en el viewport */
+    max-height: 85%;
+    overflow-y: auto;
+    border-radius: 20px 20px 0 0;
+    /* Área segura para dispositivos modernos */
+    padding: 12px 16px calc(32px + env(safe-area-inset-bottom)) 16px;
+    margin: 0;
+    position: relative;
+  }
+
+  /* Indicador de arrastre (Handle visual) */
+  #subjectModal .modal-content::before {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 5px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+    margin: 0 auto 16px auto;
+  }
+
+  /* Handle para modo nocturno */
+  html.dark-mode #subjectModal .modal-content::before,
+  body.dark-mode #subjectModal .modal-content::before {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  #subjectModal .modal-content h3 {
+    text-align: center;
+    padding: 0 40px;
+    font-size: 17px;
+    margin-top: 0;
+  }
+
+  /* Reubicación del botón de cerrar a la derecha */
+  #subjectModal .close-btn {
+    top: 16px;
+    right: 16px;
+    left: auto;
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  /* Fondo del botón de cerrar en modo nocturno */
+  html.dark-mode #subjectModal .close-btn,
+  body.dark-mode #subjectModal .close-btn {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .subject-row-triple {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .subject-field--credits {
+    grid-column: 1 / -1;
+  }
+
+  /* ── MODAL EXPORTAR IMAGEN ─────────────────────────────── */
+
+  .export-image-modal-content {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    max-height: 100dvh;
+    height: 100dvh;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    overflow-y: auto;
+  }
+
+  .export-image-layout {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    flex: 1;
+  }
+
+  .export-preview-col {
+    order: -1;
+  }
+
+  .export-preview-container {
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
+  .export-preview-img {
+    max-width: none !important; 
+    width: auto !important; 
+    height: auto !important;
+    display: block;
+  }
+
+  .export-confirm-btn {
+    margin-top: 12px;
+  }
+
+  /* ── MODAL EXPORTAR PDF ────────────────────────────────── */
+
+  .export-pdf-preview-container {
+    max-height: 40vh;
+  }
+
+  /* ── MODAL AGUINALDO ───────────────────────────────────── */
+
+  #monthlyModal .modal-content {
+    width: 95vw;
+  }
+
+  /* ── FILTROS DE ASIGNATURA ─────────────────────────────── */
+
+  .modal-filtros-flotante {
+    width: 95vw;
+    height: 85vh;
+  }
+
+  .filtro-opciones {
+    grid-template-columns: 1fr;
+  }
+
+  /* ── THEME TOGGLE ──────────────────────────────────────── */
+
+  #themeToggle {
+    width: 48px;
+    height: 48px;
+    bottom: 16px;
+    right: 16px;
+  }
+
+  /* ── MODAL DÍAS EXCLUIDOS — CALENDARIO ─────────────────── */
+
+  #excludeDaysModal .modal-content {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    padding: 16px;
+    overflow-x: hidden;
+  }
+
+  #excludeDaysModal #calendarGrid {
+    gap: 3px;
+    width: 100%;
+  }
+
+  .calendar-day {
+    min-height: 0;
+    font-size: 12px;
+  }
+
+  .calendar-day-header {
+    font-size: 10px;
+  }
+
+  #excludeDaysModal .calendar-legend {
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 12px;
+  }
+
+  /* ── CHANGELOG ─────────────────────────────────────────── */
+
+  #changelogPanel {
+    width: 100vw;
+    right: -100vw;
+    left: auto;
+  }
+
+  #changelogPanel.open {
+    right: 0;
+  }
+
+}
+
+/* ============================================================
+   BREAKPOINT 480px
+   ============================================================ */
+@media (max-width: 480px) {
+
+  /* ── GLOBAL ────────────────────────────────────────────── */
+
+  .view {
+    padding: 16px;
+  }
+
+  /* ── HOME ──────────────────────────────────────────────── */
+
+  #home header h1 {
+    font-size: 20px;
+  }
+
+  #home header button {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  #scheduleList {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .schedule-card {
+    padding: 10px;
+  }
+
+  .schedule-card h3 {
+    font-size: 13px;
+  }
+
+  /* ── BARRA DE ACCIONES ─────────────────────────────────── */
+
+  .actions {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .actions button {
+    flex: none;
+    width: 100%;
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  /* ── APP HEADER ────────────────────────────────────────── */
+
+  #app header h2 {
+    font-size: 16px;
+  }
+
+  #scheduleInfo {
+    font-size: 12px !important;
+  }
+
+  #app header button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  /* ── TABLA DE HORARIO ──────────────────────────────────── */
+
+  #schedule {
+    min-width: 530px;
+  }
+
+  #schedule th:not(:first-child),
+  #schedule td:not(.time) {
+    min-width: 78px;
+  }
+
+  th {
+    font-size: 9px;
+    padding: 5px 2px;
+  }
+
+  .time {
+    font-size: 8px;
+    min-width: 50px;
+    padding: 2px 3px;
+  }
+
+  .cell {
+    height: 40px;
+  }
+
+  .subject {
+    font-size: 9px;
+  }
+
+  .subject-content {
+    padding: 14px 3px 1px 3px;
+    gap: 0;
+    justify-content: center;
+  }
+
+  .subject-content > div:first-child {
+    font-size: 8px;
+  }
+
+  .subject-info {
+    font-size: 6px;
+    padding: 1px 2px;
+  }
+
+  .subject-program {
+    font-size: 6px;
+    padding: 0 2px;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+
+  .subject-aula {
+    font-size: 6px;
+    padding: 0 2px;
+  }
+
+  /* ── MODAL ASIGNATURA — columna única en 480px ─────────── */
+
+  #subjectModal .modal-content {
+    max-height: 92vh;
+    padding: 16px 14px 28px 14px;
+  }
+
+  .subject-row-triple {
+    grid-template-columns: 1fr;
+  }
+
+  .subject-field--credits {
+    grid-column: auto;
+  }
+
+  /* ── MODALES ───────────────────────────────────────────── */
+
+  .modal-content {
+    padding: 14px;
+  }
+
+  .modal-content h3 {
+    font-size: 16px;
+    padding: 0 30px;
+  }
+
+  /* ── BOTÓN CERRAR ──────────────────────────────────────── */
+
+  .close-btn {
+    width: 26px;
+    height: 26px;
+    font-size: 14px;
+    top: 10px;
+    left: 10px;
+  }
+
+  /* ── MODAL EXPORTAR IMAGEN en 480px ────────────────────── */
+
+  .export-image-layout {
+    gap: 10px;
+  }
+
+  .export-preview-container {
+    max-height: 45vh;
+  }
+
+  /* ── SIDEBAR ───────────────────────────────────────────── */
+
+  .sidebar-header {
+    padding: 16px;
+  }
+
+  .sidebar-header h3 {
+    font-size: 16px;
+  }
+
+  .sidebar-content {
+    padding: 12px;
+  }
+
+  /* ── FILTROS DE ASIGNATURA ─────────────────────────────── */
+
+  .modal-filtros-flotante {
+    height: 90vh;
+  }
+
+  .filtro-acciones {
+    padding: 12px 16px;
+    gap: 8px;
+  }
+
+  .btn-limpiar-filtros,
+  .btn-aplicar-filtros {
+    min-width: 0;
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  /* ── CHANGELOG ─────────────────────────────────────────── */
+
+  #changelogPanel {
+    width: 100vw;
+    right: -100vw;   /* Oculto fuera de pantalla */
+    left: auto;
+  }
+
+  #changelogPanel.open {
+    right: 0;
+  }
+
+  /* ── THEME TOGGLE ──────────────────────────────────────── */
+
+  #themeToggle {
+    width: 44px;
+    height: 44px;
+    bottom: 12px;
+    right: 12px;
+  }
+
+  /* ── EMPTY STATE HOME ──────────────────────────────────── */
+
+  .home-empty-state {
+    padding: 40px 16px;
+    min-height: 300px;
+  }
+
+  .home-empty-illustration {
+    width: 150px;
+    height: 120px;
+    margin-bottom: 20px;
+  }
+
+  .home-empty-title {
+    font-size: 18px;
+  }
+
+  .home-empty-subtitle {
+    font-size: 13px;
+  }
+
+  /* ── MODAL DÍAS EXCLUIDOS — CALENDARIO 480px ───────────── */
+
+  #excludeDaysModal #calendarGrid {
+    gap: 2px;
+  }
+
+  .calendar-day {
+    font-size: 11px;
+  }
+
+  /* ── MINIHORARIOS EN SIDEBAR ───────────────────────────── */
+
+  .minihorario-card {
+    padding: 10px;
+  }
+
+  .mini-tabla thead th,
+  .mini-celda {
+    font-size: 8px;
+    padding: 2px;
+  }
+
+}
+
+/* ============================================================
+   ANIMACIONES MÓVIL
+   ============================================================ */
+
+@media (max-width: 768px) {
+  @keyframes slideUpSheet {
+    from {
+      transform: translateY(100%);
+      opacity: 0.8;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  #subjectModal .modal-content {
+    animation: slideUpSheet 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* ============================================================
+   BOTTOM SHEET — prevenir scroll del body al abrirse
+   ============================================================ */
+@media (max-width: 768px) {
+  body:has(#subjectModal.active) {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   DISPOSITIVOS TÁCTILES — sin hover en celdas
+   @media (hover: none) detecta touchscreens sin hover real.
+   Elimina el efecto de celda activa que en móvil persiste
+   brevemente tras el toque y aparece como mancha.
+   ============================================================ */
+@media (hover: none) {
+  .cell:hover::before {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .cell:hover::after {
+    content: "";
+  }
+}
+
+/* ============================================================
+   REFINAMIENTO MÓVIL: PANTALLAS PEQUEÑAS (< 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+  
+  /* 1. Prevenir Auto-Zoom en iOS Safari al tocar inputs */
+  input[type="text"],
+  input[type="number"],
+  select {
+    font-size: 16px !important;
+  }
+
+  /* 2. Modal Calcular Aguinaldo */
+  /* Ajustar la fila superior: Mes, Año y Calendario */
+  #monthlyModal div[style*="grid-template-columns"] {
+    /* Rompe la cuadrícula de 3 a 2 columnas */
+    grid-template-columns: 1fr 1fr !important; 
+    gap: 12px !important;
+  }
+  
+  #openCalendarBtn {
+    grid-column: 1 / -1; /* Obliga al botón a pasar a la siguiente línea ocupando todo el ancho */
+    width: 100%;
+    height: 44px; /* Altura táctil ideal recomendada por Apple/Google */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4px;
+  }
+
+  /* Apilar costos de merienda y transporte (que originalmente estaban en fila) */
+  #monthlyModal .input-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #monthlyModal .input-group {
+    width: 100%;
+  }
+
+  /* 3. Modal Exportar Imagen */
+  .export-image-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .export-options-col,
+  .export-preview-col {
+    width: 100%;
+  }
+
+  .export-preview-container {
+    min-height: 180px; /* Asegura un buen espacio para la miniatura */
+  }
+
+  /* 4. Panel Lateral (Sidebar de Generación) */
+  #combinacionesSidebar {
+    /* En pantallas muy pequeñas, el panel no debe verse como un cajón, sino ocupar todo el ancho */
+    width: 100% !important; 
+    max-width: none;
+    border-radius: 0;
+  }
+}
+
+/* ============================================================
+   MEJORAS PREVISUALIZACIÓN EXPORTAR - SOLUCIÓN CLON
+   ============================================================ */
+
+/* Propiedades globales (PC y Móvil) */
+.export-preview-container {
+  width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: #f9f9f9;
+}
+
+@media (max-width: 768px) {
+  .export-preview-container {
+    max-height: 45vh !important;
+  }
+
+  .export-preview-img {
+    width: 700px !important; 
+    min-width: 700px !important;
+    max-width: none !important;
+    height: auto !important;
+    pointer-events: none; 
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+}
+
+/* ============================================================
+   ESTILOS DE EXPORTACIÓN (CENTRADO MULTI-LÍNEA DEFINITIVO)
+   ============================================================ */
+
+#scheduleExportClone .subject {
+  position: absolute !important;
+  left: 3px !important; 
+  top: 3px !important;  
+  width: calc(100% - 6px) !important; 
+  border-radius: 8px !important;
+  overflow: hidden !important; 
+  box-sizing: border-box !important;
+  border: 1px solid rgba(0,0,0,0.12) !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06) !important;
+  display: block !important; 
+}
+
+#scheduleExportClone .subject-content {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  display: block !important;
+}
+
+#scheduleExportClone .subject-text-container {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 100% !important;
+  padding: 0 10px !important; 
+  box-sizing: border-box !important;
+  text-align: center !important;
+  display: block !important;
+}
+
+#scheduleExportClone .subject-text-container > div {
+  margin: 0 auto !important; 
+}
+
+#scheduleExportClone .subject-text-container > div + div {
+  margin-top: 5px !important; 
+}
+
+#scheduleExportClone .subject-name-wrapper {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  width: 100% !important;
+  display: block !important;
+  white-space: normal !important;
+  word-wrap: break-word !important;
+}
+
+#scheduleExportClone .export-badge-wrapper {
+  width: 100% !important;
+  line-height: 1.3 !important; 
+  display: block !important;
+  text-align: center !important; /* CRÍTICO: Obliga al texto inline a centrarse */
+}
+
+/* === SOLUCIÓN: inline-block + text-align center para evitar desplazamientos === */
+#scheduleExportClone .subject-program,
+#scheduleExportClone .subject-aula {
+  display: inline !important; 
+  width: auto !important;
+  font-size: 11px !important;
+  padding: 2px 4px !important; /* SOLUCIÓN: Padding nativo y simétrico */
+  white-space: normal !important;
+  -webkit-box-decoration-break: clone !important;
+  box-decoration-break: clone !important;
+  box-sizing: border-box !important;
+  border-radius: 4px !important; /* Suaviza las esquinas en todas las líneas */
+}
+
+#scheduleExportClone .subject-group {
+  position: absolute !important;
+  top: 4px !important;
+  left: 6px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  z-index: 2 !important;
+}
+
+#scheduleExportClone .subject-credits {
+  position: absolute !important;
+  top: 4px !important;
+  right: 6px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  z-index: 2 !important;
+}
+
+/* Alta Legibilidad Compensada */
+#scheduleExportClone.export-enhanced .subject-name-wrapper {
+  font-size: 17px !important; 
+}
+
+#scheduleExportClone.export-enhanced .subject-program,
+#scheduleExportClone.export-enhanced .subject-group,
+#scheduleExportClone.export-enhanced .subject-credits {
+  font-size: 13px !important; 
+}
+
+#scheduleExportClone.export-enhanced .subject-aula {
+  font-size: 15px !important; 
+  font-weight: 700 !important;
+  padding: 2px 6px !important; /* Padding nativo simétrico */
+}
+
+#scheduleExportClone.export-enhanced .subject-credits {
+  padding: 0 4px !important;
+  background: rgba(0,0,0,0.08) !important;
+  border-radius: 4px !important;
+}
+
+/* ── CLASES DE FILTRADO PARA EXPORTACIÓN ────────────────── */
+
+#schedule.export-hide-diurna tr[data-jornada="diurna"] { display: none !important; }
+#schedule.export-hide-nocturna tr[data-jornada="nocturna"] { display: none !important; }
+
+/* Ocultar columnas vacías */
+#schedule.hide-col-0 th:nth-child(2), #schedule.hide-col-0 td:nth-child(2) { display: none; }
+#schedule.hide-col-1 th:nth-child(3), #schedule.hide-col-1 td:nth-child(3) { display: none; }
+#schedule.hide-col-2 th:nth-child(4), #schedule.hide-col-2 td:nth-child(4) { display: none; }
+#schedule.hide-col-3 th:nth-child(5), #schedule.hide-col-3 td:nth-child(5) { display: none; }
+#schedule.hide-col-4 th:nth-child(6), #schedule.hide-col-4 td:nth-child(6) { display: none; }
+#schedule.hide-col-5 th:nth-child(7), #schedule.hide-col-5 td:nth-child(7) { display: none; }

@@ -1,0 +1,2632 @@
+{
+  "metadata": {
+    "programa": "Ingeniería Química",
+    "archivo": "Ingeniería_Química_2026-1.xlsx",
+    "fechaProcesamiento": "2026-03-06T00:46:57.000Z",
+    "totalAsignaturas": 79,
+    "totalGrupos": 114,
+    "totalSemestres": 11,
+    "version": "2.0.0"
+  },
+  "semestres": [
+    {
+      "numero": 0,
+      "asignaturas": [
+        {
+          "id": "ciencia_de_los_materiales",
+          "nombre": "Ciencia de los materiales",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "ciencia_de_los_materiales_a1",
+              "grupo": "A1",
+              "profesor": "Liliana Castellón",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tecnologia_del_carbon",
+          "nombre": "Tecnología del Carbón",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "tecnologia_del_carbon_a1",
+              "grupo": "A1",
+              "profesor": "Jasser Martínez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "13:50",
+                  "fin": "17:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "control_de_calidad",
+          "nombre": "Control de Calidad",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "control_de_calidad_a1",
+              "grupo": "A1",
+              "profesor": "Liliana Castellón",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "gestion_gerencial",
+          "nombre": "Gestión Gerencial",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "gestion_gerencial_a1",
+              "grupo": "A1",
+              "profesor": "Alfonso Muskus",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:50",
+                  "fin": "17:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "estadistica_aplicada_para_analisis_de_resultados",
+          "nombre": "Estadística Aplicada para análisis de resultados",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "estadistica_aplicada_para_analisis_de_resultados_a1",
+              "grupo": "A1",
+              "profesor": "José Venecia",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "economia_circular",
+          "nombre": "Economía circular",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "economia_circular_a1",
+              "grupo": "A1",
+              "profesor": "Ildefonso Baldiris",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "15:30",
+                  "fin": "18:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "seguridad_industrial",
+          "nombre": "Seguridad Industrial",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "seguridad_industrial_a1",
+              "grupo": "A1",
+              "profesor": "Yajaira Ricardo Blanco",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "09:30",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "simulacion_de_procesos",
+          "nombre": "Simulación de Procesos",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "simulacion_de_procesos_a1",
+              "grupo": "A1",
+              "profesor": "Eduardo Sánchez",
+              "ubicacion": "Sala de Simulación",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "13:50",
+                  "fin": "17:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bioprocesos",
+          "nombre": "Bioprocesos",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "bioprocesos_a1",
+              "grupo": "A1",
+              "profesor": "Gezira de Ávila",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "evaluacion_de_proyectos",
+          "nombre": "Evaluación de Proyectos",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "evaluacion_de_proyectos_a1",
+              "grupo": "A1",
+              "profesor": "Liliana Castellón",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 1,
+      "asignaturas": [
+        {
+          "id": "calculo_diferencial",
+          "nombre": "Cálculo Diferencial",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "calculo_diferencial_g1",
+              "grupo": "G1",
+              "profesor": "Randy Zabaleta",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:50",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "13:50",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "calculo_diferencial_h1",
+              "grupo": "H1",
+              "profesor": "Bernardo Orozco",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:50",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "13:50",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catedra_institucional",
+          "nombre": "Cátedra Institucional",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "catedra_institucional_f1",
+              "grupo": "F1",
+              "profesor": "Gezira de Ávila",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "08:40",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "produccion_y_comprension_textual_i",
+          "nombre": "Producción y comprensión textual I",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "produccion_y_comprension_textual_i_f1",
+              "grupo": "F1",
+              "profesor": "Marilin Cuesta Osorio",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "laboratorio_quimica_gral",
+          "nombre": "Laboratorio Química Gral.",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "laboratorio_quimica_gral_a2",
+              "grupo": "A2",
+              "profesor": "Luis Monroy",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "laboratorio_quimica_gral_a1",
+              "grupo": "A1",
+              "profesor": "Adriana Herrera",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingles_i",
+          "nombre": "Inglés I",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "ingles_i_j1",
+              "grupo": "J1",
+              "profesor": "Milagro Agudelo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingles_i_i1",
+              "grupo": "I1",
+              "profesor": "Milagro Agudelo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fundamentos_de_matematicas",
+          "nombre": "Fundamentos de Matemáticas",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "fundamentos_de_matematicas_f1",
+              "grupo": "F1",
+              "profesor": "Dalia Bonilla Correa",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "introduccion_a_la_ingenieria",
+          "nombre": "Introducción a la Ingeniería",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "introduccion_a_la_ingenieria_a1",
+              "grupo": "A1",
+              "profesor": "María T. Acevedo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "asignaturas": [
+        {
+          "id": "algebra_lineal",
+          "nombre": "Algebra lineal",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "algebra_lineal_i1",
+              "grupo": "I1",
+              "profesor": "Edilbert Almanza",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "11:10",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "algebra_lineal_h1",
+              "grupo": "H1",
+              "profesor": "Edilbert Almanza",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "07:50",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "lab_fisica_mecanica",
+          "nombre": "LAB. FÍSICA MECÁNICA",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "lab_fisica_mecanica_a6",
+              "grupo": "A6",
+              "profesor": "Angel Masa",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "lab_fisica_mecanica_a7",
+              "grupo": "A7",
+              "profesor": "Julio C. Arrieta P",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "lab_fisica_mecanica_a8",
+              "grupo": "A8",
+              "profesor": "Julio C. Arrieta P.",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingles_ii",
+          "nombre": "INGLÉS II",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "ingles_ii_o1",
+              "grupo": "O1",
+              "profesor": "Jorge Hernández",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "08:40",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingles_ii_h1",
+              "grupo": "H1",
+              "profesor": "Jorge Hernández",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "calculo_integral",
+          "nombre": "Cálculo Integral",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "calculo_integral_i1",
+              "grupo": "I1",
+              "profesor": "Eilberh Caro",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "07:50",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "calculo_integral_h1",
+              "grupo": "H1",
+              "profesor": "Alcibaldo Miranda",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "quimica_organica",
+          "nombre": "Química Orgánica",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "quimica_organica_a1",
+              "grupo": "A1",
+              "profesor": "Rodinson Arrieta",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "11:10",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "produccion_y_comprension_textual_ii",
+          "nombre": "Producción y comprensión textual II",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "produccion_y_comprension_textual_ii_i1",
+              "grupo": "I1",
+              "profesor": "José D. Gutiérrez M",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:50",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "lab_quimica_organica",
+          "nombre": "LAB. QUÍMICA ORGÁNICA",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "lab_quimica_organica_a2",
+              "grupo": "A2",
+              "profesor": "Juan Romero",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "lab_quimica_organica_a1",
+              "grupo": "A1",
+              "profesor": "Ildefonso Baldiris.",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "13:50",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "asignaturas": [
+        {
+          "id": "estequiometria",
+          "nombre": "Estequiometria",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "estequiometria_a1",
+              "grupo": "A1",
+              "profesor": "Karina Ojeda D",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "estequiometria_b1",
+              "grupo": "B1",
+              "profesor": "Luis Cova Cantillo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "11:10",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "calculo_vectorial",
+          "nombre": "Calculo Vectorial",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "calculo_vectorial_i1",
+              "grupo": "I1",
+              "profesor": "Tomás Sarmiento",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "15:30",
+                  "fin": "17:10",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "16:20",
+                  "fin": "18:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "calculo_vectorial_h1",
+              "grupo": "H1",
+              "profesor": "Walter Ortega",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fundamentos_de_proyectos_en_ingenieria_quimica",
+          "nombre": "Fundamentos de proyectos en Ingeniería Química",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "fundamentos_de_proyectos_en_ingenieria_quimica_a1",
+              "grupo": "A1",
+              "profesor": "Karina Ballesteros",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:50",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "fundamentos_de_proyectos_en_ingenieria_quimica_b1",
+              "grupo": "B1",
+              "profesor": "Karina Ballesteros",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:50",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingles_iii",
+          "nombre": "INGLÉS III",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "ingles_iii_o1",
+              "grupo": "O1",
+              "profesor": "Antonio Miranda",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingles_iii_p1",
+              "grupo": "P1",
+              "profesor": "Javier Sierra",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "lab_quimica_inorganica",
+          "nombre": "LAB. QUÍMICA INORGÁNICA",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "lab_quimica_inorganica_a2",
+              "grupo": "A2",
+              "profesor": "Luis Monroy",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "lab_quimica_inorganica_a1",
+              "grupo": "A1",
+              "profesor": "Luis Monroy",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "programacion",
+          "nombre": "Programación",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "programacion_a1",
+              "grupo": "A1",
+              "profesor": "Julio Rodríguez R.",
+              "ubicacion": "Salas de Informática",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "programacion_b1",
+              "grupo": "B1",
+              "profesor": "Nohemy Castro Genes",
+              "ubicacion": "Salas de Informática",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "lab_electromagnetismo",
+          "nombre": "LAB. Electromagnetismo",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "lab_electromagnetismo_a9",
+              "grupo": "A9",
+              "profesor": "Javier Trujillo Ocampo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "lab_electromagnetismo_a8",
+              "grupo": "A8",
+              "profesor": "Javier Trujillo O",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "lab_electromagnetismo_b1",
+              "grupo": "B1",
+              "profesor": "Yaleidys Hernández",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "electromagnetismo_teoria",
+          "nombre": "Electromagnetismo teoría",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "electromagnetismo_teoria_a6",
+              "grupo": "A6",
+              "profesor": "Edil Melo Jaimes",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 4,
+      "asignaturas": [
+        {
+          "id": "ecuaciones_diferenciales",
+          "nombre": "Ecuaciones Diferenciales",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "ecuaciones_diferenciales_g1",
+              "grupo": "G1",
+              "profesor": "Edilbert Almanza",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:50",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ecuaciones_diferenciales_f1",
+              "grupo": "F1",
+              "profesor": "Eduardo Sánchez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:50",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "07:50",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "emprendimiento_empresarial",
+          "nombre": "Emprendimiento Empresarial",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "emprendimiento_empresarial_a1",
+              "grupo": "A1",
+              "profesor": "José Payares Guzmán",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "13:50",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingles_iv",
+          "nombre": "INGLÉS IV",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "ingles_iv_q1",
+              "grupo": "Q1",
+              "profesor": "Victor Ricardo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingles_iv_p1",
+              "grupo": "P1",
+              "profesor": "Ferman Madero",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "termodinamica_general",
+          "nombre": "Termodinámica General",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "termodinamica_general_a1",
+              "grupo": "A1",
+              "profesor": "José Venecia Nuñez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "07:50",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "termodinamica_general_b1",
+              "grupo": "B1",
+              "profesor": "Luis Cova Cantillo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fundamentos_de_bioquimica",
+          "nombre": "Fundamentos de Bioquímica",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "fundamentos_de_bioquimica_a1",
+              "grupo": "A1",
+              "profesor": "Leonor Cervantes",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "10:20",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "probabilidad_y_estadistica",
+          "nombre": "Probabilidad y Estadística",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "probabilidad_y_estadistica_h1",
+              "grupo": "H1",
+              "profesor": "Mario Hernández",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "quimica_analitica_laboratorio",
+          "nombre": "Química Analítica Laboratorio",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "quimica_analitica_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Maximiliano Ceballos",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "08:40",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 5,
+      "asignaturas": [
+        {
+          "id": "ingles_v",
+          "nombre": "INGLÉS V",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "ingles_v_j1",
+              "grupo": "J1",
+              "profesor": "Claudia Sumoza",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingles_v_i1",
+              "grupo": "I1",
+              "profesor": "Javier Sierra",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "09:30",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mecanica_de_fluidos",
+          "nombre": "Mecánica de fluidos",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "mecanica_de_fluidos_a1",
+              "grupo": "A1",
+              "profesor": "Martha Cuenca",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "metodos_numericos",
+          "nombre": "Métodos Numéricos",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "metodos_numericos_a1",
+              "grupo": "A1",
+              "profesor": "Juan Carlos Burgos",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "metodos_numericos_b1",
+              "grupo": "B1",
+              "profesor": "Dina Mendoza Beltrán",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fisicoquimica_y_laboratorio",
+          "nombre": "Fisicoquímica y laboratorio",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "fisicoquimica_y_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Luis Monroy",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "fisicoquimica_y_laboratorio_a2",
+              "grupo": "A2",
+              "profesor": "Maximiliano Ceballos",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "termodinamica_de_equilibrio_y_slnes",
+          "nombre": "Termodinámica de equilibrio y slnes",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "termodinamica_de_equilibrio_y_slnes_b1",
+              "grupo": "B1",
+              "profesor": "Dina Mendoza Beltrán",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "07:50",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "termodinamica_de_equilibrio_y_slnes_a1",
+              "grupo": "A1",
+              "profesor": "Ángel González D",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "07:50",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fenomenos_de_transporte",
+          "nombre": "Fenómenos de Transporte",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "fenomenos_de_transporte_a1",
+              "grupo": "A1",
+              "profesor": "Miguel Angel Mueses",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:50",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 6,
+      "asignaturas": [
+        {
+          "id": "modulo_de_profundizacion_fundamentos_de_ecologia_y_medio_ambiente",
+          "nombre": "Módulo de Profundización Fundamentos de Ecología y Medio Ambiente",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "modulo_de_profundizacion_fundamentos_de_ecologia_y_medio_ambiente_a1",
+              "grupo": "A1",
+              "profesor": "Mario Hernández",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:50",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "manejo_de_solidos",
+          "nombre": "Manejo de Sólidos",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "manejo_de_solidos_a1",
+              "grupo": "A1",
+              "profesor": "Juan Romero",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "procesos_quimicos_industriales",
+          "nombre": "Procesos Químicos Industriales",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "procesos_quimicos_industriales_a1",
+              "grupo": "A1",
+              "profesor": "Karina Ojeda",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "procesos_quimicos_industriales_a2",
+              "grupo": "A2",
+              "profesor": "Juan Romero",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "procesos_quimicos_industriales_astar",
+              "grupo": "A*",
+              "profesor": "Mario Hernández",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fundamentos_de_transferencia_de_calor",
+          "nombre": "Fundamentos de Transferencia de Calor",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "fundamentos_de_transferencia_de_calor_b1",
+              "grupo": "B1",
+              "profesor": "José Venecia",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "fundamentos_de_transferencia_de_calor_a1",
+              "grupo": "A1",
+              "profesor": "Claudia Hernández",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:50",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "modulo_de_profundizacion_introduccion_a_los_polimeros",
+          "nombre": "Módulo de Profundización Introducción a los Polímeros",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "modulo_de_profundizacion_introduccion_a_los_polimeros_a1",
+              "grupo": "A1",
+              "profesor": "Luis Cova Cantillo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "nivel_de_ingles_iii",
+          "nombre": "NIVEL DE INGLÉS III",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "nivel_de_ingles_iii_a1",
+              "grupo": "A1",
+              "profesor": "Alfredo Herazo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "modulo_de_profundizacion_introduccion_a_la_petroquimica",
+          "nombre": "Módulo de Profundización Introducción a la Petroquímica",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "modulo_de_profundizacion_introduccion_a_la_petroquimica_a1",
+              "grupo": "A1",
+              "profesor": "Luis Cova Cantillo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 7,
+      "asignaturas": [
+        {
+          "id": "ingenieria_de_las_reacciones_quimicas",
+          "nombre": "Ingeniería de las Reacciones Químicas",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "ingenieria_de_las_reacciones_quimicas_b1",
+              "grupo": "B1",
+              "profesor": "María Acevedo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingenieria_de_las_reacciones_quimicas_a1",
+              "grupo": "A1",
+              "profesor": "María Acevedo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "transferencia_de_masa",
+          "nombre": "Transferencia de Masa",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "transferencia_de_masa_b1",
+              "grupo": "B1",
+              "profesor": "Adriana Herrera",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "transferencia_de_masa_a1",
+              "grupo": "A1",
+              "profesor": "Adriana Herrera",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "nivel_de_ingles_iv",
+          "nombre": "Nivel de inglés IV",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "nivel_de_ingles_iv_b1",
+              "grupo": "B1",
+              "profesor": "Carlos Gómez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "lab_de_operaciones_unitarias_i",
+          "nombre": "Lab. De Operaciones Unitarias I",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "lab_de_operaciones_unitarias_i_a1",
+              "grupo": "A1",
+              "profesor": "Ángel Villabona",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "lab_de_operaciones_unitarias_i_b1",
+              "grupo": "B1",
+              "profesor": "Ángel González",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "modulo_de_profundizacion_ingenieria_ambiental",
+          "nombre": "Módulo de Profundización Ingeniería Ambiental",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "modulo_de_profundizacion_ingenieria_ambiental_a1",
+              "grupo": "A1",
+              "profesor": "José Payares",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "modulo_de_profundizacion_procesos_cataliticos",
+          "nombre": "Módulo de Profundización Procesos Catalíticos",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "modulo_de_profundizacion_procesos_cataliticos_a1",
+              "grupo": "A1",
+              "profesor": "Juan Romero",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "diseno_de_equipos_de_transferencia_de_calor",
+          "nombre": "Diseño de Equipos de Transferencia de Calor",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "diseno_de_equipos_de_transferencia_de_calor_a1",
+              "grupo": "A1",
+              "profesor": "José Colina",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "diseno_de_equipos_de_transferencia_de_calor",
+          "nombre": "Diseño de Equipos de Transferencia de Calor",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "diseno_de_equipos_de_transferencia_de_calor_b1",
+              "grupo": "B1",
+              "profesor": "Rodrigo Ricardo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "14:40",
+                  "fin": "17:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "modulos_de_profundizacion_procesos_con_polimeros",
+          "nombre": "Módulos de Profundización Procesos con Polímeros",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "modulos_de_profundizacion_procesos_con_polimeros_a1",
+              "grupo": "A1",
+              "profesor": "Ildefonso Baldiris",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:50",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 8,
+      "asignaturas": [
+        {
+          "id": "modulo_de_profundizacion_evaluacion_ambiental",
+          "nombre": "Módulo de Profundización Evaluación Ambiental",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "modulo_de_profundizacion_evaluacion_ambiental_a1",
+              "grupo": "A1",
+              "profesor": "Mario Hernández",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "diseno_de_reactores_y_laboratorio",
+          "nombre": "Diseño de reactores y Laboratorio",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "diseno_de_reactores_y_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Martha Cuenca",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "diseno_de_reactores_y_laboratorio_b1",
+              "grupo": "B1",
+              "profesor": "Juan Romero",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:50",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "diseno_de_plantas",
+          "nombre": "Diseño de Plantas",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "diseno_de_plantas_b1",
+              "grupo": "B1",
+              "profesor": "Edwin Fuentes",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "diseno_de_plantas_a1",
+              "grupo": "A1",
+              "profesor": "José Colina",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "07:50",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "seminario_en_ingenieria_quimicaemprendimiento_y_proyeccion_social",
+          "nombre": "Seminario en ingeniería Química-Emprendimiento y proyección social",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "seminario_en_ingenieria_quimicaemprendimiento_y_proyeccion_social_b1",
+              "grupo": "B1",
+              "profesor": "Liliana Usuga",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "operaciones_de_separacion",
+          "nombre": "Operaciones de Separación",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "operaciones_de_separacion_a1",
+              "grupo": "A1",
+              "profesor": "Rodrigo Ricardo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "operaciones_de_separacion_b1",
+              "grupo": "B1",
+              "profesor": "Edwin Fuentes O",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "modulo_de_profundizacion_refinacion_de_petroleo",
+          "nombre": "Módulo de Profundización Refinación de Petróleo",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "modulo_de_profundizacion_refinacion_de_petroleo_a1",
+              "grupo": "A1",
+              "profesor": "Rodinson Arrieta",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "seminario_en_ingenieria_quimicainvestigacion",
+          "nombre": "Seminario en ingeniería Química-Investigación",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "seminario_en_ingenieria_quimicainvestigacion_a1",
+              "grupo": "A1",
+              "profesor": "Dina Mendoza Beltrán",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:50",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "modulo_de_profundizacion_tecnologia_de_plasticos",
+          "nombre": "Módulo de Profundización Tecnología de Plásticos",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "modulo_de_profundizacion_tecnologia_de_plasticos_a1",
+              "grupo": "A1",
+              "profesor": "Maximiliano Ceballos",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 9,
+      "asignaturas": [
+        {
+          "id": "constitucion_y_etica",
+          "nombre": "Constitución y ética",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "constitucion_y_etica_a1",
+              "grupo": "A1",
+              "profesor": "Amalia Jaspe Prens",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "16:20",
+                  "fin": "18:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "control_de_procesos",
+          "nombre": "Control de Procesos",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "control_de_procesos_a1",
+              "grupo": "A1",
+              "profesor": "Álvaro Realpe",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "control_de_procesos_b1",
+              "grupo": "B1",
+              "profesor": "Claudia Hernández",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingenieria_de_procesos",
+          "nombre": "Ingeniería de Procesos",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "ingenieria_de_procesos_b1",
+              "grupo": "B1",
+              "profesor": "Eduardo Sánchez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "formulacion_de_proyectos_investigacion_trabajo_de_grado_i",
+          "nombre": "Formulación de proyectos investigación (Trabajo de Grado I)",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "formulacion_de_proyectos_investigacion_trabajo_de_grado_i_a1",
+              "grupo": "A1",
+              "profesor": "María Acevedo/Liliana Usuga",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "nivel_de_ingles_v",
+          "nombre": "Nivel de inglés V",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "nivel_de_ingles_v_a1",
+              "grupo": "A1",
+              "profesor": "Carmen Torres",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "lab_de_operaciones_unitarias_ii",
+          "nombre": "Lab. de Operaciones Unitarias II",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "lab_de_operaciones_unitarias_ii_b1",
+              "grupo": "B1",
+              "profesor": "Rodrigo Ricardo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "lab_de_operaciones_unitarias_ii_a1",
+              "grupo": "A1",
+              "profesor": "Ángel Villabona",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:50",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "formulacion_de_proyectos_emprendimiento_y_proyeccion_social_trabajo_de_grado_i",
+          "nombre": "Formulación de proyectos Emprendimiento y proyección social (Trabajo de Grado I)",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "formulacion_de_proyectos_emprendimiento_y_proyeccion_social_trabajo_de_grado_i_a1",
+              "grupo": "A1",
+              "profesor": "Liliana Usuga",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 10,
+      "asignaturas": [
+        {
+          "id": "desarrollo_de_proyectos_investigacion_trabajo_de_grado",
+          "nombre": "Desarrollo de proyectos investigación (Trabajo de Grado)",
+          "creditos": null,
+          "semestre": 10,
+          "grupos": [
+            {
+              "id": "desarrollo_de_proyectos_investigacion_trabajo_de_grado_a1",
+              "grupo": "A1",
+              "profesor": "Gezira de Ávila M.",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "nivel_de_ingles_vi",
+          "nombre": "Nivel de inglés VI",
+          "creditos": null,
+          "semestre": 10,
+          "grupos": [
+            {
+              "id": "nivel_de_ingles_vi_a1",
+              "grupo": "A1",
+              "profesor": "Gabriel Vivanco",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "desarrollo_de_proyectos_emprendimiento_trabajo_de_grado",
+          "nombre": "Desarrollo de proyectos Emprendimiento y proyección social (Trabajo de Grado)",
+          "creditos": null,
+          "semestre": 10,
+          "grupos": [
+            {
+              "id": "desarrollo_de_proyectos_emprendimiento_trabajo_de_grado_a1",
+              "grupo": "A1",
+              "profesor": "Pedro Meza Castellar",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "18:00",
+                  "fin": "21:00",
+                  "jornada": "nocturna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

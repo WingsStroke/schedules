@@ -1,0 +1,82 @@
+[
+  {
+    "version": "1.0.8",
+    "date": "23/02/2026",
+    "changes": [
+      "Se agregaron checkboxes en el modal de asignaturas para mostrar información sobre las asignaturas en las tarjetas del horario.",
+      "Se arregló un bug con el modal del Changelog que aún era visible si se accedía a un horario.",
+      "Se optimizó la función del render de asignaturas."
+    ]
+  },
+  {
+    "version": "1.0.7",
+    "date": "16/02/2026",
+    "changes": [
+      "Se agregaron checkboxes en la opción de 'Exportar como imagen' para desactivar las jornadas al momento de exportar el horario.",
+      "Se agregó contador de asignaturas y créditos.",
+      "Los datos del cálculo de aguinaldo más reciente se guardan en el navegador.",
+      "Se agregó opción para excluir días personalizados en el cálculo de aguinaldo.",
+      "Ahora la opción para ver el detalle por día del cálculo de aguinaldo tiene un modal independiente.",
+      "Se agregó Semana Santa al motor de festivos en el cálculo de aguinaldo.",
+      "Se optimizó la parte del CSS de la página."
+    ]
+  },
+  {
+    "version": "1.0.6",
+    "date": "11/02/2026",
+    "changes": [
+      "Se agregó opción para ver el detalle por día en el cálculo de transportes.",
+      "Se agregaron atajos de teclado para cerrar (ESC) y confirmar (ENTER) en menús.",
+      "Se optimizó el render de asignaturas.",
+      "Se agregaron validaciones más Rollback a la importación de horarios."
+    ]
+  },
+  {
+    "version": "1.0.5",
+    "date": "04/02/2026",
+    "changes": [
+      "Se arregló un bug de exportación en el formato de matrículas que no exportaba los días y las horas correctamente.",
+      "Se arregló un bug en el cálculo de transportes cuando se detectaban huecos horarios y había una asignatura en la jornada nocturna.",
+      "Se mejoró el sistema de detección de huecos horarios."
+    ]
+  },
+  {
+    "version": "1.0.4",
+    "date": "30/01/2026",
+    "changes": [
+      "Se cambió el parámetro de detección de huecos horarios a minutos, ya no se usan bloques.",
+      "Se arregló un bug de duplicación de viajes en el cálculo de transportes debido a la jornada nocturna.",
+      "Se agregaron mejoras visuales."
+    ]
+  },
+  {
+    "version": "1.0.3",
+    "date": "28/01/2026",
+    "changes": [
+      "Se agregó jornada nocturna."
+    ]
+  },
+  {
+    "version": "1.0.2",
+    "date": "27/01/2026",
+    "changes": [
+      "Opción para exportar horario a formato UdeC para matrículas.",
+      "Opción para exportar horario a JSON.",
+      "Se arregló un bug de duplicación."
+    ]
+  },
+  {
+    "version": "1.0.1",
+    "date": "26/01/2026",
+    "changes": [
+      "Botón 'Changelog' añadido."
+    ]
+  },
+  {
+    "version": "1.0.0",
+    "date": "26/01/2026",
+    "changes": [
+      "Lanzamiento inicial."
+    ]
+  }
+]

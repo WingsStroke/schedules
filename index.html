@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PWA -->
+  <meta name="theme-color" content="#ffffff" id="theme-meta">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Horarios UdeC">
+  <meta name="description" content="Gestor de horarios académicos para la Universidad de Caldas">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+
+  <title>Horarios Académicos UdeC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/minihorarios-styles.css">
+  <link rel="stylesheet" href="css/sidebar-panel.css">
+  <link rel="stylesheet" href="css/filtros-asignaturas.css">
+  <link rel="stylesheet" href="css/dark-mode.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+</head>
+
+<body>
+
+<!--HOME-->
+<div id="home" class="view active">
+  <header>
+    <h1>Mis Horarios</h1>
+    <div style="display:flex; gap:10px;">
+      <button id="createScheduleBtn">+ Nuevo horario</button>
+      <button id="importSchedulesBtn">Importar</button>
+      <input type="file" id="importFileInput" accept=".json" hidden>
+      <button id="changelogBtn" style="position:relative;">
+        Changelog
+        <span id="changelogAlert">!</span>
+      </button>
+    </div>
+<!--
+    <button onclick="showErrorLog()" style="background: #666; font-size: 12px; padding: 5px 10px;">
+      Ver Errores
+    </button>
+-->
+
+  </header>
+
+  <div id="sortBar">
+    <select>
+  <option value="dateDesc">Fecha (más reciente)</option>
+  <option value="dateAsc">Fecha (más antiguo)</option>
+  <option value="nameAsc">Nombre (A-Z)</option>
+  <option value="nameDesc">Nombre (Z-A)</option>
+</select>
+  </div>
+
+  <div id="scheduleList">
+    <!-- Cards de horarios -->
+  </div>
+</div>
+
+<!--APP-->
+<div id="app" class="view">
+  <header>
+    <div>
+      <h2>Horario actual</h2>
+      <div id="scheduleInfo" style="
+        font-size: 15px;
+        color: #4D4D4D;
+        margin-top: 2px;
+        font-weight: 400;
+      ">
+        <span id="subjectCountInfo">0 asignaturas</span>
+        <span style="margin: 0 6px;">·</span>
+        <span id="totalCreditsInfo">0 créditos</span>
+      </div>
+    </div>
+    <button>← Volver</button>
+  </header>
+
+  <div class="actions">
+    <button id="exportScheduleBtn">Exportar JSON</button>
+    <button id="exportPdfBtn">Exportar formato UdeC (PDF)</button>
+    <button id="exportBtn">Exportar como imagen</button>
+    <button id="calculateMonthlyBtn">Calcular Aguinaldo</button>
+    <button id="searchSubjectBtn" class="btn-search-subject">
+      Generar Horario
+    </button>
+  </div>
+
+  <div id="scheduleContainer">
+  <div id="scrollIndicator" aria-hidden="true"></div>
+  <table id="schedule">
+    <thead>
+      <tr>
+        <th>Hora</th>
+        <th>Lunes</th>
+        <th>Martes</th>
+        <th>Miércoles</th>
+        <th>Jueves</th>
+        <th>Viernes</th>
+        <th>Sábado</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+</div>
+
+</div>
+
+<!-- MODAL NUEVO HORARIO -->
+<div class="modal" id="newScheduleModal">
+  <div class="modal-content">
+    <span class="close-btn">✕</span>
+    <h3>Nuevo horario</h3>
+    <label>Nombre del horario</label>
+    <input type="text">
+    <button>Guardar</button>
+  </div>
+</div>
+
+<!--RENOMBRAR-->
+
+<div class="modal" id="renameScheduleModal">
+  <div class="modal-content">
+    <span class="close-btn">✕</span>
+    <h3>Renombrar horario</h3>
+    <label>Nuevo nombre</label>
+    <input type="text">
+    <button>Guardar cambios</button>
+  </div>
+</div>
+
+<!--ELIMINAR-->
+
+<div class="modal" id="deleteScheduleModal">
+  <div class="modal-content">
+    <span class="close-btn">✕</span>
+    <h3>Eliminar horario</h3>
+    <p>¿Seguro que deseas eliminar este horario?</p>
+    <button>Eliminar</button>
+  </div>
+</div>
+
+<!--ASIGNATURA-->
+
+<div class="modal" id="subjectModal">
+  <div class="modal-content">
+    <span class="close-btn">✕</span>
+    <h3>Asignatura</h3>
+
+    <div class="subject-form-field">
+      <label>Nombre</label>
+      <input type="text">
+    </div>
+
+    <div class="subject-row-triple">
+      <div class="subject-field">
+        <div class="subject-label-row">
+          <label>Grupo</label>
+          <input type="checkbox" id="showGroupCheckbox" title="Mostrar en horario">
+        </div>
+        <input type="text" id="subjectGroupInput" placeholder="Ej: A1">
+      </div>
+      <div class="subject-field">
+        <div class="subject-label-row">
+          <label>Aula</label>
+          <input type="checkbox" id="showAulaCheckbox" title="Mostrar en horario">
+        </div>
+        <input type="text" id="subjectAulaInput" placeholder="Ej: A102">
+      </div>
+      <div class="subject-field subject-field--credits">
+        <div class="subject-label-row">
+          <label>Créd.</label>
+          <input type="checkbox" id="showCreditsCheckbox" title="Mostrar en horario">
+        </div>
+        <input type="number" id="subjectCreditsInput" min="0" placeholder="0">
+      </div>
+    </div>
+
+    <div class="subject-form-field">
+      <div class="subject-label-row">
+        <label>Programa</label>
+        <input type="checkbox" id="showProgramCheckbox" title="Mostrar en horario">
+      </div>
+      <input type="text" id="subjectProgramInput" placeholder="Ej: Ingeniería de Sistemas">
+    </div>
+
+    <div class="subject-form-field">
+      <label>Color</label>
+      <div class="color-picker-wrapper">
+        <div id="colorPreview"></div>
+        <input type="color" id="subjectColorPicker">
+      </div>
+    </div>
+
+    <div class="subject-form-field">
+      <label>Bloques académicos</label>
+      <select>
+        <option value="1">1 bloque</option>
+        <option value="2">2 bloques</option>
+        <option value="3">3 bloques</option>
+        <option value="4">4 bloques</option>
+      </select>
+    </div>
+
+    <button>Guardar asignatura</button>
+  </div>
+</div>
+
+<!--MESADA-->
+
+<div class="modal" id="monthlyModal">
+  <div class="modal-content">
+    <span class="close-btn">✕</span>
+    <h3>Calcular Aguinaldo</h3>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; margin-bottom: 12px; align-items: end;">
+      <div class="input-group">
+        <label>Mes</label>
+        <select id="monthSelect"></select>
+      </div>
+
+      <div class="input-group">
+        <label>Año</label>
+        <input type="number" id="yearInput" min="2020" placeholder="Ej: 2026">
+      </div>
+      <button type="button" id="openCalendarBtn" title="Excluir días específicos">
+          <img src="assets/calendar.png" alt="Calendario">
+      </button>
+    </div>
+
+      <div class="error-text" id="yearError"></div>
+
+    <div class="input-row">
+      <div class="input-group">
+        <label>Merienda diaria</label>
+        <input type="number" id="snackCostInput" min="0" placeholder="Ej: 5000">
+        <div class="error-text" id="snackError"></div>
+      </div>
+      <div class="input-group">
+        <label>Transporte (ida+vuelta)</label>
+        <input type="number" id="transportCostInput" min="0" placeholder="Ej: 8000">
+        <div class="error-text" id="transportError"></div>
+      </div>
+    </div>
+
+    <label for="minGapMinutes">Minutos mínimos para considerar hueco</label>
+    <input
+      type="number"
+      id="minGapMinutes"
+      min="0"
+      step="5"
+      value="0"
+    />
+
+    <small>Si es 0, no se detectan huecos ni transportes extra.</small>
+
+    <div class="error-text" id="gapError"></div>
+
+    <button id="confirmMonthlyBtn" type="button">Calcular</button>
+    <div id="monthlyResult">
+
+      <p id="resultMonth"></p>
+      <p id="resultTrips"></p>
+      <p id="resultTotal"></p>
+      
+      <button type="button" id="viewDailyDetailBtn" title="Ver detalle">Ver detalle del cálculo →</button>
+            
+      <button id="closeMonthlyResult">Cerrar</button>
+    </div>
+    </div>
+
+  </div>
+</div>
+
+<!--EXCLUSIÓN DE DÍAS-->
+
+<div class="modal" id="excludeDaysModal">
+  <div class="modal-content">
+    
+    <button type="button" id="backToAguinaldoBtn" title="Volver">✕</button>
+    
+    <div class="calendar-header">
+      <div class="calendar-header-content">
+        <h3>Días excluidos</h3>
+        <span id="excludeDaysCount">Ningún día excluido</span>
+      </div>
+    </div>
+    
+    <div id="calendarGrid"></div>
+    
+    <div class="calendar-legend">
+      <div class="legend-item">
+        <div class="legend-box-festivos"></div>
+        <span>Festivos</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box-holyweek"></div>
+        <span>Semana Santa</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box-excluidos"></div>
+        <span>Excluidos</span>
+      </div>
+    </div>
+    
+    <small class="calendar-note">
+      Haz click para excluir días del cálculo de aguinaldo
+    </small>
+  </div>
+</div>
+
+<!--DETALLE POR DÍA-->
+
+<div class="modal" id="dailyDetailModal">
+  <div class="modal-content">
+    
+    <button type="button" id="backToResultBtn" title="Volver">✕</button>
+    
+    <h3>Detalle por día</h3>
+    
+    <div id="monthlyDetailContent"></div>
+    
+  </div>
+</div>
+
+<!--EXPORTAR IMAGEN-->
+
+<div class="modal" id="exportImageModal">
+  <div class="modal-content export-image-modal-content">
+    <span class="close-btn">✕</span>
+    <h3>Exportar como imagen</h3>
+
+    <div class="export-image-layout">
+
+      <!-- Columna izquierda: opciones -->
+      <div class="export-options-col">
+        <label class="export-section-label">Jornadas a incluir:</label>
+
+        <label class="export-option-row">
+          <input type="checkbox" id="exportDiurna" checked>
+          <span>Jornada diurna</span>
+        </label>
+
+        <label class="export-option-row">
+          <input type="checkbox" id="exportNocturna" checked>
+          <span>Jornada nocturna</span>
+        </label>
+
+        <hr class="export-divider">
+
+        <label class="export-option-row">
+          <input type="checkbox" id="exportHideEmpty">
+          <span>Ocultar días sin clases</span>
+        </label>
+
+        <label class="export-option-row">
+          <input type="checkbox" id="exportEnhanced">
+          <span>Alta legibilidad</span>
+          <span class="export-tooltip-trigger" title="Aumenta el tamaño de las celdas y el texto para que la imagen exportada sea más fácil de leer">?</span>
+        </label>
+
+        <button id="confirmExportImageBtn" class="export-confirm-btn">Descargar imagen</button>
+      </div>
+
+      <!-- Columna derecha: preview -->
+      <div class="export-preview-col">
+        <span class="export-preview-label">Vista previa</span>
+        <div id="exportImagePreviewContainer" class="export-preview-container">
+          <div id="exportImagePreviewLoading" class="export-preview-loading">
+            Generando vista previa...
+          </div>
+          <img id="exportImagePreviewImg" class="export-preview-img" style="display:none;" alt="Vista previa">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--EXPORTAR FORMATO UdeC - VISTA PREVIA-->
+
+<div class="modal" id="exportPdfModal">
+  <div class="modal-content export-pdf-modal-content">
+    <span class="close-btn">✕</span>
+    <h3>Exportar formato UdeC</h3>
+    <p class="export-pdf-subtitle">Vista previa del documento a exportar</p>
+    <div class="export-pdf-preview-container">
+      <div class="export-pdf-preview-scroll">
+        <table class="export-pdf-preview-table" id="exportPdfPreviewTable">
+          <thead>
+            <tr>
+              <th>Asignatura</th>
+              <th>Horario</th>
+              <th>Grupo</th>
+              <th>Programa</th>
+            </tr>
+          </thead>
+          <tbody id="exportPdfPreviewBody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <button id="confirmExportPdfBtn" class="export-confirm-btn">Descargar PDF</button>
+  </div>
+</div>
+
+<div id="duplicateBar">
+  <span>Modo duplicación activo: selecciona una celda</span>
+  <button id="cancelDuplicateBtn">Cancelar</button>
+</div>
+
+
+<div class="modal" id="searchModal">
+  <div class="modal-content" style="max-width: 700px;">
+    <span class="close-btn">✕</span>
+    <h3>Buscar Asignatura</h3>
+    
+    <div style="margin: 20px 0;">
+      <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="Escribe el nombre de la asignatura (ej: Cálculo, Física, Programación)..."
+        style="width: 100%; padding: 12px 16px; border: 1px solid #E0E0E0; border-radius: 4px; font-size: 14px; font-family: 'Inter', sans-serif;"
+        autocomplete="off"
+      >
+    </div>
+    
+    <div id="searchResults" style="max-height: 450px; overflow-y: auto; margin-top: 20px;">
+      <p class="search-empty" style="text-align: center; color: #999; padding: 60px 20px; font-size: 14px;">
+        Escribe para buscar asignaturas...
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- SIDEBAR PANEL LATERAL -->
+<div id="combinacionesSidebar" class="sidebar-panel">
+  <div class="sidebar-header">
+    <h3>Generar horario</h3>
+    <button class="btn-close-sidebar" onclick="cerrarSidebar()" title="Cerrar">×</button>
+  </div>
+  
+  <div class="sidebar-content">
+    <!-- Búsqueda de asignaturas -->
+    <div class="sidebar-section">
+      <h4>Buscar asignaturas</h4>
+      <div class="sidebar-search-container">
+        <input 
+          type="text" 
+          id="sidebarSearchInput" 
+          class="sidebar-search-input" 
+          placeholder="Escribe el nombre de la asignatura..."
+          autocomplete="off"
+        >
+        <div id="sidebarSearchResults" class="sidebar-search-results"></div>
+      </div>
+    </div>
+    
+    <!-- Asignaturas seleccionadas -->
+    <div class="sidebar-section">
+      <div class="sidebar-section-header">
+        <h4>Asignaturas seleccionadas</h4>
+        <span id="asignaturasCountSidebar" class="count-badge">0</span>
+      </div>
+      <div id="asignaturasSeleccionadasSidebar" class="asignaturas-seleccionadas-sidebar">
+        <div class="sidebar-empty-message">
+          <p>No hay asignaturas seleccionadas</p>
+          <span>Busca y selecciona asignaturas arriba</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Combinaciones generadas -->
+    <div class="sidebar-section">
+      <div class="sidebar-section-header">
+        <h4>Combinaciones</h4>
+        <div class="combinaciones-controls">
+          <input 
+            type="number" 
+            id="maxCombinacionesSidebar" 
+            class="max-combinaciones-input"
+            min="1" 
+            max="10" 
+            value="5"
+            title="Máximo de combinaciones a generar (1-10)"
+          >
+          <button 
+            id="btnRegenerarCombinaciones" 
+            class="btn-regenerar-combinaciones"
+            title="Regenerar combinaciones descartadas"
+            style="display: none;"
+          >
+            ↻
+          </button>
+          <span id="combinacionesCountSidebar" class="count-badge">0</span>
+        </div>
+      </div>
+      <div id="minihorariosContainerSidebar" class="minihorarios-container-sidebar">
+        <div class="sidebar-empty-state">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h5>No hay combinaciones</h5>
+          <p>Busca y selecciona asignaturas</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay para cerrar sidebar -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="cerrarSidebar()"></div>
+
+<div id="changelogOverlay" class="changelog-overlay"></div>
+<div id="changelogPanel" class="changelog-panel">
+  <div class="changelog-header">
+    <h2>Registro de cambios</h2>
+    <button id="closeChangelogBtn">✕</button>
+  </div>
+  <div id="changelogContent" class="changelog-content">
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js" defer></script>
+
+
+<script src="js/core.js" defer></script>
+<script src="js/storage-db.js" defer></script>
+<script src="js/state-manager.js" defer></script>
+<script src="js/calculadora-aguinaldo.js" defer></script>
+<script src="js/dom-renderer.js" defer></script>
+<script src="js/motor-combinaciones.js" defer></script>
+<script src="js/cargador-combinaciones.js" defer></script>
+<script src="js/sistema-carga-ofertas.js" defer></script>
+<script src="js/sidebar-panel.js" defer></script>
+<script src="js/minihorarios-ui.js" defer></script>
+<script src="js/integracion-busqueda.js" defer></script>
+<script src="js/dark-mode.js" defer></script>
+<script src="js/app.js" defer></script>
+
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw.js", { scope: "./" })
+        .then(reg => {
+          console.info("[PWA] Service Worker registrado:", reg.scope);
+
+          reg.addEventListener("updatefound", () => {
+            const newWorker = reg.installing;
+            newWorker.addEventListener("statechange", () => {
+              if (newWorker.state === "activated" && navigator.serviceWorker.controller) {
+                console.info("[PWA] Nueva versión disponible. Recarga para actualizar.");
+              }
+            });
+          });
+        })
+        .catch(err => console.warn("[PWA] Error al registrar Service Worker:", err));
+    });
+  }
+</script>
+</body>
+</html>

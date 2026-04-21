@@ -1,0 +1,2721 @@
+{
+  "metadata": {
+    "programa": "Ingeniería de Alimentos",
+    "archivo": "HORARIO_2026-1_Reforma_1802.xlsx",
+    "fechaProcesamiento": "2026-03-08T14:56:25.000Z",
+    "totalAsignaturas": 89,
+    "totalGrupos": 116,
+    "totalSemestres": 11,
+    "version": "2.0.0"
+  },
+  "semestres": [
+    {
+      "numero": 0,
+      "asignaturas": [
+        {
+          "id": "recursos_naturales_y_agroindrustriales",
+          "nombre": "Recursos Naturales y Agroindrustriales",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "recursos_naturales_y_agroindrustriales_a1",
+              "grupo": "A1",
+              "profesor": "Giovanna Pastrana May",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "trazabilidad",
+          "nombre": "Trazabilidad",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "trazabilidad_a1",
+              "grupo": "A1",
+              "profesor": "Carmen Navarro Vargas",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "control_estadistico_de_la_calidad",
+          "nombre": "Control Estadístico de la Calidad",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "control_estadistico_de_la_calidad_a1",
+              "grupo": "A1",
+              "profesor": "David Ramirez Brewer",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "toxicologia_de_alimentos",
+          "nombre": "Toxicología de Alimentos",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "toxicologia_de_alimentos_a1",
+              "grupo": "A1",
+              "profesor": "Escilda Benavidez Benitez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "gestion_en_salud_publica",
+          "nombre": "Gestión en Salud Pública",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "gestion_en_salud_publica_a1",
+              "grupo": "A1",
+              "profesor": "Carmen Navarro Vargas",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "metodos_y_tiempos_de_trabajo",
+          "nombre": "Métodos y Tiempos de Trabajo",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "metodos_y_tiempos_de_trabajo_a1",
+              "grupo": "A1",
+              "profesor": "David Ramirez Brewer",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "introduccion_a_procesos_industriales",
+          "nombre": "Introducción a Procesos Industriales",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "introduccion_a_procesos_industriales_a1",
+              "grupo": "A1",
+              "profesor": "Angel Camacho Vergara",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "16:20",
+                  "fin": "18:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bebidas_carbonatadas_y_acoholicas",
+          "nombre": "Bebidas Carbonatadas y Acohólicas",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "bebidas_carbonatadas_y_acoholicas_a1",
+              "grupo": "A1",
+              "profesor": "Santiago Madera Perez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "16:20",
+                  "fin": "18:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 1,
+      "asignaturas": [
+        {
+          "id": "ingles_i",
+          "nombre": "Ingles I",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "ingles_i_f1",
+              "grupo": "F1",
+              "profesor": "Jorge Hernandez Camacho",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingles_i_f2",
+              "grupo": "F2",
+              "profesor": "Alfredo Erazo de Avila",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "quimica_general_teoria",
+          "nombre": "Quimica General Teoria",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "quimica_general_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Arnulfo Taron Dunoyer",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "quimica_general_laboratorio",
+          "nombre": "Quimica General Laboratorio",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "quimica_general_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Arnulfo Taron Dunoyer",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "quimica_general_laboratorio_a2",
+              "grupo": "A2",
+              "profesor": "Santiago Madera Perez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "quimica_general_laboratorio_a3",
+              "grupo": "A3",
+              "profesor": "Angel Camacho Vergara",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "introduccion_a_la_ingenieria_de_alimentos",
+          "nombre": "Introducción a la Ingeniería de Alimentos",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "introduccion_a_la_ingenieria_de_alimentos_a1",
+              "grupo": "A1",
+              "profesor": "Jaime Perez Mendoza",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "introduccion_a_la_ingenieria_de_alimentos_a2",
+              "grupo": "A2",
+              "profesor": "Jaime Perez Mendoza",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catedra_institucional",
+          "nombre": "Catedra Institucional",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "catedra_institucional_d1",
+              "grupo": "D1",
+              "profesor": null,
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fundamentos_de_matematicas",
+          "nombre": "Fundamentos de Matematicas",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "fundamentos_de_matematicas_c1",
+              "grupo": "C1",
+              "profesor": "Eilberth Caro Zuñiga",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "fundamentos_de_matematicas_c2",
+              "grupo": "C2",
+              "profesor": "Dalia Bonilla Correa",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:50",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "calculo_diferencial",
+          "nombre": "Calculo Diferencial",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "calculo_diferencial_c1",
+              "grupo": "C1",
+              "profesor": "Jhonny Cuadro Molina",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "calculo_diferencial_c2",
+              "grupo": "C2",
+              "profesor": "Luis Lopez Macias",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "produccion_y_compresion_textual_i",
+          "nombre": "Produccion y compresion textual I",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "produccion_y_compresion_textual_i_d1",
+              "grupo": "D1",
+              "profesor": null,
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "asignaturas": [
+        {
+          "id": "fisica_mecanica_teoria",
+          "nombre": "Física Mecánica Teoria",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "fisica_mecanica_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Escilda Benavidez Benitez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "fisica_mecanica_teoria_a2",
+              "grupo": "A2",
+              "profesor": "Alvaro García Muriel",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "calculo_integral",
+          "nombre": "Cálculo Integral",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "calculo_integral_f1",
+              "grupo": "F1",
+              "profesor": "Jhonny Cuadro Molina",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "calculo_integral_f2",
+              "grupo": "F2",
+              "profesor": "Luis Lopez Macias",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "quimica_organica_teoria",
+          "nombre": "Quimica Orgánica Teoría",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "quimica_organica_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Glicerio Leon Mendez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "quimica_organica_teoria_a2",
+              "grupo": "A2",
+              "profesor": "Glicerio Leon Mendez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingles_ii",
+          "nombre": "Ingles II",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "ingles_ii_c1",
+              "grupo": "C1",
+              "profesor": "Antonio Miranda Sanchez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingles_ii_c2",
+              "grupo": "C2",
+              "profesor": "Danny Hernandez Diaz",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fisica_mecanica_laboratorio",
+          "nombre": "Física Mecánica Laboratorio",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "fisica_mecanica_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Oscar Yovany Fajardo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "fisica_mecanica_laboratorio_a2",
+              "grupo": "A2",
+              "profesor": "Oscar Yovany Fajardo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "fisica_mecanica_laboratorio_a3",
+              "grupo": "A3",
+              "profesor": "Julio Arrieta Pastrana",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "16:20",
+                  "fin": "18:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "produccion_y_comprension_textual_ii",
+          "nombre": "Produccion y comprension textual II",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "produccion_y_comprension_textual_ii_e1",
+              "grupo": "E1",
+              "profesor": "Tania Lambraño Torres",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "algebra_lineal",
+          "nombre": "Algebra Lineal",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "algebra_lineal_f1",
+              "grupo": "F1",
+              "profesor": "Dalia Bonilla correa",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "algebra_lineal_f2",
+              "grupo": "F2",
+              "profesor": "Atilano Arrieta Vivero",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "quimica_organica_laboratorio",
+          "nombre": "Quimica Orgánica Laboratorio",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "quimica_organica_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Glicerio Leon Mendez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "quimica_organica_laboratorio_a2",
+              "grupo": "A2",
+              "profesor": "Angel Camacho Vergara",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "quimica_organica_laboratorio_a3",
+              "grupo": "A3",
+              "profesor": "Luis Monroy Rodriguez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "asignaturas": [
+        {
+          "id": "electromagnetismo_teoria",
+          "nombre": "Electromagnetismo Teoria",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "electromagnetismo_teoria_a3",
+              "grupo": "A3",
+              "profesor": "Santiago Cortes Ocaña",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "biologia_aplicada_laboratorio",
+          "nombre": "Biologia Aplicada Laboratorio",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "biologia_aplicada_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Jesus Ortiz Montañez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "biologia_aplicada_laboratorio_a2",
+              "grupo": "A2",
+              "profesor": "Rafael Pineda Aleman",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "biologia_aplicada_laboratorio_a3",
+              "grupo": "A3",
+              "profesor": "Rafael Pineda Aleman",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "electromagnetismo_laboratorio",
+          "nombre": "Electromagnetismo Laboratorio",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "electromagnetismo_laboratorio_a3",
+              "grupo": "A3",
+              "profesor": "Julio Arrieta Pastrana",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "electromagnetismo_laboratorio_a4",
+              "grupo": "A4",
+              "profesor": "Santiago Cortes Ocaña",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "electromagnetismo_laboratorio_a5",
+              "grupo": "A5",
+              "profesor": "Santiago Cortes Ocaña",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "biologia_aplicada_teoria",
+          "nombre": "Biologia aplicada Teoria",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "biologia_aplicada_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Rafael Pineda Aleman",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "biologia_aplicada_teoria_a2",
+              "grupo": "A2",
+              "profesor": "Jesus Ortiz Montañez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bioquimica_de_alimentos_teoria",
+          "nombre": "Bioquimica de Alimentos Teoria",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "bioquimica_de_alimentos_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Glicerio Leon Mendez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "calculo_vectorial",
+          "nombre": "Calculo Vectorial",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "calculo_vectorial_f1",
+              "grupo": "F1",
+              "profesor": null,
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bioquimica_de_alimentos_laboratorio",
+          "nombre": "Bioquimica de Alimentos Laboratorio",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "bioquimica_de_alimentos_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Glicerio Leon Mendez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "bioquimica_de_alimentos_laboratorio_a2",
+              "grupo": "A2",
+              "profesor": "Glicerio Leon Mendez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "informatica_y_programacion",
+          "nombre": "Informatica y Programación",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "informatica_y_programacion_a1",
+              "grupo": "A1",
+              "profesor": "Roberto Orozco Bonilla",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "informatica_y_programacion_a2",
+              "grupo": "A2",
+              "profesor": "Hernan Adolfo Velasquez Wilches",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "16:20",
+                  "fin": "18:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "15:30",
+                  "fin": "18:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingles_iii",
+          "nombre": "Ingles III",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "ingles_iii_h1",
+              "grupo": "H1",
+              "profesor": "Darlin Miranda Uribe",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingles_iii_h2",
+              "grupo": "H2",
+              "profesor": "Maikel Marimon Ramos",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fundamentos_de_ecologia_y_medio_ambiente",
+          "nombre": "Fundamentos de Ecologia y Medio Ambiente",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "fundamentos_de_ecologia_y_medio_ambiente_a1",
+              "grupo": "A1",
+              "profesor": "Luis Mieles Gómez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "14:40",
+                  "fin": "17:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 4,
+      "asignaturas": [
+        {
+          "id": "quimica_de_alimentos_laboratorio",
+          "nombre": "Quimica de Alimentos Laboratorio",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "quimica_de_alimentos_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Marcos Muñiz Martinez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "quimica_de_alimentos_laboratorio_a2",
+              "grupo": "A2",
+              "profesor": "Marcos Muñiz Martinez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "quimica_de_alimentos_laboratorio_a3",
+              "grupo": "A3",
+              "profesor": "Marcos Muñiz Martinez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "quimica_de_alimentos_teoria",
+          "nombre": "Quimica de Alimentos Teoria",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "quimica_de_alimentos_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Marcos Muñiz Martinez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "probabilidad_y_estadistica",
+          "nombre": "Probabilidad y estadistica",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "probabilidad_y_estadistica_f1",
+              "grupo": "F1",
+              "profesor": "Leonardo Cortina Jaramillo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "08:40",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ecuaciones_diferenciales",
+          "nombre": "Ecuaciones Diferenciales",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "ecuaciones_diferenciales_d1",
+              "grupo": "D1",
+              "profesor": "Dalia Bonilla Correa",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "analisis_de_alimentos_laboratorio",
+          "nombre": "Analisis de Alimentos laboratorio",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "analisis_de_alimentos_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "David Ramirez Brewer",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "analisis_de_alimentos_laboratorio_a2",
+              "grupo": "A2",
+              "profesor": "Giovana Pastrana May",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "termodinamica_general",
+          "nombre": "Termodinámica General",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "termodinamica_general_a1",
+              "grupo": "A1",
+              "profesor": "David Ramirez Brewer",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingles_iv",
+          "nombre": "Ingles IV",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "ingles_iv_h1",
+              "grupo": "H1",
+              "profesor": "Carlos Valiente Ortega",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingles_iv_h2",
+              "grupo": "H2",
+              "profesor": "Jorge Luis Diaz Vasquez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "analisis_de_alimentos_teoria",
+          "nombre": "Analisis de alimentos Teoria",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "analisis_de_alimentos_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Santiago Madera Perez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "metodologia_de_la_investigacion",
+          "nombre": "Metodología de la Investigación",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "metodologia_de_la_investigacion_a1",
+              "grupo": "A1",
+              "profesor": "Santiago Madera Perez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "14:40",
+                  "fin": "17:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 5,
+      "asignaturas": [
+        {
+          "id": "microbiologia_general_teoria",
+          "nombre": "Microbiologia General Teoría",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "microbiologia_general_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Rafael Gonzalez Cuello",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "07:50",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "diseno_de_experimentos",
+          "nombre": "Diseño de Experimentos",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "diseno_de_experimentos_a1",
+              "grupo": "A1",
+              "profesor": "David Ramirez Brewer",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fisicoquimica_teoria",
+          "nombre": "Físicoquímica Teoria",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "fisicoquimica_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Escilda Benavidez Bentiez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "balance_de_materia_y_energia",
+          "nombre": "Balance de Materia y Energia",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "balance_de_materia_y_energia_a1",
+              "grupo": "A1",
+              "profesor": "Fabian Rico Rodriguez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fisicoquimica_laboratorio",
+          "nombre": "Físicoquímica Laboratorio",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "fisicoquimica_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Escilda Benavidez Bentiez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mecanica_de_fluidos_teoria",
+          "nombre": "Mecánica de Fluidos Teoria",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "mecanica_de_fluidos_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Jaime Perez Mendoza",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mecanica_de_fluidos_laboratorio",
+          "nombre": "Mecánica de Fluidos Laboratorio",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "mecanica_de_fluidos_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Jaime Perez Mendoza",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingles_v",
+          "nombre": "Ingles V",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "ingles_v_d1",
+              "grupo": "D1",
+              "profesor": "Jairo Chamorro Morales",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingles_v_d2",
+              "grupo": "D2",
+              "profesor": "Victor Ricardo Marrugo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "administracion_general",
+          "nombre": "Administración General",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "administracion_general_a1",
+              "grupo": "A1",
+              "profesor": "Alfonso Muskus Vergara",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "13:50",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 6,
+      "asignaturas": [
+        {
+          "id": "reologia_y_textura_de_alimentos_teoria",
+          "nombre": "Reologia y Textura de Alimentos Teoria",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "reologia_y_textura_de_alimentos_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Ronald Marsiglia Fuentes",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ciencia_y_tecnologia_de_carnes_teoria",
+          "nombre": "Ciencia y Tecnología de Carnes Teoria",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "ciencia_y_tecnologia_de_carnes_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Piedad Margarita Montero",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contabilidad_y_costos",
+          "nombre": "Contabilidad y Costos",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "contabilidad_y_costos_a1",
+              "grupo": "A1",
+              "profesor": "Jorge Hernandexz Rivero",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ciencia_y_tecnologia_de_pescados_teoria",
+          "nombre": "Ciencia y Tecnología de Pescados Teoria",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": []
+        },
+        {
+          "id": "transferencia_de_calor_teoria",
+          "nombre": "Transferencia de Calor Teoria",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "transferencia_de_calor_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Fabian Rico Rodriguez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ciencia_y_tecnologia_de_carnes_laboratorio",
+          "nombre": "Ciencia y Tecnología de Carnes Laboratorio",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "ciencia_y_tecnologia_de_carnes_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Piedad Margarita Montero",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "09:30",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "microbiologia_de_los_alimentos_teoria",
+          "nombre": "Microbiologia de los Alimentos Teoria",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "microbiologia_de_los_alimentos_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Yohana Sarría Guzman",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:50",
+                  "fin": "17:10",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "reologia_y_textura_de_alimentos_laboratorio",
+          "nombre": "Reologia y Textura de Alimentos Laboratorio",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "reologia_y_textura_de_alimentos_laboratorio_a2",
+              "grupo": "A2",
+              "profesor": "Ronald Marsiglia Fuentes",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "11:10",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ciencia_y_tecnologia_de_pescados_laboratorio",
+          "nombre": "Ciencia y Tecnología de Pescados Laboratorio",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "ciencia_y_tecnologia_de_pescados_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Luis Gabriel Fuentes Rosado",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "transferencia_de_calor_laboratorio",
+          "nombre": "Transferencia de Calor Laboratorio",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "transferencia_de_calor_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Fabian Rico Rodriguez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 7,
+      "asignaturas": [
+        {
+          "id": "evaluacion_sensorial_teoria",
+          "nombre": "Evaluación sensorial Teoría",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "evaluacion_sensorial_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Carmen Navarro Vargas",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "normas_y_regulacion_de_alimentos",
+          "nombre": "Normas y regulación de alimentos",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "normas_y_regulacion_de_alimentos_a1",
+              "grupo": "A1",
+              "profesor": "Luis Gabriel Fuentes Rosado",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingenieria_economica",
+          "nombre": "Ingeniería Económica",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "ingenieria_economica_a1",
+              "grupo": "A1",
+              "profesor": "Nilson Carrillo Perez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ciencia_y_tecnologia_de_frutas_y_hortalizas_teoria",
+          "nombre": "Ciencia y Tecnología de Frutas y Hortalizas Teoria",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": []
+        },
+        {
+          "id": "operaciones_unitarias_i_laboratorio",
+          "nombre": "Operaciones Unitarias I Laboratorio",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "operaciones_unitarias_i_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Somaris Quintana Martinez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "operaciones_unitarias_i_laboratorio_a2",
+              "grupo": "A2",
+              "profesor": "Santander Lastra Ripoll",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "operaciones_unitarias_i_teoria",
+          "nombre": "Operaciones Unitarias I Teoria",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "operaciones_unitarias_i_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Somaris Quintana Martinez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "nutricion",
+          "nombre": "Nutrición",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "nutricion_a1",
+              "grupo": "A1",
+              "profesor": "Luis Mieles Gomez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingles_vi",
+          "nombre": "Ingles VI",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "ingles_vi_a1",
+              "grupo": "A1",
+              "profesor": "Jose García Benavidez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingles_vi_a2",
+              "grupo": "A2",
+              "profesor": "Jose García Benavidez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ciencia_y_tecnologia_de_frutas_y_hortalizas_laboratorio",
+          "nombre": "Ciencia y Tecnología de Frutas y Hortalizas Laboratorio",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "ciencia_y_tecnologia_de_frutas_y_hortalizas_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Miladis Torrenegra alarcon",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "09:30",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 8,
+      "asignaturas": [
+        {
+          "id": "investigacion_de_mercados",
+          "nombre": "Investigación de Mercados",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "investigacion_de_mercados_a1",
+              "grupo": "A1",
+              "profesor": "Alfonso Muskus Vergara",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "desarrollo_empresarial",
+          "nombre": "Desarrollo Empresarial",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "desarrollo_empresarial_a1",
+              "grupo": "A1",
+              "profesor": "Ivan Monterrosa Castro",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ciencia_y_tecnologia_de_cereales_y_oleaginosas_teoria",
+          "nombre": "Ciencia y Tecnología de cereales y Oleaginosas Teoria",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "ciencia_y_tecnologia_de_cereales_y_oleaginosas_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Santander Lastra Ripoll",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sistemas_de_aseguramiento_de_la_calidad",
+          "nombre": "Sistemas de Aseguramiento de la Calidad",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "sistemas_de_aseguramiento_de_la_calidad_a1",
+              "grupo": "A1",
+              "profesor": "Carmen Navarro Vargas",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "control_de_procesos_industriales",
+          "nombre": "Control de Procesos industriales",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "control_de_procesos_industriales_a1",
+              "grupo": "A1",
+              "profesor": "Nilson Carrillo Perez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "biotecnologia_teoria",
+          "nombre": "Biotecnología Teoria",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "biotecnologia_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Rafael Gonzalez Cuello",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "operaciones_unitarias_ii_teoria",
+          "nombre": "Operaciones Unitarias II Teoria",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "operaciones_unitarias_ii_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Luis García Zapateiro",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "operaciones_unitarias_ii_laboratorio",
+          "nombre": "Operaciones Unitarias II Laboratorio",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "operaciones_unitarias_ii_laboratorio_a2",
+              "grupo": "A2",
+              "profesor": "Luis García Zapateiro",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "12:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 9,
+      "asignaturas": [
+        {
+          "id": "ciencia_y_tecnologia_de_lacteos_teoria",
+          "nombre": "Ciencia y Tecnología de Lácteos Teoria",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": []
+        },
+        {
+          "id": "seminario_de_investigacion",
+          "nombre": "Seminario de Investigación",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "seminario_de_investigacion_a1",
+              "grupo": "A1",
+              "profesor": "Luis Mieles Gomez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "diseno_de_planta_de_alimentos",
+          "nombre": "Diseño de Planta de Alimentos",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "diseno_de_planta_de_alimentos_a1",
+              "grupo": "A1",
+              "profesor": "Ronald Marsiglia Fuentes",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "formulacion_y_evaluacion_de_proyectos_de_ingenieria",
+          "nombre": "Formulación y Evaluación de Proyectos de Ingeniería",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "formulacion_y_evaluacion_de_proyectos_de_ingenieria_a1",
+              "grupo": "A1",
+              "profesor": "Alexis Lopez Padilla",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "constitucion_y_etica",
+          "nombre": "Constitución y Etica",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "constitucion_y_etica_a1",
+              "grupo": "A1",
+              "profesor": "Luis Mieles Gomez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "materiales_y_empaques",
+          "nombre": "Materiales y Empaques",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "materiales_y_empaques_a1",
+              "grupo": "A1",
+              "profesor": "Rodrigo Ortega Toro",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "procesos_de_conservacion",
+          "nombre": "Procesos de Conservación",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "procesos_de_conservacion_a1",
+              "grupo": "A1",
+              "profesor": "David Ramirez Brewer",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ciencia_y_tecnologia_de_lacteos_laboratorio",
+          "nombre": "Ciencia y Tecnología de Lácteos Laboratorio",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "ciencia_y_tecnologia_de_lacteos_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Clemente Granados Conde",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "09:30",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 10,
+      "asignaturas": [
+        {
+          "id": "trabajo_de_grado",
+          "nombre": "Trabajo de Grado",
+          "creditos": null,
+          "semestre": 10,
+          "grupos": [
+            {
+              "id": "trabajo_de_grado_a1",
+              "grupo": "A1",
+              "profesor": "Luis García Zapateiro",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "practicas_empresariales",
+          "nombre": "Practicas Empresariales",
+          "creditos": null,
+          "semestre": 10,
+          "grupos": [
+            {
+              "id": "practicas_empresariales_a1",
+              "grupo": "A1",
+              "profesor": "Ronald Marsiglia Fuentes",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

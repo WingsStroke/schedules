@@ -1,0 +1,2636 @@
+{
+  "metadata": {
+    "programa": "Ingeniería de Sistemas",
+    "archivo": "Horario_2026-1_Ing_de_Sistemas.xlsx",
+    "fechaProcesamiento": "2026-03-08T19:10:51.000Z",
+    "totalAsignaturas": 82,
+    "totalGrupos": 106,
+    "totalSemestres": 11,
+    "version": "2.0.0"
+  },
+  "semestres": [
+    {
+      "numero": 0,
+      "asignaturas": [
+        {
+          "id": "software_libre",
+          "nombre": "Software Libre",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "software_libre_a1",
+              "grupo": "A1",
+              "profesor": "Gabriel Elías Chanchi Golondrino",
+              "ubicacion": "Laboratorio de Inteligencia Computacional",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "interaccion_humano_computador",
+          "nombre": "Interacción Humano Computador",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "interaccion_humano_computador_a1",
+              "grupo": "A1",
+              "profesor": "Gabriel elías Chanchi Golondrino. Laboratorio de Redes A",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "gobernanza_de_ti",
+          "nombre": "Gobernanza de TI",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "gobernanza_de_ti_a1",
+              "grupo": "A1",
+              "profesor": "Javier Pinedo Cabarcas",
+              "ubicacion": "Salòn de Clases",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "desarrollo_de_soluciones_en_la_nube",
+          "nombre": "Desarrollo de Soluciones en la Nube",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "desarrollo_de_soluciones_en_la_nube_a1",
+              "grupo": "A1",
+              "profesor": "Carlos Cáceres",
+              "ubicacion": "Lab de Ingeniería de Software",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "big_data",
+          "nombre": "Big Data",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "big_data_a1",
+              "grupo": "A1",
+              "profesor": "Johanny Enrique Valencia Sánchez",
+              "ubicacion": "Lab de Ingeniería de Software",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "12:00",
+                  "fin": "13:50",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "12:00",
+                  "fin": "13:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "internet_de_las_cosas",
+          "nombre": "Internet de las Cosas",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "internet_de_las_cosas_a1",
+              "grupo": "A1",
+              "profesor": "Juan Carlos García Ojeda",
+              "ubicacion": "Lab de Inteligencia Computacional",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "12:00",
+                  "fin": "13:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "diseno_de_soluciones_en_la_nube",
+          "nombre": "Diseño de Soluciones en la Nube",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "diseno_de_soluciones_en_la_nube_a1",
+              "grupo": "A1",
+              "profesor": "Carlos Cuesta Yepes",
+              "ubicacion": "Lab de Redes B",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "robotica",
+          "nombre": "Robótica",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "robotica_a1",
+              "grupo": "A1",
+              "profesor": "Manuel Alejandro Ospina Alarcón",
+              "ubicacion": "Lab de Redes y Telemática",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "curso_libre_ofimatica",
+          "nombre": "Curso Libre Ofimática",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "curso_libre_ofimatica_a1",
+              "grupo": "A1",
+              "profesor": null,
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "curso_libre_diseno_de_pagina_web",
+          "nombre": "Curso Libre Diseño de Página Web",
+          "creditos": null,
+          "semestre": 0,
+          "grupos": [
+            {
+              "id": "curso_libre_diseno_de_pagina_web_a1",
+              "grupo": "A1",
+              "profesor": null,
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 1,
+      "asignaturas": [
+        {
+          "id": "calculo_diferencial",
+          "nombre": "Cálculo Diferencial",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "calculo_diferencial_a1",
+              "grupo": "A1",
+              "profesor": "Guillermo Muñoz Rodríguez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "calculo_diferencial_b1",
+              "grupo": "B1",
+              "profesor": "Luis Lopez Macias",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catedra_institucional",
+          "nombre": "Cátedra Institucional",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "catedra_institucional_a1",
+              "grupo": "A1",
+              "profesor": "Yazmìn Pereira Guardo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "algoritmos_y_programacion",
+          "nombre": "Algoritmos y Programación",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "algoritmos_y_programacion_b1",
+              "grupo": "B1",
+              "profesor": "Amaury Cabarcas A",
+              "ubicacion": "Laboratorio de Redes y Telemática",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "algoritmos_y_programacion_c1",
+              "grupo": "C1",
+              "profesor": "Nohemy Castro Genes",
+              "ubicacion": "Lab de Ing de Software. En este grupo se deben matricular los estudiantes que repiten esta asignatura",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fundamentos_de_matematicas",
+          "nombre": "Fundamentos de Matemáticas",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "fundamentos_de_matematicas_a1",
+              "grupo": "A1",
+              "profesor": "José Luis Vivas Frontana -",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "fundamentos_de_matematicas_b1",
+              "grupo": "B1",
+              "profesor": "Randy Zabaleta Mesino -",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "14:40",
+                  "fin": "17:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "produccion_y_comprension_textual_i",
+          "nombre": "Producción y Comprensión Textual I",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "produccion_y_comprension_textual_i_a1",
+              "grupo": "A1",
+              "profesor": "Raquel Leotau Díaz",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingles_i",
+          "nombre": "Inglés I",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "ingles_i_d1",
+              "grupo": "D1",
+              "profesor": "José Fernando García Benavides",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingles_i_e1",
+              "grupo": "E1",
+              "profesor": "Israel Acevedo Babilonia",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "14:40",
+                  "fin": "18:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "introduccion_a_la_ingenieria_de_sistemas",
+          "nombre": "Introducción a la Ingeniería de Sistemas",
+          "creditos": null,
+          "semestre": 1,
+          "grupos": [
+            {
+              "id": "introduccion_a_la_ingenieria_de_sistemas_a1",
+              "grupo": "A1",
+              "profesor": "Carlos Cuesta Yepes",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "asignaturas": [
+        {
+          "id": "fisicamecanica_laboratorio",
+          "nombre": "FísicaMecánica Laboratorio",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "fisicamecanica_laboratorio_a3",
+              "grupo": "A3",
+              "profesor": "Òscar Yovanny Fajardo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "algebra_lineal",
+          "nombre": "Álgebra Lineal",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "algebra_lineal_a1",
+              "grupo": "A1",
+              "profesor": "José Luis Vivas Frontana",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "07:50",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "algebra_lineal_b1",
+              "grupo": "B1",
+              "profesor": "Randy Zabaleta M",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "15:30",
+                  "fin": "17:10",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "produccion_y_comprension_textual_ii",
+          "nombre": "Producción y Comprensión Textual II",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "produccion_y_comprension_textual_ii_a1",
+              "grupo": "A1",
+              "profesor": "Raquel Leottau Díaz",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:50",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "calculo_integral",
+          "nombre": "Cálculo Integral",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "calculo_integral_a1",
+              "grupo": "A1",
+              "profesor": "Guillermo Luis Muñoz Rodríguez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "calculo_integral_b1",
+              "grupo": "B1",
+              "profesor": "Deivinso Villa Moncaris",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "programacion_basica",
+          "nombre": "Programación Básica",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "programacion_basica_a1",
+              "grupo": "A1",
+              "profesor": "Johanny Valencia Sánchez",
+              "ubicacion": "Laboratorio de Ingeniería de Software",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "programacion_basica_b1",
+              "grupo": "B1",
+              "profesor": "Nohemy Castro Genes",
+              "ubicacion": "Laboratorio de Redes B",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "programacion_basica_c1",
+              "grupo": "C1",
+              "profesor": "David Franco Borré",
+              "ubicacion": "Laboratorio de Ingeniería de Software",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fisica_mecanica_teoria",
+          "nombre": "Física Mecánica Teoría",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "fisica_mecanica_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Javier Montoya Martínez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fisica_mecanica_laboratorio",
+          "nombre": "Física Mecánica Laboratorio",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "fisica_mecanica_laboratorio_a1",
+              "grupo": "A1",
+              "profesor": "Julio César Arrieta Pastrana",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "fisica_mecanica_laboratorio_a2",
+              "grupo": "A2",
+              "profesor": "Javier Montoya Martínez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingles_ii",
+          "nombre": "Inglés II",
+          "creditos": null,
+          "semestre": 2,
+          "grupos": [
+            {
+              "id": "ingles_ii_a1",
+              "grupo": "A1",
+              "profesor": "Jorge Royero",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "13:50",
+                  "fin": "17:10",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingles_ii_b1",
+              "grupo": "B1",
+              "profesor": "Rafael Puello Romero",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "asignaturas": [
+        {
+          "id": "programacion_orientada_a_objetos",
+          "nombre": "Programación Orientada a Objetos",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "programacion_orientada_a_objetos_b1",
+              "grupo": "B1",
+              "profesor": "Yasmín Moya Villa",
+              "ubicacion": "Laboratorio de Ingeniería de Software",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "teoria_general_de_sistemas",
+          "nombre": "Teoría General de Sistemas",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "teoria_general_de_sistemas_a1",
+              "grupo": "A1",
+              "profesor": "Raúl José Martelo Gómez",
+              "ubicacion": "Salón de Clases",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "teoria_general_de_sistemas_b1",
+              "grupo": "B1",
+              "profesor": "Juan José Puello Beltrán",
+              "ubicacion": "Laboratorio de Redes B",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "12:00",
+                  "fin": "13:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "probabilidad_y_estadistica",
+          "nombre": "Probabilidad y Estadística",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "probabilidad_y_estadistica_a1",
+              "grupo": "A1",
+              "profesor": "Leonardo Cortina Jaramillo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "laboratorio_de_electromagnetismo",
+          "nombre": "Laboratorio de Electromagnetismo",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "laboratorio_de_electromagnetismo_a1",
+              "grupo": "A1",
+              "profesor": "Javier Trujillo Ocampo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "electromagnetismo",
+          "nombre": "Electromagnetismo",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "electromagnetismo_a1",
+              "grupo": "A1",
+              "profesor": "Ángel David Masa Domínguez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "laboratorio_de_electromagnetismos",
+          "nombre": "Laboratorio de Electromagnetismos",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "laboratorio_de_electromagnetismos_a3",
+              "grupo": "A3",
+              "profesor": "Yaleidis Paola Hernández Díaz",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingles_iii",
+          "nombre": "Inglés III",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "ingles_iii_c1",
+              "grupo": "C1",
+              "profesor": "Rafael Puello Romero",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "calculo_vectorial",
+          "nombre": "Calculo Vectorial",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "calculo_vectorial_a1",
+              "grupo": "A1",
+              "profesor": "Rubén Darío Ortiz Ortiz",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "poo",
+          "nombre": "POO",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "poo_a1",
+              "grupo": "A1",
+              "profesor": "Juan Carlos García Ojeda",
+              "ubicacion": "Laboratorio de Ingeniería de Software",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "matematicas_discretas",
+          "nombre": "Matemáticas Discretas",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "matematicas_discretas_a1",
+              "grupo": "A1",
+              "profesor": "Luis Martínez Magallanes",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "16:20",
+                  "fin": "18:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "16:20",
+                  "fin": "18:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "laboratorio_de_eectromagnetismos",
+          "nombre": "Laboratorio de Eectromagnetismos",
+          "creditos": null,
+          "semestre": 3,
+          "grupos": [
+            {
+              "id": "laboratorio_de_eectromagnetismos_a2",
+              "grupo": "A2",
+              "profesor": "Santiago Ocaña",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "16:20",
+                  "fin": "18:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 4,
+      "asignaturas": [
+        {
+          "id": "base_de_datos",
+          "nombre": "Base de Datos",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "base_de_datos_a1",
+              "grupo": "A1",
+              "profesor": "María Claudia Bonfante Rodríguez",
+              "ubicacion": "Laboratorio de Redes A",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "base_de_datos_b1",
+              "grupo": "B1",
+              "profesor": "Víctor Valdelamar García",
+              "ubicacion": "Lab de Redes B",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "laboratorio_de_fisica_moderna",
+          "nombre": "Laboratorio de Física Moderna",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "laboratorio_de_fisica_moderna_a1",
+              "grupo": "A1",
+              "profesor": "Álvaro García Muriel",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "laboratorio_de_fisica_moderna_a2",
+              "grupo": "A2",
+              "profesor": "Javier Trujillo Ocampo",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "electronica",
+          "nombre": "Electrónica",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "electronica_a1",
+              "grupo": "A1",
+              "profesor": "Alex Jiménez de la Cruz",
+              "ubicacion": "Laboratorio de Redes A",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "estructura_de_datos",
+          "nombre": "Estructura de Datos",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "estructura_de_datos_a1",
+              "grupo": "A1",
+              "profesor": "Juan Carlos García Ojeda",
+              "ubicacion": "Laboratorio de Redes B",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "11:10",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "estructura_de_datos_b1",
+              "grupo": "B1",
+              "profesor": "José Fernando Ramos Velosa",
+              "ubicacion": "Laboratorio de Ingeniería de Software",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "administracion",
+          "nombre": "Administración",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "administracion_a1",
+              "grupo": "A1",
+              "profesor": "Iván Monterrosa Castro",
+              "ubicacion": "",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fisica_de_ondas_de_calor_teoria",
+          "nombre": "Física de Ondas de Calor Teoría",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "fisica_de_ondas_de_calor_teoria_a1",
+              "grupo": "A1",
+              "profesor": "Luis Cortés Rodríguez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingles_iv",
+          "nombre": "Inglés IV",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "ingles_iv_e1",
+              "grupo": "E1",
+              "profesor": "Keren Martínez Palacio / Carmen Ariza",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ecuaciones_diferenciales",
+          "nombre": "Ecuaciones Diferenciales",
+          "creditos": null,
+          "semestre": 4,
+          "grupos": [
+            {
+              "id": "ecuaciones_diferenciales_a1",
+              "grupo": "A1",
+              "profesor": "Eduin Salgado Pérez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "15:30",
+                  "fin": "17:10",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "15:30",
+                  "fin": "17:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 5,
+      "asignaturas": [
+        {
+          "id": "ingenieria_de_servicios_de_internet",
+          "nombre": "Ingeniería de Servicios de Internet",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "ingenieria_de_servicios_de_internet_a1",
+              "grupo": "A1",
+              "profesor": "Julio César Rodríguez Ribón",
+              "ubicacion": "Laboratorio de Redes B",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingenieria_de_servicios_de_internet_b1",
+              "grupo": "B1",
+              "profesor": "Julio César Rodríguez Ribón",
+              "ubicacion": "Laboratorio de Ingeniería de Software",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sistemas_operativos",
+          "nombre": "Sistemas Operativos",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "sistemas_operativos_a1",
+              "grupo": "A1",
+              "profesor": "Heybertt Moreno Díaz",
+              "ubicacion": "Laboratorio de Redes y Telemática Sistemas Operativos (B1)",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "sistemas_operativos_b1",
+              "grupo": "B1",
+              "profesor": "Víctor Valdelamar García",
+              "ubicacion": "Lab de Redes y Telemática",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contabilidad_y_costos",
+          "nombre": "Contabilidad y Costos",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "contabilidad_y_costos_a1",
+              "grupo": "A1",
+              "profesor": "Carla de Ávila Altamiranda",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sistemas_digitales",
+          "nombre": "Sistemas Digitales",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "sistemas_digitales_a1",
+              "grupo": "A1",
+              "profesor": "Alex Jiménez de la Cruz",
+              "ubicacion": "Laboratorio de Redes y Telemática",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "sistemas_digitales_b1",
+              "grupo": "B1",
+              "profesor": "Ricardo Galezo Arango",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "16:20",
+                  "fin": "18:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "metodologia_de_la_investigacion",
+          "nombre": "Metodología de la Investigación",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "metodologia_de_la_investigacion_a1",
+              "grupo": "A1",
+              "profesor": "Javier Antonio Pinedo Cabarca",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "investigacion_de_operaciones",
+          "nombre": "Investigación de Operaciones",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "investigacion_de_operaciones_a1",
+              "grupo": "A1",
+              "profesor": "José Luis Vivas Frontana",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sistemas_dinamicos",
+          "nombre": "Sistemas Dinámicos",
+          "creditos": null,
+          "semestre": 5,
+          "grupos": [
+            {
+              "id": "sistemas_dinamicos_a1",
+              "grupo": "A1",
+              "profesor": "Eduin Salgado Pérez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "15:30",
+                  "fin": "17:10",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 6,
+      "asignaturas": [
+        {
+          "id": "comercio_electronico",
+          "nombre": "Comercio Electrónico",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "comercio_electronico_a1",
+              "grupo": "A1",
+              "profesor": "Heybertt Moreno Díaz",
+              "ubicacion": "Laboratorio de Redes A",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "comercio_electronico_b1",
+              "grupo": "B1",
+              "profesor": "Heybertt Moreno Díaz",
+              "ubicacion": "Laboratorio de Ingeniería de Software",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "teoria_de_automatas_y_lenguajes_formales",
+          "nombre": "Teoría de Autómatas y Lenguajes Formales",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "teoria_de_automatas_y_lenguajes_formales_a1",
+              "grupo": "A1",
+              "profesor": "Luis Carlos Tovar Garrido",
+              "ubicacion": "Salón de Clases/lab de Redes A",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "teoria_de_automatas_y_lenguajes_formales_b1",
+              "grupo": "B1",
+              "profesor": "José Luis Vivas Frontana",
+              "ubicacion": "Salón B306/Lab de Redes A",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "L",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingenieria_de_software",
+          "nombre": "Ingeniería de Software",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "ingenieria_de_software_a1",
+              "grupo": "A1",
+              "profesor": "Martín Monroy Ríos",
+              "ubicacion": "Laboratorio de Redes A",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "ingenieria_de_software_b1",
+              "grupo": "B1",
+              "profesor": "Juan José Puello Beltrán",
+              "ubicacion": "Laboratorio de Redes B",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingenieria_economica",
+          "nombre": "Ingeniería Económica",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "ingenieria_economica_a1",
+              "grupo": "A1",
+              "profesor": "Yazmín Pereira Guardo",
+              "ubicacion": "Salón en el perimer piso",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "W",
+                  "inicio": "07:50",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "organizacion_de_computadores",
+          "nombre": "Organización de Computadores",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "organizacion_de_computadores_a1",
+              "grupo": "A1",
+              "profesor": "Alex Jiménez de la Cruz",
+              "ubicacion": "Laboratorio de Ing de Software",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "organizacion_de_computadores_b1",
+              "grupo": "B1",
+              "profesor": "Ricardo Galezo Arango",
+              "ubicacion": "Laboratorio de Inteligencia Computacional",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingles_v",
+          "nombre": "Inglés V",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "ingles_v_a1",
+              "grupo": "A1",
+              "profesor": "Keren Martínez Palacio / Angie Machado",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "comunicacion_de_datos",
+          "nombre": "Comunicación de Datos",
+          "creditos": null,
+          "semestre": 6,
+          "grupos": [
+            {
+              "id": "comunicacion_de_datos_a1",
+              "grupo": "A1",
+              "profesor": "Hernán Adolfo Velásquez Wilches",
+              "ubicacion": "Laboratorio de Redes y Telemática",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 7,
+      "asignaturas": [
+        {
+          "id": "profundizacion_i_aseguramiento_de_la_calidad_y_pruebas_de_software",
+          "nombre": "Profundización I: Aseguramiento de la Calidad y Pruebas de Software",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "profundizacion_i_aseguramiento_de_la_calidad_y_pruebas_de_software_a1",
+              "grupo": "A1",
+              "profesor": "Juan José Puello Beltrán",
+              "ubicacion": "Sala de Informática No. 4",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "14:40",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inteligencia_artificial",
+          "nombre": "Inteligencia Artificial",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "inteligencia_artificial_a1",
+              "grupo": "A1",
+              "profesor": "Manuel Alejandro Ospina Alarcón",
+              "ubicacion": "Laboratorio de Inteligencia Computacional",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "inteligencia_artificial_b1",
+              "grupo": "B1",
+              "profesor": "Manuel Alejandro Ospina Alarcón",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "M",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "gestion_de_proyectos_informaticos",
+          "nombre": "Gestión de Proyectos Informáticos",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "gestion_de_proyectos_informaticos_a1",
+              "grupo": "A1",
+              "profesor": "Iván Monterrosa Castro",
+              "ubicacion": "Laboratorio de Redes y Telemática",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "etica_y_legislacion_informaica",
+          "nombre": "Ética y Legislación Informáica",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "etica_y_legislacion_informaica_a1",
+              "grupo": "A1",
+              "profesor": "María Claudia Bonfante Rodríguez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "profundizacion_i_enrutamiento_y_conmutacion",
+          "nombre": "Profundización I: Enrutamiento y conmutación",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "profundizacion_i_enrutamiento_y_conmutacion_a1",
+              "grupo": "A1",
+              "profesor": "Gabriel Elías Chanchí Golondrino",
+              "ubicacion": "Laboratorio de Redes (B)",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "13:00",
+                  "fin": "14:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ingles_vi",
+          "nombre": "Inglés VI",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "ingles_vi_a1",
+              "grupo": "A1",
+              "profesor": "Janteh Patricia Gómez de Castro",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "seguridad_informatica",
+          "nombre": "Seguridad Informática",
+          "creditos": null,
+          "semestre": 7,
+          "grupos": [
+            {
+              "id": "seguridad_informatica_a1",
+              "grupo": "A1",
+              "profesor": "José Luis Vivas Frontana",
+              "ubicacion": "Laboratorio de Redes A",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "13:50",
+                  "fin": "16:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 8,
+      "asignaturas": [
+        {
+          "id": "profundizacion_ii_arquitectura_de_software",
+          "nombre": "Profundización II: Arquitectura de Software",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "profundizacion_ii_arquitectura_de_software_a1",
+              "grupo": "A1",
+              "profesor": "Juan José Puello Beltrán",
+              "ubicacion": "Lab de Inteligencia Computacional",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fundamentos_de_ecologia_y_medio_ambiente",
+          "nombre": "Fundamentos de Ecología y Medio Ambiente",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "fundamentos_de_ecologia_y_medio_ambiente_a1",
+              "grupo": "A1",
+              "profesor": "Liliana Usuga M",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:00",
+                  "fin": "09:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "simulacion_digital",
+          "nombre": "Simulación Digital",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "simulacion_digital_a1",
+              "grupo": "A1",
+              "profesor": "Luis Carlos Garrido",
+              "ubicacion": "Laboratorio de Ingeniería de Software",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            },
+            {
+              "id": "simulacion_digital_b1",
+              "grupo": "B1",
+              "profesor": "Eduin Salgado Pérez",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "13:50",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "16:20",
+                  "fin": "18:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "auditoria_de_sistemas",
+          "nombre": "Auditoría de Sistemas",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "auditoria_de_sistemas_a1",
+              "grupo": "A1",
+              "profesor": "María Claudia Bonfante Rodríguez",
+              "ubicacion": "Laboratorio de Inteligencia Computacional",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "seminario_taller_creacion_de_empresas",
+          "nombre": "Seminario Taller Creación de Empresas",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "seminario_taller_creacion_de_empresas_a1",
+              "grupo": "A1",
+              "profesor": "Carla de Àvila Altamiranda",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "09:30",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "trabajo_de_grado_i",
+          "nombre": "Trabajo de Grado I",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "trabajo_de_grado_i_a1",
+              "grupo": "A1",
+              "profesor": "Raúl José Martelo Gómez",
+              "ubicacion": "Salón de Clases",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "13:00",
+                  "fin": "15:30",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "profundizacion_ii_redes_de_alta_disponibilidad",
+          "nombre": "Profundización II: Redes de Alta Disponibilidad",
+          "creditos": null,
+          "semestre": 8,
+          "grupos": [
+            {
+              "id": "profundizacion_ii_redes_de_alta_disponibilidad_a1",
+              "grupo": "A1",
+              "profesor": "Hernán Adolfo Velásquez Wilches",
+              "ubicacion": "Lab. De Ingeniería de Software",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "16:20",
+                  "fin": "18:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "16:20",
+                  "fin": "18:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 9,
+      "asignaturas": [
+        {
+          "id": "sistemas_de_informacion_gerencial",
+          "nombre": "Sistemas de Información Gerencial",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "sistemas_de_informacion_gerencial_a1",
+              "grupo": "A1",
+              "profesor": "María Claudia Bonfante Rodríguez",
+              "ubicacion": "Laboratorio de Redes y Telemática",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "profundizacion_iii_administracion_de_redes",
+          "nombre": "Profundización III: Administración de Redes",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "profundizacion_iii_administracion_de_redes_a1",
+              "grupo": "A1",
+              "profesor": "Heybertt Moreno Díaz",
+              "ubicacion": "Lab de Redes y Telemática",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "W",
+                  "inicio": "07:00",
+                  "fin": "08:40",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "constitucion_y_etica",
+          "nombre": "Constitución y ética",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "constitucion_y_etica_a1",
+              "grupo": "A1",
+              "profesor": "Javier Pinedo Cabarcas",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "J",
+                  "inicio": "07:50",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "profundizacion_iii_gestion_de_proyectos_de_ingenieria_de_software",
+          "nombre": "Profundización III: Gestión de Proyectos de Ingeniería de Software",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "profundizacion_iii_gestion_de_proyectos_de_ingenieria_de_software_a1",
+              "grupo": "A1",
+              "profesor": "Javier Pinedo Cabarcas",
+              "ubicacion": "Lab de Redes B",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "L",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "08:40",
+                  "fin": "10:20",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "expresion_grafica_digital",
+          "nombre": "Expresión Gráfica Digital",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "expresion_grafica_digital_a1",
+              "grupo": "A1",
+              "profesor": "Randy Javier Fuentes Ramos",
+              "ubicacion": "Lab de Redes B",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "V",
+                  "inicio": "14:40",
+                  "fin": "17:10",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "trabajo_de_grado_ii",
+          "nombre": "Trabajo de Grado II",
+          "creditos": null,
+          "semestre": 9,
+          "grupos": [
+            {
+              "id": "trabajo_de_grado_ii_a1",
+              "grupo": "A1",
+              "profesor": "David Franco Borré",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": []
+            },
+            {
+              "id": "trabajo_de_grado_ii_a2",
+              "grupo": "A2",
+              "profesor": "Julio César Rodríguez Ribón",
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 10,
+      "asignaturas": [
+        {
+          "id": "profundizacion_iv_diseno_de_redes",
+          "nombre": "Profundización IV: Diseño de Redes",
+          "creditos": null,
+          "semestre": 10,
+          "grupos": [
+            {
+              "id": "profundizacion_iv_diseno_de_redes_a1",
+              "grupo": "A1",
+              "profesor": "David Enrique Castro Ocampo",
+              "ubicacion": "Laboratorio de Inteligencia Computacional",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "10:20",
+                  "fin": "12:00",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "profundizacion_iv_topicos_avanzados_de_ingenieria_de_software",
+          "nombre": "Profundización IV: Tópicos Avanzados de Ingeniería de Software",
+          "creditos": null,
+          "semestre": 10,
+          "grupos": [
+            {
+              "id": "profundizacion_iv_topicos_avanzados_de_ingenieria_de_software_a1",
+              "grupo": "A1",
+              "profesor": null,
+              "ubicacion": "Labotarorio de Redes A",
+              "cupos": null,
+              "horarios": [
+                {
+                  "dia": "M",
+                  "inicio": "12:00",
+                  "fin": "13:50",
+                  "jornada": "diurna"
+                },
+                {
+                  "dia": "V",
+                  "inicio": "12:00",
+                  "fin": "13:50",
+                  "jornada": "diurna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "practica_empresarial",
+          "nombre": "Práctica Empresarial",
+          "creditos": null,
+          "semestre": 10,
+          "grupos": [
+            {
+              "id": "practica_empresarial_a1",
+              "grupo": "A1",
+              "profesor": null,
+              "ubicacion": null,
+              "cupos": null,
+              "horarios": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

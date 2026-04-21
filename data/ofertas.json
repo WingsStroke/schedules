@@ -1,0 +1,28 @@
+{
+  "periodo": "2026-1",
+  "fechaActualizacion": "2026-03-02",
+  "version": "1.0.0",
+  "programas": [
+    {
+      "id": "sistemas",
+      "nombre": "Ingeniería de Sistemas",
+      "archivo": "data/2026-1_sistemas.json",
+      "facultad": "Ingeniería",
+      "activo": true
+    },
+    {
+      "id": "alimentos",
+      "nombre": "Ingeniería de Alimentos",
+      "archivo": "data/2026-1_alimentos.json",
+      "facultad": "Ingeniería",
+      "activo": true
+    },
+    {
+      "id": "quimica",
+      "nombre": "Ingeniería Química",
+      "archivo": "data/2026-1_quimica.json",
+      "facultad": "Ingeniería",
+      "activo": true
+    }
+  ]
+}

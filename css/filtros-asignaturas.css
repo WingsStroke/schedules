@@ -1,0 +1,453 @@
+/* SISTEMA DE FILTROS DE ASIGNATURAS */
+
+/* Modal flotante separado (fuera del contenedor de asignaturas) */
+#modalFiltrosFlotante {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  pointer-events: none;
+  background: transparent;
+}
+
+.modal-filtros-flotante {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 650px;
+  height: 90vh;
+  max-height: 800px;
+
+  /* Glass Morphism — igual que .modal-content */
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 0 1px rgba(255, 255, 255, 0.5) inset;
+
+  z-index: 1001;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+
+  /* Animación de aparición */
+  animation: modalFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Header del modal flotante (centrado) */
+.modal-header-filtros {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 60px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.modal-titulo-asignatura {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1A1A1A;
+  text-align: center;
+  flex: 1;
+}
+
+.modal-header-filtros .badge-filtrado {
+  margin-left: 8px;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Asignatura con acordeón (en la lista normal) */
+.asignatura-seleccionada-item-sidebar {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  margin: 0 0 10px 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  align-self: stretch;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.asignatura-seleccionada-item-sidebar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Cuando está expandida, solo cambiar borde (NO position fixed) */
+.asignatura-seleccionada-item-sidebar.is-expanded {
+  border-color: rgba(0, 0, 0, 0.3);
+  background: rgba(240, 248, 255, 0.8);
+  box-shadow: 0 8px 24px rgba(33, 150, 243, 0.15);
+}
+
+/* Header de la asignatura */
+.asignatura-header {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+  background: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.asignatura-header:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* Botón cerrar modal (X grande en header) - UNIVERSAL */
+.btn-cerrar-modal-filtros {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  
+  /* Glass Morphism Universal */
+  background: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  
+  color: #1A1A1A;
+  font-size: 20px;
+  font-weight: 300;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  padding: 0;
+  line-height: 1;
+}
+
+.btn-cerrar-modal-filtros:hover {
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-cerrar-modal-filtros:active {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.asignatura-seleccionada-nombre {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1A1A1A;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Badges */
+.badge-fijo,
+.badge-filtrado {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-fijo {
+  background: #4CAF50;
+  color: white;
+}
+
+.badge-filtrado {
+  /* Glass badge */
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Contenedor de filtros */
+.asignatura-filtros {
+  padding: 20px;
+  background: transparent;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-filtros-flotante .asignatura-filtros {
+  width: 100%;
+  padding: 24px;
+}
+
+.asignatura-filtros::-webkit-scrollbar {
+  width: 8px;
+}
+
+.asignatura-filtros::-webkit-scrollbar-track {
+  background: #F0F0F0;
+  border-radius: 4px;
+}
+
+.asignatura-filtros::-webkit-scrollbar-thumb {
+  background: #CCC;
+  border-radius: 4px;
+}
+
+.asignatura-filtros::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* Secciones de filtros */
+.filtro-section {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.filtro-section:last-child {
+  margin-bottom: 0;
+}
+
+.filtro-titulo {
+  margin: 0 0 10px 0; /* Reducido de 12px */
+  font-size: 12px; /* Reducido de 13px */
+  font-weight: 600;
+  color: #4D4D4D;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Opciones de filtros con GRID */
+.filtro-opciones {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+  gap: 8px;
+  max-height: 250px; /* Reducido de 200px pero más opciones visibles */
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.filtro-opciones::-webkit-scrollbar {
+  width: 6px;
+}
+
+.filtro-opciones::-webkit-scrollbar-track {
+  background: #F0F0F0;
+  border-radius: 3px;
+}
+
+.filtro-opciones::-webkit-scrollbar-thumb {
+  background: #CCC;
+  border-radius: 3px;
+}
+
+.filtro-opciones::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* Checkbox de opciones más compacto */
+.filtro-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 8px;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filtro-checkbox:hover {
+  border-color: rgba(33, 150, 243, 0.5);
+  background: rgba(240, 247, 255, 0.6);
+}
+
+.filtro-checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.filtro-checkbox input[type="checkbox"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.filtro-option-label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.filtro-option-label strong {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1A1A1A;
+  line-height: 1.2;
+}
+
+.filtro-option-label small {
+  font-size: 11px;
+  color: #666;
+  line-height: 1.3;
+  display: block;
+}
+
+.filtro-option-label small + small {
+  margin-top: 1px;
+}
+
+/* Información de filtros más compacta */
+.filtro-sin-opciones {
+  padding: 12px; /* Reducido de 16px */
+  text-align: center;
+  color: #999;
+  font-size: 12px; /* Reducido de 13px */
+  font-style: italic;
+  grid-column: 1 / -1; /* Ocupa todas las columnas */
+}
+
+/* Botones de acción centrados y visibles */
+.filtro-acciones {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 0;
+  padding: 20px 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  background: transparent;
+  flex-shrink: 0;
+  border-radius: 0 0 12px 12px;
+}
+
+.asignatura-seleccionada-item-sidebar.expandida .filtro-acciones {
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.btn-limpiar-filtros,
+.btn-aplicar-filtros {
+  flex: 0 0 auto;
+  min-width: 140px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Botón secundario (Limpiar) - Glass */
+.btn-limpiar-filtros {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #1A1A1A;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn-limpiar-filtros:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón primario (Aplicar) - Glass */
+.btn-aplicar-filtros {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-aplicar-filtros:hover {
+  background: rgba(0, 0, 0, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btn-aplicar-filtros:active {
+  transform: translateY(0);
+}
+
+/* Contenedor de asignaturas */
+.asignaturas-seleccionadas-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: stretch;
+}
+
+/* Mensaje vacío */
+.sidebar-empty-message {
+  text-align: center;
+  padding: 24px;
+  background: #FAFAFA;
+  border-radius: 8px;
+  border: 1px dashed #E0E0E0;
+}
+
+.sidebar-empty-message p {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.sidebar-empty-message span {
+  font-size: 12px;
+  color: #999;
+}
