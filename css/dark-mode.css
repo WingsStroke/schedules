@@ -1086,3 +1086,39 @@ body.dark-mode .btn-filtros-asignatura:hover {
     background: linear-gradient(to left, rgba(10, 10, 10, 0.88), transparent);
   }
 }
+
+/* Añade esto al final de dark-mode.css */
+
+body.dark-mode #calendarGrid .calendar-day {
+  background: #121212 !important; /* Fondo negro para días normales */
+  color: #ffffff !important;      /* Texto blanco */
+  border-color: #333333 !important;
+}
+
+body.dark-mode #calendarGrid .calendar-day:hover {
+  background: #1f1f1f !important;
+}
+
+/* Mantenemos los colores de estado como pidió el usuario */
+body.dark-mode #calendarGrid .calendar-day-holiday {
+  background: #ffb5C0 !important;
+  color: #d32f2f !important;
+  border-color: #d32f2f !important;
+}
+
+body.dark-mode #calendarGrid .calendar-day-holyweek {
+  background: #f3e5f5 !important;
+  color: #7b1fa2 !important;
+  border-color: #7b1fa2 !important;
+}
+
+body.dark-mode #calendarGrid .calendar-day-excluded {
+  background: #fff9c4 !important;
+  color: #f57f17 !important;
+  border-color: #f57f17 !important;
+}
+
+/* Ajuste del encabezado de días en modo oscuro */
+body.dark-mode .calendar-day-header {
+  color: #aaaaaa !important;
+}
