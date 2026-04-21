@@ -646,11 +646,11 @@ function closeDailyDetailModal() { document.getElementById("dailyDetailModal").c
 
 document.getElementById("backToResultBtn").onclick = closeDailyDetailModal;
 
+// Localiza esto en la sección 7 de app.js y reemplázalo:
 document.getElementById("openCalendarBtn").onclick = () => { 
-  renderCalendarGrid(); // Dibuja el calendario antes de abrir
+  renderCalendarGrid(); // Genera el contenido antes de mostrarlo
   document.getElementById("excludeDaysModal").classList.add("active"); 
 };
-document.getElementById("backToAguinaldoBtn").onclick = () => document.getElementById("excludeDaysModal").classList.remove("active");
 
 function renderCalendarGrid() {
   const grid = document.getElementById("calendarGrid");
@@ -660,8 +660,8 @@ function renderCalendarGrid() {
   
   grid.innerHTML = "";
   
-  // 1. Dibujar los encabezados (Lu, Ma, Mi...)
-  const daysOfWeek = ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'];
+  // Encabezados: Solo Lunes a Sábado
+  const daysOfWeek = ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'];
   daysOfWeek.forEach(d => {
     const el = document.createElement("div");
     el.className = "calendar-day-header";
@@ -672,33 +672,36 @@ function renderCalendarGrid() {
   const firstDay = new Date(year, month, 1);
   const lastDay = new Date(year, month + 1, 0);
   
+  // Ajuste de inicio de semana (0=Lunes, 5=Sábado, 6=Domingo)
   let startingDay = firstDay.getDay() - 1;
   if (startingDay === -1) startingDay = 6; 
-  
-  // 2. Días vacíos iniciales (Totalmente invisibles para no crear cuadros raros)
+
+  // Espacios en blanco iniciales (evitando el domingo)
   for (let i = 0; i < startingDay; i++) {
-    const blank = document.createElement("div");
-    blank.style.visibility = "hidden"; 
-    grid.appendChild(blank);
+    if (i < 6) { // Si el espacio cae en lunes-sábado
+        const blank = document.createElement("div");
+        blank.style.visibility = "hidden"; 
+        grid.appendChild(blank);
+    }
   }
   
   let excludedCount = 0;
 
-  // 3. Dibujar días y enlazar clases correctas
   for (let i = 1; i <= lastDay.getDate(); i++) {
     const date = new Date(year, month, i);
-    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+    const dayOfWeek = date.getDay(); // 0=Domingo
     
+    if (dayOfWeek === 0) continue; // SALTAR DOMINGOS
+
+    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
     const dayBtn = document.createElement("button");
     dayBtn.className = "calendar-day";
+    dayBtn.type = "button"; // Evita recargas de página
     dayBtn.textContent = i;
     
-    // Nombres exactos extraídos de tu styles.css
-    if (isHoliday(date)) {
-      dayBtn.classList.add("calendar-day-holiday");
-    } else if (isHolyWeek(date)) {
-      dayBtn.classList.add("calendar-day-holyweek");
-    }
+    // Aplicar clases de estilos desde calculadora-aguinaldo.js
+    if (isHoliday(date)) dayBtn.classList.add("calendar-day-holiday");
+    else if (isHolyWeek(date)) dayBtn.classList.add("calendar-day-holyweek");
     
     if (excludedDaysSet.has(dateStr)) {
       dayBtn.classList.add("calendar-day-excluded");
@@ -717,10 +720,8 @@ function renderCalendarGrid() {
       }
       countSpan.textContent = excludedCount === 0 ? "Ningún día excluido" : `${excludedCount} día(s) excluido(s)`;
     };
-    
     grid.appendChild(dayBtn);
   }
-  
   countSpan.textContent = excludedCount === 0 ? "Ningún día excluido" : `${excludedCount} día(s) excluido(s)`;
 }
 
