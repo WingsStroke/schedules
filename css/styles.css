@@ -1191,8 +1191,9 @@ button:disabled{
 #excludeDaysModal #calendarGrid {
   display: grid !important;
   grid-template-columns: repeat(6, 1fr) !important;
-  gap: 8px;
-  margin-top: 15px;
+  gap: 5px !important;
+  margin-top: 10px !important;
+  margin-bottom: 24px !important; /* Aumentado a 24px para más respiro */
 }
 
 #calendarGrid .calendar-day {
@@ -1206,6 +1207,13 @@ button:disabled{
   border-radius: 6px !important;
   box-shadow: none !important;
   transform: none !important;
+  font-size: 13px !important;
+  padding: 4px !important;
+}
+
+#excludeDaysModal .calendar-day-header {
+  font-size: 10px !important;
+  padding-bottom: 2px !important;
 }
 
 #calendarGrid .calendar-day:hover {
@@ -1234,6 +1242,7 @@ button:disabled{
   background: #f9f9f9;
   border-radius: 4px;
   justify-content: center;
+  margin-top: 16px; /* Añadido margen superior */
   margin-bottom: 12px;
 }
 
