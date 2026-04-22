@@ -151,7 +151,7 @@ document.getElementById("createScheduleBtn").onclick = () => {
 
 nameModal.querySelector("button:not(.close-btn)").onclick = () => {
   const name = nameModal.querySelector("input").value.trim();
-  if(!name) return alert("Debes escribir un nombre");
+  if(!name) return Toast.show("Debes escribir un nombre", "error");
   schedules.push({ name, created: Date.now(), subjects: [], schemaVersion: APP_CONFIG.SCHEMA_VERSION });
   saveData(); nameModal.classList.remove("active"); renderSchedules();
 };
@@ -256,7 +256,7 @@ saveSubjectBtn.onclick = () => {
   
   // 1. Sanitizamos las entradas de texto para evitar inyecciones maliciosas
   const name = escapeHTML(subjectNameInput.value.trim());
-  if(!name) return alert("Nombre obligatorio");
+  if(!name) return Toast.show("El nombre es obligatorio", "error");
 
   const color = subjectColorInput.value;
   const blocks = parseInt(subjectBlocksInput.value);
@@ -271,7 +271,7 @@ saveSubjectBtn.onclick = () => {
   const targetCell = editorState.cellMatrix[editorState.currentCell.row][editorState.currentCell.col];
   if (isCellOccupied(currentSchedule, editorState.currentCell.row, editorState.currentCell.col, blocks, editingSubject, targetCell.jornada)){
     if (editingSubject) currentSchedule.subjects.push(editingSubject);
-    alert("Ese espacio ya está ocupado por otra asignatura");
+    Toast.show("Ese espacio ya está ocupado", "warning");
     return;
   }
 
@@ -354,7 +354,7 @@ function cleanSubjectModalButtons(){
 // 6. SISTEMA DE EXPORTACIÓN E IMPORTACIÓN (JSON)
 // ==========================================
 document.getElementById("exportScheduleBtn").onclick = () => {
-  if (currentScheduleIndex === null) return alert("Abre un horario primero.");
+  if (currentScheduleIndex === null) return Toast.show("Abre un horario primero", "warning");
   const jsonString = safeJSONStringify([schedules[currentScheduleIndex]], '[]');
   const blob = new Blob([jsonString], { type: "application/json" });
   const url = URL.createObjectURL(blob);
@@ -374,7 +374,7 @@ document.getElementById("importFileInput").onchange = (e) => {
   reader.onload = (event) => {
     try {
       let imported = safeJSONParse(event.target.result);
-      if (!imported) return alert("Archivo JSON inválido");
+      if (!imported) return Toast.show("Archivo JSON inválido", "error");
       if(!Array.isArray(imported)) imported = [imported];
       
       let count = 0;
@@ -388,8 +388,8 @@ document.getElementById("importFileInput").onchange = (e) => {
       
       saveData(); renderSchedules();
       if(currentScheduleIndex !== null) DOMRenderer.rebuildScheduleView();
-      alert(`${count} horario(s) importado(s).`);
-    } catch(err) { alert("Error de importación."); }
+      Toast.show(`${count} horario(s) importado(s) correctamente`, "success");
+    } catch(err) { Toast.show("Error de importación", "error"); }
     document.getElementById("importFileInput").value = "";
   };
   reader.readAsText(file);

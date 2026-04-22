@@ -2019,3 +2019,57 @@ button:disabled{
 .changelog-overlay.active {
   display: block;
 }
+
+/* ============================================================
+   SISTEMA DE NOTIFICACIONES (TOASTS)
+   ============================================================ */
+
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none; /* Deja que los clics traspasen la caja invisible */
+}
+
+.toast {
+  background: #333333;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto;
+  text-align: center;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Variantes de Color */
+.toast.error { background: #d32f2f; color: #fff; }
+.toast.success { background: #2e7d32; color: #fff; }
+.toast.warning { background: #ed6c02; color: #fff; }
+
+/* Ajuste Responsivo para Móviles */
+@media (max-width: 768px) {
+  .toast-container {
+    /* Lo subimos para que no choque con el botón FAB ni con la Safe Area */
+    bottom: calc(90px + env(safe-area-inset-bottom));
+    width: 90%;
+  }
+  .toast {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

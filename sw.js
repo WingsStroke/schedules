@@ -1,7 +1,7 @@
 "use strict";
 
 // Cambia esta versión cuando subas actualizaciones grandes
-const CACHE_VERSION = 'v2.0.0-beta-57';
+const CACHE_VERSION = 'v2.0.0-beta-59';
 const CACHE_NAME = `horarios-udec-${CACHE_VERSION}`;
 
 const ASSETS_TO_CACHE = [
@@ -16,6 +16,7 @@ const ASSETS_TO_CACHE = [
   './js/calculadora-aguinaldo.js',
   './js/dom-renderer.js',
   '/js/export-engine.js',
+  './js/toast-system.js',
   './js/app.js'
 ];
 
