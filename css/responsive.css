@@ -188,6 +188,12 @@
     opacity: 1;
     visibility: visible;
   }
+
+  body:has(.modal.active) #mobileFabContainer,
+  body:has(.sidebar-panel.active) #mobileFabContainer {
+    display: none !important;
+  }
+  
 }
 
 
@@ -823,6 +829,7 @@
 /* ============================================================
    BOTTOM SHEET — prevenir scroll del body al abrirse
    ============================================================ */
+
 @media (max-width: 768px) {
   body:has(#subjectModal.active) {
     overflow: hidden;
@@ -837,6 +844,7 @@
    Elimina el efecto de celda activa que en móvil persiste
    brevemente tras el toque y aparece como mancha.
    ============================================================ */
+
 @media (hover: none) {
   .cell:hover::before {
     background: transparent;
