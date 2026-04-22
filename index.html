@@ -109,8 +109,23 @@
     <tbody>
     </tbody>
   </table>
-</div>
-</div>
+  </div>
+
+  <div id="mobileFabContainer" class="mobile-only">
+  <div id="mobileFabMenu" class="fab-menu">
+    <button onclick="document.getElementById('exportScheduleBtn').click()">Exportar JSON</button>
+    <button onclick="document.getElementById('exportPdfBtn').click()">Exportar PDF</button>
+    <button onclick="document.getElementById('exportBtn').click()">Exportar Imagen</button>
+    <button onclick="document.getElementById('calculateMonthlyBtn').click()">Calcular Aguinaldo</button>
+    <button onclick="document.getElementById('searchSubjectBtn').click()">Generar Horario</button>
+  </div>
+  
+  <button id="mainFabBtn" class="main-fab">
+    <img src="assets/settings.svg" alt="Herramientas">
+  </button>
+  </div>
+
+  <div id="fabOverlay" class="fab-overlay"></div>
 
 </div>
 
@@ -569,22 +584,6 @@
     });
   }
 </script>
-
-<div id="mobileFabContainer" class="mobile-only">
-  <div id="mobileFabMenu" class="fab-menu">
-    <button onclick="document.getElementById('exportScheduleBtn').click()">Exportar JSON</button>
-    <button onclick="document.getElementById('exportPdfBtn').click()">Exportar PDF</button>
-    <button onclick="document.getElementById('exportBtn').click()">Exportar Imagen</button>
-    <button onclick="document.getElementById('calculateMonthlyBtn').click()">Calcular Aguinaldo</button>
-    <button onclick="document.getElementById('searchSubjectBtn').click()">Generar Horario</button>
-  </div>
-  
-  <button id="mainFabBtn" class="main-fab">
-    <img src="assets/settings.svg" alt="Herramientas">
-  </button>
-</div>
-
-<div id="fabOverlay" class="fab-overlay"></div>
 
 </body>
 </html>
