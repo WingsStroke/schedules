@@ -41,6 +41,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- EXPORTACIÓN A IMAGEN (CANVAS) ---
   window._previewCache = window._previewCache || {}; 
 
+  // NUEVO: Función para limpiar la memoria gráfica
+  function flushPreviewCache() {
+    window._previewCache = {};
+    const previewImg = document.getElementById("exportImagePreviewImg");
+    if (previewImg) previewImg.src = "";
+  }
+
   async function actualizarPreviewImagen() {
     const includeDiurna = document.getElementById("exportDiurna").checked;
     const includeNocturna = document.getElementById("exportNocturna").checked;
@@ -78,6 +85,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const dataUrl = await generarCanvasExport(includeDiurna, includeNocturna, enhancedExport, hideEmptyCols);
+      
+      // NUEVO: Evitar que el caché crezca infinitamente saturando la RAM
+      if (Object.keys(window._previewCache).length > 3) {
+        window._previewCache = {}; 
+      }
+
       window._previewCache[cacheKey] = dataUrl; 
       previewImg.src = dataUrl; 
       previewImg.style.display = "block"; 
@@ -92,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("exportBtn").onclick = () => {
     if (currentScheduleIndex === null) return;
+    flushPreviewCache(); // <-- Liberamos RAM de sesiones anteriores
     document.getElementById("exportImageModal").classList.add("active");
     actualizarPreviewImagen();
   };
@@ -105,9 +119,20 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("confirmExportImageBtn").onclick = () => {
     const dataUrl = document.getElementById("confirmExportImageBtn").dataset.previewUrl;
     if (!dataUrl) return;
-    const link = document.createElement("a"); link.href = dataUrl; link.download = "horario.png"; link.click();
+    const link = document.createElement("a"); 
+    link.href = dataUrl; 
+    link.download = "horario.png"; 
+    link.click();
+    
     document.getElementById("exportImageModal").classList.remove("active");
+    flushPreviewCache(); // <-- Liberamos RAM justo después de descargar
   };
+
+  // Escuchar el botón de "Cerrar (X)" específico del modal de imagen
+  const closeImageModalBtn = document.querySelector("#exportImageModal .close-btn");
+  if (closeImageModalBtn) {
+    closeImageModalBtn.addEventListener("click", flushPreviewCache);
+  }
 
   async function generarCanvasExport(includeDiurna, includeNocturna, enhancedExport, hideEmptyCols) {
     const originalTable = document.getElementById("schedule");
