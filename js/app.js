@@ -546,6 +546,28 @@ changelogBtn.addEventListener("click", async () => {
 document.getElementById("closeChangelogBtn").onclick = () => { changelogPanel.classList.remove("open"); if(changelogOverlay) changelogOverlay.classList.remove("active"); };
 if(changelogOverlay) changelogOverlay.onclick = () => document.getElementById("closeChangelogBtn").click();
 
+
+// CONTROL DEL FAB MENU (MÓVIL)
+const fabContainer = document.getElementById("mobileFabContainer");
+const fabBtn = document.getElementById("mainFabBtn");
+const fabOverlay = document.getElementById("fabOverlay");
+
+function toggleFabMenu() {
+  const isActive = fabContainer.classList.toggle("active");
+  fabOverlay.classList.toggle("active", isActive);
+}
+
+fabBtn.addEventListener("click", toggleFabMenu);
+fabOverlay.addEventListener("click", toggleFabMenu);
+
+// Cerrar menú al hacer clic en cualquier opción
+document.querySelectorAll(".fab-menu button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    toggleFabMenu();
+  });
+});
+
+
 // ==========================================
 // 9. EVENTOS GLOBALES (Cerrar Modales)
 // ==========================================

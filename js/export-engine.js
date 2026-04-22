@@ -130,7 +130,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (i === 0 || !hideEmptyCols || activeDays.has(dayIndex)) {
         const th = document.createElement("th");
         th.textContent = text;
-        th.style.cssText = "background: #000; color: #fff; padding: 10px; border: 1px solid #ddd; text-align: center;";
+        // INYECCIÓN DE FUENTE: 18px en Alta legibilidad, 14px en Normal
+        th.style.cssText = `background: #000; color: #fff; padding: 10px; border: 1px solid #ddd; text-align: center; font-size: ${enhancedExport ? '18px' : '14px'}; font-weight: bold;`;
         newHeadRow.appendChild(th);
       }
     });
@@ -150,6 +151,9 @@ document.addEventListener("DOMContentLoaded", () => {
               if (headerTd) {
                   headerTd.colSpan = numCols;
                   headerTd.style.position = "static";
+                  // 2. FORZAR TAMAÑO EN EL DIVISOR DE JORNADA (Diurna / Nocturna)
+                  headerTd.style.fontSize = enhancedExport ? '16px' : '13px';
+                  headerTd.style.padding = '8px';
               }
               cloneTbody.appendChild(clonedHeaderRow);
           }
@@ -161,7 +165,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const originalTimeCell = originalRow.querySelector(".time");
       if (originalTimeCell) {
         const timeCell = originalTimeCell.cloneNode(true);
-        timeCell.style.cssText = `position: static; background: #f5f5f5; border: 1px solid #ddd; text-align: center; height: ${cellHeight}px;`;
+        // 3. FORZAR TAMAÑO EN LAS HORAS LATERALES (6:00, 7:00...)
+        timeCell.style.cssText = `position: static; background: #f5f5f5; border: 1px solid #ddd; text-align: center; height: ${cellHeight}px; font-size: ${enhancedExport ? '18px' : '14px'}; font-weight: 600; color: #333; box-sizing: border-box;`;
         cloneRow.appendChild(timeCell);
       }
 
