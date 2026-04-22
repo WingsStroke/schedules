@@ -337,6 +337,9 @@ function createDuplicateButton(subject){
   btn.onclick = () => {
       subjectModal.classList.remove("active");
       state.startDuplication({...subject});
+      
+      window._subjectToDuplicate = {...subject}; 
+      
       editorState.editingSubjectIndex = null;
       state.clearCurrentCell();
   };
@@ -612,3 +615,85 @@ document.addEventListener("keydown", (e) => {
     }
   }
 });
+
+// ==========================================
+// 10. INTERCEPTOR DE DUPLICACIÓN (PATCH)
+// ==========================================
+document.getElementById("schedule").addEventListener("click", (e) => {
+  // Verificamos si estamos en modo duplicación y tenemos una asignatura en memoria
+  if (typeof state !== "undefined" && state.isDuplicating() && window._subjectToDuplicate) {
+    const cell = e.target.closest(".cell");
+    if (!cell) return;
+    
+    // Detenemos inmediatamente cualquier otra acción de la celda (como abrir el modal)
+    e.stopPropagation();
+    e.preventDefault();
+
+    // 1. Buscar las coordenadas (Fila y Columna) de la celda clickeada
+    let targetRow = null, targetCol = null;
+    for (let r = 0; r < editorState.cellMatrix.length; r++) {
+      for (let c = 0; c < 6; c++) { // 6 días (Lunes a Sábado)
+        if (editorState.cellMatrix[r] && editorState.cellMatrix[r][c] && editorState.cellMatrix[r][c].element === cell) {
+          targetRow = r;
+          targetCol = c;
+          break;
+        }
+      }
+      if (targetRow !== null) break;
+    }
+
+    if (targetRow === null) return;
+
+    const currentSchedule = schedules[currentScheduleIndex];
+    const blocks = window._subjectToDuplicate.blocks;
+    
+    // 2. Prevenir desbordamiento (que la asignatura se salga por debajo de la tabla)
+    if (targetRow + blocks - 1 >= editorState.cellMatrix.length) {
+      return Toast.show("La asignatura excede el límite del horario", "error");
+    }
+
+    const targetCellData = editorState.cellMatrix[targetRow][targetCol];
+
+    // 3. Validar si el espacio choca con otra asignatura o jornada incompatible
+    if (isCellOccupied(currentSchedule, targetRow, targetCol, blocks, null, targetCellData.jornada)) {
+      return Toast.show("Ese espacio ya está ocupado", "warning");
+    }
+
+    // 4. Calcular los nuevos horarios en minutos basados en la celda destino
+    const startCell = editorState.cellMatrix[targetRow][targetCol];
+    const endCell = editorState.cellMatrix[targetRow + blocks - 1][targetCol];
+
+    // 5. Fabricar el clon perfecto
+    const newSubject = {
+      ...window._subjectToDuplicate,
+      id: crypto.randomUUID(), // Identificador único obligatorio
+      row: targetRow,
+      col: targetCol,
+      day: targetCol,
+      jornada: targetCellData.jornada,
+      startMinutes: startCell.startMinutes,
+      endMinutes: endCell.endMinutes
+    };
+
+    // 6. Inyectar al estado y guardar
+    currentSchedule.subjects.push(newSubject);
+    saveData();
+    
+    // 7. Limpiar la sesión de duplicación
+    state.cancelDuplication();
+    window._subjectToDuplicate = null; 
+    
+    // 8. Refrescar la pantalla y notificar
+    DOMRenderer.rebuildScheduleView();
+    DOMRenderer.updateScheduleInfo();
+    Toast.show("Asignatura duplicada con éxito", "success");
+  }
+}, true); // <- Fase de captura obligatoria
+
+// Limpiar la variable global si el usuario se arrepiente y presiona "Cancelar" en la barra
+const cancelDuplicateGlobalBtn = document.getElementById("cancelDuplicateBtn");
+if(cancelDuplicateGlobalBtn) {
+    cancelDuplicateGlobalBtn.addEventListener("click", () => {
+        window._subjectToDuplicate = null;
+    });
+}
