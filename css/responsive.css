@@ -193,15 +193,6 @@
   body:has(.sidebar-panel.active) #mobileFabContainer {
     display: none !important;
   }
-  
-}
-
-
-@media (min-width: 769px) {
-  #mobileFabContainer, .fab-overlay {
-    display: none !important;
-  }
-}
 
   /* Indicador de scroll: div con position:fixed posicionado por JS
      para que siga siempre el borde derecho del contenedor en pantalla */
@@ -1081,3 +1072,9 @@
 #schedule.hide-col-3 th:nth-child(5), #schedule.hide-col-3 td:nth-child(5) { display: none; }
 #schedule.hide-col-4 th:nth-child(6), #schedule.hide-col-4 td:nth-child(6) { display: none; }
 #schedule.hide-col-5 th:nth-child(7), #schedule.hide-col-5 td:nth-child(7) { display: none; }
+
+@media (min-width: 769px) {
+  #mobileFabContainer, .fab-overlay {
+    display: none !important;
+  }
+}
