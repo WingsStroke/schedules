@@ -264,20 +264,51 @@ const MinihorariosUI = {
   
   usarCombinacion(index) {
     if (index < 0 || index >= this.combinacionesActuales.length) {
-      console.error('Índice de combinación inválido:', index);
-      return;
+      return Toast.show('Error: Combinación no encontrada', 'error');
     }
     
     const combinacion = this.combinacionesActuales[index];
-    console.log('Usando combinación', index + 1);
-    console.log('Asignaturas:', combinacion.length);
     
-    // Cargar combinación en el horario principal
-    if (typeof CargadorCombinaciones !== 'undefined') {
-      CargadorCombinaciones.cargarCombinacion(combinacion, index);
+    const aplicarHorarioDirecto = () => {
+        try {
+            // 1. Vaciamos las materias actuales silenciosamente.
+            // Al vaciarlo, el módulo antiguo "CargadorCombinaciones" asume que 
+            // es un horario nuevo y NO dispara su molesto alert() nativo.
+            if (schedules[currentScheduleIndex] && schedules[currentScheduleIndex].subjects) {
+                schedules[currentScheduleIndex].subjects = [];
+            }
+
+            // 2. Cargamos la nueva combinación
+            if (typeof CargadorCombinaciones !== 'undefined') {
+                CargadorCombinaciones.cargarCombinacion(combinacion, index);
+            }
+
+            // 3. Forzamos la actualización inmediata del DOM y la UI
+            if (typeof saveData === 'function') saveData();
+            if (typeof DOMRenderer !== 'undefined') {
+                DOMRenderer.rebuildScheduleView();
+                DOMRenderer.updateScheduleInfo();
+            }
+            
+            // 4. Cerramos el panel lateral con estilo
+            if (typeof SidebarPanel !== 'undefined') SidebarPanel.cerrar();
+            
+            Toast.show('Horario generado con éxito', 'success');
+
+        } catch (error) {
+            console.error("Error al aplicar:", error);
+            Toast.show('Hubo un error al aplicar el horario', 'error');
+        }
+    };
+
+    // Verificar si el horario actual ya tiene asignaturas
+    const currentSchedule = schedules[currentScheduleIndex];
+    if (currentSchedule && currentSchedule.subjects && currentSchedule.subjects.length > 0) {
+        // Disparar nuestro nuevo Toast interactivo
+        Toast.confirm("Este horario ya tiene asignaturas. ¿Deseas sobreescribirlo?", aplicarHorarioDirecto);
     } else {
-      console.error('CargadorCombinaciones no está disponible');
-      alert('Error: Sistema de carga no disponible');
+        // Si está vacío, aplicar inmediatamente sin preguntar
+        aplicarHorarioDirecto();
     }
   },
   
