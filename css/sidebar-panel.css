@@ -4,8 +4,8 @@
 .sidebar-panel {
   position: fixed;
   top: 0;
-  right: 0; /* ANTES: -550px */
-  transform: translateX(100%); /* NUEVO: Aceleración por hardware (GPU) */
+  right: 0 !important; /* Mantenemos el panel anclado estrictamente a la derecha */
+  transform: translateX(100%); /* Lo sacamos de la pantalla usando la GPU */
   width: 550px;
   height: 100vh;
   
@@ -16,7 +16,7 @@
   border-left: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: -8px 0 32px rgba(0, 0, 0, 0.1);
   
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important; /* Animación ininterrumpible */
   will-change: transform;
   z-index: 1000;
   display: flex;
@@ -24,7 +24,7 @@
 }
 
 .sidebar-panel.active {
-  transform: translateX(0); /* ANTES: right: 0 */
+  transform: translateX(0) !important;
 }
 
 /* Header del sidebar - Glass */
@@ -510,12 +510,12 @@
 /* Responsive */
 @media (max-width: 768px) {
   .sidebar-panel {
-    transform: translateX(100%); /* ANTES: right: -100% */
-    width: 100%;
+    transform: translateX(100%) !important;
+    width: 100% !important;
   }
   
   .sidebar-panel.active {
-    transform: translateX(0); /* ANTES: right: 0 */
+    transform: translateX(0) !important;
   }
 }
 

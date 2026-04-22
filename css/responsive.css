@@ -313,17 +313,6 @@
     padding: 1px 3px;
   }
 
-  /* ── SIDEBAR ───────────────────────────────────────────── */
-
-  .sidebar-panel {
-    width: 100vw;
-    right: -100vw;
-  }
-
-  .sidebar-panel.active {
-    right: 0;
-  }
-
   /* ── MODALES GENERALES ─────────────────────────────────── */
 
   .modal {
