@@ -1,7 +1,7 @@
 "use strict";
 
 // Cambia esta versión cuando subas actualizaciones grandes
-const CACHE_VERSION = 'v2.0.0-beta-52';
+const CACHE_VERSION = 'v2.0.0-beta-53';
 const CACHE_NAME = `horarios-udec-${CACHE_VERSION}`;
 
 const ASSETS_TO_CACHE = [
