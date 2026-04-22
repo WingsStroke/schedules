@@ -23,7 +23,7 @@
   flex-direction: column;
 }
 
-sidebar-panel.active {
+.sidebar-panel.active {
   transform: translateX(0); /* ANTES: right: 0 */
 }
 
