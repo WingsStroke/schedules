@@ -94,6 +94,7 @@
     flex-direction: column;
     align-items: flex-end;
     gap: 12px;
+    pointer-events: none; 
   }
 
   /* Botón Principal */
@@ -109,6 +110,7 @@
     justify-content: center;
     align-items: center;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: auto; 
   }
 
   .main-fab img {
@@ -143,6 +145,7 @@
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    pointer-events: auto; 
   }
 
   .fab-menu button {
