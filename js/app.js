@@ -240,9 +240,22 @@ function openEditSubjectModal(subject) {
   subjectModal.classList.add("active");
 }
 
+function escapeHTML(str) {
+  if (!str) return "";
+  return str.replace(/[&<>'"]/g, tag => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    "'": '&#39;',
+    '"': '&quot;'
+  }[tag]));
+}
+
 saveSubjectBtn.onclick = () => {
   if(!editorState.currentCell) return;
-  const name = subjectNameInput.value.trim();
+  
+  // 1. Sanitizamos las entradas de texto para evitar inyecciones maliciosas
+  const name = escapeHTML(subjectNameInput.value.trim());
   if(!name) return alert("Nombre obligatorio");
 
   const color = subjectColorInput.value;
@@ -267,12 +280,14 @@ saveSubjectBtn.onclick = () => {
 
   const newSubject = {
     id: editingSubject ? editingSubject.id : crypto.randomUUID(),
-    name, color,
+    name, // Ya está sanitizado arriba
+    color,
     row: editorState.currentCell.row, col: editorState.currentCell.col, day: editorState.currentCell.col,
     blocks, jornada: targetCell.jornada,
-    group: subjectGroupInput ? subjectGroupInput.value.trim() : "",
-    program: subjectProgramInput ? subjectProgramInput.value.trim() : "",
-    aula: subjectAulaInput ? subjectAulaInput.value.trim() : "",
+    // Sanitizamos el resto de campos secundarios
+    group: escapeHTML(subjectGroupInput ? subjectGroupInput.value.trim() : ""),
+    program: escapeHTML(subjectProgramInput ? subjectProgramInput.value.trim() : ""),
+    aula: escapeHTML(subjectAulaInput ? subjectAulaInput.value.trim() : ""),
     credits: subjectCreditsInput && subjectCreditsInput.value ? parseInt(subjectCreditsInput.value) : 0,
     startMinutes: startCell.startMinutes, endMinutes: endCell.endMinutes,
     showCredits: document.getElementById("showCreditsCheckbox")?.checked || false,
