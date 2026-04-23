@@ -76,14 +76,21 @@ const closeSearchBtn = searchModal ? searchModal.querySelector('.close-btn') : n
 
 if (searchSubjectBtn) {
   searchSubjectBtn.addEventListener('click', () => {
-    if (typeof SidebarPanel !== 'undefined') {
-      SidebarPanel.abrir();
-      setTimeout(() => {
-        const sidebarSearchInput = document.getElementById('sidebarSearchInput');
-        if (sidebarSearchInput) sidebarSearchInput.focus();
-      }, 100);
+
+  if (typeof SidebarPanel !== 'undefined') {
+    SidebarPanel.abrir();
+
+    setTimeout(() => {
+      const sidebarSearchInput = document.getElementById('sidebarSearchInput');
+      if (sidebarSearchInput) sidebarSearchInput.focus();
+    }, 450);
+  } else {
+
+      if (typeof openSearchModal !== 'undefined') {
+        openSearchModal();
+      }
     }
-  });
+ });
 }
 
 if (closeSearchBtn && searchModal) {

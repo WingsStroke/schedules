@@ -3,7 +3,7 @@
 .sidebar-panel {
   position: fixed;
   top: 0;
-  right: 0;
+  right: -600px; /* START OFF-SCREEN: Lo ocultamos a la derecha */
   width: 550px;
   height: 100vh;
   
@@ -12,14 +12,12 @@
   box-shadow: -10px 0 25px rgba(0, 0, 0, 0.1);
   border-radius: 16px 0 0 16px; 
   
-  /* ANIMACIÓN GPU PURA (Sin 'visibility' para evitar la destrucción de la capa) */
-  transform: translateX(100%);
   opacity: 0;
   pointer-events: none;
-  will-change: transform, opacity; /* Mantiene la capa 3D lista en memoria */
+  visibility: hidden; /* Mantiene seguro el modal cuando está cerrado */
   
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
-              opacity 0.4s ease;
+  /* EL SECRETO ESTÁ AQUÍ: Añadimos 'visibility 0.4s' para que no desaparezca de golpe al salir */
+  transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, visibility 0.4s;
   
   z-index: 1000;
   display: flex;
@@ -28,9 +26,10 @@
 }
 
 .sidebar-panel.active {
-  transform: translateX(0);
+  right: 0; /* Desliza hacia la izquierda hasta el borde */
   opacity: 1;
   pointer-events: auto;
+  visibility: visible;
 }
 
 /* Header del sidebar - Estilo Modal */
@@ -526,7 +525,11 @@ body.dark-mode .btn-close-sidebar {
 @media (max-width: 768px) {
   .sidebar-panel {
     width: 100vw;
+    right: -100vw; /* Oculto fuera de pantalla en móvil */
     border-radius: 0;
+  }
+  .sidebar-panel.active {
+    right: 0; /* Visible en móvil */
   }
 }
 
