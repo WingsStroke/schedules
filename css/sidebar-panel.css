@@ -4,28 +4,31 @@
 .sidebar-panel {
   position: fixed;
   top: 0;
-  right: -550px; /* START OFF-SCREEN: Lo sacamos de la pantalla usando la propiedad física */
+  right: 0; 
   width: 550px;
   height: 100vh;
-  
-  /* Glass effect */
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-left: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: -8px 0 32px rgba(0, 0, 0, 0.1);
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
   
-  /* ANIMACIÓN BLINDADA: Usamos 'right' para esquivar el bug del blur en Safari/Chrome */
-  transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s;
-  visibility: hidden; /* Evita que intercepte clics accidentales estando cerrado */
+  transition: 
+    transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+    opacity 0.3s ease;
+    
   z-index: 1000;
   display: flex;
   flex-direction: column;
 }
 
 .sidebar-panel.active {
-  right: 0; /* Entra a la pantalla */
-  visibility: visible;
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto; /* Reactiva los clics */
 }
 
 /* Header del sidebar - Glass */
