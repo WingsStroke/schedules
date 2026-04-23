@@ -261,12 +261,18 @@ const SidebarPanel = {
       return;
     }
     
+    // 1. Quitamos el scroll primero (Esto altera el tamaño de la ventana)
+    document.body.style.overflow = 'hidden'; 
+    
+    // 2. FORZAR REFLOW: Le obligamos al navegador a procesar el cambio de tamaño YA, 
+    // separándolo de la animación que viene a continuación.
+    void sidebar.offsetWidth; 
+    
+    // 3. Ahora sí, disparamos la animación fluidamente
     sidebar.classList.add('active');
     overlay.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevenir scroll del body
     
     this.isOpen = true;
-    
     console.log('Sidebar abierto');
   },
   
@@ -298,10 +304,14 @@ const SidebarPanel = {
     // Cerrar primero el modal de filtros si está abierto
     this.cerrarModalFiltros();
 
+    // 1. Iniciamos la animación de salida
     sidebar.classList.remove('active');
     overlay.classList.remove('active');
     
-    document.body.style.overflow = '';
+    // 2. Devolvemos el scroll SOLO cuando la animación haya terminado (400ms)
+    setTimeout(() => {
+        if (!this.isOpen) document.body.style.overflow = '';
+    }, 400);
     
     this.isOpen = false;
   },
