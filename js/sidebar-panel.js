@@ -261,16 +261,18 @@ const SidebarPanel = {
       return;
     }
     
-    // 1. Quitamos el scroll primero (Esto altera el tamaño de la ventana)
+    // 1. Quitamos el scroll (Altera el ancho de la ventana)
     document.body.style.overflow = 'hidden'; 
     
-    // 2. FORZAR REFLOW: Le obligamos al navegador a procesar el cambio de tamaño YA, 
-    // separándolo de la animación que viene a continuación.
-    void sidebar.offsetWidth; 
-    
-    // 3. Ahora sí, disparamos la animación fluidamente
-    sidebar.classList.add('active');
-    overlay.classList.add('active');
+    // 2. PATRÓN "DOUBLE requestAnimationFrame" (Nivel Senior)
+    // El primer rAF espera a que el navegador pinte el cambio del scroll.
+    // El segundo rAF ejecuta la animación en el siguiente fotograma limpio.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+      });
+    });
     
     this.isOpen = true;
     console.log('Sidebar abierto');
