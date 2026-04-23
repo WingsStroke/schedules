@@ -3,21 +3,19 @@
 .sidebar-panel {
   position: fixed;
   top: 0;
-  right: -600px; /* START OFF-SCREEN: Lo ocultamos a la derecha */
+  right: -600px; /* Oculto fuera de la pantalla */
   width: 550px;
   height: 100vh;
   
-  /* ESTILO HEREDADO DE .modal-content */
   background: #ffffff;
   box-shadow: -10px 0 25px rgba(0, 0, 0, 0.1);
   border-radius: 16px 0 0 16px; 
   
   opacity: 0;
-  pointer-events: none;
-  visibility: hidden; /* Mantiene seguro el modal cuando está cerrado */
+  pointer-events: none; /* Bloquea clics accidentales estando oculto */
   
-  /* EL SECRETO ESTÁ AQUÍ: Añadimos 'visibility 0.4s' para que no desaparezca de golpe al salir */
-  transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, visibility 0.4s;
+  /* TRANSICIÓN PURA: Sin interrupciones de visibilidad */
+  transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
   
   z-index: 1000;
   display: flex;
@@ -26,10 +24,9 @@
 }
 
 .sidebar-panel.active {
-  right: 0; /* Desliza hacia la izquierda hasta el borde */
+  right: 0; 
   opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
+  pointer-events: auto; /* Reactiva los clics cuando está abierto */
 }
 
 /* Header del sidebar - Estilo Modal */
@@ -492,16 +489,18 @@ body.dark-mode .btn-close-sidebar {
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.4); /* Opacidad estándar de tus modales */
+  background: rgba(0, 0, 0, 0.4); 
+  
   opacity: 0;
-  visibility: hidden;
+  pointer-events: none; /* Evita que el overlay bloquee la página cuando está oculto */
+  
   transition: opacity 0.3s ease;
   z-index: 999;
 }
 
 .sidebar-overlay.active {
   opacity: 1;
-  visibility: visible;
+  pointer-events: auto;
 }
 
 /* Scrollbar personalizado para sidebar */
