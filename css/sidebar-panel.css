@@ -3,7 +3,7 @@
 .sidebar-panel {
   position: fixed;
   top: 0;
-  right: -600px; /* Oculto fuera de la pantalla */
+  right: 0; /* 1. Lo anclamos firmemente a la derecha */
   width: 550px;
   height: 100vh;
   
@@ -11,11 +11,13 @@
   box-shadow: -10px 0 25px rgba(0, 0, 0, 0.1);
   border-radius: 16px 0 0 16px; 
   
+  /* 2. OCULTO POR GPU: Lo sacamos de la pantalla 100% de su ancho */
+  transform: translateX(100%);
   opacity: 0;
-  pointer-events: none; /* Bloquea clics accidentales estando oculto */
+  pointer-events: none; 
   
-  /* TRANSICIÓN PURA: Sin interrupciones de visibilidad */
-  transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+  /* TRANSICIÓN DE SALIDA: Retrasamos la opacidad 0.1s para que SE VEA el deslizamiento */
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease 0.1s;
   
   z-index: 1000;
   display: flex;
@@ -24,9 +26,12 @@
 }
 
 .sidebar-panel.active {
-  right: 0; 
+  transform: translateX(0); /* Vuelve a su posición original */
   opacity: 1;
-  pointer-events: auto; /* Reactiva los clics cuando está abierto */
+  pointer-events: auto; 
+  
+  /* TRANSICIÓN DE ENTRADA: Sin retraso, aparece fluido de inmediato */
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease 0s;
 }
 
 /* Header del sidebar - Estilo Modal */
@@ -524,11 +529,8 @@ body.dark-mode .btn-close-sidebar {
 @media (max-width: 768px) {
   .sidebar-panel {
     width: 100vw;
-    right: -100vw; /* Oculto fuera de pantalla en móvil */
     border-radius: 0;
-  }
-  .sidebar-panel.active {
-    right: 0; /* Visible en móvil */
+    /* La animación transform: translateX(100%) se hereda automáticamente de arriba */
   }
 }
 
