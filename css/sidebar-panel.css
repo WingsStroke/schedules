@@ -4,8 +4,7 @@
 .sidebar-panel {
   position: fixed;
   top: 0;
-  right: 0; 
-  transform: translateX(100%); 
+  right: -550px; /* START OFF-SCREEN: Lo sacamos de la pantalla usando la propiedad física */
   width: 550px;
   height: 100vh;
   
@@ -16,14 +15,17 @@
   border-left: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: -8px 0 32px rgba(0, 0, 0, 0.1);
   
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  /* ANIMACIÓN BLINDADA: Usamos 'right' para esquivar el bug del blur en Safari/Chrome */
+  transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s;
+  visibility: hidden; /* Evita que intercepte clics accidentales estando cerrado */
   z-index: 1000;
   display: flex;
   flex-direction: column;
 }
 
 .sidebar-panel.active {
-  transform: translateX(0);
+  right: 0; /* Entra a la pantalla */
+  visibility: visible;
 }
 
 /* Header del sidebar - Glass */
@@ -506,14 +508,14 @@
   background: #999;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .sidebar-panel {
-    width: 100%;
+    width: 100vw;
+    right: -100vw;
   }
   
   .sidebar-panel.active {
-    transform: translateX(0) !important;
+    right: 0;
   }
 }
 
