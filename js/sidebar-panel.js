@@ -261,15 +261,15 @@ const SidebarPanel = {
       return;
     }
     
-    // 1. Ocultar scroll (Causa recálculo pesado en la ventana)
-    document.body.style.overflow = 'hidden'; 
+    // 1. Aplicamos las clases INMEDIATAMENTE para iniciar la animación fluida
+    sidebar.classList.add('active');
+    overlay.classList.add('active');
     
-    // 2. AISLAMIENTO: Damos 10ms al navegador para que pinte la ventana SIN la barra 
-    // de scroll ANTES de ordenarle que inicie la animación del modal.
+    // 2. AISLAMIENTO: Bloqueamos el scroll de la página 400ms DESPUÉS, 
+    // justo cuando el modal terminó de entrar. Esto evita que el navegador cancele la animación.
     setTimeout(() => {
-        sidebar.classList.add('active');
-        overlay.classList.add('active');
-    }, 10);
+        if (this.isOpen) document.body.style.overflow = 'hidden';
+    }, 400);
     
     this.isOpen = true;
     console.log('Sidebar abierto');
@@ -297,22 +297,16 @@ const SidebarPanel = {
     
     if (!sidebar || !overlay) return;
 
-    // 1. Limpiar filtros (Causa destrucción de nodos y recálculos pesados en el DOM)
     this.cerrarModalFiltros();
 
-    // 2. AISLAMIENTO: Damos 10ms al navegador para recuperarse de la limpieza 
-    // antes de ordenarle que inicie la fluida animación de salida.
-    setTimeout(() => {
-        sidebar.classList.remove('active');
-        overlay.classList.remove('active');
-    }, 10);
+    // 1. Quitamos las clases INMEDIATAMENTE para deslizar el panel hacia la derecha
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
     
-    // 3. Devolver el scroll al body al terminar (400ms de animación + 10ms de retraso)
+    // 2. Devolvemos el scroll 400ms DESPUÉS (cuando el panel ya esté escondido)
     setTimeout(() => {
-      if (!this.isOpen) {
-        document.body.style.overflow = '';
-      }
-    }, 410);
+      if (!this.isOpen) document.body.style.overflow = '';
+    }, 400);
     
     this.isOpen = false;
   },

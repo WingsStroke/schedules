@@ -3,7 +3,7 @@
 .sidebar-panel {
   position: fixed;
   top: 0;
-  right: 0;
+  right: -600px; /* 100% Oculto fuera de la pantalla físicamente */
   width: 550px;
   height: 100vh;
   
@@ -11,12 +11,8 @@
   box-shadow: -10px 0 25px rgba(0, 0, 0, 0.1);
   border-radius: 16px 0 0 16px; 
   
-  /* ESTADO CERRADO: Fuera de la pantalla al 100% de su ancho */
-  transform: translateX(100%);
-  
-  /* ANIMACIÓN HARDWARE: Solo movemos, sin fallos de opacidad */
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: transform;
+  /* Animación física directa, imposible que falle */
+  transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   
   z-index: 1000;
   display: flex;
@@ -25,8 +21,7 @@
 }
 
 .sidebar-panel.active {
-  /* ESTADO ABIERTO */
-  transform: translateX(0);
+  right: 0; /* Vuelve a la pantalla */
 }
 
 /* Header del sidebar - Estilo Modal */
@@ -523,8 +518,11 @@ body.dark-mode .btn-close-sidebar {
 @media (max-width: 768px) {
   .sidebar-panel {
     width: 100vw;
+    right: -100vw; /* Fuera de la pantalla en móviles */
     border-radius: 0;
-    /* La animación transform: translateX(100%) se hereda automáticamente de arriba */
+  }
+  .sidebar-panel.active {
+    right: 0;
   }
 }
 
