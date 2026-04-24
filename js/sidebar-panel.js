@@ -261,18 +261,16 @@ const SidebarPanel = {
       return;
     }
     
-    // 1. Quitamos el scroll (Altera el ancho de la ventana)
+    // 1. Ocultar scroll
     document.body.style.overflow = 'hidden'; 
     
-    // 2. PATRÓN "DOUBLE requestAnimationFrame" (Nivel Senior)
-    // El primer rAF espera a que el navegador pinte el cambio del scroll.
-    // El segundo rAF ejecuta la animación en el siguiente fotograma limpio.
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        sidebar.classList.add('active');
-        overlay.classList.add('active');
-      });
-    });
+    // 2. FORZAR REFLOW: Esto obliga al motor gráfico a aplicar el cambio 
+    // de scroll ANTES de iniciar la animación. Es inmediato y sin "lags".
+    sidebar.getBoundingClientRect();
+    
+    // 3. Activar animación
+    sidebar.classList.add('active');
+    overlay.classList.add('active');
     
     this.isOpen = true;
     console.log('Sidebar abierto');
@@ -298,21 +296,19 @@ const SidebarPanel = {
     const sidebar = document.getElementById('combinacionesSidebar');
     const overlay = document.getElementById('sidebarOverlay');
     
-    if (!sidebar || !overlay) {
-      console.error('Elementos del sidebar no encontrados');
-      return;
-    }
+    if (!sidebar || !overlay) return;
 
-    // Cerrar primero el modal de filtros si está abierto
     this.cerrarModalFiltros();
 
-    // 1. Iniciamos la animación de salida
+    // 1. Iniciar animación de salida (el CSS hará que regrese a translateX(100%))
     sidebar.classList.remove('active');
     overlay.classList.remove('active');
     
-    // 2. Devolvemos el scroll SOLO cuando la animación haya terminado (400ms)
+    // 2. Devolver el scroll al body SOLO cuando termine el movimiento
     setTimeout(() => {
-        if (!this.isOpen) document.body.style.overflow = '';
+      if (!this.isOpen) {
+        document.body.style.overflow = '';
+      }
     }, 400);
     
     this.isOpen = false;

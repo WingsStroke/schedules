@@ -3,7 +3,7 @@
 .sidebar-panel {
   position: fixed;
   top: 0;
-  right: 0; /* 1. Lo anclamos firmemente a la derecha */
+  right: 0;
   width: 550px;
   height: 100vh;
   
@@ -11,13 +11,11 @@
   box-shadow: -10px 0 25px rgba(0, 0, 0, 0.1);
   border-radius: 16px 0 0 16px; 
   
-  /* 2. OCULTO POR GPU: Lo sacamos de la pantalla 100% de su ancho */
+  /* ESTADO CERRADO: Fuera de la pantalla al 100% de su ancho */
   transform: translateX(100%);
-  opacity: 0;
-  pointer-events: none; 
   
-  /* TRANSICIÓN DE SALIDA: Retrasamos la opacidad 0.1s para que SE VEA el deslizamiento */
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease 0.1s;
+  /* TRANSICIÓN PURA: Solo movemos, sin fallos de opacidad o visibilidad */
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   
   z-index: 1000;
   display: flex;
@@ -26,12 +24,8 @@
 }
 
 .sidebar-panel.active {
-  transform: translateX(0); /* Vuelve a su posición original */
-  opacity: 1;
-  pointer-events: auto; 
-  
-  /* TRANSICIÓN DE ENTRADA: Sin retraso, aparece fluido de inmediato */
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease 0s;
+  /* ESTADO ABIERTO: Entra a la pantalla */
+  transform: translateX(0);
 }
 
 /* Header del sidebar - Estilo Modal */
@@ -492,20 +486,23 @@ body.dark-mode .btn-close-sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.4); 
+  background: rgba(0, 0, 0, 0.4);
   
+  /* ESTADO CERRADO */
   opacity: 0;
-  pointer-events: none; /* Evita que el overlay bloquee la página cuando está oculto */
+  pointer-events: none; /* Evita que bloquee la pantalla al estar cerrado */
   
-  transition: opacity 0.3s ease;
+  /* TRANSICIÓN PURA */
+  transition: opacity 0.4s ease;
   z-index: 999;
 }
 
 .sidebar-overlay.active {
+  /* ESTADO ABIERTO */
   opacity: 1;
-  pointer-events: auto;
+  pointer-events: auto; /* Permite hacer clic para cerrar */
 }
 
 /* Scrollbar personalizado para sidebar */
