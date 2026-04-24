@@ -1,7 +1,7 @@
 "use strict";
 
 // Cambia esta versión cuando subas actualizaciones grandes
-const CACHE_VERSION = 'v2.0.0-beta-83';
+const CACHE_VERSION = 'v2.0.0-beta-84';
 const CACHE_NAME = `horarios-udec-${CACHE_VERSION}`;
 
 const ASSETS_TO_CACHE = [
@@ -21,14 +21,23 @@ const ASSETS_TO_CACHE = [
 ];
 
 // FASE 1: INSTALACIÓN SILENCIOSA
+// FASE 1: INSTALACIÓN SILENCIOSA Y "CACHE BUSTING"
 self.addEventListener('install', (event) => {
-  // skipWaiting() hace que el SW se instale en segundo plano sin interrumpir al usuario.
   self.skipWaiting(); 
   
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log(`[PWA] Preparando nueva versión en segundo plano: ${CACHE_VERSION}`);
-      return cache.addAll(ASSETS_TO_CACHE);
+      console.log(`[PWA] Preparando nueva versión: ${CACHE_VERSION}`);
+      // Usamos cache: 'reload' para obligar al navegador a ir al servidor, saltándose la caché HTTP
+      return Promise.all(
+        ASSETS_TO_CACHE.map(url => {
+          return fetch(new Request(url, { cache: 'reload' }))
+            .then(response => {
+              if (!response.ok) throw new Error(`Fetch falló para ${url}`);
+              return cache.put(url, response);
+            });
+        })
+      );
     })
   );
 });

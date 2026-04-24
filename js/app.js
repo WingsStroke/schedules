@@ -528,8 +528,6 @@ function renderCalendarGrid() {
   countSpan.textContent = excludedCount === 0 ? "Ningún día excluido" : `${excludedCount} día(s) excluido(s)`;
 }
 
-document.getElementById("backToAguinaldoBtn").onclick = () => document.getElementById("excludeDaysModal").classList.remove("active");
-
 // ==========================================
 // 8. SISTEMA DE CHANGELOG
 // ==========================================

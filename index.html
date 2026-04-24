@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- PWA -->
@@ -572,18 +571,17 @@
     window.addEventListener("load", () => {
       navigator.serviceWorker.register("./sw.js", { scope: "./" })
         .then(reg => {
-          console.info("[PWA] Service Worker registrado:", reg.scope);
-
           reg.addEventListener("updatefound", () => {
             const newWorker = reg.installing;
             newWorker.addEventListener("statechange", () => {
               if (newWorker.state === "activated" && navigator.serviceWorker.controller) {
-                console.info("[PWA] Nueva versión disponible. Recarga para actualizar.");
+                // Notifica al usuario y recarga la página para aplicar los cambios sin Ctrl+F5
+                if (typeof Toast !== 'undefined') Toast.show("Actualizando a la nueva versión...", "success");
+                setTimeout(() => window.location.reload(), 1500);
               }
             });
           });
-        })
-        .catch(err => console.warn("[PWA] Error al registrar Service Worker:", err));
+        });
     });
   }
 </script>
