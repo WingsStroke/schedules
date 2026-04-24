@@ -261,16 +261,15 @@ const SidebarPanel = {
       return;
     }
     
-    // 1. Ocultar scroll
+    // 1. Ocultar scroll (Causa recálculo pesado en la ventana)
     document.body.style.overflow = 'hidden'; 
     
-    // 2. FORZAR REFLOW: Esto obliga al motor gráfico a aplicar el cambio 
-    // de scroll ANTES de iniciar la animación. Es inmediato y sin "lags".
-    sidebar.getBoundingClientRect();
-    
-    // 3. Activar animación
-    sidebar.classList.add('active');
-    overlay.classList.add('active');
+    // 2. AISLAMIENTO: Damos 10ms al navegador para que pinte la ventana SIN la barra 
+    // de scroll ANTES de ordenarle que inicie la animación del modal.
+    setTimeout(() => {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+    }, 10);
     
     this.isOpen = true;
     console.log('Sidebar abierto');
@@ -298,18 +297,22 @@ const SidebarPanel = {
     
     if (!sidebar || !overlay) return;
 
+    // 1. Limpiar filtros (Causa destrucción de nodos y recálculos pesados en el DOM)
     this.cerrarModalFiltros();
 
-    // 1. Iniciar animación de salida (el CSS hará que regrese a translateX(100%))
-    sidebar.classList.remove('active');
-    overlay.classList.remove('active');
+    // 2. AISLAMIENTO: Damos 10ms al navegador para recuperarse de la limpieza 
+    // antes de ordenarle que inicie la fluida animación de salida.
+    setTimeout(() => {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+    }, 10);
     
-    // 2. Devolver el scroll al body SOLO cuando termine el movimiento
+    // 3. Devolver el scroll al body al terminar (400ms de animación + 10ms de retraso)
     setTimeout(() => {
       if (!this.isOpen) {
         document.body.style.overflow = '';
       }
-    }, 400);
+    }, 410);
     
     this.isOpen = false;
   },

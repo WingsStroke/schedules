@@ -14,8 +14,9 @@
   /* ESTADO CERRADO: Fuera de la pantalla al 100% de su ancho */
   transform: translateX(100%);
   
-  /* TRANSICIÓN PURA: Solo movemos, sin fallos de opacidad o visibilidad */
+  /* ANIMACIÓN HARDWARE: Solo movemos, sin fallos de opacidad */
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
   
   z-index: 1000;
   display: flex;
@@ -24,7 +25,7 @@
 }
 
 .sidebar-panel.active {
-  /* ESTADO ABIERTO: Entra a la pantalla */
+  /* ESTADO ABIERTO */
   transform: translateX(0);
 }
 
@@ -490,19 +491,15 @@ body.dark-mode .btn-close-sidebar {
   height: 100vh;
   background: rgba(0, 0, 0, 0.4);
   
-  /* ESTADO CERRADO */
   opacity: 0;
-  pointer-events: none; /* Evita que bloquee la pantalla al estar cerrado */
-  
-  /* TRANSICIÓN PURA */
+  pointer-events: none; 
   transition: opacity 0.4s ease;
   z-index: 999;
 }
 
 .sidebar-overlay.active {
-  /* ESTADO ABIERTO */
   opacity: 1;
-  pointer-events: auto; /* Permite hacer clic para cerrar */
+  pointer-events: auto; 
 }
 
 /* Scrollbar personalizado para sidebar */
