@@ -575,9 +575,11 @@
             const newWorker = reg.installing;
             newWorker.addEventListener("statechange", () => {
               if (newWorker.state === "activated" && navigator.serviceWorker.controller) {
-                // Notifica al usuario y recarga la página para aplicar los cambios sin Ctrl+F5
-                if (typeof Toast !== 'undefined') Toast.show("Actualizando a la nueva versión...", "success");
-                setTimeout(() => window.location.reload(), 1500);
+                // Nueva versión disponible - notificar sin forzar recarga
+                if (typeof Toast !== 'undefined') {
+                  Toast.show("Nueva versión disponible. Recarga la página para actualizar.", "info", 8000);
+                }
+                // NO forzamos reload - esperamos a que el usuario recargue manualmente
               }
             });
           });

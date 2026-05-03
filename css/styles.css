@@ -1227,6 +1227,12 @@ button:disabled{
   color: #d32f2f !important;
 }
 
+#calendarGrid .calendar-day-holyweek {
+  background: #e1bee7 !important;
+  border-color: #7b1fa2 !important;
+  color: #7b1fa2 !important;
+}
+
 #calendarGrid .calendar-day-excluded {
   background: #fff9c4 !important;
   border: 2px solid #f57f17 !important;

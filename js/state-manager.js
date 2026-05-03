@@ -86,6 +86,21 @@ function getTimeRangePure(subject) {
   return { startMinutes, endMinutes: startMinutes + subject.blocks * base.blockMinutes };
 }
 
+// Definir ScheduleTimeModel ANTES de normalizeSubject para evitar forward reference
+const ScheduleTimeModel = {
+  getSubjectTimeRange(subject) {
+    if (typeof subject.startMinutes === "number") return { startMinutes: subject.startMinutes, endMinutes: subject.endMinutes };
+    return getTimeRangePure(subject);
+  },
+  calculateGaps(timeline, minGapMinutes) {
+    let gaps = 0;
+    for (let i = 1; i < timeline.length; i++) {
+      if (timeline[i].startMinutes - timeline[i - 1].endMinutes >= minGapMinutes) gaps++;
+    }
+    return gaps;
+  }
+};
+
 function normalizeSubject(subject) {
   const day = Number.isInteger(Number(subject.day)) ? Number(subject.day) : Number(subject.col);
   const normalized = {
@@ -121,20 +136,6 @@ const ScheduleLogic = {
       if (conflict) return false;
     }
     return true;
-  }
-};
-
-const ScheduleTimeModel = {
-  getSubjectTimeRange(subject) {
-    if (typeof subject.startMinutes === "number") return { startMinutes: subject.startMinutes, endMinutes: subject.endMinutes };
-    return getTimeRangePure(subject);
-  },
-  calculateGaps(timeline, minGapMinutes) {
-    let gaps = 0;
-    for (let i = 1; i < timeline.length; i++) {
-      if (timeline[i].startMinutes - timeline[i - 1].endMinutes >= minGapMinutes) gaps++;
-    }
-    return gaps;
   }
 };
 

@@ -1,4 +1,4 @@
-// SIDEBAR PANEL - CONTROLADOR DEL PANEL LATERAL
+﻿// SIDEBAR PANEL - CONTROLADOR DEL PANEL LATERAL
 
 const SidebarPanel = {
   
@@ -17,12 +17,12 @@ const SidebarPanel = {
   
   // Inicializar sidebar
   inicializar() {
-    console.log('Inicializando Sidebar Panel...');
+
     
-    // Configurar búsqueda integrada
+    // Configurar bÃºsqueda integrada
     this.configurarBusqueda();
     
-    // Configurar botón regenerar
+    // Configurar botÃ³n regenerar
     const btnRegenerar = document.getElementById('btnRegenerarCombinaciones');
     if (btnRegenerar) {
       btnRegenerar.addEventListener('click', () => {
@@ -50,7 +50,7 @@ const SidebarPanel = {
       });
     }
     
-    // Configurar tecla ESC (ÚNICO listener)
+    // Configurar tecla ESC (ÃšNICO listener)
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         // Verificar si hay alguna asignatura expandida (modal de filtros abierto)
@@ -71,15 +71,15 @@ const SidebarPanel = {
       }
     });
     
-    console.log('Sidebar Panel inicializado');
+
   },
   
-  // Configurar búsqueda integrada
+  // Configurar bÃºsqueda integrada
   configurarBusqueda() {
     const searchInput = document.getElementById('sidebarSearchInput');
     
     if (!searchInput) {
-      console.error('Input de búsqueda no encontrado');
+
       return;
     }
     
@@ -93,7 +93,7 @@ const SidebarPanel = {
         clearTimeout(timeoutId);
       }
       
-      // Esperar 300ms después de que el usuario deje de escribir
+      // Esperar 300ms despuÃ©s de que el usuario deje de escribir
       timeoutId = setTimeout(() => {
         this.buscarAsignaturas(query);
       }, 300);
@@ -106,16 +106,16 @@ const SidebarPanel = {
       }
     });
     
-    // Configurar control de máximo de combinaciones
+    // Configurar control de mÃ¡ximo de combinaciones
     this.configurarMaxCombinaciones();
   },
   
-  // Configurar control de máximo de combinaciones
+  // Configurar control de mÃ¡ximo de combinaciones
   configurarMaxCombinaciones() {
     const maxInput = document.getElementById('maxCombinacionesSidebar');
     
     if (!maxInput) {
-      console.error('Input de max combinaciones no encontrado');
+
       return;
     }
     
@@ -135,7 +135,7 @@ const SidebarPanel = {
       // Actualizar motor de combinaciones
       if (typeof MotorCombinaciones !== 'undefined') {
         MotorCombinaciones.setMaxCombinaciones(valor);
-        console.log('Máximo de combinaciones actualizado a:', valor);
+
         
         // Regenerar combinaciones si hay asignaturas seleccionadas
         if (MotorCombinaciones.asignaturasSeleccionadas?.length > 0) {
@@ -161,7 +161,7 @@ const SidebarPanel = {
     });
   },
   
-  // Mostrar botón regenerar
+  // Mostrar botÃ³n regenerar
   mostrarBotonRegenerar() {
     const btn = document.getElementById('btnRegenerarCombinaciones');
     if (btn) {
@@ -169,7 +169,7 @@ const SidebarPanel = {
     }
   },
   
-  // Ocultar botón regenerar
+  // Ocultar botÃ³n regenerar
   ocultarBotonRegenerar() {
     const btn = document.getElementById('btnRegenerarCombinaciones');
     if (btn) {
@@ -179,7 +179,7 @@ const SidebarPanel = {
   
   // Regenerar combinaciones
   regenerarCombinaciones() {
-    console.log('Regenerando combinaciones...');
+
     
     if (typeof MotorCombinaciones !== 'undefined') {
       const resultado = MotorCombinaciones.regenerarCombinaciones();
@@ -189,7 +189,7 @@ const SidebarPanel = {
         this.actualizarMinihorarios();
         this.ocultarBotonRegenerar();
         
-        console.log('Combinaciones regeneradas:', resultado.combinaciones.length);
+
       }
     }
   },
@@ -200,13 +200,13 @@ const SidebarPanel = {
     
     if (!resultsContainer) return;
     
-    // Si query vacía, limpiar resultados
+    // Si query vacÃ­a, limpiar resultados
     if (query.length === 0) {
       resultsContainer.innerHTML = '';
       return;
     }
     
-    // Buscar usando la función existente
+    // Buscar usando la funciÃ³n existente
     let resultados = [];
     if (typeof buscarAsignatura === 'function') {
       resultados = buscarAsignatura(query);
@@ -226,27 +226,27 @@ const SidebarPanel = {
       <div class="sidebar-search-result-item" onclick="SidebarPanel.seleccionarAsignaturaDesdeBusqueda('${asig.id}')">
         <div class="sidebar-search-result-name">${asig.nombre}</div>
         <div class="sidebar-search-result-info">
-          ${asig.totalGrupos} grupo${asig.totalGrupos !== 1 ? 's' : ''} • 
+          ${asig.totalGrupos} grupo${asig.totalGrupos !== 1 ? 's' : ''} â€¢ 
           ${asig.programas.join(', ')}
         </div>
       </div>
     `).join('');
   },
   
-  // Seleccionar asignatura desde búsqueda integrada
+  // Seleccionar asignatura desde bÃºsqueda integrada
   seleccionarAsignaturaDesdeBusqueda(asignaturaId) {
-    console.log('Seleccionando asignatura desde sidebar:', asignaturaId);
+
     
-    // Usar la función existente de selección
+    // Usar la funciÃ³n existente de selecciÃ³n
     if (typeof seleccionarAsignatura === 'function') {
-      // Limpiar búsqueda
+      // Limpiar bÃºsqueda
       const searchInput = document.getElementById('sidebarSearchInput');
       const searchResults = document.getElementById('sidebarSearchResults');
       
       if (searchInput) searchInput.value = '';
       if (searchResults) searchResults.innerHTML = '';
       
-      // Seleccionar asignatura (esto ya actualiza el sidebar automáticamente)
+      // Seleccionar asignatura (esto ya actualiza el sidebar automÃ¡ticamente)
       seleccionarAsignatura(asignaturaId);
     }
   },
@@ -257,22 +257,22 @@ const SidebarPanel = {
     const overlay = document.getElementById('sidebarOverlay');
     
     if (!sidebar || !overlay) {
-      console.error('Elementos del sidebar no encontrados');
+
       return;
     }
     
-    // 1. Aplicamos las clases INMEDIATAMENTE para iniciar la animación fluida
+    // 1. Aplicamos las clases INMEDIATAMENTE para iniciar la animaciÃ³n fluida
     sidebar.classList.add('active');
     overlay.classList.add('active');
     
-    // 2. AISLAMIENTO: Bloqueamos el scroll de la página 400ms DESPUÉS, 
-    // justo cuando el modal terminó de entrar. Esto evita que el navegador cancele la animación.
+    // 2. AISLAMIENTO: Bloqueamos el scroll de la pÃ¡gina 400ms DESPUÃ‰S, 
+    // justo cuando el modal terminÃ³ de entrar. Esto evita que el navegador cancele la animaciÃ³n.
     setTimeout(() => {
         if (this.isOpen) document.body.style.overflow = 'hidden';
     }, 400);
     
     this.isOpen = true;
-    console.log('Sidebar abierto');
+
   },
   
   // Cerrar sidebar
@@ -303,7 +303,7 @@ const SidebarPanel = {
     sidebar.classList.remove('active');
     overlay.classList.remove('active');
     
-    // 2. Devolvemos el scroll 400ms DESPUÉS (cuando el panel ya esté escondido)
+    // 2. Devolvemos el scroll 400ms DESPUÃ‰S (cuando el panel ya estÃ© escondido)
     setTimeout(() => {
       if (!this.isOpen) document.body.style.overflow = '';
     }, 400);
@@ -326,7 +326,7 @@ const SidebarPanel = {
     const counter = document.getElementById('asignaturasCountSidebar');
     
     if (!container) {
-      console.error('Container de asignaturas seleccionadas no encontrado');
+
       return;
     }
     
@@ -375,7 +375,7 @@ const SidebarPanel = {
               onclick="event.stopPropagation(); SidebarPanel.quitarAsignatura(${index})"
               title="Quitar asignatura"
             >
-              ×
+              Ã—
             </button>
           </div>
         </div>
@@ -417,7 +417,7 @@ const SidebarPanel = {
             onclick="SidebarPanel.toggleAsignatura(${index})"
             title="Cerrar filtros"
           >
-            ×
+            Ã—
           </button>
           <h3 class="modal-titulo-asignatura">${asignatura.nombre}</h3>
           ${this.tieneFiltros(asignatura) ? '<span class="badge-filtrado">FILTRADO</span>' : ''}
@@ -438,14 +438,14 @@ const SidebarPanel = {
            (filtros.profesoresPermitidos && filtros.profesoresPermitidos.length > 0);
   },
   
-  // Toggle expansión de asignatura
+  // Toggle expansiÃ³n de asignatura
   toggleAsignatura(index) {
     const asignaturas = MotorCombinaciones.asignaturasSeleccionadas || [];
     if (index < 0 || index >= asignaturas.length) return;
     
     const wasExpanded = asignaturas[index]._expandida;
     
-    // Cerrar todas las demás asignaturas
+    // Cerrar todas las demÃ¡s asignaturas
     asignaturas.forEach(a => a._expandida = false);
     
     // Toggle estado expandida
@@ -466,7 +466,7 @@ const SidebarPanel = {
     // Si no existe el overlay del sidebar, no hacer nada
     // El modal de filtros usa el overlay del sidebar existente
     if (!overlay) {
-      console.warn('Overlay del sidebar no encontrado');
+
       return;
     }
     
@@ -489,13 +489,13 @@ const SidebarPanel = {
     const programasPermitidos = filtros.programasPermitidos || [];
     const profesoresPermitidos = filtros.profesoresPermitidos || [];
     
-    // Obtener todos los grupos únicos
+    // Obtener todos los grupos Ãºnicos
     const todosLosGrupos = asignatura.grupos || [];
     
-    // Obtener programas únicos
+    // Obtener programas Ãºnicos
     const programasUnicos = [...new Set(todosLosGrupos.map(g => g.programa))].filter(Boolean);
     
-    // Obtener profesores únicos
+    // Obtener profesores Ãºnicos
     const profesoresUnicos = [...new Set(todosLosGrupos.map(g => g.profesor))].filter(Boolean);
     
     return `
@@ -582,7 +582,7 @@ const SidebarPanel = {
         </div>
       ` : ''}
       
-      <!-- Botones de acción -->
+      <!-- Botones de acciÃ³n -->
       <div class="filtro-acciones">
         <button class="btn-limpiar-filtros" onclick="SidebarPanel.limpiarFiltros(${index})">
           Limpiar filtros
@@ -594,7 +594,7 @@ const SidebarPanel = {
     `;
   },
   
-  // Toggle grupo específico
+  // Toggle grupo especÃ­fico
   toggleGrupo(index, grupoId) {
     const asignaturas = MotorCombinaciones.asignaturasSeleccionadas || [];
     if (index < 0 || index >= asignaturas.length) return;
@@ -614,7 +614,7 @@ const SidebarPanel = {
       gruposPermitidos.splice(indexGrupo, 1);
     }
     
-    // NO re-renderizar aquí para evitar parpadeo
+    // NO re-renderizar aquÃ­ para evitar parpadeo
     // this.actualizarAsignaturasSeleccionadas();
   },
   
@@ -636,7 +636,7 @@ const SidebarPanel = {
       programasPermitidos.splice(indexPrograma, 1);
     }
     
-    // NO re-renderizar aquí para evitar parpadeo
+    // NO re-renderizar aquÃ­ para evitar parpadeo
     // this.actualizarAsignaturasSeleccionadas();
   },
   
@@ -658,7 +658,7 @@ const SidebarPanel = {
       profesoresPermitidos.splice(indexProfesor, 1);
     }
     
-    // NO re-renderizar aquí para evitar parpadeo
+    // NO re-renderizar aquÃ­ para evitar parpadeo
     // this.actualizarAsignaturasSeleccionadas();
   },
   
@@ -679,14 +679,14 @@ const SidebarPanel = {
   
   // Aplicar filtros y regenerar combinaciones
   aplicarFiltros(index) {
-    console.log('Aplicando filtros para asignatura:', index);
+
     
     // Regenerar combinaciones con los nuevos filtros
     if (typeof generarYMostrarCombinaciones === 'function') {
       generarYMostrarCombinaciones();
     }
     
-    // Cerrar el acordeón después de aplicar
+    // Cerrar el acordeÃ³n despuÃ©s de aplicar
     const asignaturas = MotorCombinaciones.asignaturasSeleccionadas || [];
     if (asignaturas[index]) {
       asignaturas[index]._expandida = false;
@@ -697,17 +697,17 @@ const SidebarPanel = {
   
   // Quitar asignatura
   quitarAsignatura(index) {
-    console.log('Quitando asignatura en índice:', index);
+
     
     // Obtener asignaturas actuales
     const asignaturas = MotorCombinaciones.asignaturasSeleccionadas || [];
     
     if (index < 0 || index >= asignaturas.length) {
-      console.error('Índice inválido:', index);
+
       return;
     }
     
-    // Verificar si la asignatura que se va a eliminar está expandida
+    // Verificar si la asignatura que se va a eliminar estÃ¡ expandida
     const estabaExpandida = asignaturas[index]._expandida;
     
     // Eliminar asignatura
@@ -767,7 +767,7 @@ const SidebarPanel = {
     const container = document.getElementById('minihorariosContainerSidebar');
     
     if (!container) {
-      console.error('Container de minihorarios no encontrado');
+
       return;
     }
     
@@ -801,9 +801,9 @@ const SidebarPanel = {
     this.actualizarContadorCombinaciones();
   },
   
-  // Abrir modal de búsqueda desde sidebar
+  // Abrir modal de bÃºsqueda desde sidebar
   abrirBusqueda() {
-    // Abrir modal de búsqueda (función existente en integracion-busqueda.js)
+    // Abrir modal de bÃºsqueda (funciÃ³n existente en integracion-busqueda.js)
     if (typeof openSearchModal !== 'undefined') {
       openSearchModal();
     } else {
@@ -830,17 +830,17 @@ const SidebarPanel = {
   }
 };
 
-// Inicializar cuando el DOM esté listo
+// Inicializar cuando el DOM estÃ© listo
 document.addEventListener('DOMContentLoaded', () => {
   SidebarPanel.inicializar();
 });
 
-// Función global para cerrar sidebar (usada en onclick)
+// FunciÃ³n global para cerrar sidebar (usada en onclick)
 function cerrarSidebar() {
   SidebarPanel.cerrar();
 }
 
-// Función global para abrir búsqueda desde sidebar
+// FunciÃ³n global para abrir bÃºsqueda desde sidebar
 function abrirBusquedaDesdeSidebar() {
   SidebarPanel.abrirBusqueda();
 }

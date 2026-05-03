@@ -1,30 +1,30 @@
-const SistemaCargaOfertas = {
+﻿const SistemaCargaOfertas = {
   
   ofertas: [],
   indice: null,
   cargado: false,
   
   async inicializar() {
-    console.log('Inicializando sistema de carga de ofertas...');
+
     
     try {
       await this.cargarIndice();
       await this.cargarOfertas();
       
       this.cargado = true;
-      console.log('Sistema de ofertas cargado correctamente');
-      console.log('Total programas:', this.ofertas.length);
+
+
       
       return true;
       
     } catch (error) {
-      console.error('Error inicializando sistema de ofertas:', error);
+
       return false;
     }
   },
   
   async cargarIndice() {
-    console.log('Cargando índice de ofertas...');
+
     
     try {
       const response = await fetch('data/ofertas.json');
@@ -35,35 +35,35 @@ const SistemaCargaOfertas = {
       
       this.indice = await response.json();
       
-      console.log('Índice cargado:');
-      console.log('  Periodo:', this.indice.periodo);
-      console.log('  Programas disponibles:', this.indice.programas.length);
+
+
+
       
       return this.indice;
       
     } catch (error) {
-      console.error('Error cargando índice:', error);
+
       throw error;
     }
   },
   
   async cargarOfertas() {
-    console.log('Cargando ofertas académicas...');
+
     
     const programasActivos = this.indice.programas.filter(p => p.activo !== false);
     
-    console.log('Programas a cargar:', programasActivos.length);
+
     
     for (let i = 0; i < programasActivos.length; i++) {
       const programa = programasActivos[i];
       
-      console.log('Cargando', (i + 1) + '/' + programasActivos.length + ':', programa.nombre);
+
       
       try {
         const response = await fetch(programa.archivo);
         
         if (!response.ok) {
-          console.warn('No se pudo cargar:', programa.archivo);
+
           continue;
         }
         
@@ -77,19 +77,19 @@ const SistemaCargaOfertas = {
           semestres: data.semestres
         });
         
-        console.log('  OK:', data.metadata.totalAsignaturas, 'asignaturas,', data.metadata.totalGrupos, 'grupos');
+
         
       } catch (error) {
-        console.error('  Error cargando', programa.nombre + ':', error.message);
+
       }
     }
     
-    console.log('Ofertas cargadas:', this.ofertas.length, 'programas');
+
   },
   
   buscarAsignatura(query) {
     if (!this.cargado) {
-      console.warn('Sistema no cargado aún');
+
       return [];
     }
     
@@ -209,4 +209,4 @@ const SistemaCargaOfertas = {
 };
 
 window.SistemaCargaOfertas = SistemaCargaOfertas;
-console.log('SistemaCargaOfertas cargado');
+

@@ -1,14 +1,14 @@
-// PARTE 5: CARGAR COMBINACIÓN EN HORARIO PRINCIPAL
-// Agregar este código después de minihorarios-ui.js y antes de app.js
+﻿// PARTE 5: CARGAR COMBINACIÃ“N EN HORARIO PRINCIPAL
+// Agregar este cÃ³digo despuÃ©s de minihorarios-ui.js y antes de app.js
 
 const CargadorCombinaciones = {
   
   cargarCombinacion(combinacion, indice) {
-    console.log('Cargando combinación', indice + 1, 'en horario principal');
-    console.log('Asignaturas:', combinacion.length);
+
+
     
     if (!combinacion || combinacion.length === 0) {
-      alert('Combinación vacía');
+      alert('CombinaciÃ³n vacÃ­a');
       return false;
     }
     
@@ -23,11 +23,11 @@ const CargadorCombinaciones = {
       return false;
     }
     
-    // Convertir combinación a formato de asignaturas del sistema
+    // Convertir combinaciÃ³n a formato de asignaturas del sistema
     const asignaturasConvertidas = this.convertirCombinacion(combinacion);
     
-    console.log('=== ASIGNATURAS CONVERTIDAS ===');
-    console.log('Total:', asignaturasConvertidas.length);
+
+
     asignaturasConvertidas.forEach((a, i) => {
       console.log(`Bloque ${i + 1}:`, {
         name: a.name,
@@ -40,7 +40,7 @@ const CargadorCombinaciones = {
     });
     
     if (asignaturasConvertidas.length === 0) {
-      alert('Error al convertir la combinación');
+      alert('Error al convertir la combinaciÃ³n');
       return false;
     }
     
@@ -51,19 +51,19 @@ const CargadorCombinaciones = {
       const conflictos = this.detectarConflictos(asignaturasConvertidas, bloquesExistentes);
       
       if (conflictos.length > 0) {
-        console.warn('=== CONFLICTOS DETECTADOS ===');
+
         conflictos.forEach(c => console.warn(`${c.nueva} vs ${c.existente} en ${c.dia}`));
         
         let mensaje = 'CONFLICTOS DE HORARIO DETECTADOS\n\n';
-        mensaje += 'Las siguientes asignaturas de la combinación chocan con tu horario actual:\n\n';
+        mensaje += 'Las siguientes asignaturas de la combinaciÃ³n chocan con tu horario actual:\n\n';
         
         conflictos.forEach(c => {
-          mensaje += `• ${c.nueva} (${c.grupoNueva})\n`;
+          mensaje += `â€¢ ${c.nueva} (${c.grupoNueva})\n`;
           mensaje += `  choca con ${c.existente} (${c.grupoExistente})\n`;
-          mensaje += `  Día: ${c.dia}\n\n`;
+          mensaje += `  DÃ­a: ${c.dia}\n\n`;
         });
         
-        mensaje += 'No se puede agregar esta combinación.\n';
+        mensaje += 'No se puede agregar esta combinaciÃ³n.\n';
         mensaje += 'Elimina las asignaturas en conflicto del horario principal primero.';
         
         alert(mensaje);
@@ -75,46 +75,46 @@ const CargadorCombinaciones = {
     let agregadas = 0;
     let errores = 0;
     
-    console.log('=== AGREGANDO BLOQUES AL HORARIO ===');
-    console.log('Horario actual tiene:', schedules[currentScheduleIndex].subjects.length, 'bloques');
+
+
     
     for (const asignatura of asignaturasConvertidas) {
       try {
-        // Agregar ID único si no existe
+        // Agregar ID Ãºnico si no existe
         if (!asignatura.id) {
           asignatura.id = crypto.randomUUID();
         }
         
         schedules[currentScheduleIndex].subjects.push(asignatura);
         agregadas++;
-        console.log(`✓ Agregado bloque ${agregadas}:`, {
+        console.log(`âœ“ Agregado bloque ${agregadas}:`, {
           name: asignatura.name,
           col: asignatura.col,
           row: asignatura.row,
           blocks: asignatura.blocks
         });
       } catch (error) {
-        console.error('Error agregando asignatura:', asignatura.name, error);
+
         errores++;
       }
     }
     
-    console.log('=== RESULTADO ===');
-    console.log('Bloques agregados:', agregadas);
-    console.log('Errores:', errores);
-    console.log('Total bloques en horario:', schedules[currentScheduleIndex].subjects.length);
+
+
+
+
     
-    // Contar asignaturas únicas (no bloques)
+    // Contar asignaturas Ãºnicas (no bloques)
     const asignaturasUnicas = new Set();
     for (const bloque of asignaturasConvertidas) {
       asignaturasUnicas.add(bloque.name);
     }
     const totalAsignaturasUnicas = asignaturasUnicas.size;
     
-    console.log('Asignaturas únicas agregadas:', totalAsignaturasUnicas);
+
     
     if (errores > 0) {
-      console.warn('Hubo errores al agregar');
+
     }
     
     // Guardar y actualizar vista
@@ -130,7 +130,7 @@ const CargadorCombinaciones = {
       updateScheduleInfo();
     }
     
-    // Limpiar selección de asignaturas
+    // Limpiar selecciÃ³n de asignaturas
     MotorCombinaciones.limpiarAsignaturas();
     if (typeof SidebarPanel !== 'undefined') {
       SidebarPanel.actualizarAsignaturasSeleccionadas();
@@ -150,18 +150,18 @@ const CargadorCombinaciones = {
     // Scroll a la parte superior
     window.scrollTo({ top: 0, behavior: 'smooth' });
     
-    alert(`Combinación cargada correctamente\n\n${totalAsignaturasUnicas} asignatura${totalAsignaturasUnicas !== 1 ? 's' : ''} agregada${totalAsignaturasUnicas !== 1 ? 's' : ''} al horario`);
+    alert(`CombinaciÃ³n cargada correctamente\n\n${totalAsignaturasUnicas} asignatura${totalAsignaturasUnicas !== 1 ? 's' : ''} agregada${totalAsignaturasUnicas !== 1 ? 's' : ''} al horario`);
     
     return true;
   },
   
   detectarConflictos(nuevosBloques, bloquesExistentes) {
     const conflictos = [];
-    const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const diasSemana = ['Lunes', 'Martes', 'MiÃ©rcoles', 'Jueves', 'Viernes', 'SÃ¡bado'];
     
     for (const nuevo of nuevosBloques) {
       for (const existente of bloquesExistentes) {
-        // Mismo día y jornada
+        // Mismo dÃ­a y jornada
         if (nuevo.col === existente.col && nuevo.jornada === existente.jornada) {
           // Calcular rangos de filas
           const nuevoInicio = nuevo.row;
@@ -207,7 +207,7 @@ const CargadorCombinaciones = {
   },
   
   unificarHorarios(horarios) {
-    // Agrupar por día
+    // Agrupar por dÃ­a
     const porDia = {};
     
     for (const h of horarios) {
@@ -217,7 +217,7 @@ const CargadorCombinaciones = {
       porDia[h.dia].push(h);
     }
     
-    // Unificar horarios consecutivos del mismo día
+    // Unificar horarios consecutivos del mismo dÃ­a
     const unificados = [];
     
     for (const dia in porDia) {
@@ -241,7 +241,7 @@ const CargadorCombinaciones = {
         }
       }
       
-      unificados.push(actual); // Agregar el último bloque
+      unificados.push(actual); // Agregar el Ãºltimo bloque
     }
     
     return unificados;
@@ -251,22 +251,22 @@ const CargadorCombinaciones = {
     const { asignatura, grupo } = item;
     
     if (!grupo.horarios || grupo.horarios.length === 0) {
-      console.warn('Grupo sin horarios:', grupo.grupo);
+
       return [];
     }
     
-    console.log('=== Convirtiendo asignatura ===');
-    console.log('Nombre:', asignatura.nombre);
-    console.log('Grupo:', grupo.grupo);
-    console.log('Horarios originales:', grupo.horarios.length);
+
+
+
+
     grupo.horarios.forEach(h => console.log(`  ${h.dia}: ${h.inicio}-${h.fin}`));
     
     const color = this.generarColor(asignatura.nombre);
     
-    // PASO 1: Unificar horarios consecutivos del mismo día
+    // PASO 1: Unificar horarios consecutivos del mismo dÃ­a
     const horariosUnificados = this.unificarHorarios(grupo.horarios);
     
-    console.log('Horarios unificados:', horariosUnificados.length);
+
     horariosUnificados.forEach(h => console.log(`  ${h.dia}: ${h.inicio}-${h.fin}`));
     
     const bloques = [];
@@ -280,12 +280,12 @@ const CargadorCombinaciones = {
       const finMin = this.horaAMinutos(horario.fin);
       
       if (inicioMin < 360 || inicioMin > 1320) {
-        console.error('⚠️ Hora fuera de rango:', horario);
+
         continue;
       }
       
       if (finMin <= inicioMin) {
-        console.error('⚠️ Hora fin antes que inicio:', horario);
+
         continue;
       }
       
@@ -296,9 +296,9 @@ const CargadorCombinaciones = {
       const bloqueMin = jornada === 'diurna' ? 50 : 45;
       const numBloques = Math.ceil(duracionMin / bloqueMin);
       
-      console.log(`  Día ${horario.dia} → Column ${column}, Row ${row}, Blocks ${numBloques}`);
+
       
-      // Determinar si mostrar créditos (solo si hay valor válido en JSON)
+      // Determinar si mostrar crÃ©ditos (solo si hay valor vÃ¡lido en JSON)
       const tieneCreditos = asignatura.creditos !== null && 
                            asignatura.creditos !== undefined && 
                            asignatura.creditos > 0;
@@ -311,17 +311,17 @@ const CargadorCombinaciones = {
         professor: grupo.profesor || '',
         location: grupo.ubicacion || '',
         color: color,
-        col: column,  // CAMBIO CRÍTICO: col en lugar de column
+        col: column,  // CAMBIO CRÃTICO: col en lugar de column
         row: row,
         blocks: numBloques,
         jornada: jornada,
-        showCredits: tieneCreditos,  // Solo mostrar si hay créditos válidos
+        showCredits: tieneCreditos,  // Solo mostrar si hay crÃ©ditos vÃ¡lidos
         showGroup: true,
         showProgram: true
       });
     }
     
-    console.log('Total bloques generados:', bloques.length);
+
     
     return bloques;
   },
@@ -346,22 +346,22 @@ const CargadorCombinaciones = {
   },
   
   calcularPosicion(horario) {
-    // IMPORTANTE: app.js usa índices base-0 para columnas
-    // diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
-    // índice 0 = Lunes, índice 1 = Martes, etc.
+    // IMPORTANTE: app.js usa Ã­ndices base-0 para columnas
+    // diasSemana = ["Lunes", "Martes", "MiÃ©rcoles", "Jueves", "Viernes", "SÃ¡bado"]
+    // Ã­ndice 0 = Lunes, Ã­ndice 1 = Martes, etc.
     const diaAColumna = {
-      'L': 0,  // Lunes = índice 0
-      'M': 1,  // Martes = índice 1
-      'W': 2,  // Miércoles = índice 2
-      'J': 3,  // Jueves = índice 3
-      'V': 4,  // Viernes = índice 4
-      'S': 5   // Sábado = índice 5
+      'L': 0,  // Lunes = Ã­ndice 0
+      'M': 1,  // Martes = Ã­ndice 1
+      'W': 2,  // MiÃ©rcoles = Ã­ndice 2
+      'J': 3,  // Jueves = Ã­ndice 3
+      'V': 4,  // Viernes = Ã­ndice 4
+      'S': 5   // SÃ¡bado = Ã­ndice 5
     };
     
     const column = diaAColumna[horario.dia];
     
     if (column === undefined) {
-      console.error('Día no reconocido:', horario.dia);
+
       return { row: 0, column: 0 };
     }
     
@@ -403,13 +403,13 @@ const CargadorCombinaciones = {
   
   horaAMinutos(hora) {
     if (!hora || typeof hora !== 'string') {
-      console.error('Hora inválida:', hora);
+
       return 0;
     }
     
     const partes = hora.split(':');
     if (partes.length !== 2) {
-      console.error('Formato de hora inválido:', hora);
+
       return 0;
     }
     
@@ -417,12 +417,12 @@ const CargadorCombinaciones = {
     const m = parseInt(partes[1], 10);
     
     if (isNaN(h) || isNaN(m)) {
-      console.error('Hora contiene valores no numéricos:', hora);
+
       return 0;
     }
     
     if (h < 0 || h > 23 || m < 0 || m > 59) {
-      console.error('Hora fuera de rango:', hora);
+
       return 0;
     }
     
@@ -431,4 +431,4 @@ const CargadorCombinaciones = {
 };
 
 window.CargadorCombinaciones = CargadorCombinaciones;
-console.log('CargadorCombinaciones cargado');
+

@@ -1,4 +1,4 @@
-const MinihorariosUI = {
+﻿const MinihorariosUI = {
 
   combinacionesActuales: [],
   
@@ -6,14 +6,14 @@ const MinihorariosUI = {
     return `
       <div class="minihorario-card">
         <div class="minihorario-header">
-          <h4>Combinación ${index + 1}</h4>
+          <h4>CombinaciÃ³n ${index + 1}</h4>
           <div class="minihorario-actions">
             <button 
               class="btn-descartar-combinacion" 
               onclick="MinihorariosUI.descartarCombinacion(${index})"
-              title="Descartar y ver otra combinación"
+              title="Descartar y ver otra combinaciÃ³n"
             >
-              ×
+              Ã—
             </button>
             <button 
               class="btn-usar-combinacion" 
@@ -147,7 +147,7 @@ const MinihorariosUI = {
         const bloque = porHora[hora][dia];
         
         if (bloque) {
-          // Buscar información completa del grupo
+          // Buscar informaciÃ³n completa del grupo
           const infoCompleta = this.obtenerInfoCompleta(combinacion, bloque.asignatura, bloque.grupo);
           
           html += `
@@ -201,7 +201,7 @@ const MinihorariosUI = {
     const bloqueMinutos = jornada === 'diurna' ? 50 : 45;
     const inicioJornada = jornada === 'diurna' ? 7 * 60 : 17 * 60 + 30;
     
-    // Calcular cuántos bloques completos caben
+    // Calcular cuÃ¡ntos bloques completos caben
     const duracionTotal = finMin - inicioMin;
     const numBloques = Math.ceil(duracionTotal / bloqueMinutos);
     
@@ -256,7 +256,7 @@ const MinihorariosUI = {
     const minutosFormato = totalHoras % 60;
     
     return `
-      <div class="info-item">${diasUsados.size} días de clase</div>
+      <div class="info-item">${diasUsados.size} dÃ­as de clase</div>
       <div class="info-item">${horasFormato}h ${minutosFormato}m semanales</div>
       <div class="info-item">${jornadas.diurna > jornadas.nocturna ? 'Jornada diurna' : 'Jornada nocturna'}</div>
     `;
@@ -264,7 +264,7 @@ const MinihorariosUI = {
   
   usarCombinacion(index) {
     if (index < 0 || index >= this.combinacionesActuales.length) {
-      return Toast.show('Error: Combinación no encontrada', 'error');
+      return Toast.show('Error: CombinaciÃ³n no encontrada', 'error');
     }
     
     const combinacion = this.combinacionesActuales[index];
@@ -272,18 +272,18 @@ const MinihorariosUI = {
     const aplicarHorarioDirecto = () => {
         try {
             // 1. Vaciamos las materias actuales silenciosamente.
-            // Al vaciarlo, el módulo antiguo "CargadorCombinaciones" asume que 
+            // Al vaciarlo, el mÃ³dulo antiguo "CargadorCombinaciones" asume que 
             // es un horario nuevo y NO dispara su molesto alert() nativo.
             if (schedules[currentScheduleIndex] && schedules[currentScheduleIndex].subjects) {
                 schedules[currentScheduleIndex].subjects = [];
             }
 
-            // 2. Cargamos la nueva combinación
+            // 2. Cargamos la nueva combinaciÃ³n
             if (typeof CargadorCombinaciones !== 'undefined') {
                 CargadorCombinaciones.cargarCombinacion(combinacion, index);
             }
 
-            // 3. Forzamos la actualización inmediata del DOM y la UI
+            // 3. Forzamos la actualizaciÃ³n inmediata del DOM y la UI
             if (typeof saveData === 'function') saveData();
             if (typeof DOMRenderer !== 'undefined') {
                 DOMRenderer.rebuildScheduleView();
@@ -293,10 +293,10 @@ const MinihorariosUI = {
             // 4. Cerramos el panel lateral con estilo
             if (typeof SidebarPanel !== 'undefined') SidebarPanel.cerrar();
             
-            Toast.show('Horario generado con éxito', 'success');
+            Toast.show('Horario generado con Ã©xito', 'success');
 
         } catch (error) {
-            console.error("Error al aplicar:", error);
+
             Toast.show('Hubo un error al aplicar el horario', 'error');
         }
     };
@@ -305,15 +305,15 @@ const MinihorariosUI = {
     const currentSchedule = schedules[currentScheduleIndex];
     if (currentSchedule && currentSchedule.subjects && currentSchedule.subjects.length > 0) {
         // Disparar nuestro nuevo Toast interactivo
-        Toast.confirm("Este horario ya tiene asignaturas. ¿Deseas sobreescribirlo?", aplicarHorarioDirecto);
+        Toast.confirm("Este horario ya tiene asignaturas. Â¿Deseas sobreescribirlo?", aplicarHorarioDirecto);
     } else {
-        // Si está vacío, aplicar inmediatamente sin preguntar
+        // Si estÃ¡ vacÃ­o, aplicar inmediatamente sin preguntar
         aplicarHorarioDirecto();
     }
   },
   
   descartarCombinacion(index) {
-    console.log('Descartando combinación:', index);
+
     
     // Descartar en el motor
     if (typeof MotorCombinaciones !== 'undefined') {
@@ -336,7 +336,7 @@ const MinihorariosUI = {
   },
   
   obtenerInfoCompleta(combinacion, nombreAsignatura, grupo) {
-    // Buscar en la combinación la asignatura y grupo específicos
+    // Buscar en la combinaciÃ³n la asignatura y grupo especÃ­ficos
     for (const item of combinacion) {
       if (item.asignatura.nombre === nombreAsignatura && item.grupo.grupo === grupo) {
         return {
@@ -362,4 +362,4 @@ const MinihorariosUI = {
 };
 
 window.MinihorariosUI = MinihorariosUI;
-console.log('MinihorariosUI cargado');
+

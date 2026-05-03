@@ -1,22 +1,22 @@
-const MotorCombinaciones = {
+﻿const MotorCombinaciones = {
   
   asignaturasSeleccionadas: [],
   maxCombinaciones: 5,
   combinaciones: [],
   todasLasCombinaciones: [],  // Todas las combinaciones generadas
-  combinacionesDescartadas: [],  // Índices de combinaciones descartadas
+  combinacionesDescartadas: [],  // Ãndices de combinaciones descartadas
   
   agregarAsignatura(asignatura) {
     const existe = this.asignaturasSeleccionadas.find(a => a.id === asignatura.id);
     
     if (existe) {
-      console.warn('Asignatura ya está seleccionada:', asignatura.nombre);
+
       return false;
     }
     
     this.asignaturasSeleccionadas.push(asignatura);
-    console.log('Asignatura agregada:', asignatura.nombre);
-    console.log('Total seleccionadas:', this.asignaturasSeleccionadas.length);
+
+
     
     return true;
   },
@@ -25,35 +25,35 @@ const MotorCombinaciones = {
     const index = this.asignaturasSeleccionadas.findIndex(a => a.id === asignaturaId);
     
     if (index === -1) {
-      console.warn('Asignatura no encontrada:', asignaturaId);
+
       return false;
     }
     
     const eliminada = this.asignaturasSeleccionadas.splice(index, 1)[0];
-    console.log('Asignatura eliminada:', eliminada.nombre);
+
     
     return true;
   },
   
   limpiarAsignaturas() {
     this.asignaturasSeleccionadas = [];
-    console.log('Todas las asignaturas eliminadas');
+
   },
   
   setMaxCombinaciones(max) {
     if (max < 1 || max > 10) {
-      console.warn('Máximo de combinaciones debe estar entre 1 y 10');
+
       return false;
     }
     
     this.maxCombinaciones = max;
-    console.log('Máximo de combinaciones:', max);
+
     return true;
   },
   
   generarCombinaciones() {
     if (this.asignaturasSeleccionadas.length === 0) {
-      console.warn('No hay asignaturas seleccionadas');
+
       this.combinaciones = []; // Limpiar combinaciones
       return {
         exito: false,
@@ -62,9 +62,9 @@ const MotorCombinaciones = {
       };
     }
     
-    console.log('Generando combinaciones...');
-    console.log('Asignaturas:', this.asignaturasSeleccionadas.length);
-    console.log('Max combinaciones:', this.maxCombinaciones);
+
+
+
     
     // Aplicar filtros a cada asignatura
     const gruposPorAsignatura = this.asignaturasSeleccionadas.map(asig => {
@@ -77,7 +77,7 @@ const MotorCombinaciones = {
           gruposFiltrados = gruposFiltrados.filter(g => 
             asig.filtros.gruposPermitidos.includes(g.grupo)
           );
-          console.log(`Filtro grupos para ${asig.nombre}:`, asig.filtros.gruposPermitidos);
+
         }
         
         // Filtro por programas permitidos
@@ -85,7 +85,7 @@ const MotorCombinaciones = {
           gruposFiltrados = gruposFiltrados.filter(g => 
             asig.filtros.programasPermitidos.includes(g.programa)
           );
-          console.log(`Filtro programas para ${asig.nombre}:`, asig.filtros.programasPermitidos);
+
         }
         
         // Filtro por profesores permitidos
@@ -93,7 +93,7 @@ const MotorCombinaciones = {
           gruposFiltrados = gruposFiltrados.filter(g => 
             asig.filtros.profesoresPermitidos.includes(g.profesor)
           );
-          console.log(`Filtro profesores para ${asig.nombre}:`, asig.filtros.profesoresPermitidos);
+
         }
       }
       
@@ -115,16 +115,16 @@ const MotorCombinaciones = {
     }
     
     const totalGruposMin = Math.min(...gruposPorAsignatura.map(g => g.grupos.length));
-    console.log('Mínimo de grupos por asignatura:', totalGruposMin);
+
     
     const combinacionesGeneradas = this.generarTodasLasCombinaciones(gruposPorAsignatura);
-    console.log('Combinaciones totales generadas:', combinacionesGeneradas.length);
+
     
     const combinacionesValidas = combinacionesGeneradas.filter(comb => {
       return !this.tieneConflictos(comb);
     });
     
-    console.log('Combinaciones sin conflictos:', combinacionesValidas.length);
+
     
     if (combinacionesValidas.length === 0) {
       this.combinaciones = []; // Limpiar combinaciones
@@ -143,11 +143,11 @@ const MotorCombinaciones = {
     // Reiniciar descartadas al generar nuevas combinaciones
     this.combinacionesDescartadas = [];
     
-    // Mostrar solo las primeras según maxCombinaciones
+    // Mostrar solo las primeras segÃºn maxCombinaciones
     const combinacionesLimitadas = combinacionesOrdenadas.slice(0, this.maxCombinaciones);
     
-    console.log('Combinaciones finales:', combinacionesLimitadas.length);
-    console.log('Total disponibles:', this.todasLasCombinaciones.length);
+
+
     
     // Guardar combinaciones mostradas
     this.combinaciones = combinacionesLimitadas;
@@ -162,14 +162,14 @@ const MotorCombinaciones = {
     };
   },
   
-  // Descartar una combinación específica y obtener una nueva
+  // Descartar una combinaciÃ³n especÃ­fica y obtener una nueva
   descartarCombinacion(index) {
     if (index < 0 || index >= this.combinaciones.length) {
-      console.error('Índice inválido:', index);
+
       return false;
     }
     
-    console.log('Descartando combinación:', index);
+
     
     // Marcar como descartada
     const indexEnTodasLasCombinaciones = this.todasLasCombinaciones.findIndex(
@@ -183,29 +183,29 @@ const MotorCombinaciones = {
     // Eliminar de las mostradas
     this.combinaciones.splice(index, 1);
     
-    // Buscar la siguiente combinación disponible
+    // Buscar la siguiente combinaciÃ³n disponible
     const siguienteCombinacion = this.obtenerSiguienteCombinacion();
     
     if (siguienteCombinacion) {
-      // Agregar la nueva combinación
+      // Agregar la nueva combinaciÃ³n
       this.combinaciones.push(siguienteCombinacion);
-      console.log('Nueva combinación agregada');
+
     } else {
-      console.log('No hay más combinaciones disponibles');
+
     }
     
     return true;
   },
   
-  // Obtener la siguiente combinación no descartada
+  // Obtener la siguiente combinaciÃ³n no descartada
   obtenerSiguienteCombinacion() {
     for (let i = 0; i < this.todasLasCombinaciones.length; i++) {
-      // Saltar si está descartada
+      // Saltar si estÃ¡ descartada
       if (this.combinacionesDescartadas.includes(i)) {
         continue;
       }
       
-      // Saltar si ya está en las mostradas
+      // Saltar si ya estÃ¡ en las mostradas
       const yaEstaMostrada = this.combinaciones.some(
         comb => JSON.stringify(comb) === JSON.stringify(this.todasLasCombinaciones[i])
       );
@@ -220,7 +220,7 @@ const MotorCombinaciones = {
   
   // Regenerar combinaciones (limpiar descartadas)
   regenerarCombinaciones() {
-    console.log('Regenerando combinaciones...');
+
     
     // Limpiar descartadas
     this.combinacionesDescartadas = [];
@@ -228,7 +228,7 @@ const MotorCombinaciones = {
     // Volver a mostrar las primeras N combinaciones
     this.combinaciones = this.todasLasCombinaciones.slice(0, this.maxCombinaciones);
     
-    console.log('Combinaciones regeneradas:', this.combinaciones.length);
+
     
     return {
       exito: true,
@@ -237,7 +237,7 @@ const MotorCombinaciones = {
     };
   },
   
-  // Obtener estadísticas
+  // Obtener estadÃ­sticas
   obtenerEstadisticasCombinaciones() {
     return {
       mostradas: this.combinaciones.length,
@@ -391,4 +391,4 @@ const MotorCombinaciones = {
 };
 
 window.MotorCombinaciones = MotorCombinaciones;
-console.log('Motor de Combinaciones cargado');
+

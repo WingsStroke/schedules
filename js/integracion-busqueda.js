@@ -1,14 +1,14 @@
-"use strict";
+﻿"use strict";
 
-// INTEGRACIÓN DEL SISTEMA DE CARGA DE OFERTAS
+// INTEGRACIÃ“N DEL SISTEMA DE CARGA DE OFERTAS
 
-// 1. VARIABLES GLOBALES Y CACHÉ
+// 1. VARIABLES GLOBALES Y CACHÃ‰
 let ultimosResultadosBusqueda = [];
 
-// CACHÉ DE RENDIMIENTO
+// CACHÃ‰ DE RENDIMIENTO
 const _textCache = new Map();
 
-// FUNCIÓN AUXILIAR PARA NORMALIZAR TEXTO (Optimizada con Memoización)
+// FUNCIÃ“N AUXILIAR PARA NORMALIZAR TEXTO (Optimizada con MemoizaciÃ³n)
 function normalizarTexto(texto) {
   if (!texto) return '';
   if (_textCache.has(texto)) return _textCache.get(texto);
@@ -18,26 +18,26 @@ function normalizarTexto(texto) {
   return normalizado;
 }
 
-// 2. INICIALIZACIÓN
+// 2. INICIALIZACIÃ“N
 window.addEventListener('DOMContentLoaded', async () => {
-  console.log('Iniciando carga de ofertas académicas...');
+
   
   const exito = await SistemaCargaOfertas.inicializar();
   const searchBtn = document.getElementById('searchSubjectBtn');
   
   if (exito) {
-    console.log('Ofertas cargadas correctamente');
+
     if (searchBtn) searchBtn.disabled = false;
   } else {
-    console.error('No se pudieron cargar las ofertas académicas');
+
     if (searchBtn) {
       searchBtn.disabled = true;
-      searchBtn.title = 'Error cargando ofertas académicas';
+      searchBtn.title = 'Error cargando ofertas acadÃ©micas';
     }
   }
 });
 
-// 3. MOTOR DE BÚSQUEDA
+// 3. MOTOR DE BÃšSQUEDA
 function buscarAsignatura(query) {
   if (!SistemaCargaOfertas.cargado) return [];
   
@@ -103,10 +103,10 @@ if (searchModal) {
   });
 }
 
-// 6. EJECUCIÓN DE BÚSQUEDA CON FEEDBACK VISUAL
+// 6. EJECUCIÃ“N DE BÃšSQUEDA CON FEEDBACK VISUAL
 if (searchInput && searchResults) {
   
-  // Creamos la función debounced que se ejecutará 300ms después
+  // Creamos la funciÃ³n debounced que se ejecutarÃ¡ 300ms despuÃ©s
   const realizarBusqueda = debounce((query) => {
     const resultados = buscarAsignatura(query);
     renderizarResultadosBusqueda(resultados);
@@ -126,7 +126,7 @@ if (searchInput && searchResults) {
         <span style="display: inline-block; animation: pulse 1.5s infinite;">Buscando...</span>
       </div>`;
       
-    // Llamamos a la función debounced
+    // Llamamos a la funciÃ³n debounced
     realizarBusqueda(query);
   });
 }
@@ -142,7 +142,7 @@ function renderizarResultadosBusqueda(resultados) {
   
   let html = '';
   for (const asignatura of resultados) {
-    const color = getSubjectColor(asignatura.nombre); // Reutilizamos tu función centralizada
+    const color = getSubjectColor(asignatura.nombre); // Reutilizamos tu funciÃ³n centralizada
     const programasTexto = asignatura.programas.join(', ');
     
     html += `
@@ -191,10 +191,10 @@ function seleccionarAsignatura(asignaturaId) {
     }
   }
   
-  if (!asignatura) return alert('Error: No se encontró la asignatura.');
+  if (!asignatura) return alert('Error: No se encontrÃ³ la asignatura.');
   
   const agregada = MotorCombinaciones.agregarAsignatura(asignatura);
-  if (!agregada) return alert('Esta asignatura ya está seleccionada');
+  if (!agregada) return alert('Esta asignatura ya estÃ¡ seleccionada');
   
   if (searchModal) searchModal.classList.remove('active');
   

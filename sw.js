@@ -7,9 +7,16 @@ const CACHE_NAME = `horarios-udec-${CACHE_VERSION}`;
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  './manifest.json',
+  './changelog.json',
+  // CSS
   './css/styles.css',
   './css/dark-mode.css',
   './css/responsive.css',
+  './css/sidebar-panel.css',
+  './css/filtros-asignaturas.css',
+  './css/minihorarios-styles.css',
+  // JS Core
   './js/core.js',
   './js/storage-db.js',
   './js/state-manager.js',
@@ -17,7 +24,23 @@ const ASSETS_TO_CACHE = [
   './js/dom-renderer.js',
   './js/export-engine.js',
   './js/toast-system.js',
-  './js/app.js'
+  './js/dark-mode.js',
+  './js/app.js',
+  // JS Features (generación de horarios)
+  './js/motor-combinaciones.js',
+  './js/cargador-combinaciones.js',
+  './js/sistema-carga-ofertas.js',
+  './js/sidebar-panel.js',
+  './js/minihorarios-ui.js',
+  './js/integracion-busqueda.js',
+  // Data
+  './data/ofertas.json',
+  './data/2026-1_sistemas.json',
+  './data/2026-1_alimentos.json',
+  './data/2026-1_quimica.json',
+  // Assets
+  './assets/icon-192.png',
+  './assets/icon-512.png'
 ];
 
 // FASE 1: INSTALACIÓN SILENCIOSA
@@ -27,7 +50,7 @@ self.addEventListener('install', (event) => {
   
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log(`[PWA] Preparando nueva versión: ${CACHE_VERSION}`);
+      // Nueva versión siendo cacheada
       // Usamos cache: 'reload' para obligar al navegador a ir al servidor, saltándose la caché HTTP
       return Promise.all(
         ASSETS_TO_CACHE.map(url => {
@@ -50,7 +73,7 @@ self.addEventListener('activate', (event) => {
         cacheNames.map((cacheName) => {
           // Borramos las cachés de versiones anteriores para no saturar el celular
           if (cacheName.startsWith('horarios-udec-') && cacheName !== CACHE_NAME) {
-            console.log('[PWA] Limpiando caché antigua:', cacheName);
+            // Limpiando caché antigua
             return caches.delete(cacheName);
           }
         })
@@ -77,7 +100,7 @@ self.addEventListener('fetch', (event) => {
         })
         .catch(() => {
           // 2. NO hay internet (o el servidor falló): Rescatamos la página desde la caché local.
-          console.log('[PWA] Modo offline activado para:', event.request.url);
+          // Modo offline activado
           return caches.match(event.request);
         })
     );
