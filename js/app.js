@@ -501,26 +501,33 @@ function renderCalendarGrid() {
     dayBtn.textContent = i;
     
     // Aplicar clases de estilos desde calculadora-aguinaldo.js
-    if (isHoliday(date)) dayBtn.classList.add("calendar-day-holiday");
-    else if (isHolyWeek(date)) dayBtn.classList.add("calendar-day-holyweek");
+    // NOTA: isHolyWeek debe ir primero porque isHoliday incluye los días de Semana Santa
+    const isHolyWeekDay = isHolyWeek(date);
+    const isHolidayDay = isHoliday(date);
+    
+    if (isHolyWeekDay) dayBtn.classList.add("calendar-day-holyweek");
+    else if (isHolidayDay) dayBtn.classList.add("calendar-day-holiday");
     
     if (excludedDaysSet.has(dateStr)) {
       dayBtn.classList.add("calendar-day-excluded");
       excludedCount++;
     }
     
-    dayBtn.onclick = () => {
-      if (excludedDaysSet.has(dateStr)) {
-        excludedDaysSet.delete(dateStr);
-        dayBtn.classList.remove("calendar-day-excluded");
-        excludedCount--;
-      } else {
-        excludedDaysSet.add(dateStr);
-        dayBtn.classList.add("calendar-day-excluded");
-        excludedCount++;
-      }
-      countSpan.textContent = excludedCount === 0 ? "Ningún día excluido" : `${excludedCount} día(s) excluido(s)`;
-    };
+    // Solo permitir click en días que NO son festivos ni Semana Santa
+    if (!isHolyWeekDay && !isHolidayDay) {
+      dayBtn.onclick = () => {
+        if (excludedDaysSet.has(dateStr)) {
+          excludedDaysSet.delete(dateStr);
+          dayBtn.classList.remove("calendar-day-excluded");
+          excludedCount--;
+        } else {
+          excludedDaysSet.add(dateStr);
+          dayBtn.classList.add("calendar-day-excluded");
+          excludedCount++;
+        }
+        countSpan.textContent = excludedCount === 0 ? "Ningún día excluido" : `${excludedCount} día(s) excluido(s)`;
+      };
+    }
     grid.appendChild(dayBtn);
   }
   countSpan.textContent = excludedCount === 0 ? "Ningún día excluido" : `${excludedCount} día(s) excluido(s)`;
