@@ -1,7 +1,7 @@
 "use strict";
 
-// Cambia esta versión cuando subas actualizaciones grandes
-const CACHE_VERSION = 'v2.0.0-beta-85';
+// v2.0.0-20260503-c9a95dd5a43c - Generado automáticamente por build.js
+const CACHE_VERSION = 'v2.0.0-20260503-c9a95dd5a43c';
 const CACHE_NAME = `horarios-udec-${CACHE_VERSION}`;
 
 const ASSETS_TO_CACHE = [
@@ -86,22 +86,35 @@ self.addEventListener('activate', (event) => {
 });
 
 // FASE 3: ESTRATEGIA "NETWORK-FIRST" (Red primero, Caché como respaldo)
+// Helper para obtener URL sin query params (para cache matching)
+function getCacheUrl(request) {
+  const url = new URL(request.url);
+  // Remover query params para matching de cache
+  url.search = '';
+  return url.toString();
+}
+
 self.addEventListener('fetch', (event) => {
   // Solo aplicamos esto a nuestros archivos locales
   if (event.request.url.includes(self.location.origin)) {
+    const cacheUrl = getCacheUrl(event.request);
+    
     event.respondWith(
       fetch(event.request)
         .then((response) => {
           // 1. Hay internet: Descargamos la versión más fresca del servidor,
           // la clonamos para guardarla en la caché y se la mostramos al usuario.
           const resClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, resClone));
+          caches.open(CACHE_NAME).then((cache) => {
+            // Guardar sin query params para matching consistente
+            cache.put(cacheUrl, resClone);
+          });
           return response;
         })
         .catch(() => {
           // 2. NO hay internet (o el servidor falló): Rescatamos la página desde la caché local.
           // Modo offline activado
-          return caches.match(event.request);
+          return caches.match(cacheUrl);
         })
     );
   } else {

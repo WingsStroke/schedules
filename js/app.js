@@ -446,11 +446,19 @@ document.getElementById("backToResultBtn").onclick = closeDailyDetailModal;
 // Localiza esto en la sección 7 de app.js y reemplázalo:
 document.getElementById("openCalendarBtn").onclick = () => { 
   renderCalendarGrid(); 
-  document.getElementById("excludeDaysModal").classList.add("active"); 
+  document.getElementById("excludeDaysModal").classList.add("active");
+  // Evitar doble blur: desactivar backdrop-filter del modal subyacente
+  monthlyModal.style.backdropFilter = 'none';
+  monthlyModal.style.webkitBackdropFilter = 'none';
+  monthlyModal.style.background = 'transparent';
 };
 
 document.getElementById("backToAguinaldoBtn").onclick = () => { 
-  document.getElementById("excludeDaysModal").classList.remove("active"); 
+  document.getElementById("excludeDaysModal").classList.remove("active");
+  // Restaurar backdrop-filter del modal subyacente
+  monthlyModal.style.backdropFilter = '';
+  monthlyModal.style.webkitBackdropFilter = '';
+  monthlyModal.style.background = '';
 };
 
 function renderCalendarGrid() {
