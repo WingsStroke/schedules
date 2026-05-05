@@ -438,6 +438,12 @@ th {
   display: flex;
 }
 
+.modal.no-backdrop {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: transparent;
+}
+
 #monthlyDetailModal {
   background: transparent;
 }
@@ -1130,7 +1136,9 @@ button:disabled{
 }
 
 #excludeDaysModal {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 #dailyDetailModal {

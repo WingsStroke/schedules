@@ -447,18 +447,14 @@ document.getElementById("backToResultBtn").onclick = closeDailyDetailModal;
 document.getElementById("openCalendarBtn").onclick = () => { 
   renderCalendarGrid(); 
   document.getElementById("excludeDaysModal").classList.add("active");
-  // Evitar doble blur: desactivar backdrop-filter del modal subyacente
-  monthlyModal.style.backdropFilter = 'none';
-  monthlyModal.style.webkitBackdropFilter = 'none';
-  monthlyModal.style.background = 'transparent';
+  // Suprimir solo el blur del modal subyacente para evitar doble efecto
+  monthlyModal.classList.add("no-backdrop");
 };
 
 document.getElementById("backToAguinaldoBtn").onclick = () => { 
   document.getElementById("excludeDaysModal").classList.remove("active");
-  // Restaurar backdrop-filter del modal subyacente
-  monthlyModal.style.backdropFilter = '';
-  monthlyModal.style.webkitBackdropFilter = '';
-  monthlyModal.style.background = '';
+  // Restaurar blur del modal subyacente
+  monthlyModal.classList.remove("no-backdrop");
 };
 
 function renderCalendarGrid() {
