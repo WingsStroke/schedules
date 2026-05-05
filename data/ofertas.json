@@ -6,7 +6,7 @@
     {
       "id": "sistemas",
       "nombre": "Ingeniería de Sistemas",
-      "archivo": "data/2026-1_sistemas.json",
+      "archivo": "data/sistemas.json",
       "facultad": "Ingeniería",
       "activo": true
     },
