@@ -25,22 +25,22 @@ const ErrorHandler = {
     if (!error) return;
     const errorName = error.name || 'Error';
     const errorMessage = error.message || String(error);
-    let userMessage = 'OcurriÃ³ un error inesperado. Intenta recargar la pÃ¡gina.';
+    let userMessage = 'Ocurrió un error inesperado. Intenta recargar la página.';
     
     if (errorName === 'QuotaExceededError' || errorMessage.includes('quota')) userMessage = 'Almacenamiento lleno. Elimina horarios.';
-    else if (errorName === 'NetworkError' || errorMessage.includes('fetch')) userMessage = 'ðŸ“¡ Error de conexiÃ³n.';
-    else if (errorName === 'SyntaxError' && errorMessage.includes('JSON')) userMessage = 'Archivo corrupto o invÃ¡lido.';
+    else if (errorName === 'NetworkError' || errorMessage.includes('fetch')) userMessage = 'Error de conexión. Verifica tu red.';
+    else if (errorName === 'SyntaxError' && errorMessage.includes('JSON')) userMessage = 'Archivo corrupto o inválido.';
     else if (context) userMessage = `Error en ${context}. ${errorMessage}`;
     
     if (this.config.showUserMessages) alert(userMessage);
   },
-  wrap(fn, context = 'operaciÃ³n') {
+  wrap(fn, context = 'operación') {
     return async (...args) => {
       try { return await fn(...args); } 
       catch (error) { this.logError({ context, message: error.message, error }); this.handleError(error, context); throw error; }
     };
   },
-  async safeExecute(fn, context = 'operaciÃ³n', defaultValue = null) {
+  async safeExecute(fn, context = 'operación', defaultValue = null) {
     try { return await fn(); } 
     catch (error) { this.logError({ context, message: error.message, error }); this.handleError(error, context); return defaultValue; }
   },
@@ -107,7 +107,7 @@ function getSubjectColor(nombre) {
   return SUBJECT_COLORS[Math.abs(hash) % SUBJECT_COLORS.length];
 }
 
-const diasSemana = ["Lunes", "Martes", "MiÃ©rcoles", "Jueves", "Viernes", "SÃ¡bado"];
+const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 function timeToMinutes(time) { const [h, m] = time.split(":").map(Number); return h * 60 + m; }
 function minutesToTime(min) { const h = Math.floor(min / 60); const m = min % 60; return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`; }
 
@@ -127,14 +127,4 @@ function generarBloques(jornada) {
 const bloquesDiurnos = generarBloques("diurna");
 const bloquesNocturnos = generarBloques("nocturna");
 
-// ==========================================
-// SISTEMA PWA
-// ==========================================
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    // Registramos el SW y dejamos que trabaje en silencio
-    navigator.serviceWorker.register('./sw.js')
-      .then(reg => console.log('[PWA] Service Worker registrado.', reg.scope))
-      .catch(err => console.error('[PWA] Error en SW:', err));
-  });
-}
+// El registro del Service Worker se gestiona en index.html

@@ -32,8 +32,8 @@ async function saveData(invalidatePreviewCache = true) {
     
     if (invalidatePreviewCache) {
       const prefix = `${currentScheduleIndex}:`;
-      Object.keys(_previewCache).forEach(k => { 
-        if (k.startsWith(prefix)) delete _previewCache[k]; 
+      Object.keys(window._previewCache).forEach(k => { 
+        if (k.startsWith(prefix)) delete window._previewCache[k]; 
       });
     }
     return success;
@@ -52,7 +52,7 @@ const editorState = {
 };
 
 const renderCache = { renderedSubjects: new Map() };
-const _previewCache = {};
+window._previewCache = window._previewCache || {};
 
 function _previewCacheKey() {
   const d = document.getElementById("exportDiurna").checked ? "1" : "0";

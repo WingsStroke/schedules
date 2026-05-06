@@ -56,10 +56,7 @@ const DOMRenderer = {
         
         cell.onclick = (e) => {
           e.stopPropagation();
-          if (state.isDuplicating()) { 
-            if (typeof placeDuplicatedSubject === 'function') placeDuplicatedSubject(rowIndex, colIndex); 
-            return; 
-          }
+          if (state.isDuplicating()) return;
           openSubjectModal(rowIndex, colIndex);
         };
         

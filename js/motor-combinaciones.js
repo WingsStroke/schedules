@@ -4,7 +4,7 @@
   maxCombinaciones: 5,
   combinaciones: [],
   todasLasCombinaciones: [],  // Todas las combinaciones generadas
-  combinacionesDescartadas: [],  // Ãndices de combinaciones descartadas
+  combinacionesDescartadas: [],  // Índices de combinaciones descartadas
   
   agregarAsignatura(asignatura) {
     const existe = this.asignaturasSeleccionadas.find(a => a.id === asignatura.id);
@@ -143,7 +143,7 @@
     // Reiniciar descartadas al generar nuevas combinaciones
     this.combinacionesDescartadas = [];
     
-    // Mostrar solo las primeras segÃºn maxCombinaciones
+    // Mostrar solo las primeras según maxCombinaciones
     const combinacionesLimitadas = combinacionesOrdenadas.slice(0, this.maxCombinaciones);
     
 
@@ -162,7 +162,7 @@
     };
   },
   
-  // Descartar una combinaciÃ³n especÃ­fica y obtener una nueva
+  // Descartar una combinación específica y obtener una nueva
   descartarCombinacion(index) {
     if (index < 0 || index >= this.combinaciones.length) {
 
@@ -183,11 +183,11 @@
     // Eliminar de las mostradas
     this.combinaciones.splice(index, 1);
     
-    // Buscar la siguiente combinaciÃ³n disponible
+    // Buscar la siguiente combinación disponible
     const siguienteCombinacion = this.obtenerSiguienteCombinacion();
     
     if (siguienteCombinacion) {
-      // Agregar la nueva combinaciÃ³n
+      // Agregar la nueva combinación
       this.combinaciones.push(siguienteCombinacion);
 
     } else {
@@ -197,15 +197,15 @@
     return true;
   },
   
-  // Obtener la siguiente combinaciÃ³n no descartada
+  // Obtener la siguiente combinación no descartada
   obtenerSiguienteCombinacion() {
     for (let i = 0; i < this.todasLasCombinaciones.length; i++) {
-      // Saltar si estÃ¡ descartada
+      // Saltar si está descartada
       if (this.combinacionesDescartadas.includes(i)) {
         continue;
       }
       
-      // Saltar si ya estÃ¡ en las mostradas
+      // Saltar si ya está en las mostradas
       const yaEstaMostrada = this.combinaciones.some(
         comb => JSON.stringify(comb) === JSON.stringify(this.todasLasCombinaciones[i])
       );
@@ -237,7 +237,7 @@
     };
   },
   
-  // Obtener estadÃ­sticas
+  // Obtener estadísticas
   obtenerEstadisticasCombinaciones() {
     return {
       mostradas: this.combinaciones.length,

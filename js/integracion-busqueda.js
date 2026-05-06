@@ -1,14 +1,14 @@
 ﻿"use strict";
 
-// INTEGRACIÃ“N DEL SISTEMA DE CARGA DE OFERTAS
+// INTEGRACIÓN DEL SISTEMA DE CARGA DE OFERTAS
 
-// 1. VARIABLES GLOBALES Y CACHÃ‰
+// 1. VARIABLES GLOBALES Y CACHÉ
 let ultimosResultadosBusqueda = [];
 
-// CACHÃ‰ DE RENDIMIENTO
+// CACHÉ DE RENDIMIENTO
 const _textCache = new Map();
 
-// FUNCIÃ“N AUXILIAR PARA NORMALIZAR TEXTO (Optimizada con MemoizaciÃ³n)
+// FUNCIÓN AUXILIAR PARA NORMALIZAR TEXTO (Optimizada con Memoización)
 function normalizarTexto(texto) {
   if (!texto) return '';
   if (_textCache.has(texto)) return _textCache.get(texto);
@@ -18,7 +18,7 @@ function normalizarTexto(texto) {
   return normalizado;
 }
 
-// 2. INICIALIZACIÃ“N
+// 2. INICIALIZACIÓN
 window.addEventListener('DOMContentLoaded', async () => {
 
   
@@ -32,12 +32,12 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     if (searchBtn) {
       searchBtn.disabled = true;
-      searchBtn.title = 'Error cargando ofertas acadÃ©micas';
+      searchBtn.title = 'Error cargando ofertas académicas';
     }
   }
 });
 
-// 3. MOTOR DE BÃšSQUEDA
+// 3. MOTOR DE BÚSQUEDA
 function buscarAsignatura(query) {
   if (!SistemaCargaOfertas.cargado) return [];
   
@@ -103,10 +103,10 @@ if (searchModal) {
   });
 }
 
-// 6. EJECUCIÃ“N DE BÃšSQUEDA CON FEEDBACK VISUAL
+// 6. EJECUCIÓN DE BÚSQUEDA CON FEEDBACK VISUAL
 if (searchInput && searchResults) {
   
-  // Creamos la funciÃ³n debounced que se ejecutarÃ¡ 300ms despuÃ©s
+  // Creamos la función debounced que se ejecutará 300ms después
   const realizarBusqueda = debounce((query) => {
     const resultados = buscarAsignatura(query);
     renderizarResultadosBusqueda(resultados);
@@ -126,7 +126,7 @@ if (searchInput && searchResults) {
         <span style="display: inline-block; animation: pulse 1.5s infinite;">Buscando...</span>
       </div>`;
       
-    // Llamamos a la funciÃ³n debounced
+    // Llamamos a la función debounced
     realizarBusqueda(query);
   });
 }
@@ -142,7 +142,7 @@ function renderizarResultadosBusqueda(resultados) {
   
   let html = '';
   for (const asignatura of resultados) {
-    const color = getSubjectColor(asignatura.nombre); // Reutilizamos tu funciÃ³n centralizada
+    const color = getSubjectColor(asignatura.nombre); // Reutilizamos tu función centralizada
     const programasTexto = asignatura.programas.join(', ');
     
     html += `

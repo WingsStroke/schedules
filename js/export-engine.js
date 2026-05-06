@@ -6,7 +6,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   
-  // --- EXPORTACI�N A PDF (FORMATO UdeC) ---
+  // --- EXPORTACIÓN A PDF (FORMATO UdeC) ---
   function buildSubjectsScheduleData() {
     if (currentScheduleIndex === null) return [];
     const map = {};
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tbody = document.getElementById("exportPdfPreviewBody");
     tbody.innerHTML = "";
     if (data.length === 0) tbody.innerHTML = `<tr><td colspan="4" class="export-pdf-empty">No hay asignaturas</td></tr>`;
-    else data.forEach(item => { tbody.innerHTML += `<tr><td>${item.name}</td><td>${item.schedule}</td><td style="text-align:center">${item.group || "�"}</td><td>${item.program || "�"}</td></tr>`; });
+    else data.forEach(item => { tbody.innerHTML += `<tr><td>${item.name}</td><td>${item.schedule}</td><td style="text-align:center">${item.group || "-"}</td><td>${item.program || "-"}</td></tr>`; });
     document.getElementById("exportPdfModal").classList.add("active");
   });
 
@@ -38,10 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("exportPdfModal").classList.remove("active");
   });
 
-  // --- EXPORTACI�N A IMAGEN (CANVAS) ---
+  // --- EXPORTACIÓN A IMAGEN (CANVAS) ---
   window._previewCache = window._previewCache || {}; 
 
-  // NUEVO: Funci�n para limpiar la memoria gr�fica
+  // NUEVO: Función para limpiar la memoria gráfica
   function flushPreviewCache() {
     window._previewCache = {};
     const previewImg = document.getElementById("exportImagePreviewImg");
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
       confirmBtn.disabled = false; 
       confirmBtn.dataset.previewUrl = dataUrl;
     } catch (err) { 
-      console.error("[Exportaci�n Error]:", err); 
+      console.error("[Exportación Error]:", err); 
       previewLoading.textContent = "Error al generar la vista previa."; 
     }
   }
@@ -125,10 +125,10 @@ document.addEventListener("DOMContentLoaded", () => {
     link.click();
     
     document.getElementById("exportImageModal").classList.remove("active");
-    flushPreviewCache(); // <-- Liberamos RAM justo despu�s de descargar
+    flushPreviewCache(); // <-- Liberamos RAM justo después de descargar
   };
 
-  // Escuchar el bot�n de "Cerrar (X)" espec�fico del modal de imagen
+  // Escuchar el botón de "Cerrar (X)" específico del modal de imagen
   const closeImageModalBtn = document.querySelector("#exportImageModal .close-btn");
   if (closeImageModalBtn) {
     closeImageModalBtn.addEventListener("click", flushPreviewCache);
@@ -150,12 +150,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const cloneThead = document.createElement("thead");
     const newHeadRow = document.createElement("tr");
-    ["Hora", "Lunes", "Martes", "Mi�rcoles", "Jueves", "Viernes", "S�bado"].forEach((text, i) => {
+    ["Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"].forEach((text, i) => {
       const dayIndex = i - 1;
       if (i === 0 || !hideEmptyCols || activeDays.has(dayIndex)) {
         const th = document.createElement("th");
         th.textContent = text;
-        // INYECCI�N DE FUENTE: 18px en Alta legibilidad, 14px en Normal
+        // INYECCIÓN DE FUENTE: 18px en Alta legibilidad, 14px en Normal
         th.style.cssText = `background: #000; color: #fff; padding: 10px; border: 1px solid #ddd; text-align: center; font-size: ${enhancedExport ? '18px' : '14px'}; font-weight: bold;`;
         newHeadRow.appendChild(th);
       }
@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
               if (headerTd) {
                   headerTd.colSpan = numCols;
                   headerTd.style.position = "static";
-                  // 2. FORZAR TAMA�O EN EL DIVISOR DE JORNADA (Diurna / Nocturna)
+                  // 2. FORZAR TAMAÑO EN EL DIVISOR DE JORNADA (Diurna / Nocturna)
                   headerTd.style.fontSize = enhancedExport ? '16px' : '13px';
                   headerTd.style.padding = '8px';
               }
@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const originalTimeCell = originalRow.querySelector(".time");
       if (originalTimeCell) {
         const timeCell = originalTimeCell.cloneNode(true);
-        // 3. FORZAR TAMA�O EN LAS HORAS LATERALES (6:00, 7:00...)
+        // 3. FORZAR TAMAÑO EN LAS HORAS LATERALES (6:00, 7:00...)
         timeCell.style.cssText = `position: static; background: #f5f5f5; border: 1px solid #ddd; text-align: center; height: ${cellHeight}px; font-size: ${enhancedExport ? '18px' : '14px'}; font-weight: 600; color: #333; box-sizing: border-box;`;
         cloneRow.appendChild(timeCell);
       }
