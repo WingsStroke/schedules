@@ -226,7 +226,7 @@ const SidebarPanel = {
       <div class="sidebar-search-result-item" onclick="SidebarPanel.seleccionarAsignaturaDesdeBusqueda('${asig.id}')">
         <div class="sidebar-search-result-name">${asig.nombre}</div>
         <div class="sidebar-search-result-info">
-          ${asig.totalGrupos} grupo${asig.totalGrupos !== 1 ? 's' : ''} â€¢ 
+          ${asig.totalGrupos} grupo${asig.totalGrupos !== 1 ? 's' : ''} • 
           ${asig.programas.join(', ')}
         </div>
       </div>
@@ -375,7 +375,7 @@ const SidebarPanel = {
               onclick="event.stopPropagation(); SidebarPanel.quitarAsignatura(${index})"
               title="Quitar asignatura"
             >
-              Ã—
+              &#215;
             </button>
           </div>
         </div>
@@ -417,7 +417,7 @@ const SidebarPanel = {
             onclick="SidebarPanel.toggleAsignatura(${index})"
             title="Cerrar filtros"
           >
-            Ã—
+            &#215;
           </button>
           <h3 class="modal-titulo-asignatura">${asignatura.nombre}</h3>
           ${this.tieneFiltros(asignatura) ? '<span class="badge-filtrado">FILTRADO</span>' : ''}

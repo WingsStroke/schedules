@@ -191,10 +191,10 @@ function seleccionarAsignatura(asignaturaId) {
     }
   }
   
-  if (!asignatura) return alert('Error: No se encontrÃ³ la asignatura.');
+  if (!asignatura) return alert('Error: No se encontró la asignatura.');
   
   const agregada = MotorCombinaciones.agregarAsignatura(asignatura);
-  if (!agregada) return alert('Esta asignatura ya estÃ¡ seleccionada');
+  if (!agregada) return alert('Esta asignatura ya está seleccionada');
   
   if (searchModal) searchModal.classList.remove('active');
   

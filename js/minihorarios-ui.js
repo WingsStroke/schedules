@@ -6,14 +6,14 @@
     return `
       <div class="minihorario-card">
         <div class="minihorario-header">
-          <h4>CombinaciÃ³n ${index + 1}</h4>
+          <h4>Combinación ${index + 1}</h4>
           <div class="minihorario-actions">
             <button 
               class="btn-descartar-combinacion" 
               onclick="MinihorariosUI.descartarCombinacion(${index})"
-              title="Descartar y ver otra combinaciÃ³n"
+              title="Descartar y ver otra combinación"
             >
-              Ã—
+              ×
             </button>
             <button 
               class="btn-usar-combinacion" 
@@ -147,7 +147,7 @@
         const bloque = porHora[hora][dia];
         
         if (bloque) {
-          // Buscar informaciÃ³n completa del grupo
+          // Buscar información completa del grupo
           const infoCompleta = this.obtenerInfoCompleta(combinacion, bloque.asignatura, bloque.grupo);
           
           html += `
@@ -201,7 +201,7 @@
     const bloqueMinutos = jornada === 'diurna' ? 50 : 45;
     const inicioJornada = jornada === 'diurna' ? 7 * 60 : 17 * 60 + 30;
     
-    // Calcular cuÃ¡ntos bloques completos caben
+    // Calcular cuántos bloques completos caben
     const duracionTotal = finMin - inicioMin;
     const numBloques = Math.ceil(duracionTotal / bloqueMinutos);
     
@@ -256,7 +256,7 @@
     const minutosFormato = totalHoras % 60;
     
     return `
-      <div class="info-item">${diasUsados.size} dÃ­as de clase</div>
+      <div class="info-item">${diasUsados.size} días de clase</div>
       <div class="info-item">${horasFormato}h ${minutosFormato}m semanales</div>
       <div class="info-item">${jornadas.diurna > jornadas.nocturna ? 'Jornada diurna' : 'Jornada nocturna'}</div>
     `;
@@ -264,7 +264,7 @@
   
   usarCombinacion(index) {
     if (index < 0 || index >= this.combinacionesActuales.length) {
-      return Toast.show('Error: CombinaciÃ³n no encontrada', 'error');
+      return Toast.show('Error: Combinación no encontrada', 'error');
     }
     
     const combinacion = this.combinacionesActuales[index];
@@ -272,18 +272,18 @@
     const aplicarHorarioDirecto = () => {
         try {
             // 1. Vaciamos las materias actuales silenciosamente.
-            // Al vaciarlo, el mÃ³dulo antiguo "CargadorCombinaciones" asume que 
+            // Al vaciarlo, el módulo antiguo "CargadorCombinaciones" asume que 
             // es un horario nuevo y NO dispara su molesto alert() nativo.
             if (schedules[currentScheduleIndex] && schedules[currentScheduleIndex].subjects) {
                 schedules[currentScheduleIndex].subjects = [];
             }
 
-            // 2. Cargamos la nueva combinaciÃ³n
+            // 2. Cargamos la nueva combinación
             if (typeof CargadorCombinaciones !== 'undefined') {
                 CargadorCombinaciones.cargarCombinacion(combinacion, index);
             }
 
-            // 3. Forzamos la actualizaciÃ³n inmediata del DOM y la UI
+            // 3. Forzamos la actualización inmediata del DOM y la UI
             if (typeof saveData === 'function') saveData();
             if (typeof DOMRenderer !== 'undefined') {
                 DOMRenderer.rebuildScheduleView();
@@ -293,7 +293,7 @@
             // 4. Cerramos el panel lateral con estilo
             if (typeof SidebarPanel !== 'undefined') SidebarPanel.cerrar();
             
-            Toast.show('Horario generado con Ã©xito', 'success');
+            Toast.show('Horario generado con éxito', 'success');
 
         } catch (error) {
 
@@ -305,9 +305,9 @@
     const currentSchedule = schedules[currentScheduleIndex];
     if (currentSchedule && currentSchedule.subjects && currentSchedule.subjects.length > 0) {
         // Disparar nuestro nuevo Toast interactivo
-        Toast.confirm("Este horario ya tiene asignaturas. Â¿Deseas sobreescribirlo?", aplicarHorarioDirecto);
+        Toast.confirm("Este horario ya tiene asignaturas. ¿Deseas sobreescribirlo?", aplicarHorarioDirecto);
     } else {
-        // Si estÃ¡ vacÃ­o, aplicar inmediatamente sin preguntar
+        // Si está vacío, aplicar inmediatamente sin preguntar
         aplicarHorarioDirecto();
     }
   },
@@ -336,7 +336,7 @@
   },
   
   obtenerInfoCompleta(combinacion, nombreAsignatura, grupo) {
-    // Buscar en la combinaciÃ³n la asignatura y grupo especÃ­ficos
+    // Buscar en la combinación la asignatura y grupo específicos
     for (const item of combinacion) {
       if (item.asignatura.nombre === nombreAsignatura && item.grupo.grupo === grupo) {
         return {
