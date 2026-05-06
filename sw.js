@@ -100,7 +100,7 @@ self.addEventListener('fetch', (event) => {
     const cacheUrl = getCacheUrl(event.request);
     
     event.respondWith(
-      fetch(event.request)
+      fetch(event.request, { cache: 'no-cache' })
         .then((response) => {
           // 1. Hay internet: Descargamos la versión más fresca del servidor,
           // la clonamos para guardarla en la caché y se la mostramos al usuario.
