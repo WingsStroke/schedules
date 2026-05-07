@@ -381,17 +381,22 @@ document.getElementById("importFileInput").onchange = (e) => {
       if(!Array.isArray(imported)) imported = [imported];
       
       let count = 0;
+      let rechazados = 0;
       imported.forEach(schedule => {
-        if (!validateScheduleSchema(schedule)) {
+        const error = validateScheduleSchema(schedule);
+        if (!error) {
           if (Array.isArray(schedule.subjects)) schedule.subjects = schedule.subjects.map(normalizeSubject);
           const exists = schedules.some(s => s.name === schedule.name && s.created === schedule.created);
           if (!exists) { schedules.push(schedule); count++; }
+        } else {
+          rechazados++;
         }
       });
       
       saveData(); renderSchedules();
       if(currentScheduleIndex !== null) DOMRenderer.rebuildScheduleView();
-      Toast.show(`${count} horario(s) importado(s) correctamente`, "success");
+      if (count > 0) Toast.show(`${count} horario(s) importado(s) correctamente`, "success");
+      if (rechazados > 0) Toast.show(`${rechazados} horario(s) ignorado(s) por formato inválido`, "warning");
     } catch(err) { Toast.show("Error de importación", "error"); }
     document.getElementById("importFileInput").value = "";
   };
@@ -436,7 +441,19 @@ confirmMonthlyBtn.onclick = () => {
 };
 
 function openDailyDetailModal() {
-  document.getElementById("monthlyDetailContent").innerHTML = `<ul>${dailyDetailData.map(d => `<li><strong>${d.dayName}</strong> - Viajes: ${d.trips}</li>`).join("")}</ul>`;
+  const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  document.getElementById("monthlyDetailContent").innerHTML = `<ul>${dailyDetailData.map(d => {
+    const fecha = `${d.date.getDate()} de ${meses[d.date.getMonth()]}`;
+    return `<li>
+      <div class="day-info">
+        <strong>${d.dayName}</strong>
+        <span class="day-date">${fecha}</span>
+      </div>
+      <div class="trip-info">
+        <span class="trip-count">Viajes: ${d.trips}</span>
+      </div>
+    </li>`;
+  }).join("")}</ul>`;
   document.getElementById("dailyDetailModal").classList.add("active");
 }
 function closeDailyDetailModal() { document.getElementById("dailyDetailModal").classList.remove("active"); }

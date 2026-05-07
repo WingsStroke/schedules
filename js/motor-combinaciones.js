@@ -6,12 +6,17 @@
   todasLasCombinaciones: [],  // Todas las combinaciones generadas
   combinacionesDescartadas: [],  // Índices de combinaciones descartadas
   
+  MAX_ASIGNATURAS: 7,
+
   agregarAsignatura(asignatura) {
     const existe = this.asignaturasSeleccionadas.find(a => a.id === asignatura.id);
     
     if (existe) {
-
       return false;
+    }
+
+    if (this.asignaturasSeleccionadas.length >= this.MAX_ASIGNATURAS) {
+      return 'limite';
     }
     
     this.asignaturasSeleccionadas.push(asignatura);

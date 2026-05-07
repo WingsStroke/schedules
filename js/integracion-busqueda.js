@@ -191,10 +191,11 @@ function seleccionarAsignatura(asignaturaId) {
     }
   }
   
-  if (!asignatura) return alert('Error: No se encontró la asignatura.');
+  if (!asignatura) return Toast.show('Error: No se encontró la asignatura.', 'error');
   
   const agregada = MotorCombinaciones.agregarAsignatura(asignatura);
-  if (!agregada) return alert('Esta asignatura ya está seleccionada');
+  if (agregada === 'limite') return Toast.show(`Máximo de ${MotorCombinaciones.MAX_ASIGNATURAS} asignaturas alcanzado`, 'warning');
+  if (!agregada) return Toast.show('Esta asignatura ya está seleccionada', 'warning');
   
   if (searchModal) searchModal.classList.remove('active');
   
