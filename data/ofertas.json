@@ -6,7 +6,7 @@
     {
       "id": "sistemas",
       "nombre": "Ingeniería de Sistemas",
-      "archivo": "data/sistemas.json",
+      "archivo": "data/sistemas_test.json",
       "facultad": "Ingeniería",
       "activo": true
     },
@@ -15,14 +15,14 @@
       "nombre": "Ingeniería de Alimentos",
       "archivo": "data/2026-1_alimentos.json",
       "facultad": "Ingeniería",
-      "activo": true
+      "activo": false
     },
     {
       "id": "quimica",
       "nombre": "Ingeniería Química",
       "archivo": "data/2026-1_quimica.json",
       "facultad": "Ingeniería",
-      "activo": true
+      "activo": false
     }
   ]
 }
