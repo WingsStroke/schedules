@@ -126,6 +126,8 @@
             resultadosMap.set(asigId, {
               id: asigId,
               nombre: asignatura.nombre,
+              creditos: asignatura.creditos ?? null,
+              codigo: asignatura.codigo ?? null,
               totalGrupos: 0,
               totalProgramas: 0,
               programas: [],

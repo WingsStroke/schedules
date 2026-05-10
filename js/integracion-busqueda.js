@@ -178,7 +178,9 @@ function seleccionarAsignatura(asignaturaId) {
         for (const asig of semestre.asignaturas) {
           if (asig.id === asignaturaId) {
             asignatura = {
-              id: asig.id, nombre: asig.nombre, totalGrupos: asig.grupos.length,
+              id: asig.id, nombre: asig.nombre,
+              creditos: asig.creditos ?? null, codigo: asig.codigo ?? null,
+              totalGrupos: asig.grupos.length,
               totalProgramas: 1, programas: [oferta.programaNombre],
               grupos: asig.grupos.map(g => ({ ...g, programa: oferta.programaNombre, programaId: oferta.programaId, semestre: asig.semestre }))
             };
