@@ -415,12 +415,13 @@ function populateMonths(){
 }
 
 document.getElementById("calculateMonthlyBtn").onclick = () => {
-  if (currentScheduleIndex === null) return alert("Abre un horario primero.");
+  if (currentScheduleIndex === null) return Toast.show("Abre un horario primero", "warning");
   monthlyModal.classList.add("active");
   resultadoAguinaldo.style.display = "none";
 };
 
 confirmMonthlyBtn.onclick = () => {
+  if (currentScheduleIndex === null) return Toast.show("Abre un horario primero", "warning");
   const config = { minGapMinutes: Number(gapInput.value)||0, transportCost: Number(transportInput.value)||0, snackCost: Number(snackInput.value)||0, year: Number(yearInput.value), month: Number(monthSelect.value) };
   const subjects = normalizeSubjectsForCalculation(schedules[currentScheduleIndex].subjects);
   const result = calculateMonthlyCost(subjects, config, excludedDaysSet);
@@ -448,6 +449,7 @@ function openDailyDetailModal() {
       <div class="day-info">
         <strong>${d.dayName}</strong>
         <span class="day-date">${fecha}</span>
+        ${d.hasGaps ? '<span class="gap-flag">Ventana horaria</span>' : ''}
       </div>
       <div class="trip-info">
         <span class="trip-count">Viajes: ${d.trips}</span>
@@ -460,7 +462,6 @@ function closeDailyDetailModal() { document.getElementById("dailyDetailModal").c
 
 document.getElementById("backToResultBtn").onclick = closeDailyDetailModal;
 
-// Localiza esto en la sección 7 de app.js y reemplázalo:
 document.getElementById("openCalendarBtn").onclick = () => { 
   renderCalendarGrid(); 
   document.getElementById("excludeDaysModal").classList.add("active");
@@ -572,17 +573,22 @@ async function initChangelog() {
 changelogBtn.addEventListener("click", async () => {
   changelogPanel.classList.add("open");
   if(changelogOverlay) changelogOverlay.classList.add("active");
-  const res = await fetch(`changelog.json?v=${Date.now()}`);
-  const data = await res.json();
-  document.getElementById("changelogContent").innerHTML = data.map(entry => `
-    <div class="changelog-entry">
-      <h3>Versión ${entry.version}</h3>
-      <ul>${entry.changes.map(c => `<li>${c}</li>`).join("")}</ul>
-      <div class="date">Fecha: ${entry.date}</div>
-    </div>
-  `).join("");
-  SafeStorage.setItem(APP_CONFIG.LAST_VERSION_KEY, data[0].version);
-  changelogAlert.style.display = "none";
+  try {
+    const res = await fetch(`changelog.json?v=${Date.now()}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    document.getElementById("changelogContent").innerHTML = data.map(entry => `
+      <div class="changelog-entry">
+        <h3>Versión ${entry.version}</h3>
+        <ul>${entry.changes.map(c => `<li>${c}</li>`).join("")}</ul>
+        <div class="date">Fecha: ${entry.date}</div>
+      </div>
+    `).join("");
+    SafeStorage.setItem(APP_CONFIG.LAST_VERSION_KEY, data[0].version);
+    changelogAlert.style.display = "none";
+  } catch (e) {
+    document.getElementById("changelogContent").innerHTML = `<p style="padding:16px;color:#888;">No se pudo cargar el historial de cambios.</p>`;
+  }
 });
 
 document.getElementById("closeChangelogBtn").onclick = () => { changelogPanel.classList.remove("open"); if(changelogOverlay) changelogOverlay.classList.remove("active"); };

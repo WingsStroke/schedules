@@ -1,7 +1,7 @@
 "use strict";
 
-// v2.0.0-20260503-c9a95dd5a43c - Generado automáticamente por build.js
-const CACHE_VERSION = 'v2.0.0-20260503-c9a95dd5a43c';
+// v2.0.0-20260505-e649893b69ba - Generado automáticamente por build.js
+const CACHE_VERSION = 'v2.0.0-20260505-e649893b69ba';
 const CACHE_NAME = `horarios-udec-${CACHE_VERSION}`;
 
 const ASSETS_TO_CACHE = [

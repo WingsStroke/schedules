@@ -830,10 +830,7 @@ const SidebarPanel = {
   }
 };
 
-// Inicializar cuando el DOM estÃ© listo
-document.addEventListener('DOMContentLoaded', () => {
-  SidebarPanel.inicializar();
-});
+// La inicialización es invocada desde app.js en su DOMContentLoaded
 
 // FunciÃ³n global para cerrar sidebar (usada en onclick)
 function cerrarSidebar() {

@@ -24,7 +24,6 @@ const StorageDB = {
       };
 
       request.onerror = (event) => {
-        console.error("Error al inicializar IndexedDB:", event.target.error);
         reject(event.target.error);
       };
     });
@@ -35,21 +34,19 @@ const StorageDB = {
     const isMigrated = localStorage.getItem("idb_migrated_v1");
     
     if (!isMigrated) {
-      console.info("Iniciando migración automática a IndexedDB...");
       try {
         const oldSchedulesStr = localStorage.getItem("schedules");
         
         if (oldSchedulesStr) {
           const oldSchedulesObj = JSON.parse(oldSchedulesStr);
           await this.setItem("schedules", oldSchedulesObj);
-          console.info("Horarios migrados exitosamente a la nueva base de datos.");
         }
         
         // Marcamos como migrado, pero NO borramos el localStorage 
         // como medida de seguridad por si algo falla en el futuro.
         localStorage.setItem("idb_migrated_v1", "true");
       } catch (error) {
-        console.error("Error durante la migración de datos:", error);
+        ErrorHandler?.handleError(error, "Migración de datos");
       }
     }
   },

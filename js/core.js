@@ -13,7 +13,6 @@ const ErrorHandler = {
       this.handleError(event.reason);
       event.preventDefault();
     });
-    if (this.config.logToConsole) console.log('Debuging inicializado');
   },
   logError(errorInfo) {
     const logEntry = { timestamp: new Date().toISOString(), ...errorInfo };
@@ -32,7 +31,10 @@ const ErrorHandler = {
     else if (errorName === 'SyntaxError' && errorMessage.includes('JSON')) userMessage = 'Archivo corrupto o inválido.';
     else if (context) userMessage = `Error en ${context}. ${errorMessage}`;
     
-    if (this.config.showUserMessages) alert(userMessage);
+    if (this.config.showUserMessages) {
+      if (typeof window.Toast !== 'undefined') window.Toast.show(userMessage, 'error', 5000);
+      else alert(userMessage);
+    }
   },
   wrap(fn, context = 'operación') {
     return async (...args) => {

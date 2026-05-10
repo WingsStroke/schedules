@@ -54,13 +54,6 @@ const editorState = {
 const renderCache = { renderedSubjects: new Map() };
 window._previewCache = window._previewCache || {};
 
-function _previewCacheKey() {
-  const d = document.getElementById("exportDiurna").checked ? "1" : "0";
-  const n = document.getElementById("exportNocturna").checked ? "1" : "0";
-  const e = document.getElementById("exportEnhanced").checked ? "1" : "0";
-  const h = document.getElementById("exportHideEmpty").checked ? "1" : "0";
-  return `${currentScheduleIndex ?? "null"}:${d}:${n}:${e}:${h}`;
-}
 
 const state = {
   resetEditor() { editorState.editingSubjectIndex = null; editorState.currentCell = null; editorState.ghostSubject = null; },
