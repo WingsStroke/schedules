@@ -449,7 +449,7 @@ function openDailyDetailModal() {
       <div class="day-info">
         <strong>${d.dayName}</strong>
         <span class="day-date">${fecha}</span>
-        ${d.hasGaps ? '<span class="gap-flag">Ventana horaria</span>' : ''}
+        ${d.hasGaps ? '<span class="gap-flag">Hueco</span>' : ''}
       </div>
       <div class="trip-info">
         <span class="trip-count">Viajes: ${d.trips}</span>

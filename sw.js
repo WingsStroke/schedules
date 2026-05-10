@@ -26,6 +26,7 @@ const ASSETS_TO_CACHE = [
   './js/toast-system.js',
   './js/dark-mode.js',
   './js/app.js',
+  './js/version.js',
   // JS Features (generación de horarios)
   './js/motor-combinaciones.js',
   './js/cargador-combinaciones.js',
@@ -52,7 +53,7 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME).then((cache) => {
       // Nueva versión siendo cacheada
       // Usamos cache: 'reload' para obligar al navegador a ir al servidor, saltándose la caché HTTP
-      return Promise.all(
+      return Promise.allSettled(
         ASSETS_TO_CACHE.map(url => {
           return fetch(new Request(url, { cache: 'reload' }))
             .then(response => {
