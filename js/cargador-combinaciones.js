@@ -201,6 +201,8 @@ const CargadorCombinaciones = {
   convertirAsignatura(item) {
     const { asignatura, grupo } = item;
     
+    console.log('[DEBUG cargador] asignatura recibida:', JSON.stringify({ id: asignatura.id, nombre: asignatura.nombre, creditos: asignatura.creditos, codigo: asignatura.codigo }));
+
     if (!grupo.horarios || grupo.horarios.length === 0) {
 
       return [];
@@ -249,6 +251,7 @@ const CargadorCombinaciones = {
       const codigoAsignatura = (asignatura.codigo && asignatura.codigo !== 'NULL')
         ? asignatura.codigo : '';
       
+      console.log('[DEBUG cargador] bloque generado:', JSON.stringify({ name: asignatura.nombre, credits: tieneCreditos ? asignatura.creditos : 0, code: codigoAsignatura, showCredits: tieneCreditos }));
       bloques.push({
         name: asignatura.nombre,
         code: codigoAsignatura,

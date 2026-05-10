@@ -123,6 +123,7 @@
           const asigId = asignatura.id;
           
           if (!resultadosMap.has(asigId)) {
+            console.log('[DEBUG ofertas] registrando:', asigId, 'creditos=', asignatura.creditos, 'codigo=', asignatura.codigo);
             resultadosMap.set(asigId, {
               id: asigId,
               nombre: asignatura.nombre,
