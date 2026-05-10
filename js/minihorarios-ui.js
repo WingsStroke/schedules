@@ -195,8 +195,11 @@
     const bloques = [];
     const jornada = horario.jornada || 'diurna';
     
-    const inicioMin = this.horaAMinutos(horario.inicio);
-    const finMin = this.horaAMinutos(horario.fin);
+    const inicioNorm = this.normalizeHora(horario.inicio, jornada);
+    const finNorm    = this.normalizeHora(horario.fin,    jornada);
+    const inicioMin = this.horaAMinutos(inicioNorm);
+    const finMin    = this.horaAMinutos(finNorm);
+    if (inicioMin <= 0 || finMin <= inicioMin) return bloques;
     
     const bloqueMinutos = jornada === 'diurna' ? 50 : 45;
     const inicioJornada = jornada === 'diurna' ? 7 * 60 : 17 * 60 + 30;
@@ -212,7 +215,7 @@
       bloques.push({
         dia: horario.dia,
         horaInicio: this.minutosAHora(bloqueInicio),
-        horaFin: this.minutosAHora(bloqueFin),
+        horaFin:    this.minutosAHora(bloqueFin),
         jornada: jornada
       });
     }
@@ -244,11 +247,13 @@
     
     for (const item of combinacion) {
       for (const horario of item.grupo.horarios) {
+        const jornada = horario.jornada || 'diurna';
         diasUsados.add(horario.dia);
-        jornadas[horario.jornada]++;
-        
-        const minutos = this.horaAMinutos(horario.fin) - this.horaAMinutos(horario.inicio);
-        totalHoras += minutos;
+        jornadas[jornada]++;
+        const inicioNorm = this.normalizeHora(horario.inicio, jornada);
+        const finNorm    = this.normalizeHora(horario.fin,    jornada);
+        const minutos = this.horaAMinutos(finNorm) - this.horaAMinutos(inicioNorm);
+        if (minutos > 0) totalHoras += minutos;
       }
     }
     
@@ -352,8 +357,25 @@
   },
   
   horaAMinutos(hora) {
+    if (!hora || typeof hora !== 'string') return 0;
     const partes = hora.split(':');
-    return parseInt(partes[0]) * 60 + parseInt(partes[1]);
+    if (partes.length !== 2) return 0;
+    const h = parseInt(partes[0], 10);
+    const m = parseInt(partes[1], 10);
+    if (isNaN(h) || isNaN(m)) return 0;
+    return h * 60 + m;
+  },
+
+  normalizeHora(hora, jornada) {
+    if (!hora || typeof hora !== 'string') return hora;
+    const partes = hora.split(':');
+    if (partes.length !== 2) return hora;
+    let h = parseInt(partes[0], 10);
+    const m = partes[1];
+    if (isNaN(h)) return hora;
+    if (jornada === 'diurna'   && h >= 1 && h < 7)  h += 12;
+    else if (jornada === 'nocturna' && h >= 1 && h < 5)  h += 12;
+    return `${String(h).padStart(2, '0')}:${m}`;
   },
   
   limpiar() {
