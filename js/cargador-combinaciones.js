@@ -245,20 +245,24 @@ const CargadorCombinaciones = {
       const tieneCreditos = asignatura.creditos !== null && 
                            asignatura.creditos !== undefined && 
                            asignatura.creditos > 0;
+
+      const codigoAsignatura = (asignatura.codigo && asignatura.codigo !== 'NULL')
+        ? asignatura.codigo : '';
       
       bloques.push({
         name: asignatura.nombre,
+        code: codigoAsignatura,
         credits: tieneCreditos ? asignatura.creditos : 0,
         group: grupo.grupo,
-        program: grupo.programa || asignatura.programas[0] || '',
+        program: grupo.programa || (asignatura.programas && asignatura.programas[0]) || '',
         professor: grupo.profesor || '',
         location: grupo.ubicacion || '',
         color: color,
-        col: column,  // CAMBIO CRÍTICO: col en lugar de column
+        col: column,
         row: row,
         blocks: numBloques,
         jornada: jornada,
-        showCredits: tieneCreditos,  // Solo mostrar si hay créditos válidos
+        showCredits: tieneCreditos,
         showGroup: true,
         showProgram: true
       });

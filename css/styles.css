@@ -559,7 +559,7 @@ th {
 }
 
 #subjectModal .modal-content {
-  width: 480px;
+  width: 560px;
   max-width: 95vw;
   max-height: none;
   overflow-y: visible;
@@ -573,10 +573,10 @@ th {
   margin-top: 16px;
 }
 
-/* Fila de tres campos: Grupo | Aula | Créditos */
-.subject-row-triple {
+/* Fila de cuatro campos: Grupo | Código | Aula | Créd. */
+.subject-row-quad {
   display: grid;
-  grid-template-columns: 1fr 1fr 96px;
+  grid-template-columns: 1fr 1fr 1fr 72px;
   gap: 10px;
   margin-top: 16px;
 }

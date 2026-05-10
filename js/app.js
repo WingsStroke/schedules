@@ -13,6 +13,7 @@ const subjectModal = document.getElementById("subjectModal");
 // Selectores de Asignatura
 const subjectNameInput = subjectModal.querySelector("input[type='text']");
 const subjectGroupInput = document.getElementById("subjectGroupInput");
+const subjectCodeInput = document.getElementById("subjectCodeInput");
 const subjectProgramInput = document.getElementById("subjectProgramInput");
 const subjectAulaInput = document.getElementById("subjectAulaInput");
 const subjectCreditsInput = document.getElementById("subjectCreditsInput");
@@ -190,6 +191,7 @@ function openSubjectModal(row, col) {
   
   subjectNameInput.value = "";
   if(subjectGroupInput) subjectGroupInput.value = "";
+  if(subjectCodeInput) subjectCodeInput.value = "";
   if(subjectProgramInput) subjectProgramInput.value = "";
   if(subjectAulaInput) subjectAulaInput.value = "";
   if(subjectCreditsInput) subjectCreditsInput.value = "";
@@ -218,6 +220,7 @@ function openEditSubjectModal(subject) {
   
   subjectNameInput.value = subject.name;
   if(subjectGroupInput) subjectGroupInput.value = subject.group || "";
+  if(subjectCodeInput) subjectCodeInput.value = subject.code || "";
   if(subjectProgramInput) subjectProgramInput.value = subject.program || "";
   if(subjectAulaInput) subjectAulaInput.value = subject.aula || "";
   if(subjectCreditsInput) subjectCreditsInput.value = subject.credits || "";
@@ -286,6 +289,7 @@ saveSubjectBtn.onclick = () => {
     blocks, jornada: targetCell.jornada,
     // Sanitizamos el resto de campos secundarios
     group: escapeHTML(subjectGroupInput ? subjectGroupInput.value.trim() : ""),
+    code: escapeHTML(subjectCodeInput ? subjectCodeInput.value.trim() : ""),
     program: escapeHTML(subjectProgramInput ? subjectProgramInput.value.trim() : ""),
     aula: escapeHTML(subjectAulaInput ? subjectAulaInput.value.trim() : ""),
     credits: subjectCreditsInput && subjectCreditsInput.value ? parseInt(subjectCreditsInput.value) : 0,
