@@ -123,12 +123,9 @@
           const asigId = asignatura.id;
           
           if (!resultadosMap.has(asigId)) {
-            console.log('[DEBUG ofertas] registrando:', asigId, 'creditos=', asignatura.creditos, 'codigo=', asignatura.codigo);
             resultadosMap.set(asigId, {
               id: asigId,
               nombre: asignatura.nombre,
-              creditos: asignatura.creditos ?? null,
-              codigo: asignatura.codigo ?? null,
               totalGrupos: 0,
               totalProgramas: 0,
               programas: [],
@@ -153,7 +150,9 @@
               profesor: grupo.profesor,
               ubicacion: grupo.ubicacion,
               cupos: grupo.cupos,
-              horarios: grupo.horarios
+              horarios: grupo.horarios,
+              creditos: asignatura.creditos ?? null,
+              codigo: asignatura.codigo ?? null
             });
             
             resultado.totalGrupos++;

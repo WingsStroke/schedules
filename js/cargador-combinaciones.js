@@ -201,8 +201,6 @@ const CargadorCombinaciones = {
   convertirAsignatura(item) {
     const { asignatura, grupo } = item;
     
-    console.log('[DEBUG cargador] asignatura recibida:', JSON.stringify({ id: asignatura.id, nombre: asignatura.nombre, creditos: asignatura.creditos, codigo: asignatura.codigo }));
-
     if (!grupo.horarios || grupo.horarios.length === 0) {
 
       return [];
@@ -243,19 +241,19 @@ const CargadorCombinaciones = {
       const bloqueMin = jornada === 'diurna' ? 50 : 45;
       const numBloques = Math.ceil(duracionMin / bloqueMin);
       
-      // Determinar si mostrar créditos (solo si hay valor válido en JSON)
-      const tieneCreditos = asignatura.creditos !== null && 
-                           asignatura.creditos !== undefined && 
-                           asignatura.creditos > 0;
+      // Determinar si mostrar créditos (solo si hay valor válido en JSON, leído desde grupo)
+      const creditosGrupo = grupo.creditos;
+      const tieneCreditos = creditosGrupo !== null && 
+                           creditosGrupo !== undefined && 
+                           creditosGrupo > 0;
 
-      const codigoAsignatura = (asignatura.codigo && asignatura.codigo !== 'NULL')
-        ? asignatura.codigo : '';
+      const codigoAsignatura = (grupo.codigo && grupo.codigo !== 'NULL')
+        ? grupo.codigo : '';
       
-      console.log('[DEBUG cargador] bloque generado:', JSON.stringify({ name: asignatura.nombre, credits: tieneCreditos ? asignatura.creditos : 0, code: codigoAsignatura, showCredits: tieneCreditos }));
       bloques.push({
         name: asignatura.nombre,
         code: codigoAsignatura,
-        credits: tieneCreditos ? asignatura.creditos : 0,
+        credits: tieneCreditos ? creditosGrupo : 0,
         group: grupo.grupo,
         program: grupo.programa || (asignatura.programas && asignatura.programas[0]) || '',
         professor: grupo.profesor || '',

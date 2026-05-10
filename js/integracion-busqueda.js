@@ -179,10 +179,9 @@ function seleccionarAsignatura(asignaturaId) {
           if (asig.id === asignaturaId) {
             asignatura = {
               id: asig.id, nombre: asig.nombre,
-              creditos: asig.creditos ?? null, codigo: asig.codigo ?? null,
               totalGrupos: asig.grupos.length,
               totalProgramas: 1, programas: [oferta.programaNombre],
-              grupos: asig.grupos.map(g => ({ ...g, programa: oferta.programaNombre, programaId: oferta.programaId, semestre: asig.semestre }))
+              grupos: asig.grupos.map(g => ({ ...g, programa: oferta.programaNombre, programaId: oferta.programaId, semestre: asig.semestre, creditos: asig.creditos ?? null, codigo: asig.codigo ?? null }))
             };
             break;
           }
