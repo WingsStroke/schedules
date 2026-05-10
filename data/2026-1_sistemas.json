@@ -15,6 +15,7 @@
         {
           "id": "calculo_diferencial",
           "nombre": "Cálculo Diferencial",
+          "codigo": "CFBD002",
           "creditos": 3,
           "semestre": 1,
           "grupos": [
@@ -89,6 +90,7 @@
         {
           "id": "catedra_institucional",
           "nombre": "Cátedra Institucional",
+          "codigo": "FN23002",
           "creditos": 2,
           "semestre": 1,
           "grupos": [
@@ -124,6 +126,7 @@
         {
           "id": "algoritmos_y_programacion",
           "nombre": "Algoritmos y Programacion",
+          "codigo": "CFP2202",
           "creditos": 3,
           "semestre": 1,
           "grupos": [
@@ -231,6 +234,7 @@
         {
           "id": "fundamentos_de_matematica",
           "nombre": "Fundamentos de Matemática",
+          "codigo": "CFBD001",
           "creditos": 2,
           "semestre": 1,
           "grupos": [
@@ -293,6 +297,7 @@
         {
           "id": "produccion_y_comprension_textual_i",
           "nombre": "Producción y Comprensión Textual I",
+          "codigo": "FN23001",
           "creditos": 2,
           "semestre": 1,
           "grupos": [
@@ -322,6 +327,7 @@
         {
           "id": "ingles_i",
           "nombre": "Ingles I",
+          "codigo": "FN23003",
           "creditos": 2,
           "semestre": 1,
           "grupos": [
@@ -396,6 +402,7 @@
         {
           "id": "introduccion_a_la_ingenieria_de_sistemas",
           "nombre": "Introducción a la Ingenieria de Sistemas",
+          "codigo": "CFP2201",
           "creditos": 2,
           "semestre": 1,
           "grupos": [
@@ -436,6 +443,7 @@
         {
           "id": "fisica_mecanica_y_laboratorio",
           "nombre": "Física Mecanica y Laboratorio",
+          "codigo": "CFBD223",
           "creditos": 4,
           "semestre": 2,
           "grupos": [
@@ -507,6 +515,7 @@
         {
           "id": "algebra_lineal",
           "nombre": "Álgebra Lineal",
+          "codigo": "CFBD222",
           "creditos": 3,
           "semestre": 2,
           "grupos": [
@@ -581,6 +590,7 @@
         {
           "id": "produccion_y_comprension_textual_ii",
           "nombre": "Producción y Comprensión Textual II",
+          "codigo": "FN23004",
           "creditos": 2,
           "semestre": 2,
           "grupos": [
@@ -610,6 +620,7 @@
         {
           "id": "calculo_integral",
           "nombre": "Cálculo Integral",
+          "codigo": "CFBD221",
           "creditos": 3,
           "semestre": 2,
           "grupos": [
@@ -684,6 +695,7 @@
         {
           "id": "programacion_basica",
           "nombre": "Programación Basica",
+          "codigo": "CFP2203",
           "creditos": 3,
           "semestre": 2,
           "grupos": [
@@ -791,6 +803,7 @@
         {
           "id": "electiva_fisica_mecanica_teoria",
           "nombre": "Física Mecánica Teoría",
+          "codigo": null,
           "creditos": null,
           "semestre": 2,
           "grupos": [
@@ -832,6 +845,7 @@
         {
           "id": "ingles_ii",
           "nombre": "Ingles II",
+          "codigo": "FN23005",
           "creditos": 2,
           "semestre": 2,
           "grupos": [
@@ -878,6 +892,7 @@
         {
           "id": "programacion_orientada_a_objetos",
           "nombre": "Programación Orientada a Objetos",
+          "codigo": "CFP2204",
           "creditos": 3,
           "semestre": 3,
           "grupos": [
@@ -952,6 +967,7 @@
         {
           "id": "teoria_general_de_sistemas",
           "nombre": "Teoria General de Sistemas",
+          "codigo": "CFP2205",
           "creditos": 3,
           "semestre": 3,
           "grupos": [
@@ -1026,6 +1042,7 @@
         {
           "id": "probabilidad_y_estadistica",
           "nombre": "Probabilidad y Estadistica",
+          "codigo": "CFBD227",
           "creditos": 2,
           "semestre": 3,
           "grupos": [
@@ -1061,6 +1078,7 @@
         {
           "id": "electromagnetismo_y_laboratorio",
           "nombre": "Electromagnetismo y Laboratorio",
+          "codigo": "CFBD226",
           "creditos": 3,
           "semestre": 3,
           "grupos": [
@@ -1132,6 +1150,7 @@
         {
           "id": "electiva_electromagnetismo",
           "nombre": "Electromagnetismo",
+          "codigo": null,
           "creditos": null,
           "semestre": 3,
           "grupos": [
@@ -1167,6 +1186,7 @@
         {
           "id": "ingles_iii",
           "nombre": "Ingles III",
+          "codigo": "FN23006",
           "creditos": 2,
           "semestre": 3,
           "grupos": [
@@ -1208,6 +1228,7 @@
         {
           "id": "calculo_vectorial",
           "nombre": "Cálculo Vectorial",
+          "codigo": "CFBD224",
           "creditos": 3,
           "semestre": 3,
           "grupos": [
@@ -1249,6 +1270,7 @@
         {
           "id": "matematicas_discretas",
           "nombre": "Matemáticas Discretas",
+          "codigo": "CFBD225",
           "creditos": 3,
           "semestre": 3,
           "grupos": [
@@ -1295,6 +1317,7 @@
         {
           "id": "bases_de_datos",
           "nombre": "Bases de Datos",
+          "codigo": "CFP2207",
           "creditos": 3,
           "semestre": 4,
           "grupos": [
@@ -1369,6 +1392,7 @@
         {
           "id": "electiva_laboratorio_de_fisica_moderna",
           "nombre": "Laboratorio de Física Moderna",
+          "codigo": null,
           "creditos": null,
           "semestre": 4,
           "grupos": [
@@ -1398,6 +1422,7 @@
         {
           "id": "electronica",
           "nombre": "Electrónica",
+          "codigo": "CFP2206",
           "creditos": 3,
           "semestre": 4,
           "grupos": [
@@ -1484,6 +1509,7 @@
         {
           "id": "estructura_de_datos",
           "nombre": "Estructura de Datos",
+          "codigo": "CFP2208",
           "creditos": 3,
           "semestre": 4,
           "grupos": [
@@ -1558,6 +1584,7 @@
         {
           "id": "fisica_mecanica_y_laboratorio",
           "nombre": "Física Mecanica y Laboratorio",
+          "codigo": "CFBD223",
           "creditos": 4,
           "semestre": 4,
           "grupos": [
@@ -1587,6 +1614,7 @@
         {
           "id": "administracion",
           "nombre": "Administracion",
+          "codigo": "CFP2209",
           "creditos": 2,
           "semestre": 4,
           "grupos": [
@@ -1622,6 +1650,7 @@
         {
           "id": "electiva_fisica_de_ondas_de_calor_teori",
           "nombre": "Física de Ondas de Calor Teoría",
+          "codigo": null,
           "creditos": null,
           "semestre": 4,
           "grupos": [
@@ -1657,6 +1686,7 @@
         {
           "id": "ingles_iv",
           "nombre": "Ingles IV",
+          "codigo": "FN23007",
           "creditos": 2,
           "semestre": 4,
           "grupos": [
@@ -1698,6 +1728,7 @@
         {
           "id": "ecuaciones_diferenciales",
           "nombre": "Ecuaciones Diferenciales",
+          "codigo": "CFBD228",
           "creditos": 3,
           "semestre": 4,
           "grupos": [
@@ -1744,6 +1775,7 @@
         {
           "id": "ingenieria_de_servicios_de_internet",
           "nombre": "Ingeniería de Servicios de Internet",
+          "codigo": "CFP2212",
           "creditos": 3,
           "semestre": 5,
           "grupos": [
@@ -1818,6 +1850,7 @@
         {
           "id": "sistemas_operativos",
           "nombre": "Sistemas Operativos",
+          "codigo": "CFP2215",
           "creditos": 3,
           "semestre": 5,
           "grupos": [
@@ -1892,6 +1925,7 @@
         {
           "id": "contabilidad_y_costos",
           "nombre": "Contabilidad y Costos",
+          "codigo": "CFP2214",
           "creditos": 2,
           "semestre": 5,
           "grupos": [
@@ -1927,6 +1961,7 @@
         {
           "id": "sistemas_digitales",
           "nombre": "Sistemas Digitales",
+          "codigo": "CFP2211",
           "creditos": 3,
           "semestre": 5,
           "grupos": [
@@ -2001,6 +2036,7 @@
         {
           "id": "metodologia_de_la_investigacion",
           "nombre": "Metodologia de la Investigacion",
+          "codigo": "CFBD239",
           "creditos": 2,
           "semestre": 5,
           "grupos": [
@@ -2036,6 +2072,7 @@
         {
           "id": "investigacion_de_operaciones",
           "nombre": "Investigacion de Operaciones",
+          "codigo": "CFP2213",
           "creditos": 2,
           "semestre": 5,
           "grupos": [
@@ -2071,6 +2108,7 @@
         {
           "id": "sistemas_dinamicos",
           "nombre": "Sistemas Dinámicos",
+          "codigo": "CFP2210",
           "creditos": 3,
           "semestre": 5,
           "grupos": [
@@ -2117,6 +2155,7 @@
         {
           "id": "comercio_electronico",
           "nombre": "Comercio Electronico",
+          "codigo": "CFP2220",
           "creditos": 3,
           "semestre": 6,
           "grupos": [
@@ -2191,6 +2230,7 @@
         {
           "id": "teoria_automatas_y_lenguajes_formales",
           "nombre": "Teoria Automatas y Lenguajes Formales",
+          "codigo": "CFP2218",
           "creditos": 3,
           "semestre": 6,
           "grupos": [
@@ -2265,6 +2305,7 @@
         {
           "id": "ingenieria_de_software",
           "nombre": "Ingeniería de Software",
+          "codigo": "CFP2219",
           "creditos": 3,
           "semestre": 6,
           "grupos": [
@@ -2339,6 +2380,7 @@
         {
           "id": "ingenieria_economica",
           "nombre": "Ingenieria Economica",
+          "codigo": "CFP2221",
           "creditos": 2,
           "semestre": 6,
           "grupos": [
@@ -2374,6 +2416,7 @@
         {
           "id": "organizacion_de_computadores",
           "nombre": "Organización de Computadores",
+          "codigo": "CFP2216",
           "creditos": 3,
           "semestre": 6,
           "grupos": [
@@ -2448,6 +2491,7 @@
         {
           "id": "ingles_v",
           "nombre": "Ingles V",
+          "codigo": "FN23008",
           "creditos": 2,
           "semestre": 6,
           "grupos": [
@@ -2489,6 +2533,7 @@
         {
           "id": "comunicacion_de_datos",
           "nombre": "Comunicación de Datos",
+          "codigo": "CFP2217",
           "creditos": 3,
           "semestre": 6,
           "grupos": [
@@ -2535,6 +2580,7 @@
         {
           "id": "electiva_profundizacion_i:_aseguramient",
           "nombre": "Profundización I: Aseguramiento de la Calidad y Pruebas de Software",
+          "codigo": null,
           "creditos": null,
           "semestre": 7,
           "grupos": [
@@ -2576,6 +2622,7 @@
         {
           "id": "inteligencia_artificial",
           "nombre": "Inteligencia Artificial",
+          "codigo": "CFP2223",
           "creditos": 3,
           "semestre": 7,
           "grupos": [
@@ -2650,6 +2697,7 @@
         {
           "id": "gestion_de_proyectos_informaticos",
           "nombre": "Gestion de Proyectos Informaticos",
+          "codigo": "CFP2224",
           "creditos": 3,
           "semestre": 7,
           "grupos": [
@@ -2691,6 +2739,7 @@
         {
           "id": "etica_y_legislacion_informatica",
           "nombre": "Ética y Legislación Informática",
+          "codigo": "CFBN221",
           "creditos": 2,
           "semestre": 7,
           "grupos": [
@@ -2720,6 +2769,7 @@
         {
           "id": "electiva_profundizacion_i:_enrutamiento",
           "nombre": "Profundización I: Enrutamiento y conmutación",
+          "codigo": null,
           "creditos": null,
           "semestre": 7,
           "grupos": [
@@ -2761,6 +2811,7 @@
         {
           "id": "ingles_vi",
           "nombre": "Ingles VI",
+          "codigo": "FN23009",
           "creditos": 2,
           "semestre": 7,
           "grupos": [
@@ -2802,6 +2853,7 @@
         {
           "id": "seguridad_informatica",
           "nombre": "Seguridad Informatica",
+          "codigo": "CFP2222",
           "creditos": 2,
           "semestre": 7,
           "grupos": [
@@ -2842,6 +2894,7 @@
         {
           "id": "electiva_profundizacion_ii:_arquitectur",
           "nombre": "Profundización II: Arquitectura de Software",
+          "codigo": null,
           "creditos": null,
           "semestre": 8,
           "grupos": [
@@ -2883,6 +2936,7 @@
         {
           "id": "fundamentos_de_ecologia_y_medio_ambiente",
           "nombre": "Fundamentos de Ecologia y Medio Ambiente",
+          "codigo": "CFP2231",
           "creditos": 2,
           "semestre": 8,
           "grupos": [
@@ -2918,6 +2972,7 @@
         {
           "id": "simulacion_digital",
           "nombre": "Simulacion Digital",
+          "codigo": null,
           "creditos": 3,
           "semestre": 8,
           "grupos": [
@@ -2992,6 +3047,7 @@
         {
           "id": "auditoria_de_sistemas",
           "nombre": "Auditoria de Sistemas",
+          "codigo": "CFP2226",
           "creditos": 2,
           "semestre": 8,
           "grupos": [
@@ -3027,6 +3083,7 @@
         {
           "id": "seminario_taller_creacion_de_empresas",
           "nombre": "Seminario Taller Creacion de Empresas",
+          "codigo": null,
           "creditos": 2,
           "semestre": 8,
           "grupos": [
@@ -3062,6 +3119,7 @@
         {
           "id": "trabajo_de_grado_i",
           "nombre": "Trabajo de Grado I",
+          "codigo": null,
           "creditos": 2,
           "semestre": 8,
           "grupos": [
@@ -3097,6 +3155,7 @@
         {
           "id": "electiva_profundizacion_ii:_redes_de_al",
           "nombre": "Profundización II: Redes de Alta Disponibilidad",
+          "codigo": null,
           "creditos": null,
           "semestre": 8,
           "grupos": [
@@ -3143,6 +3202,7 @@
         {
           "id": "sistemas_de_informacion_gerencial",
           "nombre": "Sistemas de Informacion Gerencial",
+          "codigo": null,
           "creditos": 3,
           "semestre": 9,
           "grupos": [
@@ -3184,6 +3244,7 @@
         {
           "id": "electiva_profundizacion_iii:_administra",
           "nombre": "Profundización III: Administración de Redes",
+          "codigo": null,
           "creditos": null,
           "semestre": 9,
           "grupos": [
@@ -3225,6 +3286,7 @@
         {
           "id": "electiva_constitucion_y_etica",
           "nombre": "Constitución y ética",
+          "codigo": null,
           "creditos": null,
           "semestre": 9,
           "grupos": [
@@ -3260,6 +3322,7 @@
         {
           "id": "electiva_profundizacion_iii:_gestion_de",
           "nombre": "Profundización III: Gestión de Proyectos de Ingeniería de Software",
+          "codigo": null,
           "creditos": null,
           "semestre": 9,
           "grupos": [
@@ -3301,6 +3364,7 @@
         {
           "id": "electiva_expresion_grafica_digital",
           "nombre": "Expresión Gráfica Digital",
+          "codigo": null,
           "creditos": null,
           "semestre": 9,
           "grupos": [
@@ -3336,6 +3400,7 @@
         {
           "id": "electiva_tg_ii",
           "nombre": "TG II",
+          "codigo": null,
           "creditos": null,
           "semestre": 9,
           "grupos": [
@@ -3406,6 +3471,7 @@
         {
           "id": "electiva_profundizacion_iv:_diseno_de_r",
           "nombre": "Profundización IV: Diseño de Redes",
+          "codigo": null,
           "creditos": null,
           "semestre": 10,
           "grupos": [
@@ -3447,6 +3513,7 @@
         {
           "id": "electiva_profundizacion_iv:_topicos_ava",
           "nombre": "Profundización IV: Tópicos Avanzados de Ingeniería de Software",
+          "codigo": null,
           "creditos": null,
           "semestre": 10,
           "grupos": [
@@ -3488,6 +3555,7 @@
         {
           "id": "practica_empresarial",
           "nombre": "Practica Empresarial",
+          "codigo": null,
           "creditos": 6,
           "semestre": 10,
           "grupos": [
@@ -3516,6 +3584,7 @@
         {
           "id": "electiva_software_libre",
           "nombre": "Software Libre",
+          "codigo": null,
           "creditos": null,
           "semestre": 11,
           "grupos": [
@@ -3557,6 +3626,7 @@
         {
           "id": "electiva_interaccion_humano_computador",
           "nombre": "Interacción Humano Computador",
+          "codigo": null,
           "creditos": null,
           "semestre": 11,
           "grupos": [
@@ -3598,6 +3668,7 @@
         {
           "id": "electiva_gobernanza_de_ti",
           "nombre": "Gobernanza de TI",
+          "codigo": null,
           "creditos": null,
           "semestre": 11,
           "grupos": [
@@ -3639,6 +3710,7 @@
         {
           "id": "electiva_desarrollo_de_soluciones_en_la",
           "nombre": "Desarrollo de Soluciones en la Nube",
+          "codigo": null,
           "creditos": null,
           "semestre": 11,
           "grupos": [
@@ -3680,6 +3752,7 @@
         {
           "id": "electiva_big_data",
           "nombre": "Big Data",
+          "codigo": null,
           "creditos": null,
           "semestre": 11,
           "grupos": [
@@ -3721,6 +3794,7 @@
         {
           "id": "electiva_internet_de_las_cosas",
           "nombre": "Internet de las Cosas",
+          "codigo": null,
           "creditos": null,
           "semestre": 11,
           "grupos": [
@@ -3762,6 +3836,7 @@
         {
           "id": "electiva_diseno_de_soluciones_en_la_nub",
           "nombre": "Diseño de Soluciones en la Nube",
+          "codigo": null,
           "creditos": null,
           "semestre": 11,
           "grupos": [
@@ -3803,6 +3878,7 @@
         {
           "id": "electiva_robotica",
           "nombre": "Robótica",
+          "codigo": null,
           "creditos": null,
           "semestre": 11,
           "grupos": [
