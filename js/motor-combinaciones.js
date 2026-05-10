@@ -318,7 +318,11 @@
     for (const h1 of grupo1.horarios) {
       for (const h2 of grupo2.horarios) {
         if (h1.dia === h2.dia) {
-          if (this.horasSeSolapan(h1.inicio, h1.fin, h2.inicio, h2.fin)) {
+          const i1 = this.normalizeHora(h1.inicio, h1.jornada || 'diurna');
+          const f1 = this.normalizeHora(h1.fin,    h1.jornada || 'diurna');
+          const i2 = this.normalizeHora(h2.inicio, h2.jornada || 'diurna');
+          const f2 = this.normalizeHora(h2.fin,    h2.jornada || 'diurna');
+          if (this.horasSeSolapan(i1, f1, i2, f2)) {
             return true;
           }
         }
@@ -338,8 +342,25 @@
   },
   
   horaAMinutos(hora) {
+    if (!hora || typeof hora !== 'string') return 0;
     const partes = hora.split(':');
-    return parseInt(partes[0]) * 60 + parseInt(partes[1]);
+    if (partes.length !== 2) return 0;
+    const h = parseInt(partes[0], 10);
+    const m = parseInt(partes[1], 10);
+    if (isNaN(h) || isNaN(m)) return 0;
+    return h * 60 + m;
+  },
+
+  normalizeHora(hora, jornada) {
+    if (!hora || typeof hora !== 'string') return hora;
+    const partes = hora.split(':');
+    if (partes.length !== 2) return hora;
+    let h = parseInt(partes[0], 10);
+    const m = partes[1];
+    if (isNaN(h)) return hora;
+    if (jornada === 'diurna'   && h >= 1 && h < 7)  h += 12;
+    else if (jornada === 'nocturna' && h >= 1 && h < 5)  h += 12;
+    return `${String(h).padStart(2, '0')}:${m}`;
   },
   
   ordenarCombinaciones(combinaciones) {

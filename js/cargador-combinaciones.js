@@ -208,8 +208,13 @@ const CargadorCombinaciones = {
     
     const color = this.generarColor(asignatura.nombre);
     
-    // PASO 1: Unificar horarios consecutivos del mismo día
-    const horariosUnificados = this.unificarHorarios(grupo.horarios);
+    // PASO 1: Normalizar formato de horas (12h → 24h si aplica) y unificar consecutivos
+    const horariosNormalizados = grupo.horarios.map(h => ({
+      ...h,
+      inicio: this.normalizeHora(h.inicio, h.jornada || 'diurna'),
+      fin:    this.normalizeHora(h.fin,    h.jornada || 'diurna')
+    }));
+    const horariosUnificados = this.unificarHorarios(horariosNormalizados);
     
     const bloques = [];
     
@@ -217,17 +222,15 @@ const CargadorCombinaciones = {
     for (const horario of horariosUnificados) {
       const jornada = horario.jornada || 'diurna';
       
-      // Validar
+      // Validar (las horas ya vienen normalizadas a 24h desde PASO 1)
       const inicioMin = this.horaAMinutos(horario.inicio);
       const finMin = this.horaAMinutos(horario.fin);
       
       if (inicioMin < 360 || inicioMin > 1320) {
-
         continue;
       }
       
       if (finMin <= inicioMin) {
-
         continue;
       }
       
@@ -343,30 +346,33 @@ const CargadorCombinaciones = {
   
   horaAMinutos(hora) {
     if (!hora || typeof hora !== 'string') {
-
       return 0;
     }
-    
     const partes = hora.split(':');
     if (partes.length !== 2) {
-
       return 0;
     }
-    
     const h = parseInt(partes[0], 10);
     const m = parseInt(partes[1], 10);
-    
     if (isNaN(h) || isNaN(m)) {
-
       return 0;
     }
-    
     if (h < 0 || h > 23 || m < 0 || m > 59) {
-
       return 0;
     }
-    
     return h * 60 + m;
+  },
+
+  normalizeHora(hora, jornada) {
+    if (!hora || typeof hora !== 'string') return hora;
+    const partes = hora.split(':');
+    if (partes.length !== 2) return hora;
+    let h = parseInt(partes[0], 10);
+    const m = partes[1];
+    if (isNaN(h)) return hora;
+    if (jornada === 'diurna'   && h >= 1 && h < 7)  h += 12;
+    else if (jornada === 'nocturna' && h >= 1 && h < 5)  h += 12;
+    return `${String(h).padStart(2, '0')}:${m}`;
   }
 };
 
