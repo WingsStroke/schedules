@@ -1,6 +1,8 @@
-﻿// SIDEBAR PANEL - CONTROLADOR DEL PANEL LATERAL
+import { MotorCombinaciones } from './motor-combinaciones.js';
+import { MinihorariosUI } from './minihorarios-ui.js';
+import { buscarAsignatura, seleccionarAsignatura, generarYMostrarCombinaciones } from './integracion-busqueda.js';
 
-const SidebarPanel = {
+export const SidebarPanel = {
   
   // Estado del sidebar
   isOpen: false,
@@ -832,12 +834,14 @@ const SidebarPanel = {
 
 // La inicialización es invocada desde app.js en su DOMContentLoaded
 
-// FunciÃ³n global para cerrar sidebar (usada en onclick)
-function cerrarSidebar() {
+export function cerrarSidebar() {
   SidebarPanel.cerrar();
 }
 
-// FunciÃ³n global para abrir bÃºsqueda desde sidebar
-function abrirBusquedaDesdeSidebar() {
+export function abrirBusquedaDesdeSidebar() {
   SidebarPanel.abrirBusqueda();
 }
+
+window.SidebarPanel = SidebarPanel;
+window.cerrarSidebar = cerrarSidebar;
+window.abrirBusquedaDesdeSidebar = abrirBusquedaDesdeSidebar;

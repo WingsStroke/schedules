@@ -1,15 +1,20 @@
 "use strict";
 
+import { ErrorHandler } from './core.js';
+import { StorageDB } from './storage-db.js';
+import { removeGhostSubject, clearDuplicateVisualState, setDuplicateCursor } from './dom-renderer.js';
+
 // ==========================================
 // GLOBALES DE ESTADO
 // ==========================================
-let schedules = []; // Declaración ÚNICA de la variable
-let currentScheduleIndex = null;
+export let schedules = []; // Declaración ÚNICA de la variable
+export let currentScheduleIndex = null;
+export function setCurrentScheduleIndex(index) { currentScheduleIndex = index; }
 
 // ==========================================
 // LÓGICA DE PERSISTENCIA (INDEXED DB)
 // ==========================================
-async function initializeState() {
+export async function initializeState() {
   try {
     await StorageDB.init(); // Levanta la DB y hace la migración si es necesario
     const data = await StorageDB.getItem("schedules");
@@ -25,7 +30,7 @@ async function initializeState() {
   }
 }
 
-async function saveData(invalidatePreviewCache = true) {
+export async function saveData(invalidatePreviewCache = true) {
   try {
     // Se guarda en segundo plano (no congela la pantalla)
     const success = await StorageDB.setItem("schedules", schedules);
@@ -46,16 +51,16 @@ async function saveData(invalidatePreviewCache = true) {
 // ==========================================
 // ESTADO DE LA INTERFAZ
 // ==========================================
-const editorState = {
+export const editorState = {
   editingSubjectIndex: null, duplicatingSubject: null,
   currentCell: null, cellMatrix: [], ghostSubject: null, globalRowIndex: 0
 };
 
-const renderCache = { renderedSubjects: new Map() };
+export const renderCache = { renderedSubjects: new Map() };
 window._previewCache = window._previewCache || {};
 
 
-const state = {
+export const state = {
   resetEditor() { editorState.editingSubjectIndex = null; editorState.currentCell = null; editorState.ghostSubject = null; },
   startDuplication(subject) { editorState.duplicatingSubject = subject; setDuplicateCursor(true); },
   cancelDuplication() { editorState.duplicatingSubject = null; removeGhostSubject(); clearDuplicateVisualState(); setDuplicateCursor(false); },
@@ -67,12 +72,12 @@ const state = {
 // ==========================================
 // LÓGICA DE TIEMPOS Y HORARIOS
 // ==========================================
-const JORNADA_BASE = { 
+export const JORNADA_BASE = { 
   diurna: { startMinutes: 7 * 60, blockMinutes: 100 }, 
   nocturna: { startMinutes: 17 * 60, blockMinutes: 90 } 
 };
 
-function getTimeRangePure(subject) {
+export function getTimeRangePure(subject) {
   if (!subject || typeof subject.row !== "number" || typeof subject.blocks !== "number" || !JORNADA_BASE[subject.jornada]) return null;
   const base = JORNADA_BASE[subject.jornada];
   const startMinutes = base.startMinutes + subject.row * base.blockMinutes;
@@ -80,7 +85,7 @@ function getTimeRangePure(subject) {
 }
 
 // Definir ScheduleTimeModel ANTES de normalizeSubject para evitar forward reference
-const ScheduleTimeModel = {
+export const ScheduleTimeModel = {
   getSubjectTimeRange(subject) {
     if (typeof subject.startMinutes === "number") return { startMinutes: subject.startMinutes, endMinutes: subject.endMinutes };
     return getTimeRangePure(subject);
@@ -94,7 +99,7 @@ const ScheduleTimeModel = {
   }
 };
 
-function normalizeSubject(subject) {
+export function normalizeSubject(subject) {
   const day = Number.isInteger(Number(subject.day)) ? Number(subject.day) : Number(subject.col);
   const normalized = {
     id: subject.id ?? crypto.randomUUID(), name: subject.name ?? "", color: subject.color ?? "#1d4ed8",
@@ -111,13 +116,13 @@ function normalizeSubject(subject) {
   return normalized;
 }
 
-function normalizeSubjectsForCalculation(subjects) {
+export function normalizeSubjectsForCalculation(subjects) {
   return subjects.filter(s => typeof s.day === "number" && typeof s.startMinutes === "number").map(s => ({
     day: s.day, startMinutes: s.startMinutes, endMinutes: s.endMinutes, jornada: s.jornada
   }));
 }
 
-const ScheduleLogic = {
+export const ScheduleLogic = {
   canPlaceSubject({ schedule, row, col, blocks, jornada, excludeSubject }) {
     for (let i = 0; i < blocks; i++) {
       const r = row + i;
@@ -132,11 +137,11 @@ const ScheduleLogic = {
   }
 };
 
-function isCellOccupied(schedule, row, col, blocks, excludeSubject, jornada) {
+export function isCellOccupied(schedule, row, col, blocks, excludeSubject, jornada) {
   return !ScheduleLogic.canPlaceSubject({ schedule, row, col, blocks, jornada, excludeSubject });
 }
 
-function validateScheduleSchema(schedule) {
+export function validateScheduleSchema(schedule) {
   if (!schedule || typeof schedule !== 'object') return "Objeto inválido";
   if (!schedule.name) return "Sin nombre";
   if (!Array.isArray(schedule.subjects)) return "Subjects debe ser array";

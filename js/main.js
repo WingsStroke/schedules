@@ -1,4 +1,16 @@
-"use strict";
+import { ErrorHandler, APP_CONFIG, diasSemana, minutesToTime, getSubjectColor, SafeStorage } from './core.js';
+import { StorageDB } from './storage-db.js';
+import { state, editorState, schedules, currentScheduleIndex, setCurrentScheduleIndex, saveData, initializeState, isCellOccupied, normalizeSubject, normalizeSubjectsForCalculation, validateScheduleSchema } from './state-manager.js';
+import { isHoliday, isHolyWeek, calculateMonthlyCost } from './calculadora-aguinaldo.js';
+import { DOMRenderer } from './dom-renderer.js';
+import { SidebarPanel } from './sidebar-panel.js';
+import { DarkMode } from './dark-mode.js';
+import { Toast } from './toast-system.js';
+import { initExportEngine } from './export-engine.js';
+import { SistemaCargaOfertas } from './sistema-carga-ofertas.js';
+import { CargadorCombinaciones } from './cargador-combinaciones.js';
+
+// ==========================================
 
 // ==========================================
 // 1. SELECTORES GLOBALES
@@ -48,6 +60,8 @@ let dailyDetailData = null;
 // ==========================================
 document.addEventListener("DOMContentLoaded", async () => {
   ErrorHandler.init();
+  if (typeof DarkMode !== 'undefined') DarkMode.initialize();
+  initExportEngine();
   if (typeof DarkMode !== 'undefined') DarkMode.initialize();
   
   if (typeof initializeState === 'function') {
@@ -134,7 +148,7 @@ function renderSchedules() {
 
 function openSchedule(index) {
   state.cancelDuplication();
-  currentScheduleIndex = index;
+  setCurrentScheduleIndex(index);
   document.getElementById("home").classList.remove("active");
   document.getElementById("app").classList.add("active");
   document.querySelector("#app h2").textContent = schedules[index].name;
@@ -172,7 +186,7 @@ deleteModal.querySelector("button:not(.close-btn)").onclick = () => {
 document.querySelector("#app header button").onclick = () => {
   document.getElementById("app").classList.remove("active");
   document.getElementById("home").classList.add("active");
-  currentScheduleIndex = null;
+  setCurrentScheduleIndex(null);
   renderSchedules();
 };
 
@@ -184,7 +198,7 @@ sortSelect.onchange = () => renderSchedules();
 colorPreview.onclick = () => { subjectColorInput.click(); };
 subjectColorInput.oninput = () => { colorPreview.style.background = subjectColorInput.value; };
 
-function openSubjectModal(row, col) {
+export function openSubjectModal(row, col) {
   state.cancelDuplication();
   state.setCurrentCell({ element: editorState.cellMatrix[row][col].element, row, col });
   editorState.editingSubjectIndex = null;
@@ -213,7 +227,7 @@ function openSubjectModal(row, col) {
   subjectModal.classList.add("active");
 }
 
-function openEditSubjectModal(subject) {
+export function openEditSubjectModal(subject) {
   state.cancelDuplication();
   editorState.editingSubjectIndex = schedules[currentScheduleIndex].subjects.findIndex(s => s.id === subject.id);
   state.setCurrentCell({ element: editorState.cellMatrix[subject.row][subject.col].element, row: subject.row, col: subject.col });
@@ -242,6 +256,8 @@ function openEditSubjectModal(subject) {
 
   subjectModal.classList.add("active");
 }
+
+
 
 function escapeHTML(str) {
   if (!str) return "";
@@ -360,6 +376,22 @@ function cleanSubjectModalButtons(){
 // ==========================================
 // 6. SISTEMA DE EXPORTACIÓN E IMPORTACIÓN (JSON)
 // ==========================================
+function safeJSONStringify(obj, fallback = '{}') {
+  try {
+    return JSON.stringify(obj);
+  } catch (e) {
+    return fallback;
+  }
+}
+
+function safeJSONParse(str, fallback = null) {
+  try {
+    return JSON.parse(str);
+  } catch (e) {
+    return fallback;
+  }
+}
+
 document.getElementById("exportScheduleBtn").onclick = () => {
   if (currentScheduleIndex === null) return Toast.show("Abre un horario primero", "warning");
   const jsonString = safeJSONStringify([schedules[currentScheduleIndex]], '[]');

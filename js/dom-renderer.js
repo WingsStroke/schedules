@@ -1,6 +1,8 @@
-"use strict";
+import { bloquesDiurnos, bloquesNocturnos, diasSemana, minutesToTime } from './core.js';
+import { renderCache, currentScheduleIndex, state, editorState, schedules } from './state-manager.js';
+import { openSubjectModal, openEditSubjectModal } from './main.js';
 
-const DOMRenderer = {
+export const DOMRenderer = {
   getCellHeight() {
     const cell = document.querySelector(".cell");
     if (!cell) return 60;
@@ -190,7 +192,7 @@ const DOMRenderer = {
 // ==========================================
 // Funciones visuales globales (Ghost / Duplication)
 // ==========================================
-function createGhostSubject(subject, cell) {
+export function createGhostSubject(subject, cell) {
   removeGhostSubject();
   const div = document.createElement("div");
   div.className = "ghost-subject";
@@ -199,14 +201,14 @@ function createGhostSubject(subject, cell) {
   editorState.ghostSubject = div;
 }
 
-function removeGhostSubject() { 
+export function removeGhostSubject() { 
   if (editorState.ghostSubject) { 
     editorState.ghostSubject.remove(); 
     editorState.ghostSubject = null; 
   } 
 }
 
-function clearDuplicateVisualState() { 
+export function clearDuplicateVisualState() { 
   removeGhostSubject(); 
   document.querySelectorAll(".cell.active-root").forEach(c => { 
     c.classList.remove("active-root"); 
@@ -214,7 +216,7 @@ function clearDuplicateVisualState() {
   }); 
 }
 
-function setDuplicateCursor(active) { 
+export function setDuplicateCursor(active) { 
   document.body.style.cursor = active ? "copy" : "default"; 
   document.getElementById("duplicateBar").style.display = active ? "flex" : "none"; 
 }

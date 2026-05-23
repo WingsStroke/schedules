@@ -1,4 +1,4 @@
-﻿const MotorCombinaciones = {
+export const MotorCombinaciones = {
   
   asignaturasSeleccionadas: [],
   maxCombinaciones: 5,
@@ -415,6 +415,3 @@
     };
   }
 };
-
-window.MotorCombinaciones = MotorCombinaciones;
-

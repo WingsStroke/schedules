@@ -1,3 +1,6 @@
+import { diasSemana } from './core.js';
+import { ScheduleTimeModel } from './state-manager.js';
+
 let holidayCache = {};
 
 function getEasterDate(year){
@@ -33,13 +36,13 @@ function generateColombianHolidays(year){
   return holidays;
 }
 
-function isHoliday(date){
+export function isHoliday(date){
   const year = date.getFullYear();
   if(!holidayCache[year]) holidayCache[year] = generateColombianHolidays(year);
   return holidayCache[year].some(h => h.toDateString() === date.toDateString());
 }
 
-function isHolyWeek(date) {
+export function isHolyWeek(date) {
   const year = date.getFullYear();
   const easter = getEasterDate(year);
   for (let i = 6; i >= 1; i--) {
@@ -70,7 +73,7 @@ function calculateTripsForDay(subjectsOfDay, minGapMinutes) {
   return trips;
 }
 
-function calculateMonthlyCost(subjects, config, excludedDaysSet) {
+export function calculateMonthlyCost(subjects, config, excludedDaysSet) {
   const dailyMap = buildDailySubjects(subjects);
   let totalTrips = 0, totalSnackDays = 0;
   const dailyDetails = [];

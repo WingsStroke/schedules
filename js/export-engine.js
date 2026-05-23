@@ -4,8 +4,10 @@
 // EXPORT ENGINE (PDF & IMAGEN)
 // ==========================================
 
-document.addEventListener("DOMContentLoaded", () => {
-  
+import { diasSemana, minutesToTime } from './core.js';
+import { currentScheduleIndex, schedules } from './state-manager.js';
+
+export function initExportEngine() {
   // --- EXPORTACIÓN A PDF (FORMATO UdeC) ---
   function buildSubjectsScheduleData() {
     if (currentScheduleIndex === null) return [];
@@ -252,4 +254,4 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.removeChild(ghostContainer);
     }
   }
-});
+}

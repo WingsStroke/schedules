@@ -1,6 +1,6 @@
-"use strict";
+import { ErrorHandler } from './core.js';
 
-const StorageDB = {
+export const StorageDB = {
   dbName: "UdeCHorariosDB",
   version: 1,
   db: null,

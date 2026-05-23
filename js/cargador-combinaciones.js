@@ -1,7 +1,12 @@
-﻿// PARTE 5: CARGAR COMBINACIÓN EN HORARIO PRINCIPAL
+// PARTE 5: CARGAR COMBINACIÓN EN HORARIO PRINCIPAL
 // Agregar este código después de minihorarios-ui.js y antes de app.js
 
-const CargadorCombinaciones = {
+import { getSubjectColor } from './core.js';
+import { Toast } from './toast-system.js';
+import { currentScheduleIndex, schedules } from './state-manager.js';
+import { DOMRenderer } from './dom-renderer.js';
+
+export const CargadorCombinaciones = {
   
   cargarCombinacion(combinacion, indice) {
 
@@ -380,6 +385,8 @@ const CargadorCombinaciones = {
     return `${String(h).padStart(2, '0')}:${m}`;
   }
 };
+
+window.CargadorCombinaciones = CargadorCombinaciones;
 
 window.CargadorCombinaciones = CargadorCombinaciones;
 

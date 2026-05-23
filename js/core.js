@@ -1,6 +1,6 @@
-﻿"use strict";
+"use strict";
 
-const ErrorHandler = {
+export const ErrorHandler = {
   config: { logToConsole: true, showUserMessages: true, maxErrorLogs: 50 },
   errorLog: [],
   init() {
@@ -56,7 +56,7 @@ const ErrorHandler = {
   }
 };
 
-const SafeStorage = {
+export const SafeStorage = {
   setItem(key, value) {
     try { localStorage.setItem(key, JSON.stringify(value)); return true; } 
     catch (error) { if (error.name === 'QuotaExceededError') { ErrorHandler.handleError(error); } return false; }
@@ -75,9 +75,9 @@ const SafeStorage = {
   }
 };
 
-function safeJSONParse(jsonString, defaultValue = null) { try { return JSON.parse(jsonString); } catch (e) { return defaultValue; } }
-function safeJSONStringify(obj, defaultValue = '{}') { try { return JSON.stringify(obj, null, 2); } catch (e) { return defaultValue; } }
-async function safeFetch(url, options = {}) {
+export function safeJSONParse(jsonString, defaultValue = null) { try { return JSON.parse(jsonString); } catch (e) { return defaultValue; } }
+export function safeJSONStringify(obj, defaultValue = '{}') { try { return JSON.stringify(obj, null, 2); } catch (e) { return defaultValue; } }
+export async function safeFetch(url, options = {}) {
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), options.timeout || 10000);
   try {
@@ -88,7 +88,7 @@ async function safeFetch(url, options = {}) {
   } catch (error) { clearTimeout(id); throw error; }
 }
 
-const APP_CONFIG = {
+export const APP_CONFIG = {
   SCHEMA_VERSION: 3,
   LAST_VERSION_KEY: "lastSeenChangelogVersion",
   JORNADAS: {
@@ -97,23 +97,23 @@ const APP_CONFIG = {
   }
 };
 
-const SUBJECT_COLORS = [
+export const SUBJECT_COLORS = [
   "#FF6B6B", "#4ECDC4", "#45B7D1", "#FFA07A", "#98D8C8",
   "#F7DC6F", "#BB8FCE", "#85C1E2", "#F8B500", "#6C5CE7",
   "#E74C3C", "#3498DB", "#2ECC71", "#F39C12", "#9B59B6"
 ];
 
-function getSubjectColor(nombre) {
+export function getSubjectColor(nombre) {
   let hash = 0;
   for (let i = 0; i < nombre.length; i++) hash = nombre.charCodeAt(i) + ((hash << 5) - hash);
   return SUBJECT_COLORS[Math.abs(hash) % SUBJECT_COLORS.length];
 }
 
-const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-function timeToMinutes(time) { const [h, m] = time.split(":").map(Number); return h * 60 + m; }
-function minutesToTime(min) { const h = Math.floor(min / 60); const m = min % 60; return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`; }
+export const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+export function timeToMinutes(time) { const [h, m] = time.split(":").map(Number); return h * 60 + m; }
+export function minutesToTime(min) { const h = Math.floor(min / 60); const m = min % 60; return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`; }
 
-function generarBloques(jornada) {
+export function generarBloques(jornada) {
   const { start, end, visualBlockMinutes } = APP_CONFIG.JORNADAS[jornada];
   const bloques = [];
   let actual = timeToMinutes(start);
@@ -126,7 +126,7 @@ function generarBloques(jornada) {
   return bloques;
 }
 
-const bloquesDiurnos = generarBloques("diurna");
-const bloquesNocturnos = generarBloques("nocturna");
+export const bloquesDiurnos = generarBloques("diurna");
+export const bloquesNocturnos = generarBloques("nocturna");
 
 // El registro del Service Worker se gestiona en index.html

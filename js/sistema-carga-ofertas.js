@@ -1,4 +1,4 @@
-﻿const SistemaCargaOfertas = {
+export const SistemaCargaOfertas = {
   
   ofertas: [],
   indice: null,
@@ -209,6 +209,3 @@
     };
   }
 };
-
-window.SistemaCargaOfertas = SistemaCargaOfertas;
-

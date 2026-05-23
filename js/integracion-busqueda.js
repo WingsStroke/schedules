@@ -1,4 +1,10 @@
-﻿"use strict";
+"use strict";
+
+import { getSubjectColor } from './core.js';
+import { Toast } from './toast-system.js';
+import { SistemaCargaOfertas } from './sistema-carga-ofertas.js';
+import { MotorCombinaciones } from './motor-combinaciones.js';
+import { SidebarPanel } from './sidebar-panel.js';
 
 // INTEGRACIÓN DEL SISTEMA DE CARGA DE OFERTAS
 
@@ -227,3 +233,8 @@ function generarYMostrarCombinaciones() {
     }
   }
 }
+
+export { buscarAsignatura, seleccionarAsignatura, eliminarAsignatura, generarYMostrarCombinaciones };
+window.seleccionarAsignatura = seleccionarAsignatura;
+window.eliminarAsignatura = eliminarAsignatura;
+window.generarYMostrarCombinaciones = generarYMostrarCombinaciones;

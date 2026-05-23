@@ -1,5 +1,12 @@
-﻿const MinihorariosUI = {
+import { getSubjectColor } from './core.js';
+import { Toast } from './toast-system.js';
+import { schedules, currentScheduleIndex, saveData } from './state-manager.js';
+import { CargadorCombinaciones } from './cargador-combinaciones.js';
+import { DOMRenderer } from './dom-renderer.js';
+import { SidebarPanel } from './sidebar-panel.js';
+import { MotorCombinaciones } from './motor-combinaciones.js';
 
+export const MinihorariosUI = {
   combinacionesActuales: [],
   
   renderizarMinihorario(combinacion, index) {
@@ -382,6 +389,5 @@
     this.combinacionesActuales = [];
   }
 };
-
 window.MinihorariosUI = MinihorariosUI;
 

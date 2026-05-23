@@ -2,11 +2,126 @@
   "metadata": {
     "programa": "Ingeniería de Sistemas",
     "archivo": "2026-1 Ing de Sistemas.xlsx",
-    "fechaProcesamiento": "2026-05-07T02:47:55.941235+00:00",
+    "fechaProcesamiento": "2026-05-17T01:02:19.759264+00:00",
     "totalAsignaturas": 76,
     "totalGrupos": 103,
     "totalSemestres": 11,
-    "version": "2.0.0"
+    "version": "2.0.0",
+    "conflictos": [
+      {
+        "tipo": "aula",
+        "entidad": "Laboratorio de Ingeniería de Software",
+        "dia": "W",
+        "hora": "07:00 - 07:50",
+        "involucra": "Ingeniería de Servicios de Internet (B1) vs Programación Orientada a Objetos (B1)"
+      },
+      {
+        "tipo": "aula",
+        "entidad": "Laboratorio de Ingeniería de Software",
+        "dia": "W",
+        "hora": "07:50 - 08:40",
+        "involucra": "Ingeniería de Servicios de Internet (B1) vs Programación Orientada a Objetos (B1)"
+      },
+      {
+        "tipo": "aula",
+        "entidad": "Lab de Redes y Telemática",
+        "dia": "L",
+        "hora": "10:20 - 11:10",
+        "involucra": "Sistemas Operativos (B1) vs Programación Basica (C1)"
+      },
+      {
+        "tipo": "aula",
+        "entidad": "Lab de Redes y Telemática",
+        "dia": "L",
+        "hora": "11:10 - 12:00",
+        "involucra": "Sistemas Operativos (B1) vs Programación Basica (C1)"
+      },
+      {
+        "tipo": "aula",
+        "entidad": "Laboratorio de Redes B",
+        "dia": "J",
+        "hora": "10:20 - 11:10",
+        "involucra": "Ingeniería de Software (B1) vs Estructura de Datos (A1)"
+      },
+      {
+        "tipo": "aula",
+        "entidad": "Laboratorio de Redes B",
+        "dia": "J",
+        "hora": "11:10 - 12:00",
+        "involucra": "Ingeniería de Software (B1) vs Estructura de Datos (A1)"
+      },
+      {
+        "tipo": "aula",
+        "entidad": "Laboratorio de Redes y Telemática",
+        "dia": "L",
+        "hora": "08:40 - 09:30",
+        "involucra": "Gestion de Proyectos Informaticos (None) vs Algoritmos y Programacion (B1)"
+      },
+      {
+        "tipo": "aula",
+        "entidad": "Laboratorio de Redes y Telemática",
+        "dia": "L",
+        "hora": "09:30 - 10:20",
+        "involucra": "Gestion de Proyectos Informaticos (None) vs Algoritmos y Programacion (B1)"
+      },
+      {
+        "tipo": "aula",
+        "entidad": "Laboratorio de Ingeniería de Software",
+        "dia": "M",
+        "hora": "08:40 - 09:30",
+        "involucra": "Simulacion Digital (A1) vs Ingeniería de Servicios de Internet (B1)"
+      },
+      {
+        "tipo": "aula",
+        "entidad": "Laboratorio de Ingeniería de Software",
+        "dia": "M",
+        "hora": "09:30 - 10:20",
+        "involucra": "Simulacion Digital (A1) vs Ingeniería de Servicios de Internet (B1)"
+      },
+      {
+        "tipo": "aula",
+        "entidad": "Lab de Redes B",
+        "dia": "V",
+        "hora": "03:30 - 04:20",
+        "involucra": "Expresión Gráfica Digital (None) vs Algoritmos y Programacion (A1)"
+      },
+      {
+        "tipo": "aula",
+        "entidad": "Lab de Redes B",
+        "dia": "V",
+        "hora": "04:20 - 05:10",
+        "involucra": "Expresión Gráfica Digital (None) vs Algoritmos y Programacion (A1)"
+      },
+      {
+        "tipo": "aula",
+        "entidad": "Laboratorio de Redes A",
+        "dia": "M",
+        "hora": "07:00 - 07:50",
+        "involucra": "Interacción Humano Computador (None) vs Comercio Electronico (A1)"
+      },
+      {
+        "tipo": "aula",
+        "entidad": "Laboratorio de Redes A",
+        "dia": "M",
+        "hora": "07:50 - 08:40",
+        "involucra": "Interacción Humano Computador (None) vs Comercio Electronico (A1)"
+      },
+      {
+        "tipo": "aula",
+        "entidad": "Lab de Redes y Telemática",
+        "dia": "J",
+        "hora": "02:40 - 03:30",
+        "involucra": "Robótica (None) vs Electrónica (B1)"
+      },
+      {
+        "tipo": "aula",
+        "entidad": "Lab de Redes y Telemática",
+        "dia": "J",
+        "hora": "03:30 - 04:20",
+        "involucra": "Robótica (None) vs Electrónica (B1)"
+      }
+    ],
+    "totalConflictos": 16
   },
   "semestres": [
     {
@@ -96,9 +211,9 @@
           "grupos": [
             {
               "id": "catedra_institucional_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Yazmìn Pereira Guardo",
-              "ubicacion": "",
+              "ubicacion": null,
               "cupos": null,
               "horarios": [
                 {
@@ -200,7 +315,7 @@
               "id": "algoritmos_y_programacion_c1",
               "grupo": "C1",
               "profesor": "Nohemy Castro Genes",
-              "ubicacion": "Laboratorio de Ingeniería de Software",
+              "ubicacion": "Lab de Ing de Software",
               "cupos": null,
               "horarios": [
                 {
@@ -303,7 +418,7 @@
           "grupos": [
             {
               "id": "produccion_y_comprension_textual_i_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Raquel Leotau Díaz",
               "ubicacion": null,
               "cupos": null,
@@ -596,7 +711,7 @@
           "grupos": [
             {
               "id": "produccion_y_comprension_textual_ii_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Raquel Leottau Díaz",
               "ubicacion": null,
               "cupos": null,
@@ -702,8 +817,8 @@
             {
               "id": "programacion_basica_b1",
               "grupo": "B1",
-              "profesor": "Nohemy Castro Genes",
-              "ubicacion": "Lab de Redes B",
+              "profesor": null,
+              "ubicacion": "Nohemy Castro Genes (Lab de Redes B) Programación Básica",
               "cupos": null,
               "horarios": [
                 {
@@ -810,7 +925,7 @@
             {
               "id": "electiva_fisica_mecanica_teoria_a1",
               "grupo": "A1",
-              "profesor": "Javier Montoya Martinez",
+              "profesor": "Javier Montoya Martínez",
               "ubicacion": "",
               "cupos": null,
               "horarios": [
@@ -1276,7 +1391,7 @@
           "grupos": [
             {
               "id": "matematicas_discretas_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Luis Martínez Magallanes",
               "ubicacion": null,
               "cupos": null,
@@ -1583,7 +1698,7 @@
         },
         {
           "id": "fisica_mecanica_y_laboratorio",
-          "nombre": "Física Mecanica y Laboratorio",
+          "nombre": "Laboratorio de Física Moderna",
           "codigo": "CFBD223",
           "creditos": 4,
           "semestre": 4,
@@ -1592,7 +1707,7 @@
               "id": "fisica_mecanica_y_laboratorio_a1",
               "grupo": "A1",
               "profesor": "Álvaro García Muriel",
-              "ubicacion": null,
+              "ubicacion": "",
               "cupos": null,
               "horarios": [
                 {
@@ -1620,7 +1735,7 @@
           "grupos": [
             {
               "id": "administracion_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Iván Monterrosa Castro",
               "ubicacion": null,
               "cupos": null,
@@ -1656,7 +1771,7 @@
           "grupos": [
             {
               "id": "electiva_fisica_de_ondas_de_calor_teori_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Luis Cortés Rodríguez",
               "ubicacion": null,
               "cupos": null,
@@ -1694,7 +1809,7 @@
               "id": "ingles_iv_e1",
               "grupo": "E1",
               "profesor": "Keren Martínez Palacio Carmen Ariza",
-              "ubicacion": "",
+              "ubicacion": null,
               "cupos": null,
               "horarios": [
                 {
@@ -2078,7 +2193,7 @@
           "grupos": [
             {
               "id": "investigacion_de_operaciones_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "José Luis Vivas Frontana",
               "ubicacion": null,
               "cupos": null,
@@ -2114,7 +2229,7 @@
           "grupos": [
             {
               "id": "sistemas_dinamicos_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Eduin Salgado Pérez",
               "ubicacion": null,
               "cupos": null,
@@ -2271,7 +2386,7 @@
               "id": "teoria_automatas_y_lenguajes_formales_a1",
               "grupo": "A1",
               "profesor": "Luis Carlos Tovar Garrido",
-              "ubicacion": "Salón de Clases/Lab de Imteligencia Computacional",
+              "ubicacion": "Salón de Clases/lab de Redes A",
               "cupos": null,
               "horarios": [
                 {
@@ -2539,7 +2654,7 @@
           "grupos": [
             {
               "id": "comunicacion_de_datos_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Hernán Adolfo Velásquez Wilches",
               "ubicacion": "Laboratorio de Redes y Telemática",
               "cupos": null,
@@ -2586,7 +2701,7 @@
           "grupos": [
             {
               "id": "electiva_profundizacion_i:_aseguramient_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Juan José Puello Beltrán",
               "ubicacion": "Sala de Informática No. 4",
               "cupos": null,
@@ -2703,7 +2818,7 @@
           "grupos": [
             {
               "id": "gestion_de_proyectos_informaticos_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Iván Monterrosa Castro",
               "ubicacion": "Laboratorio de Redes y Telemática",
               "cupos": null,
@@ -2745,7 +2860,7 @@
           "grupos": [
             {
               "id": "etica_y_legislacion_informatica_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "María Claudia Bonfante Rodríguez",
               "ubicacion": null,
               "cupos": null,
@@ -2775,7 +2890,7 @@
           "grupos": [
             {
               "id": "electiva_profundizacion_i:_enrutamiento_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Gabriel Elías Chanchí Golondrino",
               "ubicacion": "Laboratorio de Redes (B)",
               "cupos": null,
@@ -2859,7 +2974,7 @@
           "grupos": [
             {
               "id": "seguridad_informatica_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "José Luis Vivas Frontana",
               "ubicacion": "Laboratorio de Redes A",
               "cupos": null,
@@ -2900,7 +3015,7 @@
           "grupos": [
             {
               "id": "electiva_profundizacion_ii:_arquitectur_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": null,
               "ubicacion": "Lab de Inteligencia Computacional",
               "cupos": null,
@@ -2942,7 +3057,7 @@
           "grupos": [
             {
               "id": "fundamentos_de_ecologia_y_medio_ambiente_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Liliana Usuga M",
               "ubicacion": null,
               "cupos": null,
@@ -3089,7 +3204,7 @@
           "grupos": [
             {
               "id": "seminario_taller_creacion_de_empresas_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Carla de Àvila Altamiranda",
               "ubicacion": null,
               "cupos": null,
@@ -3125,7 +3240,7 @@
           "grupos": [
             {
               "id": "trabajo_de_grado_i_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Raúl José Martelo Gómez",
               "ubicacion": "Salón de Clases",
               "cupos": null,
@@ -3161,7 +3276,7 @@
           "grupos": [
             {
               "id": "electiva_profundizacion_ii:_redes_de_al_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Hernán Adolfo Velásquez Wilches",
               "ubicacion": "Lab. De Ingeniería de Software",
               "cupos": null,
@@ -3208,7 +3323,7 @@
           "grupos": [
             {
               "id": "sistemas_de_informacion_gerencial_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "María Claudia Bonfante Rodríguez",
               "ubicacion": "Laboratorio de Redes y Telemática",
               "cupos": null,
@@ -3250,7 +3365,7 @@
           "grupos": [
             {
               "id": "electiva_profundizacion_iii:_administra_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Heybertt Moreno Díaz",
               "ubicacion": "Lab de Redes y Telemática",
               "cupos": null,
@@ -3292,7 +3407,7 @@
           "grupos": [
             {
               "id": "electiva_constitucion_y_etica_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Javier Pinedo Cabarcas",
               "ubicacion": null,
               "cupos": null,
@@ -3328,7 +3443,7 @@
           "grupos": [
             {
               "id": "electiva_profundizacion_iii:_gestion_de_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Javier Pinedo Cabarcas",
               "ubicacion": "Lab de Redes B",
               "cupos": null,
@@ -3370,7 +3485,7 @@
           "grupos": [
             {
               "id": "electiva_expresion_grafica_digital_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Fuentes Ramos Randy Javier",
               "ubicacion": "Lab de Redes B",
               "cupos": null,
@@ -3406,7 +3521,7 @@
           "grupos": [
             {
               "id": "electiva_tg_ii_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": null,
               "ubicacion": null,
               "cupos": null,
@@ -3477,7 +3592,7 @@
           "grupos": [
             {
               "id": "electiva_profundizacion_iv:_diseno_de_r_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "David Enrique Castro Ocampo",
               "ubicacion": "Laboratorio de Inteligencia Computacional",
               "cupos": null,
@@ -3519,7 +3634,7 @@
           "grupos": [
             {
               "id": "electiva_profundizacion_iv:_topicos_ava_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": null,
               "ubicacion": "Labotarorio de Redes A",
               "cupos": null,
@@ -3561,7 +3676,7 @@
           "grupos": [
             {
               "id": "practica_empresarial_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": null,
               "ubicacion": null,
               "cupos": null,
@@ -3590,7 +3705,7 @@
           "grupos": [
             {
               "id": "electiva_software_libre_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Gabriel Elías Chanchi Golondrino",
               "ubicacion": "Laboratorio de Inteligencia Computacional",
               "cupos": null,
@@ -3632,9 +3747,9 @@
           "grupos": [
             {
               "id": "electiva_interaccion_humano_computador_na",
-              "grupo": "N/A",
-              "profesor": null,
-              "ubicacion": "Gabriel elías Chanchi Golondrino. Laboratorio de Redes A",
+              "grupo": null,
+              "profesor": "Gabriel elías Chanchi Golondrino",
+              "ubicacion": "Laboratorio de Redes A",
               "cupos": null,
               "horarios": [
                 {
@@ -3674,7 +3789,7 @@
           "grupos": [
             {
               "id": "electiva_gobernanza_de_ti_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Javier Pinedo Cabarcas",
               "ubicacion": "Salòn de Clases",
               "cupos": null,
@@ -3716,7 +3831,7 @@
           "grupos": [
             {
               "id": "electiva_desarrollo_de_soluciones_en_la_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Carlos Cáceres",
               "ubicacion": "Lab de Ingeniería de Software",
               "cupos": null,
@@ -3758,7 +3873,7 @@
           "grupos": [
             {
               "id": "electiva_big_data_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Johanny Enrique Valencia Sánchez",
               "ubicacion": "Lab de Ingeniería de Software",
               "cupos": null,
@@ -3800,7 +3915,7 @@
           "grupos": [
             {
               "id": "electiva_internet_de_las_cosas_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Juan Carlos García Ojeda",
               "ubicacion": "Lab de Inteligencia Computacional",
               "cupos": null,
@@ -3842,7 +3957,7 @@
           "grupos": [
             {
               "id": "electiva_diseno_de_soluciones_en_la_nub_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Carlos Cuesta Yepes",
               "ubicacion": "Lab de Redes B",
               "cupos": null,
@@ -3884,7 +3999,7 @@
           "grupos": [
             {
               "id": "electiva_robotica_na",
-              "grupo": "N/A",
+              "grupo": null,
               "profesor": "Manuel Alejandro Ospina Alarcón",
               "ubicacion": "Lab de Redes y Telemática",
               "cupos": null,
@@ -4863,321 +4978,6 @@
           "ref": "G15",
           "value": null,
           "row": 15,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A16",
-          "value": null,
-          "row": 16,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B16",
-          "value": null,
-          "row": 16,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C16",
-          "value": null,
-          "row": 16,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D16",
-          "value": null,
-          "row": 16,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E16",
-          "value": null,
-          "row": 16,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F16",
-          "value": null,
-          "row": 16,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G16",
-          "value": null,
-          "row": 16,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A17",
-          "value": null,
-          "row": 17,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B17",
-          "value": null,
-          "row": 17,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C17",
-          "value": null,
-          "row": 17,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D17",
-          "value": null,
-          "row": 17,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E17",
-          "value": null,
-          "row": 17,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F17",
-          "value": null,
-          "row": 17,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G17",
-          "value": null,
-          "row": 17,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A18",
-          "value": null,
-          "row": 18,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B18",
-          "value": null,
-          "row": 18,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C18",
-          "value": null,
-          "row": 18,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D18",
-          "value": null,
-          "row": 18,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E18",
-          "value": null,
-          "row": 18,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F18",
-          "value": null,
-          "row": 18,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G18",
-          "value": null,
-          "row": 18,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A19",
-          "value": null,
-          "row": 19,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B19",
-          "value": null,
-          "row": 19,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C19",
-          "value": null,
-          "row": 19,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D19",
-          "value": null,
-          "row": 19,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E19",
-          "value": null,
-          "row": 19,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F19",
-          "value": null,
-          "row": 19,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G19",
-          "value": null,
-          "row": 19,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A20",
-          "value": null,
-          "row": 20,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B20",
-          "value": null,
-          "row": 20,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C20",
-          "value": null,
-          "row": 20,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D20",
-          "value": null,
-          "row": 20,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E20",
-          "value": null,
-          "row": 20,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F20",
-          "value": null,
-          "row": 20,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G20",
-          "value": null,
-          "row": 20,
           "col": 7,
           "rowspan": 1,
           "colspan": 1,
@@ -7517,321 +7317,6 @@
           "rowspan": 1,
           "colspan": 1,
           "is_merged": false
-        },
-        {
-          "ref": "A16",
-          "value": null,
-          "row": 16,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B16",
-          "value": null,
-          "row": 16,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C16",
-          "value": null,
-          "row": 16,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D16",
-          "value": null,
-          "row": 16,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E16",
-          "value": null,
-          "row": 16,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F16",
-          "value": null,
-          "row": 16,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G16",
-          "value": null,
-          "row": 16,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A17",
-          "value": null,
-          "row": 17,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B17",
-          "value": null,
-          "row": 17,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C17",
-          "value": null,
-          "row": 17,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D17",
-          "value": null,
-          "row": 17,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E17",
-          "value": null,
-          "row": 17,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F17",
-          "value": null,
-          "row": 17,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G17",
-          "value": null,
-          "row": 17,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A18",
-          "value": null,
-          "row": 18,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B18",
-          "value": null,
-          "row": 18,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C18",
-          "value": null,
-          "row": 18,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D18",
-          "value": null,
-          "row": 18,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E18",
-          "value": null,
-          "row": 18,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F18",
-          "value": null,
-          "row": 18,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G18",
-          "value": null,
-          "row": 18,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A19",
-          "value": null,
-          "row": 19,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B19",
-          "value": null,
-          "row": 19,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C19",
-          "value": null,
-          "row": 19,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D19",
-          "value": null,
-          "row": 19,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E19",
-          "value": null,
-          "row": 19,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F19",
-          "value": null,
-          "row": 19,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G19",
-          "value": null,
-          "row": 19,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A20",
-          "value": null,
-          "row": 20,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B20",
-          "value": null,
-          "row": 20,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C20",
-          "value": null,
-          "row": 20,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D20",
-          "value": null,
-          "row": 20,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E20",
-          "value": null,
-          "row": 20,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F20",
-          "value": null,
-          "row": 20,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G20",
-          "value": null,
-          "row": 20,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
         }
       ],
       "estructura_dias": [
@@ -9031,132 +8516,6 @@
           "rowspan": 1,
           "colspan": 1,
           "is_merged": false
-        },
-        {
-          "ref": "A19",
-          "value": null,
-          "row": 19,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B19",
-          "value": null,
-          "row": 19,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C19",
-          "value": null,
-          "row": 19,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D19",
-          "value": null,
-          "row": 19,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E19",
-          "value": null,
-          "row": 19,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F19",
-          "value": null,
-          "row": 19,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G19",
-          "value": null,
-          "row": 19,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A20",
-          "value": null,
-          "row": 20,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B20",
-          "value": null,
-          "row": 20,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C20",
-          "value": null,
-          "row": 20,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D20",
-          "value": null,
-          "row": 20,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E20",
-          "value": null,
-          "row": 20,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F20",
-          "value": null,
-          "row": 20,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G20",
-          "value": null,
-          "row": 20,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
         }
       ],
       "estructura_dias": [
@@ -10163,321 +9522,6 @@
           "ref": "G15",
           "value": null,
           "row": 15,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A16",
-          "value": null,
-          "row": 16,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B16",
-          "value": null,
-          "row": 16,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C16",
-          "value": null,
-          "row": 16,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D16",
-          "value": null,
-          "row": 16,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E16",
-          "value": null,
-          "row": 16,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F16",
-          "value": null,
-          "row": 16,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G16",
-          "value": null,
-          "row": 16,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A17",
-          "value": null,
-          "row": 17,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B17",
-          "value": null,
-          "row": 17,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C17",
-          "value": null,
-          "row": 17,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D17",
-          "value": null,
-          "row": 17,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E17",
-          "value": null,
-          "row": 17,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F17",
-          "value": null,
-          "row": 17,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G17",
-          "value": null,
-          "row": 17,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A18",
-          "value": null,
-          "row": 18,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B18",
-          "value": null,
-          "row": 18,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C18",
-          "value": null,
-          "row": 18,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D18",
-          "value": null,
-          "row": 18,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E18",
-          "value": null,
-          "row": 18,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F18",
-          "value": null,
-          "row": 18,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G18",
-          "value": null,
-          "row": 18,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A19",
-          "value": null,
-          "row": 19,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B19",
-          "value": null,
-          "row": 19,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C19",
-          "value": null,
-          "row": 19,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D19",
-          "value": null,
-          "row": 19,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E19",
-          "value": null,
-          "row": 19,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F19",
-          "value": null,
-          "row": 19,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G19",
-          "value": null,
-          "row": 19,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A20",
-          "value": null,
-          "row": 20,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B20",
-          "value": null,
-          "row": 20,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C20",
-          "value": null,
-          "row": 20,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D20",
-          "value": null,
-          "row": 20,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E20",
-          "value": null,
-          "row": 20,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F20",
-          "value": null,
-          "row": 20,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G20",
-          "value": null,
-          "row": 20,
           "col": 7,
           "rowspan": 1,
           "colspan": 1,
@@ -11551,258 +10595,6 @@
           "ref": "G16",
           "value": null,
           "row": 16,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A17",
-          "value": null,
-          "row": 17,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B17",
-          "value": null,
-          "row": 17,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C17",
-          "value": null,
-          "row": 17,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D17",
-          "value": null,
-          "row": 17,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E17",
-          "value": null,
-          "row": 17,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F17",
-          "value": null,
-          "row": 17,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G17",
-          "value": null,
-          "row": 17,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A18",
-          "value": null,
-          "row": 18,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B18",
-          "value": null,
-          "row": 18,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C18",
-          "value": null,
-          "row": 18,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D18",
-          "value": null,
-          "row": 18,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E18",
-          "value": null,
-          "row": 18,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F18",
-          "value": null,
-          "row": 18,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G18",
-          "value": null,
-          "row": 18,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A19",
-          "value": null,
-          "row": 19,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B19",
-          "value": null,
-          "row": 19,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C19",
-          "value": null,
-          "row": 19,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D19",
-          "value": null,
-          "row": 19,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E19",
-          "value": null,
-          "row": 19,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F19",
-          "value": null,
-          "row": 19,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G19",
-          "value": null,
-          "row": 19,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A20",
-          "value": null,
-          "row": 20,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B20",
-          "value": null,
-          "row": 20,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C20",
-          "value": null,
-          "row": 20,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D20",
-          "value": null,
-          "row": 20,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E20",
-          "value": null,
-          "row": 20,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F20",
-          "value": null,
-          "row": 20,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G20",
-          "value": null,
-          "row": 20,
           "col": 7,
           "rowspan": 1,
           "colspan": 1,
@@ -14339,132 +13131,6 @@
           "rowspan": 1,
           "colspan": 1,
           "is_merged": true
-        },
-        {
-          "ref": "A19",
-          "value": null,
-          "row": 19,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B19",
-          "value": null,
-          "row": 19,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C19",
-          "value": null,
-          "row": 19,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D19",
-          "value": null,
-          "row": 19,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E19",
-          "value": null,
-          "row": 19,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F19",
-          "value": null,
-          "row": 19,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G19",
-          "value": null,
-          "row": 19,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A20",
-          "value": null,
-          "row": 20,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B20",
-          "value": null,
-          "row": 20,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C20",
-          "value": null,
-          "row": 20,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D20",
-          "value": null,
-          "row": 20,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E20",
-          "value": null,
-          "row": 20,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F20",
-          "value": null,
-          "row": 20,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G20",
-          "value": null,
-          "row": 20,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
         }
       ],
       "estructura_dias": [
@@ -18669,195 +17335,6 @@
           "rowspan": 1,
           "colspan": 1,
           "is_merged": true
-        },
-        {
-          "ref": "A18",
-          "value": null,
-          "row": 18,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B18",
-          "value": null,
-          "row": 18,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C18",
-          "value": null,
-          "row": 18,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D18",
-          "value": null,
-          "row": 18,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E18",
-          "value": null,
-          "row": 18,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F18",
-          "value": null,
-          "row": 18,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G18",
-          "value": null,
-          "row": 18,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A19",
-          "value": null,
-          "row": 19,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B19",
-          "value": null,
-          "row": 19,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C19",
-          "value": null,
-          "row": 19,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D19",
-          "value": null,
-          "row": 19,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E19",
-          "value": null,
-          "row": 19,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F19",
-          "value": null,
-          "row": 19,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G19",
-          "value": null,
-          "row": 19,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "A20",
-          "value": null,
-          "row": 20,
-          "col": 1,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "B20",
-          "value": null,
-          "row": 20,
-          "col": 2,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "C20",
-          "value": null,
-          "row": 20,
-          "col": 3,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "D20",
-          "value": null,
-          "row": 20,
-          "col": 4,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "E20",
-          "value": null,
-          "row": 20,
-          "col": 5,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "F20",
-          "value": null,
-          "row": 20,
-          "col": 6,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
-        },
-        {
-          "ref": "G20",
-          "value": null,
-          "row": 20,
-          "col": 7,
-          "rowspan": 1,
-          "colspan": 1,
-          "is_merged": false
         }
       ],
       "estructura_dias": [

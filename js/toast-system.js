@@ -1,6 +1,6 @@
 "use strict";
 
-// Inyectamos los estilos de los botones de confirmación
+// Inyectamos los estilos de los botones de confirmaciÃ³n
 const toastStyles = document.createElement('style');
 toastStyles.innerHTML = `
   .toast-actions { display: flex; gap: 12px; margin-top: 12px; justify-content: center; }
@@ -11,25 +11,24 @@ toastStyles.innerHTML = `
 `;
 document.head.appendChild(toastStyles);
 
-window.Toast = {
+export const Toast = {
   show: function(message, type = 'info', duration = 3000) {
     const container = document.getElementById("toastContainer");
     if (!container) return;
-    
     const toast = document.createElement("div");
     toast.className = `toast ${type}`;
     toast.textContent = message;
     
-    container.appendChild(toast);
+    document.body.appendChild(toast);
     requestAnimationFrame(() => toast.classList.add("show"));
     
     setTimeout(() => {
-      toast.classList.remove("show");
-      toast.addEventListener("transitionend", () => toast.remove());
+      toast.style.animation = "slideOut 0.3s ease-out forwards";
+      setTimeout(() => toast.remove(), 300);
     }, duration);
   },
 
-  // NUEVO: Toast con botones de confirmación
+  // NUEVO: Toast con botones de confirmaciÃ³n
   confirm: function(message, onConfirm) {
     const container = document.getElementById("toastContainer");
     if (!container) return;
@@ -59,3 +58,4 @@ window.Toast = {
     };
   }
 };
+window.Toast = Toast;
