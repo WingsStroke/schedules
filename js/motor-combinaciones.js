@@ -413,5 +413,84 @@ export const MotorCombinaciones = {
         grupos: a.grupos.length
       }))
     };
+  },
+
+  // ==========================================
+  // SOPORTE PARA WEB WORKERS (ASÍNCRONO)
+  // ==========================================
+  worker: null,
+  
+  initWorker() {
+    if (!this.worker && typeof window !== 'undefined' && window.Worker) {
+      this.worker = new Worker(new URL('./motor.worker.js', import.meta.url), { type: 'module' });
+    }
+  },
+
+  generarCombinacionesAsync() {
+    return new Promise((resolve) => {
+      this.initWorker();
+      if (!this.worker) {
+        // Fallback síncrono si el navegador no soporta workers
+        const res = this.generarCombinaciones();
+        resolve(res);
+        return;
+      }
+
+      this.worker.onmessage = (e) => {
+        if (e.data.type === 'GENERATE_RESULT') {
+          this.combinaciones = e.data.payload.combinaciones;
+          resolve(e.data.payload);
+        } else if (e.data.type === 'ERROR') {
+          resolve({ exito: false, mensaje: e.data.payload, combinaciones: [] });
+        }
+      };
+
+      this.worker.postMessage({
+        type: 'GENERATE',
+        payload: {
+          asignaturas: this.asignaturasSeleccionadas,
+          maxCombinaciones: this.maxCombinaciones
+        }
+      });
+    });
+  },
+  
+  descartarCombinacionAsync(index) {
+     return new Promise((resolve) => {
+       if (!this.worker) {
+         resolve(this.descartarCombinacion(index));
+         return;
+       }
+       
+       this.worker.onmessage = (e) => {
+         if (e.data.type === 'DISCARD_RESULT') {
+           this.combinaciones = e.data.payload.combinaciones;
+           resolve(e.data.payload.success);
+         }
+       };
+       
+       this.worker.postMessage({
+         type: 'DISCARD',
+         payload: { index }
+       });
+     });
+  },
+
+  regenerarCombinacionesAsync() {
+     return new Promise((resolve) => {
+       if (!this.worker) {
+         resolve(this.regenerarCombinaciones());
+         return;
+       }
+       
+       this.worker.onmessage = (e) => {
+         if (e.data.type === 'REGENERATE_RESULT') {
+           this.combinaciones = e.data.payload.combinaciones;
+           resolve(e.data.payload);
+         }
+       };
+       
+       this.worker.postMessage({ type: 'REGENERATE' });
+     });
   }
 };

@@ -180,18 +180,22 @@ export const SidebarPanel = {
   },
   
   // Regenerar combinaciones
-  regenerarCombinaciones() {
-
-    
+  async regenerarCombinaciones() {
     if (typeof MotorCombinaciones !== 'undefined') {
-      const resultado = MotorCombinaciones.regenerarCombinaciones();
+      const container = document.getElementById('minihorariosContainerSidebar');
+      if (container) {
+        container.innerHTML = `<div class="sidebar-empty-state" style="padding: 30px 10px;">
+          <div style="width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #1d4ed8; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px auto;"></div>
+          <h5>Recalculando...</h5>
+          <p style="color: #666; font-size: 13px;">Regenerando combinaciones en segundo plano.</p>
+        </div>`;
+      }
+
+      const resultado = await MotorCombinaciones.regenerarCombinacionesAsync();
       
-      if (resultado.exito) {
-        // Actualizar vista
+      if (resultado && resultado.exito) {
         this.actualizarMinihorarios();
         this.ocultarBotonRegenerar();
-        
-
       }
     }
   },

@@ -324,21 +324,21 @@ export const MinihorariosUI = {
     }
   },
   
-  descartarCombinacion(index) {
+  async descartarCombinacion(index) {
+    if (typeof MotorCombinaciones !== 'undefined' && typeof SidebarPanel !== 'undefined') {
+      // Mostrar loading en el minihorario específico
+      const containerId = `minihorario-${index}`;
+      const element = document.getElementById(containerId);
+      if (element) {
+        element.style.opacity = '0.5';
+        element.style.pointerEvents = 'none';
+      }
 
-    
-    // Descartar en el motor
-    if (typeof MotorCombinaciones !== 'undefined') {
-      const descartada = MotorCombinaciones.descartarCombinacion(index);
+      const descartada = await MotorCombinaciones.descartarCombinacionAsync(index);
       
       if (descartada) {
-        // Actualizar vista en sidebar
-        if (typeof SidebarPanel !== 'undefined') {
-          SidebarPanel.actualizarMinihorarios();
-          SidebarPanel.mostrarBotonRegenerar();
-        }
-        
-
+        SidebarPanel.actualizarMinihorarios();
+        SidebarPanel.mostrarBotonRegenerar();
       }
     }
   },

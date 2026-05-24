@@ -219,8 +219,21 @@ function eliminarAsignatura(asignaturaId) {
   generarYMostrarCombinaciones();
 }
 
-function generarYMostrarCombinaciones() {
-  const resultado = MotorCombinaciones.generarCombinaciones();
+async function generarYMostrarCombinaciones() {
+  if (typeof SidebarPanel !== 'undefined') {
+    const container = document.getElementById('minihorariosContainerSidebar');
+    if (container) {
+      container.innerHTML = `<div class="sidebar-empty-state" style="padding: 30px 10px;">
+        <div style="width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #1d4ed8; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px auto;"></div>
+        <h5>Calculando...</h5>
+        <p style="color: #666; font-size: 13px;">Generando combinaciones libres de choques en segundo plano.</p>
+      </div>`;
+    }
+  }
+
+  // Llamada al Web Worker (sin bloquear la UI)
+  const resultado = await MotorCombinaciones.generarCombinacionesAsync();
+  
   if (typeof SidebarPanel !== 'undefined') {
     if (resultado.exito) {
       SidebarPanel.actualizarMinihorarios();
