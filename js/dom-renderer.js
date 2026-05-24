@@ -12,14 +12,35 @@ export const DOMRenderer = {
   },
 
   rebuildScheduleView() {
-    renderCache.renderedSubjects.clear();
     if (currentScheduleIndex === null) return;
-    this.construirHorario();
+    
+    const scheduleBody = document.querySelector("#schedule tbody");
+    
+    // 🚀 OPTIMIZACIÓN: Solo construir la cuadrícula pesada una vez
+    if (!editorState.cellMatrix || editorState.cellMatrix.length === 0 || !scheduleBody || scheduleBody.children.length === 0) {
+      this.construirHorario();
+    } else {
+      // En vez de destruir el DOM, solo limpiamos los bloqueos visuales
+      this.clearBlockedCells();
+    }
+    
     this.syncSubjectsWithGrid();
     this.renderSubjects();
     
-    // Inicializar el escuchador de scroll para el diseño responsivo
     this.initScrollIndicator();
+  },
+
+  clearBlockedCells() {
+    if (!editorState.cellMatrix) return;
+    for (let r = 0; r < editorState.cellMatrix.length; r++) {
+      for (let c = 0; c < editorState.cellMatrix[r].length; c++) {
+        const cellData = editorState.cellMatrix[r][c];
+        if (cellData && cellData.element) {
+          cellData.element.classList.remove("blocked");
+          cellData.element.style.borderTop = "";
+        }
+      }
+    }
   },
 
   construirHorario() {
@@ -92,6 +113,7 @@ export const DOMRenderer = {
     const currentSchedule = schedules[currentScheduleIndex];
     const currentMap = new Map(currentSchedule.subjects.map(s => [s.id, s]));
     
+    // Limpiar materias que ya no existen
     renderCache.renderedSubjects.forEach((_, id) => {
       if (!currentMap.has(id)) {
         document.querySelector(`[data-subject-id="${id}"]`)?.remove();
@@ -100,11 +122,25 @@ export const DOMRenderer = {
     });
 
     currentSchedule.subjects.forEach(sub => {
-      document.querySelector(`[data-subject-id="${sub.id}"]`)?.remove();
       const baseCell = editorState.cellMatrix[sub.row]?.[sub.col];
       if (!baseCell || baseCell.jornada !== sub.jornada) return;
 
-      const div = document.createElement("div");
+      // Generar una firma única del estado de la materia
+      const hash = `${sub.id}-${sub.row}-${sub.col}-${sub.blocks}-${sub.color}-${sub.name}-${sub.program}-${sub.aula}-${sub.group}-${sub.credits}-${sub.showProgram}-${sub.showAula}-${sub.showGroup}-${sub.showCredits}`;
+      const cached = renderCache.renderedSubjects.get(sub.id);
+      
+      let div = document.querySelector(`[data-subject-id="${sub.id}"]`);
+
+      // 🚀 OPTIMIZACIÓN: Si la materia no ha cambiado absolutamente nada, reutilizamos el DOM
+      if (div && cached && cached._hash === hash) {
+        this.applySubjectBlocks(sub);
+        return;
+      }
+
+      // Si cambió o no existía, lo recreamos
+      if (div) div.remove();
+
+      div = document.createElement("div");
       div.className = "subject";
       div.setAttribute("data-subject-id", sub.id);
       div.style.cssText = `position: absolute; top: 3px; left: 3px; width: calc(100% - 6px); height: calc(${sub.blocks * this.getCellHeight()}px - 6px); box-sizing: border-box; background: ${sub.color}; box-shadow: 0 2px 6px rgba(0,0,0,0.08); border-radius: 6px;`;
@@ -118,16 +154,34 @@ export const DOMRenderer = {
           ${sub.showCredits && sub.credits ? `<span class="subject-info subject-credits">${sub.credits} cr</span>` : ""}
         </div>
       `;
-      div.onclick = (e) => { e.stopPropagation(); if(state.isDuplicating()){ state.cancelDuplication(); } else { openEditSubjectModal(sub); } };
       
-      for (let i = 1; i < sub.blocks; i++) {
-        const covered = editorState.cellMatrix[sub.row + i]?.[sub.col];
-        if (covered) { covered.element.classList.add("blocked"); covered.element.style.borderTop = "none"; }
-      }
+      // Asignar eventos de nuevo
+      div.onclick = (e) => { 
+        e.stopPropagation(); 
+        if(state.isDuplicating()){ 
+          state.cancelDuplication(); 
+        } else { 
+          openEditSubjectModal(sub); 
+        } 
+      };
+      
+      this.applySubjectBlocks(sub);
       
       baseCell.element.appendChild(div);
-      renderCache.renderedSubjects.set(sub.id, {...sub});
+      
+      // Guardar en caché con el nuevo hash
+      renderCache.renderedSubjects.set(sub.id, {...sub, _hash: hash});
     });
+  },
+
+  applySubjectBlocks(sub) {
+    for (let i = 1; i < sub.blocks; i++) {
+      const covered = editorState.cellMatrix[sub.row + i]?.[sub.col];
+      if (covered) { 
+        covered.element.classList.add("blocked"); 
+        covered.element.style.borderTop = "none"; 
+      }
+    }
   },
 
   truncarNombre(nombre, max = 40) {
