@@ -141,8 +141,9 @@ export const SistemaCargaOfertas = {
           }
           
           for (const grupo of asignatura.grupos) {
+            const grupoNombreStr = String(grupo.grupo || '');
             resultado.grupos.push({
-              id: asigId + '_' + grupo.grupo.toLowerCase() + '_' + oferta.programaId,
+              id: asigId + '_' + grupoNombreStr.toLowerCase() + '_' + oferta.programaId,
               grupo: grupo.grupo,
               programa: oferta.programaNombre,
               programaId: oferta.programaId,
