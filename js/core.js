@@ -91,7 +91,7 @@ export async function safeFetch(url, options = {}) {
 export const APP_CONFIG = {
   SCHEMA_VERSION: 3,
   LAST_VERSION_KEY: "lastSeenChangelogVersion",
-  R2_BUCKET_URL: "https://TU_BUCKET_R2.r2.dev", // Reemplaza esto con tu URL real de Cloudflare R2
+  R2_BUCKET_URL: "https://pub-ed2a196c92624cfbadea4f7a02c13d95.r2.dev", // Reemplaza esto con tu URL real de Cloudflare R2
   JORNADAS: {
     diurna: { start: "07:00", end: "18:00", visualBlockMinutes: 50, startMinutes: 7 * 60, blockMinutes: 100 },
     nocturna: { start: "17:30", end: "22:00", visualBlockMinutes: 45, startMinutes: 17 * 60, blockMinutes: 90 }

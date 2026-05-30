@@ -262,6 +262,41 @@ body::before {
   transform: translateY(-1px);
 }
 
+.actions button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Selector de semestre dentro de .actions */
+#semestreSelectWrapper label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+}
+
+#semestreSelect {
+  padding: 7px 10px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.85);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+#semestreSelect:focus {
+  outline: none;
+  border-color: rgba(0,0,0,0.4);
+}
+
+#semestreSelect:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;

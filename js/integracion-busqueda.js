@@ -27,21 +27,68 @@ function normalizarTexto(texto) {
 // 2. INICIALIZACIÓN
 window.addEventListener('DOMContentLoaded', async () => {
 
-  
-  const exito = await SistemaCargaOfertas.inicializar();
   const searchBtn = document.getElementById('searchSubjectBtn');
-  
+
+  if (searchBtn) {
+    searchBtn.disabled = true;
+    searchBtn.title = 'Cargando ofertas académicas...';
+  }
+
+  const exito = await SistemaCargaOfertas.inicializar();
+
   if (exito) {
-
-    if (searchBtn) searchBtn.disabled = false;
+    _poblarSelectorSemestre();
+    if (searchBtn) {
+      searchBtn.disabled = false;
+      searchBtn.title = '';
+    }
   } else {
-
     if (searchBtn) {
       searchBtn.disabled = true;
-      searchBtn.title = 'Error cargando ofertas académicas';
+      searchBtn.title = 'No se pudieron cargar las ofertas académicas';
     }
   }
 });
+
+// Rellena el <select> de semestres con los periodos disponibles en R2
+function _poblarSelectorSemestre() {
+  const select = document.getElementById('semestreSelect');
+  if (!select) return;
+
+  const semestres = SistemaCargaOfertas.getSemestresDisponibles();
+  select.innerHTML = '';
+
+  semestres.forEach(s => {
+    const option = document.createElement('option');
+    option.value = s.periodo;
+    option.textContent = s.label;
+    if (s.periodo === SistemaCargaOfertas.semestreActual) option.selected = true;
+    select.appendChild(option);
+  });
+
+  // Mostrar el contenedor del selector
+  const wrapper = document.getElementById('semestreSelectWrapper');
+  if (wrapper) wrapper.style.display = 'flex';
+
+  select.addEventListener('change', async () => {
+    const searchBtn = document.getElementById('searchSubjectBtn');
+    const periodo = select.value;
+
+    if (searchBtn) {
+      searchBtn.disabled = true;
+      searchBtn.title = `Cargando semestre ${periodo}...`;
+    }
+    select.disabled = true;
+
+    const exito = await SistemaCargaOfertas.cambiarSemestre(periodo);
+
+    select.disabled = false;
+    if (searchBtn) {
+      searchBtn.disabled = !exito;
+      searchBtn.title = exito ? '' : 'Error cargando el semestre seleccionado';
+    }
+  });
+}
 
 // 3. MOTOR DE BÚSQUEDA
 function buscarAsignatura(query) {
