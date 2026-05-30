@@ -30,7 +30,7 @@ export const SistemaCargaOfertas = {
 
     try {
       const baseUrl = APP_CONFIG.R2_BUCKET_URL.replace(/\/$/, '');
-      const response = await fetch(`${baseUrl}/data/ofertas.json`);
+      const response = await fetch(`${baseUrl}/ofertas.json`);
 
       if (!response.ok) {
         throw new Error('No se pudo cargar ofertas.json');
