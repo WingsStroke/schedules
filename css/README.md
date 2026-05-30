@@ -59,7 +59,7 @@ Los subjects multibloque se extienden visualmente sobre las celdas bloqueadas de
 
 ### Sistema de colores de asignatura
 
-Siempre usar `getSubjectColor(nombre)` definida en `app.js`. Nunca crear paletas locales en otros módulos.
+Siempre usar `getSubjectColor(nombre)` definida en `js/core.js`. Nunca crear paletas locales en otros módulos.
 
 ### Modales
 

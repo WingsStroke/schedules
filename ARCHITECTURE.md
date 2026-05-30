@@ -6,44 +6,47 @@
 
 ## 📐 **Visión General de la Arquitectura**
 
-### **Patrón de Diseño: Modular Vanilla JS**
+### **Patrón de Diseño: ES Modules (ES6)**
 
-El sistema está construido sin frameworks, utilizando JavaScript vanilla con módulos cohesivos que se comunican mediante:
-- Variables globales compartidas (schedules, currentScheduleIndex)
-- Objetos singleton (MotorCombinaciones, SidebarPanel)
-- Event-driven architecture (eventos del DOM)
+El sistema está construido como una aplicación frontend moderna basada en **ES Modules (ES6)**, donde cada archivo declara explícitamente sus importaciones y exportaciones. Ya no se depende de un orden estricto de scripts con `defer` en el HTML ni de namespaces globales redundantes. El punto de entrada principal es [`js/main.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/main.js), el cual importa la lógica necesaria de los distintos subsistemas.
 
 ```
 ┌──────────────────────────────────────────────────────────┐
-│                    index.html (509L)                      │
+│                    index.html                            │
 │              Estructura + Modales + Tablas                │
 └────────────────────────┬─────────────────────────────────┘
                          │
-         ┌───────────────┴────────────────┐
-         │                                │
-         ▼                                ▼
-┌─────────────────┐              ┌──────────────────┐
-│   CSS Layer     │              │    JS Layer      │
-│   (3,944L)      │              │    (5,278L)      │
-└─────────────────┘              └──────────────────┘
-         │                                │
-         │                                │
-    6 archivos                       8 archivos
-         │                                │
-         ▼                                ▼
-┌─────────────────┐              ┌──────────────────┐
-│ Rendering Layer │◄────────────►│  Data Layer      │
-│ (Browser DOM)   │              │  (LocalStorage)  │
-└─────────────────┘              └──────────────────┘
+          ┌───────────────┴────────────────┐
+          │                                │
+          ▼                                ▼
+ ┌─────────────────┐              ┌──────────────────┐
+ │   CSS Layer     │              │    JS Layer      │
+ │   (5,200+ L)    │              │  (ES Modules)    │
+ └─────────────────┘              └────────┬─────────┘
+          │                                │
+          │                         18 Módulos JS
+          │                                │
+          ▼                                ▼
+ ┌─────────────────┐              ┌──────────────────┐
+ │ Rendering Layer │◄────────────►│  Data Layer      │
+ │ (DOM Renderer)  │              │ (IndexedDB + R2) │
+ └─────────────────┘              └──────────────────┘
 ```
 
 ---
 
 ## 🎯 **Capas de la Aplicación**
 
-### **1. Data Layer (Persistencia)**
+### **1. Data Layer (Persistencia y Origen de Datos)**
 
-**LocalStorage Structure:**
+El sistema combina almacenamiento local asíncrono y consumo dinámico de datos desde un almacenamiento en la nube.
+
+#### **A. Persistencia Local: IndexedDB (`StorageDB`)**
+Ubicado en [`js/storage-db.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/storage-db.js), es un motor de base de datos asíncrono que almacena los horarios del usuario. Supera el límite de 5MB del LocalStorage tradicional.
+* **Base de Datos:** `UdeCHorariosDB` (Versión 1)
+* **Object Store:** `store` (Almacenamiento clave-valor genérico)
+
+Estructura de datos persistida:
 ```javascript
 {
   // === SCHEDULES ===
@@ -56,293 +59,94 @@ El sistema está construido sin frameworks, utilizando JavaScript vanilla con m�
         {
           id: "uuid",
           name: "Programación I",
-          row: 0,           // Índice de bloque temporal
-          col: 1,           // Día de semana (0=Lunes)
-          blocks: 2,        // Bloques de 90min
+          group: "A",
+          program: "Ing. Civil Informática",
+          aula: "Sala A-301",
+          credits: 5,
+          row: 0,           // Bloque temporal en la tabla
+          col: 1,           // Día de la semana (0 = Lunes)
+          blocks: 2,        // Cantidad de bloques de clase (90/50 min)
           color: "#1d4ed8",
-          // ... más campos
+          jornada: "diurna",
+          startMinutes: 420,
+          endMinutes: 520,
+          showCredits: true,
+          showGroup: true,
+          showProgram: true,
+          showAula: true
         }
       ]
     }
   ],
   
   // === STATE ===
-  "currentScheduleIndex": 0,
-  
-  // === PREFERENCES ===
-  "darkMode": true,
-  "lastSeenChangelogVersion": "1.0.8",
-  
-  // === CACHED DATA ===
-  "ofertaAcademica": {
-    // JSON completo de oferta académica UdeC
-  }
+  "currentScheduleIndex": 0
 }
 ```
 
-**Gestión:**
-- `SafeStorage` (app.js, línea 159): Wrapper con manejo de errores
-- Auto-save en cada operación crítica
-- Validación de schema version para migraciones
+#### **B. Preferencias Cortas: `SafeStorage`**
+Ubicado en [`js/core.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/core.js). Es un wrapper seguro alrededor de `localStorage` para almacenar estados síncronos sencillos (ej: `darkMode`, `lastSeenChangelogVersion`).
+
+#### **C. Origen de Datos Académicos: Cloudflare R2**
+Las ofertas académicas (los archivos JSON de las materias) se almacenan en un bucket público de Cloudflare R2.
+* **URL del Bucket:** `https://pub-ed2a196c92624cfbadea4f7a02c13d95.r2.dev` (Configurado en `APP_CONFIG.R2_BUCKET_URL` en `core.js`).
+* **Índice Global:** Un archivo `index.json` en la raíz del bucket lista los períodos académicos (semestres) disponibles de manera dinámica.
+* **Estructura del Bucket:**
+  ```
+  bucket/
+  ├── index.json            ← Lista de semestres (ej: ["2026-1", "2025-2"])
+  ├── 2026-1/
+  │   ├── sistemas.xlsx.json
+  │   ├── alimentos.xlsx.json
+  │   └── ...
+  └── 2025-2/
+      └── ...
+  ```
 
 ---
 
-### **2. Business Logic Layer**
+### **2. Business Logic Layer (Lógica de Negocio)**
 
-#### **A. Core Module (app.js - 2,960 líneas)**
+#### **A. Administrador de Estado ([`js/state-manager.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/state-manager.js))**
+Mantiene la única fuente de verdad para el estado de la aplicación (`schedules`, `editorState`).
+* Realiza las mutaciones de los horarios.
+* Ejecuta validaciones de esquemas al importar y exportar datos.
+* Orquesta el auto-guardado en IndexedDB mediante `StorageDB`.
 
-**Responsabilidades:**
-- Gestión del estado global de schedules
-- CRUD de horarios
-- Renderizado de tabla principal
-- Sistema de modales
-- Calculadora mensual
-- Changelog system
+#### **B. Motor de Combinaciones ([`js/motor-combinaciones.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/motor-combinaciones.js))**
+Genera combinaciones horarias válidas sin choques a partir de las asignaturas seleccionadas.
+* Filtra las asignaturas por grupo, programa y profesor.
+* Realiza el producto cartesiano de los grupos disponibles.
+* Para evitar congelamientos de la interfaz, el cálculo intensivo se delega a un hilo de fondo utilizando un Web Worker ([`js/motor.worker.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/motor.worker.js)).
 
-**Secciones clave:**
-```javascript
-// ErrorHandler (línea 3-157)
-// ├─ Captura errores globales
-// ├─ Logging estructurado
-// └─ Mensajes user-friendly
+#### **C. Traductor de Combinaciones ([`js/cargador-combinaciones.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/cargador-combinaciones.js))**
+Traduce las combinaciones matemáticas calculadas por el motor en listas de asignaturas con la estructura visual (bloques, días de inicio/fin) apta para el renderizador de horarios.
 
-// SafeStorage (línea 159-261)
-// ├─ Wrapper de localStorage
-// ├─ Manejo de QuotaExceededError
-// └─ JSON parsing seguro
+#### **D. Carga de Ofertas ([`js/sistema-carga-ofertas.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/sistema-carga-ofertas.js))**
+Se encarga de obtener el índice de semestres desde R2 y de descargar y parsear el JSON de la carrera seleccionada. Integra validaciones robustas para evitar caídas de la aplicación por datos nulos.
 
-// APP_CONFIG (línea 338-357)
-// └─ Constantes globales
-
-// Schedule Management (línea 753-1500)
-// ├─ createSchedule()
-// ├─ deleteSchedule()
-// ├─ renameSchedule()
-// └─ switchSchedule()
-
-// Subject Management (línea 1695-2150)
-// ├─ Modal de asignaturas
-// ├─ addSubject()
-// ├─ editSubject()
-// └─ deleteSubject()
-
-// Rendering Engine (línea 2200-2600)
-// ├─ renderSchedule()
-// ├─ createSubjectDiv()
-// └─ createSubjectContent()
-```
-
-#### **B. Combinations Engine (motor-combinaciones.js - 394 líneas)**
-
-**Algoritmo de generación:**
-```javascript
-MotorCombinaciones = {
-  asignaturasSeleccionadas: [],  // Input: Asignaturas elegidas
-  maxCombinaciones: 5,            // Límite de resultados
-  combinaciones: [],              // Output: Combinaciones válidas
-  
-  generarCombinaciones() {
-    // 1. Aplicar filtros (grupos, programas, profesores)
-    // 2. Producto cartesiano de grupos
-    // 3. Validar choques (detectarChoque)
-    // 4. Retornar primeras N combinaciones válidas
-  },
-  
-  detectarChoque(bloque1, bloque2) {
-    // Lógica: Mismo día + overlap de horarios
-    // Retorna: boolean
-  }
-}
-```
-
-**Flujo:**
-```
-Asignaturas + Filtros
-        ↓
-Producto Cartesiano
-        ↓
-Validación de Choques  ──> Combinaciones Válidas
-        ↓                          ↓
-Combinaciones Descartadas    todasLasCombinaciones[]
-```
-
-#### **C. Combinations Loader (cargador-combinaciones.js - 507 líneas)**
-
-**Responsabilidad:** Convertir combinaciones abstractas a formato de horario renderizable
-
-```javascript
-CargadorCombinaciones = {
-  // Input: Combinación (array de grupos)
-  // Output: Array de subjects para renderizar
-  
-  cargarCombinacion(combinacion, jornada) {
-    // 1. Por cada grupo en combinación:
-    //    a. Obtener horarios del grupo
-    //    b. Mapear a bloques de tabla
-    //    c. Calcular row/col/blocks
-    // 2. Retornar subjects[]
-  },
-  
-  determinarJornada(horarios) {
-    // Heurística: Si >50% son nocturnos → "nocturna"
-  }
-}
-```
-
-**Mapeo de horarios:**
-```
-Horario del grupo:
-{
-  dia: "Lunes",
-  inicio: "08:00",
-  fin: "11:00"
-}
-        ↓
-Conversión a bloques:
-{
-  col: 0,              // Lunes = 0
-  row: 0,              // Bloque 8:00-9:30 = 0
-  blocks: 2,           // (11:00-8:00)/90min = 2
-  startMinutes: 480,   // 8*60 = 480
-  endMinutes: 660      // 11*60 = 660
-}
-```
+#### **E. Calculadora de Costos ([`js/calculadora-aguinaldo.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/calculadora-aguinaldo.js))**
+Contiene la lógica de negocio para estimar costos de transporte y alimentación mensuales. Cuenta con la lista oficial de festivos en Colombia para calcular de forma exacta los días de clases del mes consultado, detectando también huecos de tiempo entre clases que requieran viajes adicionales.
 
 ---
 
-### **3. Presentation Layer**
+### **3. Presentation Layer (Interfaz y Renderizado)**
 
-#### **A. Main Schedule Table**
+#### **A. Renderizador del Horario ([`js/dom-renderer.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/dom-renderer.js))**
+Motor de renderizado óptimo y desacoplado de la lógica de negocio. Utiliza una estrategia de pintado selectivo y caché de elementos para minimizar operaciones del DOM al actualizar la tabla.
+* Construye dinámicamente la tabla según la jornada activa (diurna: 7:00 a 18:00, nocturna: 17:30 a 22:00).
+* Calcula el alto de celda (`getCellHeight()`) de forma dinámica para ajustarse a las reglas responsivas de CSS (60px en escritorio, 40px en móvil).
+* Posiciona de forma absoluta las tarjetas de asignaturas multibloque basándose en los minutos de inicio y fin.
 
-**Construcción (app.js, línea 709):**
-```javascript
-function construirHorario() {
-  // 1. Determinar jornada (diurna/nocturna)
-  // 2. Obtener bloques correspondientes
-  // 3. Construir secciones (mañana, tarde, noche)
-  // 4. Insertar en DOM
-}
-```
+#### **B. Interfaz del Sidebar ([`js/sidebar-panel.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/sidebar-panel.js))**
+Administra el panel lateral interactivo:
+* Carga la lista de materias de la carrera actual.
+* Presenta los filtros de grupos, profesores e información del período académico.
+* Aloja el **Selector de Semestres** dinámico al fondo del panel, que permite consultar ofertas de períodos pasados y futuros consultando dinámicamente R2.
+* Administra las previsualizaciones de minihorarios ([`js/minihorarios-ui.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/minihorarios-ui.js)).
 
-**Bloques de tiempo:**
-```javascript
-// Diurna (generada dinámicamente)
-bloquesDiurnos = [
-  { inicio: "08:00", fin: "09:30", minutes: 480 },
-  { inicio: "09:40", fin: "11:10", minutes: 580 },
-  { inicio: "11:20", fin: "12:50", minutes: 680 },
-  // ... hasta 20:00
-]
-
-// Nocturna
-bloquesNocturnos = [
-  { inicio: "18:05", fin: "19:35", minutes: 1085 },
-  { inicio: "19:45", fin: "21:15", minutes: 1185 },
-  { inicio: "21:20", fin: "22:50", minutes: 1280 }
-]
-```
-
-**Matrix de celdas (editorState.cellMatrix):**
-```javascript
-// Array 2D: [filas][columnas]
-cellMatrix[row][col] = {
-  row: 0,
-  col: 1,
-  startMinutes: 480,
-  endMinutes: 570,
-  element: HTMLElement  // Referencia al TD
-}
-```
-
-#### **B. Subject Rendering**
-
-**Proceso (app.js, línea 2360):**
-```javascript
-function createSubjectDiv(subject) {
-  // 1. Crear DIV con clase "subject"
-  // 2. Calcular height (blocks * 90px)
-  // 3. Agregar createSubjectContent()
-  // 4. Event listeners (dobleclick → edit)
-  // 5. Insertar en celda correspondiente
-}
-
-function createSubjectContent(subject) {
-  // Renderiza interior de tarjeta:
-  // ┌─────────────────┐
-  // │ Nombre          │ ← Siempre
-  // │ Programa        │ ← Si showProgram
-  // │ Aula            │ ← Si showAula
-  // │ A        5 cr   │ ← Si showGroup/showCredits
-  // └─────────────────┘
-}
-```
-
-#### **C. Sidebar Panel (sidebar-panel.js - 836 líneas)**
-
-**Arquitectura:**
-```javascript
-SidebarPanel = {
-  isOpen: false,
-  
-  // === LIFECYCLE ===
-  inicializar() {
-    // Setup event listeners
-  },
-  
-  abrir() {
-    // Mostrar panel + overlay
-  },
-  
-  cerrar() {
-    // Ocultar panel
-  },
-  
-  // === ASIGNATURAS ===
-  actualizarAsignaturasSeleccionadas() {
-    // Renderiza lista de asignaturas
-  },
-  
-  agregarAsignaturaAlMotor(asignatura) {
-    // MotorCombinaciones.agregarAsignatura()
-  },
-  
-  // === FILTROS ===
-  toggleGrupo(index, grupoId) {
-    // Marca/desmarca grupo en filtros
-  },
-  
-  togglePrograma(index, programaNombre) {
-    // Similar para programas
-  },
-  
-  // === COMBINACIONES ===
-  regenerarCombinaciones() {
-    // 1. MotorCombinaciones.generarCombinaciones()
-    // 2. MinihorariosUI.mostrar()
-  }
-}
-```
-
-#### **D. Minihorarios (minihorarios-ui.js - 406 líneas)**
-
-**Renderizado de vista previa:**
-```javascript
-MinihorariosUI = {
-  mostrarCombinaciones(combinaciones) {
-    // 1. Por cada combinación:
-    //    a. Crear mini-tabla
-    //    b. Renderizar bloques simplificados
-    //    c. Agregar botones (crear/descartar)
-    // 2. Mostrar panel
-  },
-  
-  crearHorarioDesdeCombinacion(index) {
-    // 1. CargadorCombinaciones.cargarCombinacion()
-    // 2. app.js → createSchedule()
-    // 3. Cerrar panel
-  }
-}
-```
+#### **C. Sistema de Búsqueda ([`js/integracion-busqueda.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/integracion-busqueda.js))**
+Maneja el input de texto de búsqueda en el sidebar. Ejecuta normalización de texto (eliminando tildes y mayúsculas) sobre el catálogo de asignaturas cargado para garantizar resultados exactos y amigables.
 
 ---
 
@@ -351,598 +155,117 @@ MinihorariosUI = {
 ### **Flujo 1: Crear Asignatura Manualmente**
 
 ```
-Usuario click celda vacía
-        ↓
-openSubjectModal(row, col)  [app.js:1724]
-        ↓
-Usuario completa formulario
-        ↓
-saveSubjectBtn.onclick  [app.js:2087]
-        ↓
-┌─ Validaciones
-├─ Crear newSubject objeto
-├─ schedules[i].subjects.push(newSubject)
-├─ saveData() → localStorage
-└─ renderSchedule() → DOM update
+Usuario hace doble clic en celda vacía
+        │
+        ▼
+main.js (listener de celda) ──> Abre subjectModal
+        │
+        ▼
+Usuario ingresa los datos y presiona "Guardar"
+        │
+        ▼
+main.js (saveSubjectBtn.onclick)
+        ├─ Valida campos obligatorios
+        └─ Llama a state-manager.js:addSubjectToSchedule()
+                │
+                ▼
+state-manager.js (Modifica schedules[] en memoria)
+        ├─ Llama a saveData() ──> Guarda asíncronamente en StorageDB (IndexedDB)
+        └─ Dispara DOMRenderer.rebuildScheduleView() ──> Actualiza la tabla del DOM
 ```
 
-### **Flujo 2: Generar Combinaciones desde Oferta Académica**
+### **Flujo 2: Generar Combinaciones con R2 y Selector de Período**
 
 ```
-1. Cargar JSON oferta
-   ↓
-   sistema-carga-ofertas.js
-   │
-   ├─ parsearOfertaAcademica(json)
-   ├─ Normalizar estructura
-   └─ localStorage.ofertaAcademica = data
-
-2. Buscar asignaturas
-   ↓
-   integracion-busqueda.js
-   │
-   ├─ Usuario escribe query
-   ├─ Filtrar asignaturas
-   └─ Mostrar resultados en sidebar
-
-3. Seleccionar asignaturas
-   ↓
-   sidebar-panel.js
-   │
-   ├─ Click en asignatura
-   ├─ MotorCombinaciones.agregarAsignatura()
-   └─ Actualizar UI
-
-4. Aplicar filtros (opcional)
-   ↓
-   sidebar-panel.js
-   │
-   ├─ Expandir asignatura
-   ├─ Marcar grupos/programas/profesores
-   └─ asignatura.filtros = {...}
-
-5. Generar combinaciones
-   ↓
-   motor-combinaciones.js
-   │
-   ├─ generarCombinaciones()
-   ├─ Producto cartesiano con filtros
-   ├─ Validar choques
-   └─ Retornar primeras N válidas
-
-6. Visualizar minihorarios
-   ↓
-   minihorarios-ui.js
-   │
-   ├─ mostrarCombinaciones()
-   └─ Renderizar mini-tablas
-
-7. Crear horario desde combinación
-   ↓
-   cargador-combinaciones.js → app.js
-   │
-   ├─ cargarCombinacion() → subjects[]
-   ├─ createSchedule(name, subjects)
-   ├─ saveData()
-   └─ switchSchedule(index)
-```
-
-### **Flujo 3: Cálculo Mensual**
-
-```
-Usuario abre modal mensual
-        ↓
-Selecciona mes/año + costos
-        ↓
-calculateMonthlyBtn.onclick  [app.js:1303]
-        ↓
-┌─ Obtener días del mes
-├─ Obtener días con clases (from subjects)
-├─ Detectar huecos entre bloques
-├─ Calcular viajes extras por huecos
-├─ Total = (días × (transporte + merienda))
-└─ Mostrar resultado en modal
+DOMContentLoaded / Cambio de Semestre
+        │
+        ▼
+sistema-carga-ofertas.js:obtenerIndicesSemestre() ──> Obtiene index.json de R2
+        │
+        ▼
+sidebar-panel.js (Puebla selector de períodos e inicializa con el más reciente)
+        │
+        ▼
+Usuario selecciona una carrera y período
+        │
+        ▼
+sistema-carga-ofertas.js:cargarOfertaPorSemestre() ──> Descarga {semestre}/{programa}.json
+        │
+        ▼
+integracion-busqueda.js (Filtra y muestra materias en el Sidebar)
+        │
+        ▼
+Usuario selecciona materias y presiona "Generar Combinaciones"
+        │
+        ▼
+motor-combinaciones.js ──> Envía materias al Web Worker (motor.worker.js)
+        │
+        ▼
+Web Worker realiza producto cartesiano y filtros (hilo secundario)
+        │
+        ▼
+motor-combinaciones.js recibe el array de combinaciones óptimas
+        │
+        ▼
+minihorarios-ui.js renderiza las mini-cards en el panel
+        │
+        ▼
+Usuario elige combinación ──> cargador-combinaciones.js (traduce a subjects[])
+        │
+        ▼
+state-manager.js:createSchedule() ──> Guarda en IndexedDB y activa nuevo horario
 ```
 
 ---
 
-## 🎨 **Sistema de Estilos**
+## 🎨 **Sistema de Estilos y Responsividad**
 
-### **Arquitectura CSS**
+### **Estructura CSS Desacoplada**
 
-```
-styles.css (BASE)
-    ↓
-┌───┴────┬─────────┬──────────┐
-│        │         │          │
-▼        ▼         ▼          ▼
-dark    sidebar   filtros   mini
-mode              asig.     horarios
-```
+El diseño se basa en una arquitectura modular sin dependencias de frameworks CSS como Tailwind (vanilla CSS para máxima flexibilidad y rendimiento):
 
-**Modo Nocturno:**
-- `body.dark-mode` selector universal
-- Sobrescribe colores de `styles.css`
-- Glass morphism: `backdrop-filter: blur(10px)`
-- Variables CSS no usadas (para futuro)
+* [`styles.css`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/css/styles.css): Contiene los estilos base de la aplicación, el layout principal de la grilla horaria, tarjetas y modales.
+* [`dark-mode.css`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/css/dark-mode.css): Aplica la temática oscura y de glassmorphic utilizando selectores bajo `body.dark-mode`.
+* [`responsive.css`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/css/responsive.css): Contiene todos los media queries específicos para tabletas (768px) y móviles (480px).
+* Hojas de estilos específicas de componentes: [`sidebar-panel.css`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/css/sidebar-panel.css), [`filtros-asignaturas.css`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/css/filtros-asignaturas.css) y [`minihorarios-styles.css`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/css/minihorarios-styles.css).
 
-**Convenciones:**
-```css
-/* Estructura de archivo */
-/* ===== SECCIÓN ===== */
-.selector {
-  /* Propiedades alfabéticas (aprox) */
-}
+---
 
-/* Especificidad */
-- Evitar !important (excepto dark-mode overrides)
-- Max 3 niveles de anidación conceptual
-- IDs para elementos únicos, clases para estilos
+## 🧪 **Testing Integrado con Vitest**
+
+El proyecto cuenta con una suite de pruebas unitarias configurada mediante **Vitest** y **JSDOM** para garantizar la validez de los algoritmos críticos sin necesidad de un navegador completo.
+
+* **Tests de Lógica de Costos:** [`tests/calculadora-aguinaldo.test.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/tests/calculadora-aguinaldo.test.js) valida el conteo de días con clases y el cálculo financiero de alimentación y transporte.
+* **Tests del Generador:** [`tests/motor-combinaciones.test.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/tests/motor-combinaciones.test.js) simula la selección de asignaturas y comprueba que el motor detecte choques correctamente y genere las combinaciones libres de solapamientos esperadas.
+
+Para ejecutar las pruebas:
+```bash
+npm test
 ```
 
 ---
 
-## 🧩 **Patrones de Código**
+## 🛠️ **Entorno de Desarrollo y Despliegue**
 
-### **1. Error Handling**
+### **Desarrollo con Vite**
+El proyecto usa **Vite** como servidor de desarrollo rápido y empaquetador para producción.
+* Servidor de desarrollo: `npm run dev`
+* Compilación de producción: `npm run build`
+* Servidor de pruebas local (preview): `npm run preview`
 
-```javascript
-// Patrón usado en todo el código:
-try {
-  // Operación riesgosa
-  const data = JSON.parse(input);
-} catch (error) {
-  ErrorHandler.handleError(error, 'contexto');
-  return defaultValue;
-}
-
-// ErrorHandler centralizado:
-ErrorHandler = {
-  logError(errorInfo),        // Registra en errorLog[]
-  handleError(error, context), // Muestra al usuario
-  wrap(fn, context)           // Wrapper para async functions
-}
-```
-
-### **2. Modal Management**
-
-```javascript
-// Patrón estándar para todos los modales:
-
-// Abrir
-function openModal() {
-  modal.classList.add("active");
-  resetModalState();  // Limpiar campos
-}
-
-// Cerrar
-closeBtn.onclick = () => {
-  modal.classList.remove("active");
-  clearState();
-};
-
-// Click fuera cierra
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    modal.classList.remove("active");
-  }
-});
-```
-
-### **3. State Management**
-
-```javascript
-// Estado global en variables top-level:
-let schedules = [];
-let currentScheduleIndex = null;
-
-// Estado local en objetos:
-const editorState = {
-  currentCell: { row: null, col: null },
-  cellMatrix: [],
-  editingSubjectIndex: null
-};
-
-// Persistencia:
-function saveData() {
-  SafeStorage.setItem("schedules", JSON.stringify(schedules));
-  SafeStorage.setItem("currentScheduleIndex", currentScheduleIndex);
-}
-```
-
-### **4. DOM Manipulation**
-
-```javascript
-// Preferencia: createElement sobre innerHTML
-const div = document.createElement("div");
-div.className = "subject";
-div.textContent = subject.name;
-div.style.background = subject.color;
-
-// Event delegation cuando aplica
-table.addEventListener("click", (e) => {
-  const cell = e.target.closest("td.cell");
-  if (cell) handleCellClick(cell);
-});
-```
+### **CI/CD: GitHub Actions**
+El despliegue está automatizado mediante GitHub Actions. Al realizar un push a la rama principal, el workflow `.github/workflows/deploy.yml` compila el proyecto usando Vite y publica el bundle resultante en **GitHub Pages**.
+* **URL de Producción:** `https://github.com/WingsStroke/schedules`
 
 ---
 
-## 🔐 **Seguridad y Validación**
-
-### **Input Sanitization**
-
-```javascript
-// Sanitización básica (no hay XSS risk por createElement)
-const name = subjectNameInput.value.trim();
-if (!name) {
-  alert("El nombre es obligatorio");
-  return;
-}
-
-// JSON parsing seguro
-function safeJSONParse(jsonString, defaultValue = null) {
-  try {
-    return JSON.parse(jsonString);
-  } catch (e) {
-    ErrorHandler.logError({...});
-    return defaultValue;
-  }
-}
-```
-
-### **LocalStorage Limits**
-
-```javascript
-// Manejo de QuotaExceededError
-SafeStorage = {
-  setItem(key, value) {
-    try {
-      localStorage.setItem(key, value);
-    } catch (e) {
-      if (e.name === 'QuotaExceededError') {
-        alert('Almacenamiento lleno. Elimina horarios.');
-      }
-      throw e;
-    }
-  }
-}
-```
-
----
-
-## 🚀 **Performance**
-
-### **Optimizaciones Actuales**
-
-1. **Render Caching (limitado)**
-   ```javascript
-   const renderCache = {
-     lastRenderedScheduleId: null,
-     cellElements: {}
-   };
-   ```
-
-2. **Event Delegation**
-   - Un listener en `<table>` en lugar de N en cada celda
-
-3. **Lazy Rendering**
-   - Minihorarios solo se renderizan al mostrar panel
-
-4. **LocalStorage Batch**
-   - saveData() agrupa escrituras
-
-### **Áreas de Mejora Potencial**
-
-- ⚠️ `renderSchedule()` reconstruye DOM completo cada vez
-- ⚠️ No usa Virtual DOM
-- ⚠️ Búsqueda no está debounced (pero tiene timeout 300ms)
-- ⚠️ Sin Web Workers para generación de combinaciones grandes
-
----
-
-## 📦 **Dependencias Externas**
-
-**NINGUNA.** El proyecto es 100% vanilla:
-- ❌ No jQuery
-- ❌ No React/Vue/Angular
-- ❌ No Lodash
-- ❌ No CSS frameworks (Bootstrap, Tailwind)
-
-**Solo APIs del navegador:**
-- localStorage API
-- DOM API
-- Fetch API (potencialmente para futuro)
-
----
-
-## 🔄 **Ciclo de Vida de la Aplicación**
-
-```javascript
-// 1. DOMContentLoaded
-document.addEventListener("DOMContentLoaded", () => {
-  
-  // 2. Inicialización de subsistemas
-  ErrorHandler.init();
-  DarkMode.initialize();
-  SidebarPanel.inicializar();
-  MinihorariosUI.inicializar();
-  
-  // 3. Cargar datos de localStorage
-  loadData();
-  
-  // 4. Verificar changelog
-  checkChangelogVersion(changelogData);
-  
-  // 5. Renderizar vista inicial
-  if (schedules.length === 0) {
-    showHomeView();
-  } else {
-    renderScheduleList();
-    if (currentScheduleIndex !== null) {
-      switchSchedule(currentScheduleIndex);
-    }
-  }
-  
-  // 6. Setup event listeners globales
-  // ...
-});
-```
-
----
-
-## 🗂️ **Convenciones de Nomenclatura**
-
-### **Variables**
-```javascript
-// camelCase para variables y funciones
-let currentScheduleIndex = 0;
-function renderSchedule() {}
-
-// UPPER_CASE para constantes
-const APP_CONFIG = {...};
-const JORNADA_BASE = {...};
-
-// PascalCase para constructores/singletons
-const MotorCombinaciones = {...};
-const ErrorHandler = {...};
-```
-
-### **Archivos**
-```
-kebab-case.js          // Archivos JS/CSS
-PascalCase.md          // Docs importantes
-lowercase.html         // HTML
-```
-
-### **CSS**
-```css
-/* kebab-case para clases */
-.subject-content {}
-.mini-horario {}
-
-/* camelCase para IDs (matching JS) */
-#subjectModal {}
-#currentScheduleIndex {}
-```
-
----
-
-## 🧪 **Testing (Estado Actual)**
-
-**No hay suite de tests automáticos.**
-
-Testing manual recomendado:
-- ✅ Crear/editar/eliminar horarios
-- ✅ Agregar asignaturas manualmente
-- ✅ Importar oferta académica
-- ✅ Generar combinaciones
-- ✅ Modo nocturno toggle
-- ✅ Cálculo mensual
-- ✅ Exportar/Importar JSON
-
----
-
-## 📊 **Métricas del Proyecto**
-
-```
-Complejidad:
-- Archivos: 14 (1 HTML, 5 CSS, 8 JS)  — glass-design-system.css eliminado
-- Líneas JS: ~5,278 (−541 por limpieza de código muerto)
-- Líneas CSS: ~3,944
-- Objetos singleton: 7 (se añadió SUBJECT_COLORS/getSubjectColor como API global)
-- Modales activos: 8
-
-Tamaño estimado:
-- HTML: ~9 KB
-- CSS: ~79 KB
-- JS: ~150 KB
-- Total: ~238 KB (sin comprimir)
-```
-
----
-
-## 🔮 **Decisiones de Diseño Importantes**
-
-### **¿Por qué Vanilla JS?**
-- Control total sobre el código
-- Cero overhead de frameworks
-- Curva de aprendizaje baja
-- Tamaño final pequeño (~260KB)
-
-### **¿Por qué LocalStorage y no IndexedDB?**
-- Datos estructurados simples
-- API síncrona más fácil
-- 5MB suficiente para use case
-- No necesita queries complejas
-
-### **¿Por qué un solo archivo app.js grande?**
-- Proyecto evolucionó orgánicamente
-- No hay build step (no bundler)
-- Todos los módulos comparten estado global
-- Refactorización futura posible
-
-### **¿Por qué no TypeScript?**
-- Mantener simplicidad
-- No hay build step
-- Proyecto académico/personal
-
----
-
-## 🛠️ **Herramientas de Desarrollo Recomendadas**
-
-- **Editor:** VS Code con extensiones:
-  - ESLint (opcional, no configurado)
-  - Live Server
-  - CSS Peek
-  
-- **Debugging:**
-  - Chrome DevTools
-  - localStorage inspector
-  - Console para ErrorHandler.errorLog
-
-- **Testing:**
-  - Manual en Chrome, Firefox, Safari, Edge
-  - Responsive design mode (móvil no optimizado)
-
----
-
-**Última actualización:** Marzo 2026  
-**Próxima revisión:** Al agregar módulo nuevo o cambio arquitectónico mayor
-
----
-
-## Historial de cambios arquitectónicos (v2.0.0dev)
-
-### Correcciones críticas aplicadas
-- **HTML inválido:** Eliminado el segundo `<body>` duplicado.
-- **Script duplicado:** `html2canvas` cargaba dos veces; eliminada la instancia duplicada.
-- **Validación de importación:** `validateScheduleSchema` rechazaba asignaturas en Sábado (`col > 4`); corregido a `col > 5`.
-- **Re-renders en cadena:** `cargador-combinaciones.js` usaba 4 `setTimeout` encadenados para forzar el re-render. Reemplazados por secuencia síncrona: `saveData()` → `rebuildScheduleView()` → `updateScheduleInfo()`.
-- **Bypass de SafeStorage:** El cargador escribía directamente en `localStorage`; eliminado, queda únicamente `saveData()`.
-
-### Correcciones moderadas aplicadas
-- **`obtenerEstadisticas()` duplicado** en `motor-combinaciones.js`: el primero renombrado a `obtenerEstadisticasCombinaciones()`.
-- **`minutesToTime()`** reescrita a formato 24h (`"HH:MM"`), eliminando la inconsistencia con el sistema de horarios.
-- **`loadChangelog()`** se llamaba dos veces al iniciar; eliminada la segunda llamada sin uso del resultado.
-- **Listener `Escape` duplicado** entre `app.js` y `sidebar-panel.js`: `app.js` ahora cede el control cuando `SidebarPanel.isOpen` es `true`.
-- **Seguridad en filtros del sidebar:** Añadido `_escAttr()` en `SidebarPanel` para escapar `grupo.grupo`, `programa` y `profesor` antes de interpolarse en atributos `onchange` inline.
-
-### Mejoras estructurales aplicadas
-- **Paleta centralizada:** `SUBJECT_COLORS` y `getSubjectColor()` definidos en `app.js`. Los tres módulos que tenían copias locales de la paleta (`cargador-combinaciones`, `minihorarios-ui`, `integracion-busqueda`) ahora delegan en esta función global.
-- **Código muerto eliminado:**
-  - `#combinacionesPanel` (panel inferior legacy) eliminado del HTML y de todas las referencias JS.
-  - `#searchSubjectModal` (modal huérfano sin lógica JS) eliminado del HTML.
-  - `MinihorariosUI.inicializar()`, `container`, `renderizar()`, `renderizarCombinaciones()` eliminados; el módulo ahora sirve exclusivamente al sidebar.
-  - `actualizarAsignaturasSeleccionadas()`, `actualizarMaxCombinaciones()` y el bloque del contador legacy eliminados de `integracion-busqueda.js`.
-- **`defer` en scripts:** Los 11 scripts (3 CDN + 8 propios) cargan con `defer`, permitiendo al navegador parsear el HTML completo antes de ejecutar JavaScript.
-
-**Última actualización:** Marzo 2026 — v2.0.0dev
-
-### Mejoras visuales y funcionales adicionales (post v2.0.0dev)
-
-**Modal de asignatura (`#subjectModal`) rediseñado:**
-- Layout de tres columnas para Grupo | Aula | Créditos usando `.subject-row-triple` (CSS Grid `1fr 1fr 96px`)
-- Cada campo usa `.subject-form-field` con `margin-top: 16px` para respiración vertical
-- Checkboxes movidos al lado del label usando `.subject-label-row` (flex `justify-content: space-between`)
-- Campo de color reemplazado por barra `.color-picker-wrapper` con `#colorPreview` (100% ancho, 36px alto) y `#subjectColorPicker` posicionado en `position: absolute; top: 100%` para anclar el popover del navegador
-- Scroll eliminado con `max-height: none; overflow-y: visible` en `#subjectModal .modal-content`
-
-**Tarjetas de asignatura en el horario:**
-- `truncarNombre(nombre, max = 40)` trunca nombres largos con `…`; nombre completo en atributo `title`
-- `.subject-program` y `.subject-aula` usan `align-self: center; max-width: 90%` para ajustarse al ancho del texto
-
-**Exportación de imagen:**
-- Clase `.subject-export` aplicada temporalmente durante exportación: fuentes a 22/17/15px
-- `EXPORT_CELL_HEIGHT = 100px` para modo alta legibilidad
-- `hideEmptyCols`: oculta columnas vacías y ajusta `colSpan` de filas de jornada
-- Cuatro opciones independientes en el modal: jornada diurna, nocturna, alta legibilidad, ocultar días sin clase
-- Tooltip en botón `?` implementado con CSS puro (`::after`/`::before` sobre `.export-tooltip-trigger`)
-
-**Dark-mode:**
-- `.mini-asignatura-tag` y `.minihorario-info` correctamente estilizados en modo nocturno
-- `input[type="checkbox"]` excluido del selector universal de inputs para evitar fondos no deseados
-- Modal de filtros (`#modalFiltrosFlotante`) con glass coherente: fondos transparentes en header, área de filtros y barra de acciones
-
-**Fondo modo claro:**
-- Gradiente de cuatro paradas en `160deg` con tonos azul-gris fríos (`#dde8f0 → #e8eef4 → #eaedf0 → #dde0e8`)
-- `background-attachment: fixed` en ambos modos para comportamiento de scroll consistente
-
-**Última actualización:** Marzo 2026 — post v2.0.0dev
-
-### Sistema de previsualización de exportación (post v2.0.0dev)
-
-**Exportar como imagen — modal rediseñado:**
-- Layout de dos columnas: opciones a la izquierda (220px), preview a la derecha (resto)
-- La preview se genera automáticamente al abrir el modal y se regenera en tiempo real al cambiar cualquier opción (jornadas, alta legibilidad, ocultar días)
-- El botón "Descargar imagen" usa el `dataUrl` ya generado, sin re-renderizar con `html2canvas`
-- `generarCanvasExport(includeDiurna, includeNocturna, enhancedExport, hideEmptyCols)` — función central que retorna `Promise<dataUrl>`, usada por preview y descarga
-
-**Sistema de cache `_previewCache`:**
-- Objeto en memoria declarado antes de `saveData()` para evitar `ReferenceError`
-- Clave: `"idx:D:N:E:H"` — índice del horario + estado de los 4 checkboxes
-- `_previewCacheKey()` genera la clave leyendo el DOM en tiempo real
-- `saveData(invalidatePreviewCache = true)` acepta parámetro para controlar si invalida el cache
-- `openSchedule()` llama `saveData(migrated)` — solo invalida si hubo migración real de esquema, no en navegación normal
-- Al cambiar datos del horario, `saveData()` borra todas las claves del índice actual con `startsWith(prefix)`
-
-**Exportar formato UdeC — modal de preview:**
-- Nuevo modal `#exportPdfModal` que muestra una tabla HTML con los datos exactos antes de confirmar
-- Estructura de contenedor doble para `border-radius` con scroll: `.export-pdf-preview-container` (externo: `overflow:hidden` + `border-radius`) y `.export-pdf-preview-scroll` (interno: `overflow-y:auto` + `max-height`)
-- Tabla con `border-collapse: separate; border-spacing: 0` para que `border-radius` en `thead th:first-child` y `th:last-child` funcione correctamente
-- Thead con color sólido (`#efefef` / `#2a2a2a` en dark) para que `position: sticky` no deje transparentar filas al hacer scroll
-- Fondo sólido (`#ffffff` / `#1e1e1e`) en `.export-pdf-preview-container` para evitar que el glass del modal padre se filtre en las esquinas
-
-**Última actualización:** Marzo 2026 — sistema de previsualización de exportación
-
-### Auditoría v4 — Marzo 2026
-
-**Assets añadidos al proyecto:**
-- `assets/moon.svg` y `assets/sun.svg` — íconos del toggle de tema en `dark-mode.js` (inline SVG, los archivos existen pero no son referenciados directamente)
-- `assets/icon-192.png` y `assets/icon-512.png` — íconos PWA para manifest e instalación
-
-**Corrección sw.js:** Añadidos `moon.svg`, `sun.svg`, `icon-192.png` e `icon-512.png` al `SHELL_ASSETS` para garantizar disponibilidad offline completa.
-
-**Estado de media queries antes de responsividad:**
-- Solo existen 2 media queries en `styles.css` (líneas 1492 y 1527), ambas limitadas al modal de búsqueda de asignaturas
-- Ningún componente principal (home, tabla de horario, app header, actions bar, sidebar, modales de exportación) tiene adaptación móvil
-- El sidebar tiene ancho fijo de 550px — en móvil ocupa más del 100% de la pantalla
-- La tabla del horario usa `table-layout: fixed` sin ancho mínimo — en móvil queda ilegible
-- Los modales de exportación tienen anchos fijos (860px imagen, 700px PDF) sin adaptación
-
-**Pendientes técnicos activos:**
-- 137 `console.log` en producción (7 archivos)
-- `ScheduleTimeModel` referenciado en línea ~917, definido en línea ~2036
-
-**Última actualización:** Marzo 2026 — auditoría pre-responsividad
-
-### Sistema de responsividad móvil (Marzo 2026)
-
-**Nuevo archivo:** `css/responsive.css` (659 líneas) — toda la responsividad en un archivo dedicado, nunca mezclada con los CSS base.
-
-**Breakpoints:** 768px (tablet/horizontal) y 480px (móvil vertical).
-
-**Tabla de horarios en móvil:**
-- Scroll horizontal con `overflow-x: auto` en `#scheduleContainer`
-- Columna de horas sticky (`position: sticky; left: 0; z-index: 20`) con fondo opaco para tapar contenido al hacer scroll
-- `getCellHeight()` — función dinámica que reemplaza la constante `CELL_HEIGHT = 60`. Lee `offsetHeight` del DOM en tiempo real con fallback a `getComputedStyle`. Garantiza que los subjects multibloque calculen su altura correctamente cuando CSS cambia el alto de celda en móvil
-- Indicador de scroll horizontal: `#scheduleContainer::after` gradiente fade que desaparece con clase `.scroll-end` cuando se llega al tope derecho. JS detecta el tope con `scrollLeft + clientWidth >= scrollWidth - 4`
-- Columnas de días con `min-width: 90px` (768px) / `78px` (480px) para dar espacio a las tarjetas
-- `truncarNombre()` adapta el límite según el ancho de pantalla: 18 caracteres en 480px, 22 en 768px, 40 en escritorio
-
-**Modal de asignatura — bottom sheet:**
-- En ≤768px: `#subjectModal` con `align-items: flex-end`, `.modal-content` con `border-radius: 20px 20px 0 0` y animación `slideUpSheet`
-- `abrirSubjectModal()` — función que envuelve `.classList.add("active")`. En móvil hace `window.scrollTo({ top: 0 })` antes de mostrar el modal para evitar que el teclado virtual desplace el panel
-- `body:has(#subjectModal.active)` bloquea el scroll del body con `position: fixed` mientras el sheet está abierto
-
-**PWA:**
-- `sw.js` con tres cachés por `BUILD_TIMESTAMP`: `shell-*`, `cdn-*`, `data-*`
-- `NEVER_CACHE` excluye `sw.js` y `manifest.json` del cache para que el navegador siempre detecte actualizaciones
-- `manifest.json` con íconos separados: `purpose: "any"` (sin recorte) y `purpose: "maskable"` (para launchers adaptativos)
-- `changelogOverlay` con acceso defensivo (`const overlay = getElementById(...)`, todos los usos con guard `if (overlay)`)
-
-**Pendientes activos:**
-- 137 `console.log` en 7 archivos
-- `ScheduleTimeModel` referenciado en línea ~936, definido en línea ~2077
-
-**Última actualización:** Marzo 2026 — responsividad completa
+## 🔮 **Decisiones de Diseño Clave**
+
+1. **¿Por qué ES Modules y Vite en lugar de Vanilla estático sin dependencias?**
+   A medida que el código creció a 18 archivos JS, los imports/exports nativos facilitaron el mantenimiento y la separación de responsabilidades. Vite provee un servidor de desarrollo ultra-rápido y optimiza el despliegue a producción compilando a un bundle unificado.
+2. **¿Por qué IndexedDB en lugar de LocalStorage?**
+   Las ofertas académicas y configuraciones detalladas de horarios consumían rápidamente la cuota de 5MB de LocalStorage. IndexedDB permite almacenar gigabytes de datos sin problemas y realizar lecturas/escrituras asíncronas no bloqueantes.
+3. **¿Por qué Web Workers?**
+   El cálculo del producto cartesiano de múltiples asignaturas con decenas de grupos puede involucrar miles de combinaciones de horarios. Ejecutar este algoritmo en el hilo principal congelaba el DOM y causaba retrasos perceptibles en la UI; el Web Worker corre esta tarea en segundo plano de manera imperceptible para el usuario.
+4. **¿Por qué Cloudflare R2?**
+   Centraliza la distribución de la oferta académica eliminando la necesidad de incluir archivos JSON gigantescos en el repositorio Git del cliente. Además, R2 no aplica cargos por ancho de banda saliente (egress), haciéndolo ideal para alojamiento estático.

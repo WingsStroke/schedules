@@ -37,7 +37,7 @@
 
 ### **Paso 2: JS - Declarar variable del input**
 ```javascript
-// app.js, línea ~1699 (sección de declaraciones de modal)
+// js/main.js, sección de selectores de modal
 const subjectProfesorInput = document.getElementById("subjectProfesorInput");
 ```
 
@@ -45,7 +45,7 @@ const subjectProfesorInput = document.getElementById("subjectProfesorInput");
 
 ### **Paso 3: JS - Limpiar modal al abrir**
 ```javascript
-// app.js, línea ~1730 (función openSubjectModal o similar)
+// js/main.js (función openSubjectModal o similar)
 subjectProfesorInput.value = "";
 // ...
 document.getElementById("showProfesorCheckbox").checked = false;
@@ -55,7 +55,7 @@ document.getElementById("showProfesorCheckbox").checked = false;
 
 ### **Paso 4: JS - Cargar datos al editar**
 ```javascript
-// app.js, línea ~1918 (función openEditSubjectModal)
+// js/main.js (función openEditSubjectModal)
 subjectProfesorInput.value = subject.profesor || "";
 // ...
 document.getElementById("showProfesorCheckbox").checked = subject.showProfesor || false;
@@ -65,7 +65,7 @@ document.getElementById("showProfesorCheckbox").checked = subject.showProfesor |
 
 ### **Paso 5: JS - Guardar en objeto subject**
 ```javascript
-// app.js, línea ~2126 (saveSubjectBtn.onclick)
+// js/main.js (saveSubjectBtn.onclick)
 const showProfesor = document.getElementById("showProfesorCheckbox").checked;
 
 const newSubject = {
@@ -79,7 +79,7 @@ const newSubject = {
 
 ### **Paso 6: JS - Normalizar en normalizeSubject**
 ```javascript
-// app.js, línea ~860 (función normalizeSubject)
+// js/state-manager.js (función normalizeSubject)
 const normalized = {
   // ... campos existentes
   profesor: subject.profesor ?? "",
@@ -92,7 +92,7 @@ const normalized = {
 
 ### **Paso 7: JS - Renderizar en tarjeta**
 ```javascript
-// app.js, línea ~2424 (función createSubjectContent)
+// js/dom-renderer.js (función createSubjectContent)
 // Después del aula o donde corresponda:
 if (subject.showProfesor && subject.profesor) {
   const profesorDiv = document.createElement("div");
@@ -172,7 +172,7 @@ body.dark-mode .subject-profesor {
 
 ### **Paso 2: JS - Referencias**
 ```javascript
-// app.js, sección de variables globales
+// js/main.js, sección de variables globales
 const settingsModal = document.getElementById("settingsModal");
 const settingsCloseBtn = settingsModal.querySelector(".close-btn");
 const saveSettingsBtn = document.getElementById("saveSettingsBtn");
@@ -318,8 +318,8 @@ backdrop-filter: blur(10px);
 
 ⚠️ **También actualizar en JavaScript:**
 ```javascript
-// app.js, función createSubjectDiv
-const height = subject.blocks * 90;  // Cambiar multiplicador
+// js/dom-renderer.js, función createSubjectDiv
+const height = subject.blocks * getCellHeight();  // Cambiar multiplicador
 div.style.height = `${height}px`;
 ```
 
@@ -329,13 +329,13 @@ div.style.height = `${height}px`;
 
 **1. Modificar diasSemana:**
 ```javascript
-// app.js, línea ~557
+// js/core.js
 const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 ```
 
 **2. Actualizar construcción de tabla:**
 ```javascript
-// app.js, función construirSeccion
+// js/dom-renderer.js, función construirSeccion
 // Agregar <th>Domingo</th> en el header
 ```
 
@@ -354,7 +354,7 @@ const diasMap = {
 
 ### **Cambiar bloques de tiempo:**
 ```javascript
-// app.js, función generarBloques, línea ~575
+// js/core.js, función generarBloques
 function generarBloques(jornada) {
   if (jornada === "diurna") {
     return [
@@ -507,9 +507,9 @@ const ExportadorPDF = {
 
 ---
 
-### **Paso 3: Usar desde app.js**
+### **Paso 3: Usar desde js/main.js**
 ```javascript
-// app.js
+// js/main.js
 const exportBtn = document.getElementById("exportPDFBtn");
 exportBtn.addEventListener("click", () => {
   const schedule = schedules[currentScheduleIndex];
@@ -532,8 +532,8 @@ exportBtn.addEventListener("click", () => {
 - configurar(options)
 
 ### Dependencias:
-- Usa: schedules[] (app.js)
-- Usado por: app.js
+- Usa: schedules[] (js/state-manager.js)
+- Usado por: js/main.js
 ```
 
 ---
@@ -737,7 +737,7 @@ El modal `#subjectModal` tiene un layout específico que debe respetarse al aña
 El campo de color usa un patrón especial: `#colorPreview` es una barra clicable que abre `#subjectColorPicker` (oculto, posicionado en `top: 100%` para anclar el popover del navegador):
 
 ```javascript
-// En app.js — el click en la barra abre el picker nativo
+// En js/main.js — el click en la barra abre el picker nativo
 colorPreview.onclick = () => { subjectColorInput.click(); };
 subjectColorInput.oninput = () => { colorPreview.style.background = subjectColorInput.value; };
 ```
