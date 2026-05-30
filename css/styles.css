@@ -268,31 +268,34 @@ body::before {
   transform: none;
 }
 
-/* Selector de semestre dentro de .actions */
-#semestreSelectWrapper label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #333;
-  white-space: nowrap;
+/* Selector de semestre en el sidebar */
+.sidebar-section-semestre {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 12px;
+  margin-top: 4px;
 }
 
-#semestreSelect {
-  padding: 7px 10px;
-  border: 1px solid rgba(0,0,0,0.2);
-  border-radius: 6px;
-  background: rgba(255,255,255,0.85);
+.sidebar-semestre-select {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.7);
   font-size: 13px;
   font-weight: 500;
+  color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 8px;
 }
 
-#semestreSelect:focus {
+.sidebar-semestre-select:focus {
   outline: none;
-  border-color: rgba(0,0,0,0.4);
+  border-color: rgba(0,0,0,0.3);
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
 }
 
-#semestreSelect:disabled {
+.sidebar-semestre-select:disabled {
   opacity: 0.5;
   cursor: wait;
 }

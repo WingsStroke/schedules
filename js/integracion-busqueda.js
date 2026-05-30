@@ -62,30 +62,37 @@ function _poblarSelectorSemestre() {
     const option = document.createElement('option');
     option.value = s.periodo;
     option.textContent = s.label;
+    // Seleccionar siempre el más reciente (primero en la lista, ya ordenada)
     if (s.periodo === SistemaCargaOfertas.semestreActual) option.selected = true;
     select.appendChild(option);
   });
 
-  // Mostrar el contenedor del selector
+  // Mostrar la sección del selector en el sidebar
   const wrapper = document.getElementById('semestreSelectWrapper');
-  if (wrapper) wrapper.style.display = 'flex';
+  if (wrapper) wrapper.style.display = 'block';
 
   select.addEventListener('change', async () => {
     const searchBtn = document.getElementById('searchSubjectBtn');
     const periodo = select.value;
 
+    select.disabled = true;
     if (searchBtn) {
       searchBtn.disabled = true;
-      searchBtn.title = `Cargando semestre ${periodo}...`;
+      searchBtn.title = `Cargando ${periodo}...`;
     }
-    select.disabled = true;
 
     const exito = await SistemaCargaOfertas.cambiarSemestre(periodo);
 
     select.disabled = false;
     if (searchBtn) {
       searchBtn.disabled = !exito;
-      searchBtn.title = exito ? '' : 'Error cargando el semestre seleccionado';
+      searchBtn.title = '';
+    }
+
+    if (exito) {
+      Toast.show(`Período ${periodo} cargado`, 'success', 2500);
+    } else {
+      Toast.show('No se pudo cargar el período seleccionado', 'error', 4000);
     }
   });
 }

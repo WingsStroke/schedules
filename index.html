@@ -87,10 +87,6 @@
     <button id="exportPdfBtn">Exportar formato UdeC (PDF)</button>
     <button id="exportBtn">Exportar como imagen</button>
     <button id="calculateMonthlyBtn">Calcular Aguinaldo</button>
-    <div id="semestreSelectWrapper" style="display:none; align-items:center; gap:8px;">
-      <label for="semestreSelect" style="font-size:13px; font-weight:600; white-space:nowrap;">Período:</label>
-      <select id="semestreSelect" title="Selecciona el semestre académico"></select>
-    </div>
     <button id="searchSubjectBtn" class="btn-search-subject" disabled>
       Generar Horario
     </button>
@@ -538,6 +534,15 @@
         </div>
       </div>
     </div>
+
+    <!-- Selector de período académico -->
+    <div class="sidebar-section sidebar-section-semestre" id="semestreSelectWrapper" style="display:none;">
+      <div class="sidebar-section-header">
+        <h4>Período académico</h4>
+      </div>
+      <select id="semestreSelect" class="sidebar-semestre-select" title="Selecciona el semestre académico"></select>
+    </div>
+
   </div>
 </div>
 
