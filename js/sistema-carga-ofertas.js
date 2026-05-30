@@ -1,84 +1,78 @@
 import { APP_CONFIG } from './core.js';
 
 export const SistemaCargaOfertas = {
-  
+
   ofertas: [],
   indice: null,
   cargado: false,
-  
+
   async inicializar() {
 
-    
+
     try {
       await this.cargarIndice();
       await this.cargarOfertas();
-      
+
       this.cargado = true;
 
 
-      
+
       return true;
-      
+
     } catch (error) {
 
       return false;
     }
   },
-  
+
   async cargarIndice() {
 
-    
+
     try {
-      // 🚀 Usar la URL de Cloudflare R2 si está configurada, sino fallback a local
-      const baseUrl = APP_CONFIG.R2_BUCKET_URL !== "https://TU_BUCKET_R2.r2.dev" ? APP_CONFIG.R2_BUCKET_URL.replace(/\/$/, '') : "";
-      const url = baseUrl ? `${baseUrl}/data/ofertas.json` : 'data/ofertas.json';
-      
-      const response = await fetch(url);
-      
+      const baseUrl = APP_CONFIG.R2_BUCKET_URL.replace(/\/$/, '');
+      const response = await fetch(`${baseUrl}/data/ofertas.json`);
+
       if (!response.ok) {
         throw new Error('No se pudo cargar ofertas.json');
       }
-      
+
       this.indice = await response.json();
-      
 
 
 
-      
+
+
       return this.indice;
-      
+
     } catch (error) {
 
       throw error;
     }
   },
-  
+
   async cargarOfertas() {
 
-    
-    const programasActivos = this.indice.programas.filter(p => p.activo !== false);
-    
 
-    
+    const programasActivos = this.indice.programas.filter(p => p.activo !== false);
+
+
+
     for (let i = 0; i < programasActivos.length; i++) {
       const programa = programasActivos[i];
-      
 
-      
+
+
       try {
-        // 🚀 Usar la URL de Cloudflare R2 para los archivos de cada carrera
-        const baseUrl = APP_CONFIG.R2_BUCKET_URL !== "https://TU_BUCKET_R2.r2.dev" ? APP_CONFIG.R2_BUCKET_URL.replace(/\/$/, '') : "";
-        const url = baseUrl ? `${baseUrl}/${programa.archivo}` : programa.archivo;
-        
-        const response = await fetch(url);
-        
+        const baseUrl = APP_CONFIG.R2_BUCKET_URL.replace(/\/$/, '');
+        const response = await fetch(`${baseUrl}/${programa.archivo}`);
+
         if (!response.ok) {
 
           continue;
         }
-        
+
         const data = await response.json();
-        
+
         this.ofertas.push({
           programaId: programa.id,
           programaNombre: programa.nombre,
@@ -86,52 +80,52 @@ export const SistemaCargaOfertas = {
           metadata: data.metadata,
           semestres: data.semestres
         });
-        
 
-        
+
+
       } catch (error) {
 
       }
     }
-    
+
 
   },
-  
+
   buscarAsignatura(query) {
     if (!this.cargado) {
 
       return [];
     }
-    
+
     const queryLower = query.toLowerCase().trim();
-    
+
     if (queryLower.length < 2) {
       return [];
     }
-    
+
     // Normalizar query (quitar tildes)
     const queryNormalizada = queryLower
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
-    
+
     const resultadosMap = new Map();
-    
+
     for (const oferta of this.ofertas) {
       for (const semestre of oferta.semestres) {
         for (const asignatura of semestre.asignaturas) {
-          
+
           // Normalizar nombre de asignatura (quitar tildes)
           const nombreNormalizado = asignatura.nombre
             .toLowerCase()
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "");
-          
+
           if (!nombreNormalizado.includes(queryNormalizada)) {
             continue;
           }
-          
+
           const asigId = asignatura.id;
-          
+
           if (!resultadosMap.has(asigId)) {
             resultadosMap.set(asigId, {
               id: asigId,
@@ -142,14 +136,14 @@ export const SistemaCargaOfertas = {
               grupos: []
             });
           }
-          
+
           const resultado = resultadosMap.get(asigId);
-          
+
           if (resultado.programas.indexOf(oferta.programaNombre) === -1) {
             resultado.programas.push(oferta.programaNombre);
             resultado.totalProgramas++;
           }
-          
+
           for (const grupo of asignatura.grupos) {
             const grupoNombreStr = String(grupo.grupo || '');
             resultado.grupos.push({
@@ -165,16 +159,16 @@ export const SistemaCargaOfertas = {
               creditos: asignatura.creditos ?? null,
               codigo: asignatura.codigo ?? null
             });
-            
+
             resultado.totalGrupos++;
           }
         }
       }
     }
-    
+
     return Array.from(resultadosMap.values());
   },
-  
+
   obtenerAsignaturaPorId(asignaturaId) {
     for (const oferta of this.ofertas) {
       for (const semestre of oferta.semestres) {
@@ -191,7 +185,7 @@ export const SistemaCargaOfertas = {
     }
     return null;
   },
-  
+
   obtenerProgramas() {
     return this.ofertas.map(o => ({
       id: o.programaId,
@@ -201,16 +195,16 @@ export const SistemaCargaOfertas = {
       totalGrupos: o.metadata.totalGrupos
     }));
   },
-  
+
   obtenerEstadisticas() {
     let totalAsignaturas = 0;
     let totalGrupos = 0;
-    
+
     for (const oferta of this.ofertas) {
       totalAsignaturas += oferta.metadata.totalAsignaturas;
       totalGrupos += oferta.metadata.totalGrupos;
     }
-    
+
     return {
       periodo: this.indice.periodo,
       totalProgramas: this.ofertas.length,
