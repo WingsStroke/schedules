@@ -1,3 +1,5 @@
+import { APP_CONFIG } from './core.js';
+
 export const SistemaCargaOfertas = {
   
   ofertas: [],
@@ -27,7 +29,11 @@ export const SistemaCargaOfertas = {
 
     
     try {
-      const response = await fetch('data/ofertas.json');
+      // 🚀 Usar la URL de Cloudflare R2 si está configurada, sino fallback a local
+      const baseUrl = APP_CONFIG.R2_BUCKET_URL !== "https://TU_BUCKET_R2.r2.dev" ? APP_CONFIG.R2_BUCKET_URL.replace(/\/$/, '') : "";
+      const url = baseUrl ? `${baseUrl}/data/ofertas.json` : 'data/ofertas.json';
+      
+      const response = await fetch(url);
       
       if (!response.ok) {
         throw new Error('No se pudo cargar ofertas.json');
@@ -60,7 +66,11 @@ export const SistemaCargaOfertas = {
 
       
       try {
-        const response = await fetch(programa.archivo);
+        // 🚀 Usar la URL de Cloudflare R2 para los archivos de cada carrera
+        const baseUrl = APP_CONFIG.R2_BUCKET_URL !== "https://TU_BUCKET_R2.r2.dev" ? APP_CONFIG.R2_BUCKET_URL.replace(/\/$/, '') : "";
+        const url = baseUrl ? `${baseUrl}/${programa.archivo}` : programa.archivo;
+        
+        const response = await fetch(url);
         
         if (!response.ok) {
 
