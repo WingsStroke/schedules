@@ -34,11 +34,6 @@ const ASSETS_TO_CACHE = [
   './js/sidebar-panel.js',
   './js/minihorarios-ui.js',
   './js/integracion-busqueda.js',
-  // Data
-  './data/ofertas.json',
-  './data/2026-1_sistemas.json',
-  './data/2026-1_alimentos.json',
-  './data/2026-1_quimica.json',
   // Assets
   './assets/icon-192.png',
   './assets/icon-512.png'
