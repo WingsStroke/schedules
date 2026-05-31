@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   renderSchedules();
   initChangelog();
+  initContactModal();
   populateMonths();
 });
 
@@ -769,4 +770,32 @@ if(cancelDuplicateGlobalBtn) {
     cancelDuplicateGlobalBtn.addEventListener("click", () => {
         window._subjectToDuplicate = null;
     });
+}
+
+// ==========================================
+// CONTACT ME MODAL
+// ==========================================
+function initContactModal() {
+  const contactBtn = document.getElementById('contactMeBtn');
+  const contactModal = document.getElementById('contactModal');
+  
+  if (contactBtn && contactModal) {
+    const closeBtn = contactModal.querySelector('.close-btn');
+    
+    contactBtn.addEventListener('click', () => {
+      contactModal.classList.add('active');
+    });
+    
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        contactModal.classList.remove('active');
+      });
+    }
+    
+    contactModal.addEventListener('click', (e) => {
+      if (e.target === contactModal) {
+        contactModal.classList.remove('active');
+      }
+    });
+  }
 }

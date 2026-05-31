@@ -559,6 +559,43 @@
   </div>
 </div>
 
+<!-- BOTÓN DE CONTACTO -->
+<button id="contactMeBtn" class="floating-contact-btn" title="Contact me">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg>
+  <span>Contact me</span>
+</button>
+
+<!-- MODAL DE CONTACTO -->
+<div class="modal" id="contactModal">
+  <div class="modal-content contact-modal-content">
+    <span class="close-btn">✕</span>
+    <div class="contact-modal-layout">
+      <div class="contact-text-section">
+        <h2>Hola, soy Angel.</h2>
+        <p class="contact-desc"><strong>Estudiante de Ingeniería de Sistemas de la Universidad de Cartagena.</strong></p>
+        <p class="contact-desc" style="margin-top: 10px;"><strong>Contáctame si necesitas:</strong></p>
+        <ul class="contact-list">
+          <li>Creación de contenido.</li>
+          <li>Alguna página web para negocio o proyecto lógico.</li>
+          <li>Trabajos contables (RStudio/PowerBI)</li>
+          <li>Presentaciones interactivas HTML con gestos.</li>
+        </ul>
+      </div>
+      <div class="contact-image-section">
+        <div class="contact-image-placeholder">
+          <!-- Placeholder de imagen. Puedes reemplazar src por tu PNG real -->
+          <img src="assets/icon-512.png" alt="Angel" id="contactImage" />
+        </div>
+      </div>
+    </div>
+    <div class="contact-footer">
+      <strong>Correo:</strong> abohorquezf@unicartagena.edu.co
+    </div>
+  </div>
+</div>
+
 <!-- Overlay para cerrar sidebar -->
 <div id="sidebarOverlay" class="sidebar-overlay" onclick="cerrarSidebar()"></div>
 
