@@ -439,6 +439,8 @@ export const MotorCombinaciones = {
       this.worker.onmessage = (e) => {
         if (e.data.type === 'GENERATE_RESULT') {
           this.combinaciones = e.data.payload.combinaciones;
+          this.todasLasCombinaciones = e.data.payload.todasLasCombinaciones || [];
+          this.combinacionesDescartadas = e.data.payload.combinacionesDescartadas || [];
           resolve(e.data.payload);
         } else if (e.data.type === 'ERROR') {
           resolve({ exito: false, mensaje: e.data.payload, combinaciones: [] });
@@ -465,6 +467,8 @@ export const MotorCombinaciones = {
        this.worker.onmessage = (e) => {
          if (e.data.type === 'DISCARD_RESULT') {
            this.combinaciones = e.data.payload.combinaciones;
+           this.todasLasCombinaciones = e.data.payload.todasLasCombinaciones || [];
+           this.combinacionesDescartadas = e.data.payload.combinacionesDescartadas || [];
            resolve(e.data.payload.success);
          }
        };
@@ -486,6 +490,8 @@ export const MotorCombinaciones = {
        this.worker.onmessage = (e) => {
          if (e.data.type === 'REGENERATE_RESULT') {
            this.combinaciones = e.data.payload.combinaciones;
+           this.todasLasCombinaciones = e.data.payload.todasLasCombinaciones || [];
+           this.combinacionesDescartadas = e.data.payload.combinacionesDescartadas || [];
            resolve(e.data.payload);
          }
        };

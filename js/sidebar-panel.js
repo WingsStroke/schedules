@@ -761,11 +761,20 @@ export const SidebarPanel = {
   // Actualizar contador de combinaciones
   actualizarContadorCombinaciones() {
     const counter = document.getElementById('combinacionesCountSidebar');
-    
     if (!counter) return;
     
-    const total = MotorCombinaciones.combinaciones?.length || 0;
-    counter.textContent = total;
+    if (typeof MotorCombinaciones !== 'undefined') {
+      const stats = MotorCombinaciones.obtenerEstadisticasCombinaciones();
+      if (stats.descartadas > 0) {
+        counter.textContent = `${stats.mostradas} / ${stats.disponibles}`;
+        counter.title = `Mostrando ${stats.mostradas} de ${stats.disponibles} combinaciones disponibles (${stats.descartadas} descartadas)`;
+      } else {
+        counter.textContent = stats.mostradas;
+        counter.title = `Mostrando ${stats.mostradas} combinaciones de ${stats.disponibles} posibles`;
+      }
+    } else {
+      counter.textContent = '0';
+    }
   },
   
   // Actualizar minihorarios en sidebar

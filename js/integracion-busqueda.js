@@ -72,6 +72,58 @@ function _poblarSelectorSemestre() {
   if (wrapper) wrapper.style.display = 'block';
 
   select.addEventListener('change', async () => {
+    const periodoDestino = select.value;
+    const periodoAnterior = SistemaCargaOfertas.semestreActual;
+
+    if (MotorCombinaciones.asignaturasSeleccionadas.length > 0) {
+      select.value = periodoAnterior;
+      
+      const modal = document.getElementById('confirmSemesterChangeModal');
+      if (modal) {
+        modal.classList.add('active');
+        
+        const confirmar = await new Promise((resolve) => {
+          const btnConfirmar = document.getElementById('confirmSemesterChangeBtn');
+          const btnCancelar = document.getElementById('cancelSemesterChangeBtn');
+          const btnClose = modal.querySelector('.close-btn');
+          
+          const cleanup = () => {
+            btnConfirmar.removeEventListener('click', onConfirm);
+            btnCancelar.removeEventListener('click', onCancel);
+            btnClose.removeEventListener('click', onCancel);
+            modal.removeEventListener('click', onOutsideClick);
+            modal.classList.remove('active');
+          };
+          
+          const onConfirm = () => { cleanup(); resolve(true); };
+          const onCancel = () => { cleanup(); resolve(false); };
+          const onOutsideClick = (e) => { if (e.target === modal) { cleanup(); resolve(false); } };
+          
+          btnConfirmar.addEventListener('click', onConfirm);
+          btnCancelar.addEventListener('click', onCancel);
+          btnClose.addEventListener('click', onCancel);
+          modal.addEventListener('click', onOutsideClick);
+        });
+        
+        if (!confirmar) return;
+        
+        MotorCombinaciones.limpiarAsignaturas();
+        if (typeof SidebarPanel !== 'undefined') {
+          SidebarPanel.actualizarAsignaturasSeleccionadas();
+        }
+        generarYMostrarCombinaciones();
+        select.value = periodoDestino;
+      } else {
+        if (!confirm('Al cambiar de semestre, se borrará tu selección actual de asignaturas. ¿Deseas continuar?')) return;
+        MotorCombinaciones.limpiarAsignaturas();
+        if (typeof SidebarPanel !== 'undefined') {
+          SidebarPanel.actualizarAsignaturasSeleccionadas();
+        }
+        generarYMostrarCombinaciones();
+        select.value = periodoDestino;
+      }
+    }
+
     const searchBtn = document.getElementById('searchSubjectBtn');
     const periodo = select.value;
 

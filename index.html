@@ -546,6 +546,19 @@
   </div>
 </div>
 
+<!-- CONFIRMACIÓN DE CAMBIO DE SEMESTRE -->
+<div class="modal" id="confirmSemesterChangeModal">
+  <div class="modal-content small" style="max-width: 400px; text-align: center;">
+    <span class="close-btn">✕</span>
+    <h3 style="margin-top: 10px; margin-bottom: 15px;">Cambiar de semestre</h3>
+    <p style="margin-bottom: 25px; line-height: 1.5; color: #666; font-size: 14px;">Al cambiar de semestre, se borrará tu selección actual de asignaturas y combinaciones generadas. ¿Deseas continuar?</p>
+    <div style="display: flex; gap: 10px; justify-content: center;">
+      <button class="secondary" id="cancelSemesterChangeBtn" style="background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 500;">Cancelar</button>
+      <button class="danger" id="confirmSemesterChangeBtn" style="background: #ef4444; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 500;">Sí, cambiar</button>
+    </div>
+  </div>
+</div>
+
 <!-- Overlay para cerrar sidebar -->
 <div id="sidebarOverlay" class="sidebar-overlay" onclick="cerrarSidebar()"></div>
 

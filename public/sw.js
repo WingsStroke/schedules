@@ -25,10 +25,11 @@ const ASSETS_TO_CACHE = [
   './js/export-engine.js',
   './js/toast-system.js',
   './js/dark-mode.js',
-  './js/app.js',
+  './js/main.js',
   './js/version.js',
   // JS Features (generación de horarios)
   './js/motor-combinaciones.js',
+  './js/motor.worker.js',
   './js/cargador-combinaciones.js',
   './js/sistema-carga-ofertas.js',
   './js/sidebar-panel.js',
@@ -91,30 +92,47 @@ function getCacheUrl(request) {
 }
 
 self.addEventListener('fetch', (event) => {
-  // Solo aplicamos esto a nuestros archivos locales
-  if (event.request.url.includes(self.location.origin)) {
+  const url = new URL(event.request.url);
+
+  // 1. Manejo específico para el bucket R2 (Ofertas Académicas JSON)
+  // Estrategia: Stale-While-Revalidate (devuelve rápido de caché, actualiza en fondo)
+  if (url.hostname === 'pub-ed2a196c92624cfbadea4f7a02c13d95.r2.dev') {
+    event.respondWith(
+      caches.open(CACHE_NAME).then((cache) => {
+        return cache.match(event.request).then((cachedResponse) => {
+          const fetchPromise = fetch(event.request).then((networkResponse) => {
+            if (networkResponse.ok) {
+              cache.put(event.request, networkResponse.clone());
+            }
+            return networkResponse;
+          }).catch((err) => console.warn('[SW] Modo offline para R2', err));
+          
+          return cachedResponse || fetchPromise;
+        });
+      })
+    );
+    return;
+  }
+
+  // 2. Manejo de archivos locales de la app (Network-First)
+  if (url.origin === self.location.origin) {
     const cacheUrl = getCacheUrl(event.request);
     
     event.respondWith(
       fetch(event.request, { cache: 'no-cache' })
         .then((response) => {
-          // 1. Hay internet: Descargamos la versión más fresca del servidor,
-          // la clonamos para guardarla en la caché y se la mostramos al usuario.
           const resClone = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
-            // Guardar sin query params para matching consistente
             cache.put(cacheUrl, resClone);
           });
           return response;
         })
         .catch(() => {
-          // 2. NO hay internet (o el servidor falló): Rescatamos la página desde la caché local.
-          // Modo offline activado
           return caches.match(cacheUrl);
         })
     );
   } else {
-    // Para CDNs externos (fuentes, librerías PDF), usamos "Cache-First" por rendimiento.
+    // 3. Para CDNs externos (fuentes, librerías), usamos Cache-First.
     event.respondWith(
       caches.match(event.request).then((res) => res || fetch(event.request))
     );

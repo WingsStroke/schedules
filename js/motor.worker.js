@@ -7,12 +7,12 @@ self.onmessage = (e) => {
     if (type === 'GENERATE') {
       const { asignaturas, maxCombinaciones } = payload;
       
-      // Sincronizar el estado en la instancia local del Worker
       MotorCombinaciones.asignaturasSeleccionadas = asignaturas;
       MotorCombinaciones.maxCombinaciones = maxCombinaciones;
       
-      // Ejecutar la operación pesada
       const resultado = MotorCombinaciones.generarCombinaciones();
+      resultado.todasLasCombinaciones = MotorCombinaciones.todasLasCombinaciones;
+      resultado.combinacionesDescartadas = MotorCombinaciones.combinacionesDescartadas;
       
       self.postMessage({ type: 'GENERATE_RESULT', payload: resultado });
     } 
@@ -24,12 +24,16 @@ self.onmessage = (e) => {
         type: 'DISCARD_RESULT', 
         payload: { 
           success, 
-          combinaciones: MotorCombinaciones.combinaciones 
+          combinaciones: MotorCombinaciones.combinaciones,
+          todasLasCombinaciones: MotorCombinaciones.todasLasCombinaciones,
+          combinacionesDescartadas: MotorCombinaciones.combinacionesDescartadas
         } 
       });
     }
     else if (type === 'REGENERATE') {
       const resultado = MotorCombinaciones.regenerarCombinaciones();
+      resultado.todasLasCombinaciones = MotorCombinaciones.todasLasCombinaciones;
+      resultado.combinacionesDescartadas = MotorCombinaciones.combinacionesDescartadas;
       self.postMessage({ type: 'REGENERATE_RESULT', payload: resultado });
     }
   } catch (error) {
