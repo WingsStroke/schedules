@@ -2172,7 +2172,7 @@ body.dark-mode .floating-contact-btn:hover {
 
 /* MODAL DE CONTACTO */
 .contact-modal-content {
-  max-width: 650px;
+  max-width: 850px;
   padding: 40px;
   border-radius: 20px;
   background: #e2e2e2; /* Gris claro basado en la imagen de referencia */
@@ -2235,7 +2235,7 @@ body.dark-mode .contact-list {
 }
 
 .contact-image-section {
-  width: 200px;
+  width: 350px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2245,18 +2245,16 @@ body.dark-mode .contact-list {
   width: 100%;
   height: 100%;
   min-height: 200px;
-  border: 2px dashed #666;
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   position: relative;
-  background: transparent;
 }
 
 body.dark-mode .contact-image-placeholder {
-  border-color: #555;
+  /* No border needed */
 }
 
 .contact-image-placeholder img {
