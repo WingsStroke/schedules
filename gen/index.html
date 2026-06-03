@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión Académica - Builder</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <div id="view-home" class="view active">
+    <header class="glass-panel">
+      <h2>Gestión Académica Interactiva</h2>
+    </header>
+    <div class="home-container">
+      <div class="bento-card" onclick="switchView('view-mallas')">
+        <div class="bento-icon">🕸️</div>
+        <h3>Mallas Académicas</h3>
+        <p style="opacity: 0.7; margin-top: 0.5rem;">Crea planes de estudio y vincula prerrequisitos.</p>
+      </div>
+      <div class="bento-card" onclick="switchView('view-calendarios')">
+        <div class="bento-icon">📅</div>
+        <h3>Calendarios Académicos</h3>
+        <p style="opacity: 0.7; margin-top: 0.5rem;">Crea calendarios de eventos y actividades académicas.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="view-mallas" class="view">
+    <header class="glass-panel">
+      <div>
+        <button class="btn btn-secondary" onclick="switchView('view-home')">⬅ Volver</button>
+        <input type="text" id="input-carrera-nombre" value="Ingeniería de Sistemas" class="glass-input"
+          style="width: 250px; margin-left: 1rem; display: inline-block; margin-top: 0; padding: 0.4rem;">
+      </div>
+      <div class="actions">
+        <button id="btn-link-mode" class="btn btn-secondary">🔗 Modo Vincular: OFF</button>
+        <button id="btn-export-malla" class="btn btn-success">💾 Exportar JSON</button>
+      </div>
+    </header>
+    <main class="grid-canvas" id="grid-canvas">
+      <svg id="svg-layer" class="svg-layer"></svg>
+      <div id="semesters-container" class="semesters-container"></div>
+    </main>
+  </div>
+
+  <div id="view-calendarios" class="view">
+    <header class="glass-panel">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <button class="btn btn-secondary" onclick="switchView('view-home')">⬅ Volver</button>
+        <input type="text" id="input-calendario-nombre" value="2026-1" class="glass-input"
+          style="width: 150px; margin-left: 0.5rem; display: inline-block; margin-top: 0; padding: 0.4rem;" placeholder="Semestre (Ej: 2026-1)">
+        <input type="number" id="input-calendario-anio" value="2026" class="glass-input"
+          style="width: 90px; margin-left: 0.2rem; display: inline-block; margin-top: 0; padding: 0.4rem;" placeholder="Año">
+      </div>
+      <div class="months-selector">
+        <span class="month-badge" data-month="0">Ene</span>
+        <span class="month-badge" data-month="1">Feb</span>
+        <span class="month-badge" data-month="2">Mar</span>
+        <span class="month-badge" data-month="3">Abr</span>
+        <span class="month-badge" data-month="4">May</span>
+        <span class="month-badge" data-month="5">Jun</span>
+        <span class="month-badge" data-month="6">Jul</span>
+        <span class="month-badge" data-month="7">Ago</span>
+        <span class="month-badge" data-month="8">Sep</span>
+        <span class="month-badge" data-month="9">Oct</span>
+        <span class="month-badge" data-month="10">Nov</span>
+        <span class="month-badge" data-month="11">Dic</span>
+      </div>
+      <div class="actions">
+        <button id="btn-export-calendario" class="btn btn-success">💾 Exportar JSON</button>
+      </div>
+    </header>
+    <main class="calendar-canvas">
+      <div id="calendarios-cards-container" class="calendar-months-grid"></div>
+    </main>
+  </div>
+
+  <div id="materia-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h3 style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem;">Editar Materia</h3>
+
+      <div class="form-group">
+        <label for="mod-id">ID de la Materia (Código único)</label>
+        <input type="text" id="mod-id" class="glass-input" placeholder="Ej: SIS-101">
+      </div>
+
+      <div class="form-group">
+        <label for="mod-nombre">Nombre de la Asignatura</label>
+        <input type="text" id="mod-nombre" class="glass-input" placeholder="Ej: Cálculo I">
+      </div>
+
+      <div class="form-group">
+        <label for="mod-creditos">Número de Créditos</label>
+        <input type="number" id="mod-creditos" class="glass-input" min="0" max="10" placeholder="Ej: 4">
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-danger" onclick="deleteCurrentMateria()" style="margin-right: auto;">🗑️ Eliminar</button>
+        <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+        <button class="btn btn-primary" onclick="saveMateria()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="event-modal" class="modal-overlay">
+    <div class="modal-content" style="width: 450px;">
+      <h3 id="event-modal-title" style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem;">Añadir Evento</h3>
+
+      <div class="form-group">
+        <label for="event-id">ID del Evento (Código único, minúsculas)</label>
+        <input type="text" id="event-id" class="glass-input" placeholder="Ej: inicio-clases">
+      </div>
+
+      <div class="form-group">
+        <label for="event-titulo">Título del Evento</label>
+        <input type="text" id="event-titulo" class="glass-input" placeholder="Ej: Inicio de Clases">
+      </div>
+
+      <div class="form-group" style="display: flex; gap: 1rem;">
+        <div style="flex: 1;">
+          <label for="event-inicio">Fecha de Inicio</label>
+          <input type="date" id="event-inicio" class="glass-input">
+        </div>
+        <div style="flex: 1;">
+          <label for="event-fin">Fecha de Fin</label>
+          <input type="date" id="event-fin" class="glass-input">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="event-color">Categoría / Color</label>
+        <select id="event-color" class="glass-input" style="background-color: #1e1e1e;">
+          <option value="var(--cal-academico)">Académico (Azul)</option>
+          <option value="var(--cal-evaluacion)">Evaluación (Rojo)</option>
+          <option value="var(--cal-receso)">Receso (Verde)</option>
+          <option value="var(--cal-deadline)">Fecha Límite (Ámbar)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="event-desc">Descripción</label>
+        <textarea id="event-desc" class="glass-input" rows="2" placeholder="Descripción opcional del evento..." style="resize: vertical; font-family: inherit;"></textarea>
+      </div>
+
+      <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem;">
+        <input type="checkbox" id="event-alerta" style="width: 18px; height: 18px; cursor: pointer;">
+        <label for="event-alerta" style="margin-bottom: 0; cursor: pointer; user-select: none;">Activar Alerta de Notificación</label>
+      </div>
+
+      <div class="form-group" id="event-dias-alerta-group" style="display: none; margin-top: 1rem;">
+        <label for="event-dias-alerta">Días de Anticipación para la Alerta</label>
+        <input type="number" id="event-dias-alerta" class="glass-input" min="0" max="30" value="5">
+      </div>
+
+      <div class="modal-actions">
+        <button id="btn-delete-event" class="btn btn-danger" onclick="deleteCurrentEvent()" style="margin-right: auto;">🗑️ Eliminar</button>
+        <button class="btn btn-secondary" onclick="closeEventModal()">Cancelar</button>
+        <button class="btn btn-primary" onclick="saveEvent()">Guardar Evento</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="app.js" defer></script>
+</body>
+
+</html>
