@@ -1,0 +1,17 @@
+{
+  "carrera": "Ingeniería de Sistemas",
+  "semestres": [
+    {
+      "numero": 1,
+      "materias": [
+        {
+          "id": "SIS101",
+          "nombre": "Cálculo I",
+          "creditos": 4,
+          "prerrequisitos": [],
+          "desbloquea": ["SIS201", "SIS205"]
+        }
+      ]
+    }
+  ]
+}

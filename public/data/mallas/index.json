@@ -1,0 +1,6 @@
+{
+  "programas": [
+    { "id": "sistemas", "nombre": "Ingeniería de Sistemas", "archivo": "sistemas.json" },
+    { "id": "alimentos", "nombre": "Ciencia y Tecnología de Alimentos", "archivo": "alimentos.json" }
+  ]
+}

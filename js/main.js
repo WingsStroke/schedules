@@ -9,6 +9,9 @@ import { Toast } from './toast-system.js';
 import { initExportEngine } from './export-engine.js';
 import { SistemaCargaOfertas } from './sistema-carga-ofertas.js';
 import { CargadorCombinaciones } from './cargador-combinaciones.js';
+import { ActionBar } from './action-bar.js';
+import { VisorMallas } from './visor-mallas.js';
+import { CalendarioAcademico } from './calendario-academico.js';
 
 // ==========================================
 
@@ -73,6 +76,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   
   if (typeof SidebarPanel !== 'undefined') SidebarPanel.inicializar();
+  
+  ActionBar.init();
+  VisorMallas.init();
+  CalendarioAcademico.init();
   
   renderSchedules();
   initChangelog();

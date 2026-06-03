@@ -148,6 +148,15 @@ Administra el panel lateral interactivo:
 #### **C. Sistema de Búsqueda ([`js/integracion-busqueda.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/integracion-busqueda.js))**
 Maneja el input de texto de búsqueda en el sidebar. Ejecuta normalización de texto (eliminando tildes y mayúsculas) sobre el catálogo de asignaturas cargado para garantizar resultados exactos y amigables.
 
+#### **D. Barra de Herramientas del Home ([`js/action-bar.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/action-bar.js))**
+Administra la barra de herramientas lateral deslizable en la vista de inicio. Controla el estado de expansión/colapso, la persistencia en `localStorage`, y gestiona el badge de notificaciones del calendario.
+
+#### **E. Visor de Mallas Académicas ([`js/visor-mallas.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/visor-mallas.js))**
+Gestiona la descarga y parseo de mallas curriculares locales, renderiza la grilla interactiva de asignaturas ordenadas por semestre, e implementa el algoritmo de grafo recursivo para iluminar las cadenas completas de prerrequisitos y desbloqueos.
+
+#### **F. Calendario Académico ([`js/calendario-academico.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/calendario-academico.js))**
+Obtiene y renderiza las fechas académicas desde Cloudflare R2 (con fallback local), construye dinámicamente las cuadrículas de mini-calendarios por mes, despliega los tooltips enriquecidos y ejecuta el sistema de alertas proactivas (urgencia de 3 niveles) almacenadas en caché.
+
 ---
 
 ## 🔄 **Flujos de Datos Críticos**

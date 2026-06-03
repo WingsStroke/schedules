@@ -1,0 +1,76 @@
+{
+  "carrera": "Ciencia y Tecnología de Alimentos",
+  "semestres": [
+    {
+      "numero": 1,
+      "materias": [
+        {
+          "id": "ALI101",
+          "nombre": "Química General",
+          "creditos": 4,
+          "prerrequisitos": [],
+          "desbloquea": ["ALI201"]
+        },
+        {
+          "id": "ALI102",
+          "nombre": "Introducción a la Ciencia de Alimentos",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": ["ALI202"]
+        },
+        {
+          "id": "ALI103",
+          "nombre": "Matemática Aplicada",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": ["ALI203"]
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "materias": [
+        {
+          "id": "ALI201",
+          "nombre": "Química Orgánica",
+          "creditos": 4,
+          "prerrequisitos": ["ALI101"],
+          "desbloquea": ["ALI301"]
+        },
+        {
+          "id": "ALI202",
+          "nombre": "Microbiología General",
+          "creditos": 3,
+          "prerrequisitos": ["ALI102"],
+          "desbloquea": ["ALI302"]
+        },
+        {
+          "id": "ALI203",
+          "nombre": "Bioestadística",
+          "creditos": 3,
+          "prerrequisitos": ["ALI103"],
+          "desbloquea": []
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "materias": [
+        {
+          "id": "ALI301",
+          "nombre": "Bioquímica de Alimentos",
+          "creditos": 4,
+          "prerrequisitos": ["ALI201"],
+          "desbloquea": []
+        },
+        {
+          "id": "ALI302",
+          "nombre": "Microbiología de Alimentos",
+          "creditos": 4,
+          "prerrequisitos": ["ALI202"],
+          "desbloquea": []
+        }
+      ]
+    }
+  ]
+}

@@ -16,6 +16,8 @@ const ASSETS_TO_CACHE = [
   './css/sidebar-panel.css',
   './css/filtros-asignaturas.css',
   './css/minihorarios-styles.css',
+  './css/action-bar.css',
+  './css/visor-mallas.css',
   // JS Core
   './js/core.js',
   './js/storage-db.js',
@@ -35,6 +37,14 @@ const ASSETS_TO_CACHE = [
   './js/sidebar-panel.js',
   './js/minihorarios-ui.js',
   './js/integracion-busqueda.js',
+  './js/action-bar.js',
+  './js/visor-mallas.js',
+  './js/calendario-academico.js',
+  // Local JSON Data
+  './data/mallas/index.json',
+  './data/mallas/sistemas.json',
+  './data/mallas/alimentos.json',
+  './data/calendario/2026-1.json',
   // Assets
   './assets/icon-192.png',
   './assets/icon-512.png'

@@ -1,0 +1,65 @@
+{
+  "semestre_activo": "2026-1",
+  "eventos": [
+    {
+      "id": "inicio-clases",
+      "titulo": "Inicio de Clases",
+      "inicio": "2026-02-09",
+      "fin": "2026-02-09",
+      "color_css": "var(--cal-academico)",
+      "descripcion": "Inicio oficial de las clases del periodo académico 2026-1.",
+      "alerta": true,
+      "diasAlerta": 5
+    },
+    {
+      "id": "corte-1",
+      "titulo": "Primer Corte de Parciales",
+      "inicio": "2026-03-23",
+      "fin": "2026-04-04",
+      "color_css": "var(--cal-evaluacion)",
+      "descripcion": "Periodo habilitado para evaluaciones del primer 30%.",
+      "alerta": true,
+      "diasAlerta": 7
+    },
+    {
+      "id": "receso-semana-santa",
+      "titulo": "Receso de Semana Santa",
+      "inicio": "2026-04-06",
+      "fin": "2026-04-11",
+      "color_css": "var(--cal-receso)",
+      "descripcion": "Periodo de vacaciones y receso de Semana Santa.",
+      "alerta": false,
+      "diasAlerta": 0
+    },
+    {
+      "id": "corte-2",
+      "titulo": "Segundo Corte de Parciales",
+      "inicio": "2026-05-11",
+      "fin": "2026-05-23",
+      "color_css": "var(--cal-evaluacion)",
+      "descripcion": "Periodo habilitado para evaluaciones del segundo 30%.",
+      "alerta": true,
+      "diasAlerta": 7
+    },
+    {
+      "id": "fin-clases",
+      "titulo": "Finalización de Clases",
+      "inicio": "2026-06-05",
+      "fin": "2026-06-05",
+      "color_css": "var(--cal-academico)",
+      "descripcion": "Cierre del periodo de clases regular.",
+      "alerta": true,
+      "diasAlerta": 3
+    },
+    {
+      "id": "habilitaciones",
+      "titulo": "Exámenes de Habilitación",
+      "inicio": "2026-06-15",
+      "fin": "2026-06-19",
+      "color_css": "var(--cal-deadline)",
+      "descripcion": "Registro y realización de exámenes de habilitación.",
+      "alerta": true,
+      "diasAlerta": 4
+    }
+  ]
+}

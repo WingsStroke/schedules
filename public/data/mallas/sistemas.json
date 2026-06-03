@@ -1,0 +1,196 @@
+{
+  "carrera": "Ingeniería de Sistemas",
+  "semestres": [
+    {
+      "numero": 1,
+      "materias": [
+        {
+          "id": "SIS101",
+          "nombre": "Cálculo I",
+          "creditos": 4,
+          "prerrequisitos": [],
+          "desbloquea": ["SIS201"]
+        },
+        {
+          "id": "SIS102",
+          "nombre": "Introducción a la Programación",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": ["SIS202", "SIS203"]
+        },
+        {
+          "id": "SIS103",
+          "nombre": "Álgebra Lineal",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": ["SIS204"]
+        },
+        {
+          "id": "SIS104",
+          "nombre": "Cátedra UdeC",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "materias": [
+        {
+          "id": "SIS201",
+          "nombre": "Cálculo II",
+          "creditos": 4,
+          "prerrequisitos": ["SIS101"],
+          "desbloquea": ["SIS301"]
+        },
+        {
+          "id": "SIS202",
+          "nombre": "Programación Orientada a Objetos",
+          "creditos": 3,
+          "prerrequisitos": ["SIS102"],
+          "desbloquea": ["SIS302"]
+        },
+        {
+          "id": "SIS203",
+          "nombre": "Matemáticas Discretas",
+          "creditos": 3,
+          "prerrequisitos": ["SIS102"],
+          "desbloquea": ["SIS303"]
+        },
+        {
+          "id": "SIS204",
+          "nombre": "Física I",
+          "creditos": 4,
+          "prerrequisitos": ["SIS103"],
+          "desbloquea": ["SIS304"]
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "materias": [
+        {
+          "id": "SIS301",
+          "nombre": "Cálculo III",
+          "creditos": 4,
+          "prerrequisitos": ["SIS201"],
+          "desbloquea": ["SIS401"]
+        },
+        {
+          "id": "SIS302",
+          "nombre": "Estructuras de Datos",
+          "creditos": 3,
+          "prerrequisitos": ["SIS202"],
+          "desbloquea": ["SIS402"]
+        },
+        {
+          "id": "SIS303",
+          "nombre": "Lógica Matemática",
+          "creditos": 3,
+          "prerrequisitos": ["SIS203"],
+          "desbloquea": ["SIS403"]
+        },
+        {
+          "id": "SIS304",
+          "nombre": "Física II",
+          "creditos": 4,
+          "prerrequisitos": ["SIS204"],
+          "desbloquea": ["SIS404"]
+        }
+      ]
+    },
+    {
+      "numero": 4,
+      "materias": [
+        {
+          "id": "SIS401",
+          "nombre": "Ecuaciones Diferenciales",
+          "creditos": 3,
+          "prerrequisitos": ["SIS301"],
+          "desbloquea": []
+        },
+        {
+          "id": "SIS402",
+          "nombre": "Análisis de Algoritmos",
+          "creditos": 3,
+          "prerrequisitos": ["SIS302"],
+          "desbloquea": ["SIS501", "SIS603"]
+        },
+        {
+          "id": "SIS403",
+          "nombre": "Bases de Datos I",
+          "creditos": 3,
+          "prerrequisitos": ["SIS303"],
+          "desbloquea": ["SIS503"]
+        },
+        {
+          "id": "SIS404",
+          "nombre": "Sistemas Operativos",
+          "creditos": 4,
+          "prerrequisitos": ["SIS304"],
+          "desbloquea": ["SIS502", "SIS504"]
+        }
+      ]
+    },
+    {
+      "numero": 5,
+      "materias": [
+        {
+          "id": "SIS501",
+          "nombre": "Ingeniería de Software I",
+          "creditos": 3,
+          "prerrequisitos": ["SIS402"],
+          "desbloquea": ["SIS601"]
+        },
+        {
+          "id": "SIS502",
+          "nombre": "Redes de Computadores",
+          "creditos": 4,
+          "prerrequisitos": ["SIS404"],
+          "desbloquea": ["SIS602"]
+        },
+        {
+          "id": "SIS503",
+          "nombre": "Bases de Datos II",
+          "creditos": 3,
+          "prerrequisitos": ["SIS403"],
+          "desbloquea": []
+        },
+        {
+          "id": "SIS504",
+          "nombre": "Arquitectura de Computadores",
+          "creditos": 3,
+          "prerrequisitos": ["SIS404"],
+          "desbloquea": []
+        }
+      ]
+    },
+    {
+      "numero": 6,
+      "materias": [
+        {
+          "id": "SIS601",
+          "nombre": "Ingeniería de Software II",
+          "creditos": 3,
+          "prerrequisitos": ["SIS501"],
+          "desbloquea": []
+        },
+        {
+          "id": "SIS602",
+          "nombre": "Seguridad Informática",
+          "creditos": 3,
+          "prerrequisitos": ["SIS502"],
+          "desbloquea": []
+        },
+        {
+          "id": "SIS603",
+          "nombre": "Inteligencia Artificial",
+          "creditos": 4,
+          "prerrequisitos": ["SIS402"],
+          "desbloquea": []
+        }
+      ]
+    }
+  ]
+}
