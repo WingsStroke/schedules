@@ -590,44 +590,6 @@ window.deleteCurrentEvent = function() {
   renderCalendariosGrid();
 };
 
-// Botón Publicar Calendario
-document.getElementById('btn-publish-calendario').onclick = async () => {
-  calendarioData.semestre_activo = document.getElementById('input-calendario-nombre').value.trim();
-  if (!calendarioData.semestre_activo) {
-    showToast('El nombre del semestre activo es requerido.');
-    return;
-  }
-  if (calendarioData.eventos.length === 0) {
-    showToast('No hay eventos para publicar.');
-    return;
-  }
-  if (!confirm(`¿Estás seguro de que deseas publicar el calendario ${calendarioData.semestre_activo}.json?`)) {
-    return;
-  }
-
-  try {
-    showToast('Publicando calendario...');
-    // Se sube al endpoint del Cloudflare Worker configurado para R2
-    const uploadUrl = `https://api.schedules.udec.edu.co/upload/calendario/${calendarioData.semestre_activo}.json`; 
-    const response = await fetch(uploadUrl, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(calendarioData)
-    });
-
-    if (response.ok) {
-      showToast('Calendario académico publicado con éxito.');
-    } else {
-      throw new Error(`Error del servidor: ${response.status} ${response.statusText}`);
-    }
-  } catch (err) {
-    console.error(err);
-    showToast(`Error al publicar: ${err.message}`);
-  }
-};
-
 // Botón Exportar Calendario
 document.getElementById('btn-export-calendario').onclick = () => {
   calendarioData.semestre_activo = document.getElementById('input-calendario-nombre').value.trim();
