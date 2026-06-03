@@ -1,5 +1,5 @@
 /* =========================================
-   🧭 SISTEMA DE VISTAS
+   SISTEMA DE VISTAS
    ========================================= */
 function switchView(viewId) {
   document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
@@ -9,7 +9,7 @@ function switchView(viewId) {
 }
 
 /* =========================================
-   🕸️ LÓGICA DE MALLAS ACADÉMICAS
+   LÓGICA DE MALLAS ACADÉMICAS
    ========================================= */
 let mallaData = {
   carrera: "Ingeniería de Sistemas",
@@ -180,7 +180,7 @@ window.closeModal = closeModal;
 /* --- LÓGICA DE DIBUJO Y DEPENDENCIAS --- */
 function validateAndCreateLink(sourceId, targetId) {
   if (hasCircularDependency(sourceId, targetId)) {
-    showToast(`⚠️ Acción bloqueada: Vincular "${sourceId}" con "${targetId}" crea un bucle infinito.`);
+    showToast(`Acción bloqueada: Vincular "${sourceId}" con "${targetId}" crea un bucle infinito.`);
     return;
   }
   let sourceMateria, targetMateria;
@@ -267,7 +267,7 @@ function showToast(message) {
 // Toggle Botón Vincular
 document.getElementById('btn-link-mode').onclick = (e) => {
   isLinkMode = !isLinkMode; sourceNodeId = null;
-  e.target.innerText = isLinkMode ? "🔗 Modo Vincular: ON" : "🔗 Modo Vincular: OFF";
+  e.target.innerText = isLinkMode ? "Modo Vincular: ON" : "Modo Vincular: OFF";
   e.target.style.backgroundColor = isLinkMode ? "var(--link-color)" : "";
   document.getElementById('grid-canvas').classList.toggle('link-mode-active', isLinkMode);
 };
@@ -292,7 +292,7 @@ switchView('view-home');
 renderMallasGrid();
 
 /* =========================================
-   📅 LÓGICA DE CALENDARIOS ACADÉMICOS
+   LÓGICA DE CALENDARIOS ACADÉMICOS
    ========================================= */
 let calendarioData = {
   semestre_activo: "2026-1",
@@ -590,6 +590,44 @@ window.deleteCurrentEvent = function() {
   renderCalendariosGrid();
 };
 
+// Botón Publicar Calendario
+document.getElementById('btn-publish-calendario').onclick = async () => {
+  calendarioData.semestre_activo = document.getElementById('input-calendario-nombre').value.trim();
+  if (!calendarioData.semestre_activo) {
+    showToast('El nombre del semestre activo es requerido.');
+    return;
+  }
+  if (calendarioData.eventos.length === 0) {
+    showToast('No hay eventos para publicar.');
+    return;
+  }
+  if (!confirm(`¿Estás seguro de que deseas publicar el calendario ${calendarioData.semestre_activo}.json?`)) {
+    return;
+  }
+
+  try {
+    showToast('Publicando calendario...');
+    // Se sube al endpoint del Cloudflare Worker configurado para R2
+    const uploadUrl = `https://api.schedules.udec.edu.co/upload/calendario/${calendarioData.semestre_activo}.json`; 
+    const response = await fetch(uploadUrl, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(calendarioData)
+    });
+
+    if (response.ok) {
+      showToast('Calendario académico publicado con éxito.');
+    } else {
+      throw new Error(`Error del servidor: ${response.status} ${response.statusText}`);
+    }
+  } catch (err) {
+    console.error(err);
+    showToast(`Error al publicar: ${err.message}`);
+  }
+};
+
 // Botón Exportar Calendario
 document.getElementById('btn-export-calendario').onclick = () => {
   calendarioData.semestre_activo = document.getElementById('input-calendario-nombre').value.trim();
@@ -607,7 +645,7 @@ document.getElementById('btn-export-calendario').onclick = () => {
 };
 
 /* =========================================
-   ⌨️ ESCUCHADORES DE TECLADO Y ATAJOS
+   ESCUCHADORES DE TECLADO Y ATAJOS
    ========================================= */
 
 // Manejar Alt + Clic en un día para seleccionar un rango

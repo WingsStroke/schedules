@@ -16,12 +16,10 @@
     </header>
     <div class="home-container">
       <div class="bento-card" onclick="switchView('view-mallas')">
-        <div class="bento-icon">🕸️</div>
         <h3>Mallas Académicas</h3>
         <p style="opacity: 0.7; margin-top: 0.5rem;">Crea planes de estudio y vincula prerrequisitos.</p>
       </div>
       <div class="bento-card" onclick="switchView('view-calendarios')">
-        <div class="bento-icon">📅</div>
         <h3>Calendarios Académicos</h3>
         <p style="opacity: 0.7; margin-top: 0.5rem;">Crea calendarios de eventos y actividades académicas.</p>
       </div>
@@ -31,13 +29,13 @@
   <div id="view-mallas" class="view">
     <header class="glass-panel">
       <div>
-        <button class="btn btn-secondary" onclick="switchView('view-home')">⬅ Volver</button>
+        <button class="btn btn-secondary" onclick="switchView('view-home')">Volver</button>
         <input type="text" id="input-carrera-nombre" value="Ingeniería de Sistemas" class="glass-input"
           style="width: 250px; margin-left: 1rem; display: inline-block; margin-top: 0; padding: 0.4rem;">
       </div>
       <div class="actions">
-        <button id="btn-link-mode" class="btn btn-secondary">🔗 Modo Vincular: OFF</button>
-        <button id="btn-export-malla" class="btn btn-success">💾 Exportar JSON</button>
+        <button id="btn-link-mode" class="btn btn-secondary">Modo Vincular: OFF</button>
+        <button id="btn-export-malla" class="btn btn-success">Exportar JSON</button>
       </div>
     </header>
     <main class="grid-canvas" id="grid-canvas">
@@ -49,7 +47,7 @@
   <div id="view-calendarios" class="view">
     <header class="glass-panel">
       <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-        <button class="btn btn-secondary" onclick="switchView('view-home')">⬅ Volver</button>
+        <button class="btn btn-secondary" onclick="switchView('view-home')">Volver</button>
         <input type="text" id="input-calendario-nombre" value="2026-1" class="glass-input"
           style="width: 150px; margin-left: 0.5rem; display: inline-block; margin-top: 0; padding: 0.4rem;" placeholder="Semestre (Ej: 2026-1)">
         <input type="number" id="input-calendario-anio" value="2026" class="glass-input"
@@ -70,7 +68,8 @@
         <span class="month-badge" data-month="11">Dic</span>
       </div>
       <div class="actions">
-        <button id="btn-export-calendario" class="btn btn-success">💾 Exportar JSON</button>
+        <button id="btn-publish-calendario" class="btn btn-primary" style="margin-right: 0.5rem;">Publicar</button>
+        <button id="btn-export-calendario" class="btn btn-success">Exportar JSON</button>
       </div>
     </header>
     <main class="calendar-canvas">
@@ -98,7 +97,7 @@
       </div>
 
       <div class="modal-actions">
-        <button class="btn btn-danger" onclick="deleteCurrentMateria()" style="margin-right: auto;">🗑️ Eliminar</button>
+        <button class="btn btn-danger" onclick="deleteCurrentMateria()" style="margin-right: auto;">Eliminar</button>
         <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
         <button class="btn btn-primary" onclick="saveMateria()">Guardar Cambios</button>
       </div>
@@ -168,7 +167,7 @@
       </div>
 
       <div class="modal-actions" style="margin-top: 1.5rem; border-top: 1px solid var(--glass-border); padding-top: 1rem;">
-        <button id="btn-delete-event" class="btn btn-danger" onclick="deleteCurrentEvent()" style="margin-right: auto;">🗑️ Eliminar</button>
+        <button id="btn-delete-event" class="btn btn-danger" onclick="deleteCurrentEvent()" style="margin-right: auto;">Eliminar</button>
         <button class="btn btn-secondary" onclick="closeEventModal()">Cancelar</button>
         <button class="btn btn-primary" onclick="saveEvent()">Guardar Evento</button>
       </div>
