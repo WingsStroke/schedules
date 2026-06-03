@@ -303,7 +303,6 @@ let activeMonths = new Set([1, 2, 3, 4, 5]); // default: Feb, Mar, Abr, May, Jun
 let selectedAnio = 2026;
 let editingEventId = null; // null significa creación
 let selectedClickDateStr = null;
-let rangeStartSelect = null; // para selección de rango con Alt + Click
 
 // Inicialización de escuchadores de Meses del Calendario
 document.querySelectorAll('.month-badge').forEach(badge => {
@@ -403,13 +402,8 @@ function createBuilderMonthCard(year, month, events) {
     cell.className = 'builder-day-cell';
     cell.textContent = day;
 
-    // Si es el inicio de un rango Alt+Click activo
-    if (rangeStartSelect === dateStr) {
-      cell.classList.add('range-start');
-    }
-
-    // Buscar si el día está comprendido en el rango de algún evento
-    const dayEvents = events.filter(ev => dateStr >= ev.inicio && dateStr <= ev.fin);
+    // Buscar si el día es fecha de inicio o fin de algún evento
+    const dayEvents = events.filter(ev => dateStr === ev.inicio || dateStr === ev.fin);
 
     if (dayEvents.length > 0) {
       cell.classList.add('has-event');
@@ -421,24 +415,16 @@ function createBuilderMonthCard(year, month, events) {
         cell.style.border = '2px solid #ffffff';
       }
 
-      // Al hacer clic, abre modal o maneja Alt+Click
+      // Al hacer clic, abre modal para editar el primer evento de este día
       cell.onclick = (e) => {
         e.stopPropagation();
-        if (e.altKey) {
-          handleAltClickDate(dateStr, cell);
-        } else {
-          openEventModal(dayEvents[0].id);
-        }
+        openEventModal(dayEvents[0].id);
       };
     } else {
-      // Al hacer clic, abre modal de creación o maneja Alt+Click
+      // Al hacer clic, abre modal de creación preestableciendo la fecha
       cell.onclick = (e) => {
         e.stopPropagation();
-        if (e.altKey) {
-          handleAltClickDate(dateStr, cell);
-        } else {
-          openEventModal(null, dateStr);
-        }
+        openEventModal(null, dateStr);
       };
     }
 
@@ -450,7 +436,7 @@ function createBuilderMonthCard(year, month, events) {
 }
 
 // Abrir Modal de Eventos
-function openEventModal(eventId = null, defaultDateStr = null, endDateStr = null) {
+function openEventModal(eventId = null, defaultDateStr = null) {
   editingEventId = eventId;
   selectedClickDateStr = defaultDateStr;
 
@@ -493,7 +479,7 @@ function openEventModal(eventId = null, defaultDateStr = null, endDateStr = null
     idInput.disabled = false;
     titleInput.value = '';
     inicioInput.value = defaultDateStr;
-    finInput.value = endDateStr || defaultDateStr;
+    finInput.value = defaultDateStr;
     colorSelect.value = 'var(--cal-academico)';
     descInput.value = '';
     alertaCheckbox.checked = false;
@@ -609,36 +595,6 @@ document.getElementById('btn-export-calendario').onclick = () => {
 /* =========================================
    ESCUCHADORES DE TECLADO Y ATAJOS
    ========================================= */
-
-// Manejar Alt + Clic en un día para seleccionar un rango
-function handleAltClickDate(dateStr, cellElement) {
-  if (!rangeStartSelect) {
-    // Primer clic con Alt: establecer como fecha de inicio
-    rangeStartSelect = dateStr;
-    showToast(`Rango iniciado en ${dateStr}. Haz Alt + Clic en la fecha final.`);
-    
-    // Marcar visualmente
-    document.querySelectorAll('.builder-day-cell.range-start').forEach(el => el.classList.remove('range-start'));
-    cellElement.classList.add('range-start');
-  } else {
-    // Segundo clic con Alt: establecer como fecha de fin (o reiniciar si es anterior)
-    const start = rangeStartSelect;
-    const end = dateStr;
-    
-    if (end < start) {
-      rangeStartSelect = dateStr;
-      showToast(`Rango reiniciado. Nuevo inicio: ${dateStr}. Haz Alt + Clic en la fecha final.`);
-      document.querySelectorAll('.builder-day-cell.range-start').forEach(el => el.classList.remove('range-start'));
-      cellElement.classList.add('range-start');
-    } else {
-      rangeStartSelect = null;
-      document.querySelectorAll('.builder-day-cell.range-start').forEach(el => el.classList.remove('range-start'));
-      
-      // Abrir modal con rango de fechas preestablecido
-      openEventModal(null, start, end);
-    }
-  }
-}
 
 // Escuchador global de teclado para ESC y ENTER
 document.addEventListener('keydown', (e) => {

@@ -282,8 +282,8 @@ export const CalendarioAcademico = {
         cell.classList.add('today');
       }
 
-      // Check if day lies within any event interval
-      const dayEvents = events.filter(ev => cellDateStr >= ev.inicio && cellDateStr <= ev.fin);
+      // Check if day is the start or end date of any event
+      const dayEvents = events.filter(ev => cellDateStr === ev.inicio || cellDateStr === ev.fin);
 
       if (dayEvents.length > 0) {
         cell.classList.add('has-event');
