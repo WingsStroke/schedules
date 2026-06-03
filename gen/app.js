@@ -303,6 +303,7 @@ let activeMonths = new Set([1, 2, 3, 4, 5]); // default: Feb, Mar, Abr, May, Jun
 let selectedAnio = 2026;
 let editingEventId = null; // null significa creación
 let selectedClickDateStr = null;
+let rangeStartSelect = null; // para selección de rango con Alt + Click
 
 // Inicialización de escuchadores de Meses del Calendario
 document.querySelectorAll('.month-badge').forEach(badge => {
@@ -402,6 +403,11 @@ function createBuilderMonthCard(year, month, events) {
     cell.className = 'builder-day-cell';
     cell.textContent = day;
 
+    // Si es el inicio de un rango Alt+Click activo
+    if (rangeStartSelect === dateStr) {
+      cell.classList.add('range-start');
+    }
+
     // Buscar si el día está comprendido en el rango de algún evento
     const dayEvents = events.filter(ev => dateStr >= ev.inicio && dateStr <= ev.fin);
 
@@ -415,16 +421,24 @@ function createBuilderMonthCard(year, month, events) {
         cell.style.border = '2px solid #ffffff';
       }
 
-      // Al hacer clic, abre modal para editar el primer evento del día
+      // Al hacer clic, abre modal o maneja Alt+Click
       cell.onclick = (e) => {
         e.stopPropagation();
-        openEventModal(dayEvents[0].id);
+        if (e.altKey) {
+          handleAltClickDate(dateStr, cell);
+        } else {
+          openEventModal(dayEvents[0].id);
+        }
       };
     } else {
-      // Al hacer clic, abre modal de creación preestableciendo la fecha
+      // Al hacer clic, abre modal de creación o maneja Alt+Click
       cell.onclick = (e) => {
         e.stopPropagation();
-        openEventModal(null, dateStr);
+        if (e.altKey) {
+          handleAltClickDate(dateStr, cell);
+        } else {
+          openEventModal(null, dateStr);
+        }
       };
     }
 
@@ -436,7 +450,7 @@ function createBuilderMonthCard(year, month, events) {
 }
 
 // Abrir Modal de Eventos
-function openEventModal(eventId = null, defaultDateStr = null) {
+function openEventModal(eventId = null, defaultDateStr = null, endDateStr = null) {
   editingEventId = eventId;
   selectedClickDateStr = defaultDateStr;
 
@@ -479,7 +493,7 @@ function openEventModal(eventId = null, defaultDateStr = null) {
     idInput.disabled = false;
     titleInput.value = '';
     inicioInput.value = defaultDateStr;
-    finInput.value = defaultDateStr;
+    finInput.value = endDateStr || defaultDateStr;
     colorSelect.value = 'var(--cal-academico)';
     descInput.value = '';
     alertaCheckbox.checked = false;
@@ -591,3 +605,81 @@ document.getElementById('btn-export-calendario').onclick = () => {
   anchor.click();
   anchor.remove();
 };
+
+/* =========================================
+   ⌨️ ESCUCHADORES DE TECLADO Y ATAJOS
+   ========================================= */
+
+// Manejar Alt + Clic en un día para seleccionar un rango
+function handleAltClickDate(dateStr, cellElement) {
+  if (!rangeStartSelect) {
+    // Primer clic con Alt: establecer como fecha de inicio
+    rangeStartSelect = dateStr;
+    showToast(`Rango iniciado en ${dateStr}. Haz Alt + Clic en la fecha final.`);
+    
+    // Marcar visualmente
+    document.querySelectorAll('.builder-day-cell.range-start').forEach(el => el.classList.remove('range-start'));
+    cellElement.classList.add('range-start');
+  } else {
+    // Segundo clic con Alt: establecer como fecha de fin (o reiniciar si es anterior)
+    const start = rangeStartSelect;
+    const end = dateStr;
+    
+    if (end < start) {
+      rangeStartSelect = dateStr;
+      showToast(`Rango reiniciado. Nuevo inicio: ${dateStr}. Haz Alt + Clic en la fecha final.`);
+      document.querySelectorAll('.builder-day-cell.range-start').forEach(el => el.classList.remove('range-start'));
+      cellElement.classList.add('range-start');
+    } else {
+      rangeStartSelect = null;
+      document.querySelectorAll('.builder-day-cell.range-start').forEach(el => el.classList.remove('range-start'));
+      
+      // Abrir modal con rango de fechas preestablecido
+      openEventModal(null, start, end);
+    }
+  }
+}
+
+// Escuchador global de teclado para ESC y ENTER
+document.addEventListener('keydown', (e) => {
+  // ESC: Cerrar modales activos
+  if (e.key === 'Escape') {
+    const materiaModal = document.getElementById('materia-modal');
+    const eventModal = document.getElementById('event-modal');
+    
+    if (materiaModal && materiaModal.classList.contains('active')) {
+      closeModal();
+    }
+    if (eventModal && eventModal.classList.contains('active')) {
+      closeEventModal();
+    }
+  }
+
+  // ENTER: Guardar cambios en el modal activo
+  if (e.key === 'Enter') {
+    const activeEl = document.activeElement;
+    if (!activeEl) return;
+
+    // Modal de Materias
+    const materiaModal = document.getElementById('materia-modal');
+    if (materiaModal && materiaModal.classList.contains('active')) {
+      if (activeEl.closest('#materia-modal')) {
+        e.preventDefault();
+        saveMateria();
+      }
+    }
+
+    // Modal de Eventos
+    const eventModal = document.getElementById('event-modal');
+    if (eventModal && eventModal.classList.contains('active')) {
+      if (activeEl.closest('#event-modal')) {
+        // Permitir saltos de línea normales en el textarea de descripción
+        if (activeEl.tagName === 'TEXTAREA') {
+          return;
+        }
+        e.preventDefault();
+        saveEvent();
+      }
+    }
+  }
+});
