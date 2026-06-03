@@ -475,7 +475,7 @@ function openEventModal(eventId = null, defaultDateStr = null) {
     titleEl.textContent = 'Añadir Evento';
     deleteBtn.style.display = 'none';
 
-    idInput.value = `evento-${Math.floor(Math.random() * 10000)}`;
+    idInput.value = '';
     idInput.disabled = false;
     titleInput.value = '';
     inicioInput.value = defaultDateStr;
@@ -509,7 +509,6 @@ window.saveEvent = function() {
   const alertaCheckbox = document.getElementById('event-alerta');
   const diasAlertaInput = document.getElementById('event-dias-alerta');
 
-  const id = idInput.value.trim().replace(/\s+/g, '-').toLowerCase();
   const titulo = titleInput.value.trim();
   const inicio = inicioInput.value;
   const fin = finInput.value;
@@ -518,10 +517,6 @@ window.saveEvent = function() {
   const alerta = alertaCheckbox.checked;
   const diasAlerta = parseInt(diasAlertaInput.value) || 0;
 
-  if (!id) {
-    showToast('El ID del evento es requerido.');
-    return;
-  }
   if (!titulo) {
     showToast('El título del evento es requerido.');
     return;
@@ -532,6 +527,35 @@ window.saveEvent = function() {
   }
   if (inicio > fin) {
     showToast('La fecha de inicio no puede ser posterior a la fecha de fin.');
+    return;
+  }
+
+  // Generar o recuperar ID
+  let id = idInput.value;
+  if (!editingEventId) {
+    // Algoritmo aleatorio usando el título, mes y día de inicio
+    const tituloNormalizado = titulo
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "") // quitar acentos
+      .replace(/[^a-z0-9]/g, "-")      // caracteres no alfanuméricos a guiones
+      .replace(/-+/g, "-")             // colapsar guiones repetidos
+      .replace(/^-|-$/g, "");          // quitar guiones al inicio/fin
+
+    const partesFecha = inicio.split("-");
+    const mes = partesFecha[1] || "01";
+    const dia = partesFecha[2] || "01";
+    
+    // Sufijo aleatorio de 3 dígitos para evitar duplicados
+    const rnd = Math.floor(100 + Math.random() * 900);
+    
+    id = `${tituloNormalizado}-${mes}-${dia}-${rnd}`;
+  } else {
+    id = id.trim().replace(/\s+/g, '-').toLowerCase();
+  }
+
+  if (!id) {
+    showToast('El ID del evento es requerido.');
     return;
   }
 
