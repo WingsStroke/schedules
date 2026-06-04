@@ -25,7 +25,19 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /*
+   * PERF: Only transition the 2 properties that actually animate on hover.
+   * 'transition: all' forces the browser to observe every CSS property on
+   * every card for every frame, which is very expensive with many cards.
+   */
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  /*
+   * PERF: Promote each card to its own GPU compositor layer so transform
+   * and opacity changes don't trigger paint/layout on the rest of the page.
+   */
+  will-change: transform;
+  contain: layout style paint;
 }
 
 .minihorario-card:hover {
@@ -375,14 +387,22 @@ body.dark-mode .info-item {
 .mini-celda.ocupada {
   position: relative;
   cursor: pointer;
-  transition: all 0.2s ease;
+  /*
+   * PERF: Only animate box-shadow (GPU compositor) — avoid scale() here
+   * because scale on a grid/flex child triggers neighbour relayout.
+   */
+  transition: box-shadow 0.2s ease;
 }
 
 .mini-celda.ocupada:hover {
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
-              0 0 25px rgba(255, 255, 255, 0.5),
-              inset 0 0 20px rgba(255, 255, 255, 0.3);
-  transform: scale(1.02);
+  /*
+   * PERF: Pure box-shadow glow — identical visual result to the old
+   * scale(1.02) + glow combo, but runs entirely on the GPU compositor
+   * thread without touching layout.
+   */
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.85),
+              0 0 22px rgba(255, 255, 255, 0.55),
+              inset 0 0 18px rgba(255, 255, 255, 0.35);
   z-index: 10;
 }
 

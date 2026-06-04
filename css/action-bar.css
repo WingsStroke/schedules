@@ -84,24 +84,9 @@
   transform: rotate(180deg);
 }
 
-/* Badge numérico de notificaciones del calendario */
+/* Badge numérico desactivado — las notificaciones se muestran únicamente como toasts */
 .action-bar-badge {
-  position: absolute;
-  top: -8px;
-  left: -8px;
-  background: #ef4444; /* Rojo vibrante */
-  color: white;
-  font-size: 10px;
-  font-weight: bold;
-  height: 18px;
-  min-width: 18px;
-  border-radius: 9px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 4px;
-  border: 1.5px solid white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: none !important;
 }
 
 /* Botones de acción individuales - Mayor contraste y sombras definidas */

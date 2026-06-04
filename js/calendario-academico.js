@@ -287,7 +287,7 @@ export const CalendarioAcademico = {
 
       if (dayEvents.length > 0) {
         cell.classList.add('has-event');
-        
+
         // Instead of painting the background, we put indicator dots
         cell.textContent = '';
         const dayNumberSpan = document.createElement('span');
@@ -316,7 +316,7 @@ export const CalendarioAcademico = {
         cell.style.flexDirection = 'column';
         cell.style.alignItems = 'center';
         cell.style.justifyContent = 'center';
-        
+
         // Attach event metadata to DOM dataset
         cell.dataset.events = JSON.stringify(dayEvents);
         cell.dataset.date = cellDateStr;
@@ -370,8 +370,8 @@ export const CalendarioAcademico = {
         }
       }
 
-      const badgeHtml = badgeText 
-        ? `<span class="tooltip-event-badge badge-${badgeText.toLowerCase()}">${badgeText}</span>` 
+      const badgeHtml = badgeText
+        ? `<span class="tooltip-event-badge badge-${badgeText.toLowerCase()}">${badgeText}</span>`
         : '';
 
       html += `
@@ -404,7 +404,7 @@ export const CalendarioAcademico = {
     // Calculate bounding box and smart layout position
     const cellRect = cell.getBoundingClientRect();
     const modalRect = this.elements.modal.querySelector('.calendario-modal-content').getBoundingClientRect();
-    
+
     // Relative coordinates inside the modal container
     const relativeLeft = cellRect.left - modalRect.left;
     const relativeTop = cellRect.top - modalRect.top;
@@ -453,7 +453,7 @@ export const CalendarioAcademico = {
    */
   async checkProactiveAlerts() {
     if (this.state.alertCheckDone) return;
-    
+
     let activeSemester = '2026-1'; // Default fallback
     if (SistemaCargaOfertas && SistemaCargaOfertas.semestreActual) {
       activeSemester = SistemaCargaOfertas.semestreActual;
@@ -487,14 +487,14 @@ export const CalendarioAcademico = {
 
     // Analyze dates
     const today = new Date();
-    today.setHours(0,0,0,0);
+    today.setHours(0, 0, 0, 0);
     const todayTime = today.getTime();
 
     events.forEach(ev => {
       if (!ev.alerta) return;
 
       const start = new Date(ev.inicio + 'T00:00:00');
-      start.setHours(0,0,0,0);
+      start.setHours(0, 0, 0, 0);
       const startTime = start.getTime();
 
       const end = new Date(ev.fin + 'T23:59:59');
@@ -509,17 +509,17 @@ export const CalendarioAcademico = {
       // 1. Level 'today': event is active today (today is between start and end)
       if (todayTime >= startTime && todayTime <= endTime) {
         alertLevel = 'today';
-        message = `📅 ¡Hoy está activo: ${ev.titulo}! ${ev.descripcion ? '- ' + ev.descripcion : ''}`;
+        message = `¡Hoy está activo: ${ev.titulo}! ${ev.descripcion ? '- ' + ev.descripcion : ''}`;
       }
       // 2. Level 'warning': starts in 1 to 3 days
       else if (diffDays > 0 && diffDays <= 3) {
         alertLevel = 'warning';
-        message = `⚠️ ¡Alerta: ${ev.titulo} inicia en ${diffDays} día${diffDays > 1 ? 's' : ''}!`;
+        message = `¡Alerta: ${ev.titulo} inicia en ${diffDays} día${diffDays > 1 ? 's' : ''}!`;
       }
       // 3. Level 'info': starts in 4 to diasAlerta days
       else if (diffDays > 3 && diffDays <= (ev.diasAlerta || 7)) {
         alertLevel = 'info';
-        message = `💡 Recordatorio: ${ev.titulo} inicia en ${diffDays} días.`;
+        message = `Recordatorio: ${ev.titulo} inicia en ${diffDays} días.`;
       }
 
       // If alert condition met, show toast only if not notified yet
@@ -551,7 +551,7 @@ export const CalendarioAcademico = {
       if (!ev.alerta) return;
 
       const start = new Date(ev.inicio + 'T00:00:00');
-      start.setHours(0,0,0,0);
+      start.setHours(0, 0, 0, 0);
       const startTime = start.getTime();
 
       const end = new Date(ev.fin + 'T23:59:59');

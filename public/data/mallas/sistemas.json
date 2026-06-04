@@ -223,7 +223,9 @@
           "prerrequisitos": [
             "FN23005"
           ],
-          "desbloquea": []
+          "desbloquea": [
+            "FN24036"
+          ]
         }
       ]
     },
@@ -290,7 +292,9 @@
           "id": "FN24036",
           "nombre": "Inglés IV",
           "creditos": 2,
-          "prerrequisitos": [],
+          "prerrequisitos": [
+            "FN24035"
+          ],
           "desbloquea": [
             "FN24037"
           ]

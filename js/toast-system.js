@@ -19,7 +19,7 @@ export const Toast = {
     toast.className = `toast ${type}`;
     toast.textContent = message;
     
-    document.body.appendChild(toast);
+    container.appendChild(toast);
     requestAnimationFrame(() => toast.classList.add("show"));
     
     setTimeout(() => {

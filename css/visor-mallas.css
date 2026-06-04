@@ -641,12 +641,24 @@ body.dark-mode .legend-item {
 @media (max-width: 768px) {
   .modal.fullscreen-modal .mallas-modal-content {
     width: 100vw;
+    /*
+     * MOBILE VIEWPORT FIX:
+     * Browser toolbars (address bar, bottom nav) reduce the visible viewport
+     * when they appear. We use 'svh' (Small Viewport Height = smallest
+     * possible viewport, i.e., ALL toolbars visible) as the safe fallback,
+     * then override with 'dvh' (Dynamic Viewport Height) when supported.
+     * This prevents the last row of subjects from being hidden under the
+     * browser's bottom toolbar at any toolbar state.
+     */
+    height: 100svh;
     height: 100dvh;
     max-width: 100vw;
+    max-height: 100svh;
     max-height: 100dvh;
     border-radius: 0;
     padding: 12px;
-    /* Reducido de 16px */
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    /* Respeta el safe area de iOS/Android (notch, home indicator, barra navegador) */
   }
 
   .mallas-header-left {
@@ -719,8 +731,13 @@ body.dark-mode .legend-item {
 
   .malla-grid-container {
     gap: 8px;
-    padding: 4px;
-    margin-bottom: 8px;
+    /*
+     * MOBILE: Reduce bottom padding drastically so the grid content
+     * uses as much vertical space as possible. The safe-area padding
+     * on the modal content already handles the bottom browser toolbar gap.
+     */
+    padding: 4px 0 8px 0;
+    margin-bottom: 4px;
   }
 
   .malla-semestre-col {
@@ -766,29 +783,35 @@ body.dark-mode .legend-item {
   }
 
   .mallas-modal-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    padding-top: 8px;
-    margin-top: 6px;
+    /*
+     * MOBILE: Collapse the footer to minimum height to reclaim vertical
+     * space for the grid. The legend is hidden on very small viewports
+     * since the grid itself is the primary interaction surface.
+     */
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    padding-top: 4px;
+    margin-top: 2px;
   }
 
   .mallas-legend {
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
   }
 
   .legend-item {
-    font-size: 11px;
+    font-size: 10px;
     gap: 4px;
   }
 
   .legend-dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
   }
 
   .mallas-instruction {
-    font-size: 11px;
+    font-size: 10px;
   }
 }
