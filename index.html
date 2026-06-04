@@ -628,7 +628,6 @@
         <div class="mallas-header-left">
           <h2>Visor de Mallas Académicas</h2>
           <div class="mallas-selector-container">
-            <label for="mallaProgramSelect">Programa:</label>
             <select id="mallaProgramSelect" class="mallas-select">
               <option value="" disabled selected>Cargando programas...</option>
             </select>
@@ -666,12 +665,10 @@
       </div>
 
       <!-- Contenido del Grid de la Malla -->
-      <div class="mallas-modal-body">
-        <div id="mallaGridContainer" class="malla-grid-container">
-          <!-- Aquí se renderizan las columnas de semestres dinámicamente -->
-          <div class="mallas-empty-state">
-            <p>Selecciona un programa académico para explorar su plan de estudios.</p>
-          </div>
+      <div id="mallaGridContainer" class="malla-grid-container">
+        <!-- Aquí se renderizan las columnas de semestres dinámicamente -->
+        <div class="mallas-empty-state">
+          <p>Selecciona un programa académico para explorar su plan de estudios.</p>
         </div>
       </div>
 
@@ -690,9 +687,6 @@
             <span class="legend-dot unlocked"></span>
             <span>Desbloquea</span>
           </div>
-        </div>
-        <div class="mallas-instruction">
-          <span>Pasa el cursor sobre una materia para ver sus requisitos. Haz clic para fijar la selección.</span>
         </div>
       </div>
 
@@ -725,14 +719,6 @@
             <div class="cal-legend-item">
               <span class="cal-legend-color" style="background: var(--cal-evaluacion);"></span>
               <span>Evaluaciones</span>
-            </div>
-            <div class="cal-legend-item">
-              <span class="cal-legend-color" style="background: var(--cal-receso);"></span>
-              <span>Receso</span>
-            </div>
-            <div class="cal-legend-item">
-              <span class="cal-legend-color" style="background: var(--cal-deadline);"></span>
-              <span>Límite / Habil.</span>
             </div>
           </div>
         </div>

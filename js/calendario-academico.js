@@ -287,8 +287,35 @@ export const CalendarioAcademico = {
 
       if (dayEvents.length > 0) {
         cell.classList.add('has-event');
-        // Paint cell with the first matching event color
-        cell.style.background = dayEvents[0].color_css;
+        
+        // Instead of painting the background, we put indicator dots
+        cell.textContent = '';
+        const dayNumberSpan = document.createElement('span');
+        dayNumberSpan.textContent = day;
+        cell.appendChild(dayNumberSpan);
+
+        const dotsContainer = document.createElement('div');
+        dotsContainer.style.display = 'flex';
+        dotsContainer.style.gap = '3px';
+        dotsContainer.style.justifyContent = 'center';
+        dotsContainer.style.marginTop = '2px';
+        dotsContainer.style.flexWrap = 'wrap';
+        dotsContainer.style.maxWidth = '100%';
+
+        dayEvents.forEach(ev => {
+          const dot = document.createElement('div');
+          dot.style.width = '5px';
+          dot.style.height = '5px';
+          dot.style.borderRadius = '50%';
+          dot.style.backgroundColor = ev.color_css;
+          dotsContainer.appendChild(dot);
+        });
+
+        cell.appendChild(dotsContainer);
+        cell.style.display = 'flex';
+        cell.style.flexDirection = 'column';
+        cell.style.alignItems = 'center';
+        cell.style.justifyContent = 'center';
         
         // Attach event metadata to DOM dataset
         cell.dataset.events = JSON.stringify(dayEvents);
@@ -320,6 +347,12 @@ export const CalendarioAcademico = {
 
     if (eventsData.length === 0) return;
 
+    // Remove existing highlights
+    document.querySelectorAll('.mini-day-cell.event-highlight').forEach(el => {
+      el.classList.remove('event-highlight');
+      el.style.removeProperty('--glow-color');
+    });
+
     // Formatting date neatly
     const dateObj = new Date(dateStr + 'T00:00:00');
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
@@ -328,8 +361,22 @@ export const CalendarioAcademico = {
     // Build rich tooltip HTML (supports multiple events on a single day!)
     let html = `<div class="tooltip-date">${formattedDate}</div>`;
     eventsData.forEach(ev => {
+      let badgeText = '';
+      if (ev.inicio !== ev.fin) {
+        if (dateStr === ev.inicio) {
+          badgeText = 'Inicio';
+        } else if (dateStr === ev.fin) {
+          badgeText = 'Final';
+        }
+      }
+
+      const badgeHtml = badgeText 
+        ? `<span class="tooltip-event-badge badge-${badgeText.toLowerCase()}">${badgeText}</span>` 
+        : '';
+
       html += `
-        <div style="margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
+        <div class="tooltip-event-card">
+          ${badgeHtml}
           <div class="tooltip-title">
             <span class="tooltip-color-indicator" style="background: ${ev.color_css};"></span>
             ${ev.titulo}
@@ -337,6 +384,18 @@ export const CalendarioAcademico = {
           <p class="tooltip-desc">${ev.descripcion || 'Sin descripción adicional.'}</p>
         </div>
       `;
+
+      // Highlight start and end cells
+      const startCell = document.querySelector(`.mini-day-cell[data-date="${ev.inicio}"]`);
+      const endCell = document.querySelector(`.mini-day-cell[data-date="${ev.fin}"]`);
+      if (startCell) {
+        startCell.classList.add('event-highlight');
+        startCell.style.setProperty('--glow-color', ev.color_css);
+      }
+      if (endCell) {
+        endCell.classList.add('event-highlight');
+        endCell.style.setProperty('--glow-color', ev.color_css);
+      }
     });
 
     this.elements.tooltip.innerHTML = html;
@@ -382,6 +441,11 @@ export const CalendarioAcademico = {
       this.elements.tooltip.classList.remove('active');
       this.elements.tooltip.style.display = 'none';
     }
+    // Remove highlights from all cells
+    document.querySelectorAll('.mini-day-cell.event-highlight').forEach(el => {
+      el.classList.remove('event-highlight');
+      el.style.removeProperty('--glow-color');
+    });
   },
 
   /**

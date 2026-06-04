@@ -4,16 +4,17 @@
 
 /* Modal Pantalla Completa (Fullscreen) */
 .modal.fullscreen-modal {
-  z-index: 100; /* Por encima del Action Bar y otros modales estándar */
+  z-index: 100;
+  /* Por encima del Action Bar y otros modales estándar */
 }
 
 .modal.fullscreen-modal .mallas-modal-content {
-  width: 96vw;
-  height: 92vh;
-  max-width: 1400px;
-  max-height: 900px;
-  padding: 24px;
-  border-radius: 24px;
+  width: 98vw;
+  height: 97vh;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 10px 16px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.75);
@@ -30,23 +31,24 @@
 .mallas-modal-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  border-bottom: 1.5px solid rgba(0, 0, 0, 0.08);
-  padding-bottom: 16px;
-  margin-bottom: 16px;
+  align-items: center;
+  padding-bottom: 6px;
+  margin-bottom: 6px;
   flex-shrink: 0;
   gap: 20px;
 }
 
 .mallas-header-left {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding-left: 48px; /* Evita que la 'X' tape el título */
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding-left: 48px;
+  /* Evita que la 'X' tape el título */
 }
 
 .mallas-header-left h2 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   margin: 0;
   color: #0f172a;
@@ -59,23 +61,23 @@
 }
 
 .mallas-selector-container label {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: #475569;
 }
 
 .mallas-select {
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: 8px;
   border: 1.5px solid rgba(0, 0, 0, 0.12);
   background: #ffffff;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: #0f172a;
   cursor: pointer;
   outline: none;
   transition: all 0.2s ease;
-  min-width: 250px;
+  min-width: 220px;
 }
 
 .mallas-select:focus {
@@ -104,19 +106,19 @@
 }
 
 .mallas-search-box input {
-  padding: 8px 36px 8px 36px;
+  padding: 6px 30px 6px 30px;
   border-radius: 8px;
   border: 1.5px solid rgba(0, 0, 0, 0.12);
   background: #ffffff;
-  font-size: 14px;
+  font-size: 13px;
   color: #0f172a;
   outline: none;
-  width: 200px;
+  width: 180px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .mallas-search-box input:focus {
-  width: 280px;
+  width: 240px;
   border-color: #0f172a;
   box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
 }
@@ -161,10 +163,10 @@
 /* Stats Container */
 .mallas-stats {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   background: rgba(0, 0, 0, 0.03);
-  padding: 6px 16px;
-  border-radius: 12px;
+  padding: 4px 12px;
+  border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -172,41 +174,41 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 60px;
+  min-width: 55px;
 }
 
 .malla-stat-val {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: #0f172a;
   line-height: 1.2;
 }
 
 .malla-stat-lbl {
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 500;
   color: #64748b;
 }
 
 /* Cuerpo del Visor: Grid Scrollable */
-.mallas-modal-body {
-  flex: 1;
-  overflow: auto; /* Permite scroll vertical y horizontal */
-  padding: 8px 4px;
-  margin-bottom: 12px;
-  border-radius: 12px;
-  background: rgba(0, 0, 0, 0.02);
-  border: 1px solid rgba(0, 0, 0, 0.03);
-  display: flex;
-  flex-direction: column;
-}
-
 .malla-grid-container {
+  flex: 1;
+  overflow-x: auto;
+  /* Permite scroll horizontal */
+  overflow-y: hidden;
+  /* Elimina scroll vertical */
+  padding: 4px 0 16px 0; /* Padding inferior añadido para dar respiro sobre el scroll horizontal */
+  margin-bottom: 6px;
+  background: transparent;
+  border: none;
   display: flex;
   gap: 12px;
-  padding: 6px;
-  min-height: 100%;
-  width: max-content; /* Fuerza a mantener ancho necesario para las columnas */
+  min-height: 0;
+  width: 100%;
+  /* Constreñido al ancho de pantalla para activar scroll horizontal */
+  /* GPU: promote grid to its own compositor layer so scroll is handled by the GPU thread */
+  transform: translateZ(0);
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Empty State */
@@ -226,19 +228,22 @@
 .malla-semestre-col {
   display: flex;
   flex-direction: column;
-  width: 190px;
-  min-width: 190px;
+  width: 185px;
+  min-width: 185px;
+  height: max-content;
+  /* Cubre exactamente las materias sin espacio sobrante abajo */
   background: rgba(255, 255, 255, 0.45);
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 12px;
-  padding: 10px;
-  gap: 8px;
+  padding: 8px;
+  gap: 6px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  flex-shrink: 0;
+  /* Evita que se encojan al hacer scroll horizontal */
 }
 
 .malla-semestre-header {
-  border-bottom: 2px solid #0f172a;
-  padding-bottom: 6px;
+  padding-bottom: 4px;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -262,15 +267,34 @@
   position: relative;
   background: #ffffff;
   border: 1.5px solid rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
-  padding: 6px 8px;
+  border-radius: 6px;
+  padding: 5px 6px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /*
+   * PERF: Only transition the 3 properties that actually change.
+   * 'transition: all' makes the browser observe every CSS property on every
+   * frame for every card, which is extremely expensive with 50+ elements.
+   */
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.2s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   user-select: none;
+  /*
+   * PERF: Hint the browser to promote each card to its own compositor layer.
+   * This lets the GPU handle opacity/transform changes without triggering
+   * layout or paint on the rest of the document.
+   */
+  will-change: transform, opacity;
+  /*
+   * PERF: 'contain: layout style paint' tells the browser that nothing
+   * inside this card affects layout/paint outside it, enabling further
+   * rendering optimizations.
+   */
+  contain: layout style paint;
 }
 
 .malla-materia-card:hover {
@@ -280,18 +304,18 @@
 }
 
 .malla-materia-id {
-  font-size: 8px;
+  font-size: 7.5px;
   font-weight: 600;
   color: #94a3b8;
   letter-spacing: 0.5px;
 }
 
 .malla-materia-name {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   color: #0f172a;
-  line-height: 1.2;
-  min-height: 26px;
+  line-height: 1.15;
+  min-height: 22px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -303,21 +327,43 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 2px;
+  margin-top: 0px;
 }
 
 .malla-materia-credits {
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 500;
   color: #475569;
   background: #f1f5f9;
-  padding: 1px 4px;
+  padding: 1px 3px;
   border-radius: 4px;
 }
 
 /* =========================================================
    ESTADOS INTERACTIVOS (HIGHLIGHTING)
    ========================================================= */
+
+/*
+ * PERF: Dimming via opacity ONLY — no filter/grayscale.
+ * CSS 'filter' forces the browser to rasterize each element separately and
+ * composite them in software, causing massive GPU pressure with 50+ cards.
+ * Pure opacity changes are handled entirely by the GPU compositor thread
+ * at zero CPU cost, making scroll perfectly smooth even with large curricula.
+ */
+.malla-grid-container.has-highlight .malla-materia-card,
+.malla-grid-container.has-search .malla-materia-card {
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+/* Override dimming: restore full visibility to highlighted/matched cards, and keep them interactive */
+.malla-grid-container.has-highlight .malla-materia-card.highlight-selected,
+.malla-grid-container.has-highlight .malla-materia-card.highlight-prereq,
+.malla-grid-container.has-highlight .malla-materia-card.highlight-unlocks,
+.malla-grid-container.has-search .malla-materia-card.search-match {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
 
 /* 1. Tarjeta Seleccionada (Activa) */
 .malla-materia-card.highlight-selected {
@@ -342,41 +388,37 @@
 
 /* 2. Prerrequisitos (Cadena atrás) */
 .malla-materia-card.highlight-prereq {
-  border-color: #ef4444 !important; /* Rojo */
+  border-color: #ef4444 !important;
+  /* Rojo */
   box-shadow: 0 0 0 1px #ef4444 inset, 0 4px 10px rgba(239, 68, 68, 0.1) !important;
 }
 
 /* 3. Desbloquea (Cadena adelante) */
 .malla-materia-card.highlight-unlocks {
-  border-color: #22c55e !important; /* Verde */
+  border-color: #22c55e !important;
+  /* Verde */
   box-shadow: 0 0 0 1px #22c55e inset, 0 4px 10px rgba(34, 197, 94, 0.1) !important;
-}
-
-/* 4. Elementos atenuados (No relacionados) */
-.malla-materia-card.dimmed {
-  opacity: 0.25 !important;
-  filter: grayscale(40%);
-  pointer-events: none;
-}
-
-.malla-semestre-col.dimmed {
-  opacity: 0.8;
 }
 
 /* Búsqueda encontrada (Highlight temporario) */
 .malla-materia-card.search-match {
+  /*
+   * PERF: Removed scale(1.02) from pulse animation — scale triggers
+   * layout recalculation on neighbours inside the flex column.
+   * The glow effect alone is sufficient and runs purely on the GPU.
+   */
   animation: pulse-search-match 1.5s infinite alternate;
 }
 
 @keyframes pulse-search-match {
   0% {
     border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
   }
+
   100% {
     border-color: #3b82f6;
-    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.4);
-    transform: scale(1.02);
+    box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.45);
   }
 }
 
@@ -398,6 +440,7 @@
   0% {
     box-shadow: 0 0 0 0 rgba(15, 23, 42, 0.6);
   }
+
   100% {
     box-shadow: 0 0 0 12px rgba(15, 23, 42, 0);
   }
@@ -411,6 +454,7 @@ body.dark-mode .malla-materia-card.card-pulse-anim::after {
   0% {
     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6);
   }
+
   100% {
     box-shadow: 0 0 0 12px rgba(255, 255, 255, 0);
   }
@@ -422,8 +466,8 @@ body.dark-mode .malla-materia-card.card-pulse-anim::after {
   justify-content: space-between;
   align-items: center;
   border-top: 1.5px solid rgba(0, 0, 0, 0.08);
-  padding-top: 12px;
-  margin-top: 8px;
+  padding-top: 6px;
+  margin-top: 4px;
   flex-shrink: 0;
   flex-wrap: wrap;
   gap: 12px;
@@ -431,14 +475,14 @@ body.dark-mode .malla-materia-card.card-pulse-anim::after {
 
 .mallas-legend {
   display: flex;
-  gap: 16px;
+  gap: 12px;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   color: #475569;
 }
@@ -464,12 +508,6 @@ body.dark-mode .malla-materia-card.card-pulse-anim::after {
   border: 2px solid #22c55e;
 }
 
-.mallas-instruction {
-  font-size: 12px;
-  font-weight: 500;
-  color: #64748b;
-}
-
 /* =========================================================
    MODO OSCURO (DARK MODE)
    ========================================================= */
@@ -478,10 +516,6 @@ body.dark-mode .modal.fullscreen-modal .mallas-modal-content {
   background: rgba(30, 30, 30, 0.85);
   border-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-}
-
-body.dark-mode .mallas-modal-header {
-  border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
 body.dark-mode .mallas-header-left h2 {
@@ -539,18 +573,9 @@ body.dark-mode .malla-stat-lbl {
   color: #94a3b8;
 }
 
-body.dark-mode .mallas-modal-body {
-  background: rgba(255, 255, 255, 0.01);
-  border-color: rgba(255, 255, 255, 0.04);
-}
-
 body.dark-mode .malla-semestre-col {
   background: rgba(45, 45, 45, 0.45);
   border-color: rgba(255, 255, 255, 0.06);
-}
-
-body.dark-mode .malla-semestre-header {
-  border-bottom-color: #ffffff;
 }
 
 body.dark-mode .malla-semestre-header h4 {
@@ -609,10 +634,6 @@ body.dark-mode .legend-item {
   color: #cbd5e1;
 }
 
-body.dark-mode .mallas-instruction {
-  color: #94a3b8;
-}
-
 /* =========================================================
    RESPONSIVIDAD (MÓVILES)
    ========================================================= */
@@ -624,16 +645,20 @@ body.dark-mode .mallas-instruction {
     max-width: 100vw;
     max-height: 100dvh;
     border-radius: 0;
-    padding: 12px; /* Reducido de 16px */
+    padding: 12px;
+    /* Reducido de 16px */
   }
 
   .mallas-header-left {
     padding-left: 36px;
     gap: 6px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .mallas-header-left h2 {
-    font-size: 18px; /* Reducido de 24px */
+    font-size: 18px;
+    /* Reducido de 24px */
   }
 
   .mallas-selector-container {
@@ -692,14 +717,10 @@ body.dark-mode .mallas-instruction {
     font-size: 9px;
   }
 
-  .mallas-modal-body {
-    padding: 4px;
-    margin-bottom: 8px;
-  }
-
   .malla-grid-container {
     gap: 8px;
     padding: 4px;
+    margin-bottom: 8px;
   }
 
   .malla-semestre-col {

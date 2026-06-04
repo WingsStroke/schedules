@@ -203,6 +203,7 @@ body.dark-mode {
   transition: all 0.2s ease;
   position: relative;
   cursor: default;
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 /* Celda vacía */
@@ -219,31 +220,35 @@ body.dark-mode {
 
 /* Celda con evento */
 .mini-day-cell.has-event {
-  color: #ffffff;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  background: rgba(0,0,0,0.02);
   border: 1.5px solid transparent;
+}
+
+body.dark-mode .mini-day-cell.has-event {
+  background: rgba(255,255,255,0.03);
 }
 
 .mini-day-cell.has-event:hover {
   transform: scale(1.15);
   z-index: 5;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  border-color: rgba(255, 255, 255, 0.9);
+  border-color: var(--glow-color, #3b82f6);
 }
 
 /* Tooltip Flotante */
 .calendar-tooltip {
   position: absolute;
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  color: #ffffff;
-  padding: 12px 16px;
+  color: #1e293b;
+  padding: 12px;
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  width: 280px;
   max-width: 280px;
   z-index: 120;
   pointer-events: none;
@@ -259,34 +264,81 @@ body.dark-mode {
   opacity: 1;
 }
 
+.tooltip-date {
+  color: #475569;
+  font-size: 11px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  text-transform: capitalize;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding-bottom: 4px;
+}
+
+.tooltip-event-card {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  background: rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  padding-right: 52px; /* Espacio para el badge de inicio/fin */
+}
+
+.tooltip-event-card:last-child {
+  margin-bottom: 0;
+}
+
 .tooltip-title {
   font-weight: 600;
-  font-size: 13px;
-  margin-bottom: 4px;
+  font-size: 12.5px;
+  color: #0f172a;
+  margin-bottom: 2px;
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
 .tooltip-color-indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
   display: inline-block;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.tooltip-date {
-  color: #94a3b8;
-  font-size: 11px;
-  margin-bottom: 8px;
-  font-weight: 500;
+  flex-shrink: 0;
 }
 
 .tooltip-desc {
-  color: #e2e8f0;
-  line-height: 1.4;
+  color: #475569;
+  line-height: 1.35;
   margin: 0;
+  font-size: 11px;
+}
+
+.tooltip-event-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 8.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 5px;
+  border-radius: 4px;
+  line-height: 1;
+  letter-spacing: 0.5px;
+}
+
+.tooltip-event-badge.badge-inicio {
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563eb;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.tooltip-event-badge.badge-final {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
 /* Footer */
@@ -365,6 +417,7 @@ body.dark-mode .mini-month-title {
 
 body.dark-mode .mini-day-cell {
   color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 body.dark-mode .mini-day-cell.today {
@@ -373,17 +426,72 @@ body.dark-mode .mini-day-cell.today {
 }
 
 body.dark-mode .calendar-tooltip {
-  background: rgba(30, 30, 30, 0.95);
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  background: rgba(30, 30, 30, 0.96);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  color: #f1f5f9;
 }
 
 body.dark-mode .tooltip-date {
   color: #94a3b8;
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .tooltip-event-card {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+body.dark-mode .tooltip-title {
+  color: #ffffff;
 }
 
 body.dark-mode .tooltip-desc {
   color: #cbd5e1;
+}
+
+body.dark-mode .tooltip-event-badge.badge-inicio {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border-color: rgba(59, 130, 246, 0.25);
+}
+
+body.dark-mode .tooltip-event-badge.badge-final {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+/* Animación de iluminación de días del evento */
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 4px var(--glow-color, rgba(255,255,255,0.6));
+    transform: scale(1.05);
+  }
+  50% {
+    box-shadow: 0 0 12px var(--glow-color, rgba(255,255,255,0.9));
+    transform: scale(1.12);
+    filter: brightness(1.2);
+  }
+  100% {
+    box-shadow: 0 0 4px var(--glow-color, rgba(255,255,255,0.6));
+    transform: scale(1.05);
+  }
+}
+
+.mini-day-cell.event-highlight {
+  position: relative;
+  z-index: 10;
+  animation: pulse-glow 1.5s infinite ease-in-out;
+  border: 1.5px solid var(--glow-color, #3b82f6) !important;
+  color: #0f172a !important;
+  font-weight: 700;
+}
+
+body.dark-mode .mini-day-cell.event-highlight {
+  border: 1.5px solid var(--glow-color, #3b82f6) !important;
+  color: #ffffff !important;
+  font-weight: 700;
 }
 
 body.dark-mode .calendario-modal-footer {

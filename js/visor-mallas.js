@@ -25,7 +25,9 @@ export const VisorMallas = {
     programas: [],
     currentMalla: null,
     subjectMap: {}, // Fast lookup for subjects by ID
-    pinnedSubjectId: null // Keep track of clicked/pinned subject
+    pinnedSubjectId: null, // Keep track of clicked/pinned subject
+    _activeHighlights: new Set(), // PERF: only store elements that currently have highlight classes
+    _hoverRafId: null            // PERF: requestAnimationFrame handle for hover debouncing
   },
 
   /**
@@ -110,10 +112,10 @@ export const VisorMallas = {
     try {
       const response = await fetch('./data/mallas/index.json');
       if (!response.ok) throw new Error('No se pudo cargar el índice de programas.');
-      
+
       const data = await response.json();
       this.state.programas = data.programas || [];
-      
+
       // Populate select
       this.elements.select.innerHTML = '<option value="" disabled selected>Selecciona un programa...</option>';
       this.state.programas.forEach(prog => {
@@ -149,7 +151,7 @@ export const VisorMallas = {
 
       const data = await response.json();
       this.state.currentMalla = data;
-      
+
       // Create quick map lookup and parse stats
       this.buildSubjectMap(data);
       this.renderGrid(data);
@@ -171,7 +173,7 @@ export const VisorMallas = {
   buildSubjectMap(data) {
     this.state.subjectMap = {};
     if (!data.semestres) return;
-    
+
     data.semestres.forEach(sem => {
       if (sem.materias) {
         sem.materias.forEach(mat => {
@@ -244,7 +246,7 @@ export const VisorMallas = {
           card.className = 'malla-materia-card';
           card.id = `malla-card-${mat.id}`;
           card.dataset.id = mat.id;
-          
+
           card.innerHTML = `
             <span class="malla-materia-id">${mat.id}</span>
             <div class="malla-materia-name">${mat.nombre}</div>
@@ -252,6 +254,12 @@ export const VisorMallas = {
               <span class="malla-materia-credits">${mat.creditos} CR</span>
             </div>
           `;
+
+          // Cache DOM element reference
+          mat.element = card;
+          if (this.state.subjectMap[mat.id]) {
+            this.state.subjectMap[mat.id].element = card;
+          }
 
           // Interactive Events
           card.addEventListener('mouseenter', () => this.handleHoverEnter(mat.id));
@@ -277,11 +285,21 @@ export const VisorMallas = {
 
   /**
    * Hover enter handler
+   * PERF: debounced via requestAnimationFrame so rapid mouse movements across
+   * multiple cards don't stack multiple recalculations in the same frame.
    */
   handleHoverEnter(subjectId) {
     // If there is a pinned card, hover does nothing
     if (this.state.pinnedSubjectId) return;
-    this.highlightChain(subjectId);
+
+    // Cancel any pending hover update scheduled for this frame
+    if (this.state._hoverRafId !== null) {
+      cancelAnimationFrame(this.state._hoverRafId);
+    }
+    this.state._hoverRafId = requestAnimationFrame(() => {
+      this.state._hoverRafId = null;
+      this.highlightChain(subjectId);
+    });
   },
 
   /**
@@ -289,6 +307,11 @@ export const VisorMallas = {
    */
   handleHoverLeave() {
     if (this.state.pinnedSubjectId) return;
+    // Cancel any pending hover-enter that hasn't fired yet
+    if (this.state._hoverRafId !== null) {
+      cancelAnimationFrame(this.state._hoverRafId);
+      this.state._hoverRafId = null;
+    }
     this.clearHighlight();
   },
 
@@ -337,19 +360,29 @@ export const VisorMallas = {
     this.getUnlocksRecursive(subjectId, unlocks);
     unlocks.delete(subjectId); // Do not color active subject as unlock
 
-    // Apply classes to DOM cards
-    Object.keys(this.state.subjectMap).forEach(id => {
-      const card = document.getElementById(`malla-card-${id}`);
-      if (!card) return;
+    // Apply class to the parent grid container
+    this.elements.gridContainer.classList.add('has-highlight');
 
-      if (id === subjectId) {
-        card.classList.add('highlight-selected');
-      } else if (prereqs.has(id)) {
-        card.classList.add('highlight-prereq');
-      } else if (unlocks.has(id)) {
-        card.classList.add('highlight-unlocks');
-      } else {
-        card.classList.add('dimmed');
+    // Add classes only to the elements in the chain (direct references, no querySelector/getElementById)
+    const activeMat = this.state.subjectMap[subjectId];
+    if (activeMat && activeMat.element) {
+      activeMat.element.classList.add('highlight-selected');
+      this.state._activeHighlights.add(activeMat.element); // PERF: track for fast clear
+    }
+
+    prereqs.forEach(id => {
+      const mat = this.state.subjectMap[id];
+      if (mat && mat.element) {
+        mat.element.classList.add('highlight-prereq');
+        this.state._activeHighlights.add(mat.element); // PERF: track for fast clear
+      }
+    });
+
+    unlocks.forEach(id => {
+      const mat = this.state.subjectMap[id];
+      if (mat && mat.element) {
+        mat.element.classList.add('highlight-unlocks');
+        this.state._activeHighlights.add(mat.element); // PERF: track for fast clear
       }
     });
   },
@@ -385,15 +418,17 @@ export const VisorMallas = {
   },
 
   /**
-   * Clears all highlighted and dimmed states from cards
+   * Clears all highlighted states from cards.
+   * PERF: Only iterates the small Set of currently-active highlighted elements
+   * instead of all subjects in the curriculum. With 50+ subjects, iterating
+   * the entire subjectMap on every mouseleave was causing per-frame overhead.
    */
   clearHighlight() {
-    Object.keys(this.state.subjectMap).forEach(id => {
-      const card = document.getElementById(`malla-card-${id}`);
-      if (card) {
-        card.classList.remove('highlight-selected', 'highlight-prereq', 'highlight-unlocks', 'dimmed');
-      }
+    this.elements.gridContainer.classList.remove('has-highlight');
+    this.state._activeHighlights.forEach(el => {
+      el.classList.remove('highlight-selected', 'highlight-prereq', 'highlight-unlocks');
     });
+    this.state._activeHighlights.clear();
   },
 
   /**
@@ -415,7 +450,7 @@ export const VisorMallas = {
    */
   handleSearch(query) {
     const cleanQuery = this.normalizeString(query);
-    
+
     if (cleanQuery === '') {
       this.elements.clearSearchBtn.style.display = 'none';
       this.clearSearchMatches();
@@ -425,10 +460,10 @@ export const VisorMallas = {
     this.elements.clearSearchBtn.style.display = 'block';
 
     let firstMatch = null;
+    this.elements.gridContainer.classList.add('has-search');
 
-    Object.keys(this.state.subjectMap).forEach(id => {
-      const mat = this.state.subjectMap[id];
-      const card = document.getElementById(`malla-card-${id}`);
+    Object.values(this.state.subjectMap).forEach(mat => {
+      const card = mat.element;
       if (!card) return;
 
       const normNombre = this.normalizeString(mat.nombre);
@@ -437,12 +472,9 @@ export const VisorMallas = {
       const matches = normNombre.includes(cleanQuery) || normId.includes(cleanQuery);
       if (matches) {
         card.classList.add('search-match');
-        card.classList.remove('dimmed');
         if (!firstMatch) firstMatch = card;
       } else {
         card.classList.remove('search-match');
-        // Only dim if the user isn't clicking/pinning a subject, or dim regardless if not matching search
-        card.classList.add('dimmed');
       }
     });
 
@@ -472,10 +504,10 @@ export const VisorMallas = {
    * Removes search classes and dimmed states
    */
   clearSearchMatches() {
-    Object.keys(this.state.subjectMap).forEach(id => {
-      const card = document.getElementById(`malla-card-${id}`);
-      if (card) {
-        card.classList.remove('search-match');
+    this.elements.gridContainer.classList.remove('has-search');
+    Object.values(this.state.subjectMap).forEach(mat => {
+      if (mat.element) {
+        mat.element.classList.remove('search-match');
       }
     });
     if (!this.state.pinnedSubjectId) {

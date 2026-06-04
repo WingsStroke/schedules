@@ -188,7 +188,7 @@ body {
   border-radius: 6px;
   cursor: pointer;
   user-select: none;
-  transition: border-color 0.2s;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   font-size: 11px;
 }
@@ -211,6 +211,47 @@ body {
 .linking-source {
   border-color: var(--link-color) !important;
   box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+}
+
+/* Efectos de Hover interactivo para mallas */
+.materia-card.hover-active {
+  transform: translateY(-2px) scale(1.03);
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+  z-index: 10;
+}
+
+.materia-card.hover-prereq {
+  transform: translateY(-2px);
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.35);
+  z-index: 5;
+}
+
+.materia-card.hover-unlock {
+  transform: translateY(-2px);
+  border-color: #10b981 !important;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
+  z-index: 5;
+}
+
+.materia-card.hover-dimmed {
+  opacity: 0.2;
+  filter: grayscale(0.6);
+}
+
+.connection-line {
+  transition: stroke-width 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+}
+
+.connection-line.line-active {
+  stroke-width: 5.5px !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 4px var(--line-shadow-color, rgba(255, 255, 255, 0.5)));
+}
+
+.connection-line.line-dimmed {
+  opacity: 0.08 !important;
 }
 
 .add-materia-btn {

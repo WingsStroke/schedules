@@ -35,7 +35,9 @@
       </div>
       <div class="actions">
         <button id="btn-link-mode" class="btn btn-secondary">Modo Vincular: OFF</button>
+        <button id="btn-import-malla" class="btn btn-primary" onclick="document.getElementById('input-file-malla').click()">Importar JSON</button>
         <button id="btn-export-malla" class="btn btn-success">Exportar JSON</button>
+        <input type="file" id="input-file-malla" accept=".json" style="display: none;">
       </div>
     </header>
     <main class="grid-canvas" id="grid-canvas">
@@ -68,7 +70,9 @@
         <span class="month-badge" data-month="11">Dic</span>
       </div>
       <div class="actions">
+        <button id="btn-import-calendario" class="btn btn-primary" onclick="document.getElementById('input-file-calendario').click()">Importar JSON</button>
         <button id="btn-export-calendario" class="btn btn-success">Exportar JSON</button>
+        <input type="file" id="input-file-calendario" accept=".json" style="display: none;">
       </div>
     </header>
     <main class="calendar-canvas">
@@ -81,13 +85,13 @@
       <h3 style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem;">Editar Materia</h3>
 
       <div class="form-group">
-        <label for="mod-id">ID de la Materia (Código único)</label>
-        <input type="text" id="mod-id" class="glass-input" placeholder="Ej: SIS-101">
+        <label for="mod-nombre">Nombre de la Asignatura</label>
+        <input type="text" id="mod-nombre" class="glass-input" placeholder="Ej: Cálculo I">
       </div>
 
       <div class="form-group">
-        <label for="mod-nombre">Nombre de la Asignatura</label>
-        <input type="text" id="mod-nombre" class="glass-input" placeholder="Ej: Cálculo I">
+        <label for="mod-id">ID de la Materia (Código único)</label>
+        <input type="text" id="mod-id" class="glass-input" placeholder="Ej: SIS-101">
       </div>
 
       <div class="form-group">
@@ -104,68 +108,21 @@
   </div>
 
   <div id="event-modal" class="modal-overlay">
-    <div class="modal-content" style="width: 680px; max-width: 95vw;">
-      <h3 id="event-modal-title" style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem;">Añadir Evento</h3>
+    <div class="modal-content" style="width: 760px; max-width: 95vw; max-height: 90vh; overflow-y: auto;">
+      <h3 id="event-modal-title" style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem; position: sticky; top: 0; background: var(--bg-dark); z-index: 10;">Añadir Eventos</h3>
 
-      <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-        <!-- Columna Izquierda: Datos Básicos -->
-        <div style="flex: 1.2; min-width: 280px; display: flex; flex-direction: column; gap: 1rem;">
-          <input type="hidden" id="event-id">
-
-          <div class="form-group" style="margin-bottom: 0;">
-            <label for="event-titulo">Título del Evento</label>
-            <input type="text" id="event-titulo" class="glass-input" style="margin-top: 0.3rem;" placeholder="Ej: Inicio de Clases">
-          </div>
-
-          <div style="display: flex; gap: 1rem;">
-            <div class="form-group" style="flex: 1; margin-bottom: 0;">
-              <label for="event-inicio">Fecha de Inicio</label>
-              <input type="date" id="event-inicio" class="glass-input" style="margin-top: 0.3rem;">
-            </div>
-            <div class="form-group" style="flex: 1; margin-bottom: 0;">
-              <label for="event-fin">Fecha de Fin</label>
-              <input type="date" id="event-fin" class="glass-input" style="margin-top: 0.3rem;">
-            </div>
-          </div>
-        </div>
-
-        <!-- Columna Derecha: Categoría, Descripción y Alertas -->
-        <div style="flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 1rem;">
-          <div class="form-group" style="margin-bottom: 0;">
-            <label for="event-color">Categoría / Color</label>
-            <select id="event-color" class="glass-input" style="margin-top: 0.3rem; background-color: #1e1e1e;">
-              <option value="var(--cal-academico)">Académico (Azul)</option>
-              <option value="var(--cal-evaluacion)">Evaluación (Rojo)</option>
-              <option value="var(--cal-receso)">Receso (Verde)</option>
-              <option value="var(--cal-deadline)">Fecha Límite (Ámbar)</option>
-            </select>
-          </div>
-
-          <div class="form-group" style="margin-bottom: 0; flex: 1; display: flex; flex-direction: column;">
-            <label for="event-desc">Descripción</label>
-            <textarea id="event-desc" class="glass-input" rows="3" style="margin-top: 0.3rem; flex: 1; min-height: 70px; resize: vertical; font-family: inherit;" placeholder="Descripción opcional del evento..."></textarea>
-          </div>
-
-          <!-- Caja de Notificación y Alerta -->
-          <div style="border: 1px solid var(--glass-border); padding: 0.8rem; border-radius: 8px; background: rgba(255,255,255,0.02); display: flex; flex-direction: column; gap: 0.6rem;">
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <input type="checkbox" id="event-alerta" style="width: 16px; height: 16px; cursor: pointer;">
-              <label for="event-alerta" style="margin-bottom: 0; cursor: pointer; user-select: none; font-size: 0.9rem;">Activar Alerta de Notificación</label>
-            </div>
-            <div id="event-dias-alerta-group" style="display: none;">
-              <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-top: 0.2rem;">
-                <span style="font-size: 0.8rem; color: rgba(255,255,255,0.7);">Días de anticipación:</span>
-                <input type="number" id="event-dias-alerta" class="glass-input" min="0" max="30" value="5" style="width: 70px; margin-top: 0; padding: 0.2rem 0.4rem; font-size: 0.85rem; text-align: center;">
-              </div>
-            </div>
-          </div>
-        </div>
+      <div id="events-blocks-container" style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <!-- JavaScript will inject event blocks here -->
       </div>
 
-      <div class="modal-actions" style="margin-top: 1.5rem; border-top: 1px solid var(--glass-border); padding-top: 1rem;">
-        <button id="btn-delete-event" class="btn btn-danger" onclick="deleteCurrentEvent()" style="margin-right: auto;">Eliminar</button>
+      <div id="btn-add-event-block" style="margin-top: 1.5rem; border: 2px dashed var(--glass-border); padding: 1.5rem; border-radius: 8px; text-align: center; cursor: pointer; color: rgba(255,255,255,0.7); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='var(--accent-color)'; this.style.color='var(--accent-color)'" onmouseout="this.style.background='transparent'; this.style.borderColor='var(--glass-border)'; this.style.color='rgba(255,255,255,0.7)'" onclick="addNewEventBlock()">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem; line-height: 1;">+</div>
+        <div>Añadir otro evento este mismo día</div>
+      </div>
+
+      <div class="modal-actions" style="margin-top: 1.5rem; border-top: 1px solid var(--glass-border); padding-top: 1rem; position: sticky; bottom: 0; background: var(--bg-dark); z-index: 10;">
         <button class="btn btn-secondary" onclick="closeEventModal()">Cancelar</button>
-        <button class="btn btn-primary" onclick="saveEvent()">Guardar Evento</button>
+        <button class="btn btn-primary" onclick="saveEvent()">Guardar Cambios</button>
       </div>
     </div>
   </div>

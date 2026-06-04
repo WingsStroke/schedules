@@ -5,32 +5,65 @@
       "numero": 1,
       "materias": [
         {
-          "id": "SIS101",
-          "nombre": "Cálculo I",
-          "creditos": 4,
-          "prerrequisitos": [],
-          "desbloquea": ["SIS201"]
-        },
-        {
-          "id": "SIS102",
-          "nombre": "Introducción a la Programación",
+          "id": "CFBD002",
+          "nombre": "Cálculo Diferencial",
           "creditos": 3,
           "prerrequisitos": [],
-          "desbloquea": ["SIS202", "SIS203"]
+          "desbloquea": [
+            "CFBD221",
+            "CFBD223"
+          ]
         },
         {
-          "id": "SIS103",
-          "nombre": "Álgebra Lineal",
-          "creditos": 3,
+          "id": "CFBD001",
+          "nombre": "Fundamentos de Matemáticas",
+          "creditos": 2,
           "prerrequisitos": [],
-          "desbloquea": ["SIS204"]
+          "desbloquea": [
+            "CFBD222",
+            "CFBD223"
+          ]
         },
         {
-          "id": "SIS104",
-          "nombre": "Cátedra UdeC",
+          "id": "CFP2201",
+          "nombre": "Introducción a la Ingeniería de Sistemas",
           "creditos": 2,
           "prerrequisitos": [],
           "desbloquea": []
+        },
+        {
+          "id": "CFP2202",
+          "nombre": "Algoritmos y Programación",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "CFP2203"
+          ]
+        },
+        {
+          "id": "FN23001",
+          "nombre": "Producción y Comprensión Textual I",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "FN23004"
+          ]
+        },
+        {
+          "id": "FN23002",
+          "nombre": "Cátedra Institucional",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "FN23003",
+          "nombre": "Inglés I",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "FN23005"
+          ]
         }
       ]
     },
@@ -38,32 +71,78 @@
       "numero": 2,
       "materias": [
         {
-          "id": "SIS201",
-          "nombre": "Cálculo II",
-          "creditos": 4,
-          "prerrequisitos": ["SIS101"],
-          "desbloquea": ["SIS301"]
-        },
-        {
-          "id": "SIS202",
-          "nombre": "Programación Orientada a Objetos",
+          "id": "CFBD221",
+          "nombre": "Cálculo Integral",
           "creditos": 3,
-          "prerrequisitos": ["SIS102"],
-          "desbloquea": ["SIS302"]
+          "prerrequisitos": [
+            "CFBD002"
+          ],
+          "desbloquea": [
+            "CFBD224",
+            "CFBD226"
+          ]
         },
         {
-          "id": "SIS203",
-          "nombre": "Matemáticas Discretas",
+          "id": "CFBD222",
+          "nombre": "Álgebra Líneal",
           "creditos": 3,
-          "prerrequisitos": ["SIS102"],
-          "desbloquea": ["SIS303"]
+          "prerrequisitos": [
+            "CFBD001"
+          ],
+          "desbloquea": [
+            "CFBD224",
+            "CFBD225"
+          ]
         },
         {
-          "id": "SIS204",
-          "nombre": "Física I",
+          "id": "CFBD223",
+          "nombre": "Física Mecánica",
           "creditos": 4,
-          "prerrequisitos": ["SIS103"],
-          "desbloquea": ["SIS304"]
+          "prerrequisitos": [
+            "CFBD002",
+            "CFBD001"
+          ],
+          "desbloquea": [
+            "CFBD226"
+          ]
+        },
+        {
+          "id": "CFP2203",
+          "nombre": "Programación Básica",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP2202"
+          ],
+          "desbloquea": [
+            "CFP2204"
+          ]
+        },
+        {
+          "id": "FN23004",
+          "nombre": "Producción y Comprensión Textual II",
+          "creditos": 2,
+          "prerrequisitos": [
+            "FN23001"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "FC72731",
+          "nombre": "Formación Humana",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "FN23005",
+          "nombre": "Inglés II",
+          "creditos": 2,
+          "prerrequisitos": [
+            "FN23003"
+          ],
+          "desbloquea": [
+            "FN24035"
+          ]
         }
       ]
     },
@@ -71,32 +150,80 @@
       "numero": 3,
       "materias": [
         {
-          "id": "SIS301",
-          "nombre": "Cálculo III",
-          "creditos": 4,
-          "prerrequisitos": ["SIS201"],
-          "desbloquea": ["SIS401"]
-        },
-        {
-          "id": "SIS302",
-          "nombre": "Estructuras de Datos",
+          "id": "CFBD224",
+          "nombre": "Cálculo Vectorial",
           "creditos": 3,
-          "prerrequisitos": ["SIS202"],
-          "desbloquea": ["SIS402"]
+          "prerrequisitos": [
+            "CFBD221",
+            "CFBD222"
+          ],
+          "desbloquea": [
+            "CFBD228"
+          ]
         },
         {
-          "id": "SIS303",
-          "nombre": "Lógica Matemática",
+          "id": "CFBD225",
+          "nombre": "Matemáticas Discretas",
           "creditos": 3,
-          "prerrequisitos": ["SIS203"],
-          "desbloquea": ["SIS403"]
+          "prerrequisitos": [
+            "CFBD222"
+          ],
+          "desbloquea": [
+            "CFP2218"
+          ]
         },
         {
-          "id": "SIS304",
-          "nombre": "Física II",
-          "creditos": 4,
-          "prerrequisitos": ["SIS204"],
-          "desbloquea": ["SIS404"]
+          "id": "CFBD226",
+          "nombre": "Electromagnetismo y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFBD221",
+            "CFBD223"
+          ],
+          "desbloquea": [
+            "CFP2206",
+            "CFBD229"
+          ]
+        },
+        {
+          "id": "CFP2204",
+          "nombre": "Programación Orientada a Objetos",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP2203"
+          ],
+          "desbloquea": [
+            "CFP2207",
+            "CFP2208"
+          ]
+        },
+        {
+          "id": "CFP2205",
+          "nombre": "Teoría General de Sistemas",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "CFP2210",
+            "CFP2228"
+          ]
+        },
+        {
+          "id": "CFBD227",
+          "nombre": "Probabilidad y Estadística",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "CFP2213"
+          ]
+        },
+        {
+          "id": "FN24035",
+          "nombre": "Inglés III",
+          "creditos": 2,
+          "prerrequisitos": [
+            "FN23005"
+          ],
+          "desbloquea": []
         }
       ]
     },
@@ -104,32 +231,69 @@
       "numero": 4,
       "materias": [
         {
-          "id": "SIS401",
+          "id": "CFBD228",
           "nombre": "Ecuaciones Diferenciales",
           "creditos": 3,
-          "prerrequisitos": ["SIS301"],
+          "prerrequisitos": [
+            "CFBD224"
+          ],
           "desbloquea": []
         },
         {
-          "id": "SIS402",
-          "nombre": "Análisis de Algoritmos",
+          "id": "CFP2206",
+          "nombre": "Electrónica",
           "creditos": 3,
-          "prerrequisitos": ["SIS302"],
-          "desbloquea": ["SIS501", "SIS603"]
+          "prerrequisitos": [
+            "CFBD226"
+          ],
+          "desbloquea": [
+            "CFP2211"
+          ]
         },
         {
-          "id": "SIS403",
-          "nombre": "Bases de Datos I",
+          "id": "CFBD229",
+          "nombre": "Física de Ondas de Calor y Laboratorio",
           "creditos": 3,
-          "prerrequisitos": ["SIS303"],
-          "desbloquea": ["SIS503"]
+          "prerrequisitos": [
+            "CFBD226"
+          ],
+          "desbloquea": []
         },
         {
-          "id": "SIS404",
-          "nombre": "Sistemas Operativos",
-          "creditos": 4,
-          "prerrequisitos": ["SIS304"],
-          "desbloquea": ["SIS502", "SIS504"]
+          "id": "CFP2207",
+          "nombre": "Base de Datos",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP2204"
+          ],
+          "desbloquea": [
+            "CFP2212"
+          ]
+        },
+        {
+          "id": "CFP2208",
+          "nombre": "Estructura de Datos",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP2204"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP2209",
+          "nombre": "Administración",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "FN24036",
+          "nombre": "Inglés IV",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "FN24037"
+          ]
         }
       ]
     },
@@ -137,31 +301,69 @@
       "numero": 5,
       "materias": [
         {
-          "id": "SIS501",
-          "nombre": "Ingeniería de Software I",
+          "id": "CFP2210",
+          "nombre": "Sistemas Dinámicos",
           "creditos": 3,
-          "prerrequisitos": ["SIS402"],
-          "desbloquea": ["SIS601"]
-        },
-        {
-          "id": "SIS502",
-          "nombre": "Redes de Computadores",
-          "creditos": 4,
-          "prerrequisitos": ["SIS404"],
-          "desbloquea": ["SIS602"]
-        },
-        {
-          "id": "SIS503",
-          "nombre": "Bases de Datos II",
-          "creditos": 3,
-          "prerrequisitos": ["SIS403"],
+          "prerrequisitos": [
+            "CFP2205"
+          ],
           "desbloquea": []
         },
         {
-          "id": "SIS504",
-          "nombre": "Arquitectura de Computadores",
+          "id": "CFP2211",
+          "nombre": "Sistemas Digitales",
           "creditos": 3,
-          "prerrequisitos": ["SIS404"],
+          "prerrequisitos": [
+            "CFP2206"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFBD239",
+          "nombre": "Metodología de la Investigación",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "CFP2227"
+          ]
+        },
+        {
+          "id": "CFP2212",
+          "nombre": "Ingeniería de Servicios de Internet",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP2207"
+          ],
+          "desbloquea": [
+            "CFP2219",
+            "CFP2223"
+          ]
+        },
+        {
+          "id": "CFP2213",
+          "nombre": "Investigación de Operaciones",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFBD227"
+          ],
+          "desbloquea": [
+            "CFP2221"
+          ]
+        },
+        {
+          "id": "CFP2214",
+          "nombre": "Contabilidad y Costos",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "CFP2221"
+          ]
+        },
+        {
+          "id": "CFP2215",
+          "nombre": "Sistemas Operativos",
+          "creditos": 3,
+          "prerrequisitos": [],
           "desbloquea": []
         }
       ]
@@ -170,24 +372,282 @@
       "numero": 6,
       "materias": [
         {
-          "id": "SIS601",
-          "nombre": "Ingeniería de Software II",
+          "id": "CFP2216",
+          "nombre": "Organización de Computadores",
           "creditos": 3,
-          "prerrequisitos": ["SIS501"],
+          "prerrequisitos": [],
           "desbloquea": []
         },
         {
-          "id": "SIS602",
+          "id": "CFP2217",
+          "nombre": "Comunicación de Datos",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP2218",
+          "nombre": "Teoría de Autómatas y Lenguas Formales",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFBD225"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP2219",
+          "nombre": "Ingeniería de Software",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP2212"
+          ],
+          "desbloquea": [
+            "CFP2234"
+          ]
+        },
+        {
+          "id": "CFP2220",
+          "nombre": "Comercio Electrónico",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP2221",
+          "nombre": "Ingeniería Económica",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFP2213",
+            "CFP2214"
+          ],
+          "desbloquea": [
+            "CFP2229",
+            "CFP2233"
+          ]
+        },
+        {
+          "id": "FN24037",
+          "nombre": "Inglés V",
+          "creditos": 2,
+          "prerrequisitos": [
+            "FN24036"
+          ],
+          "desbloquea": [
+            "FN24038"
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 7,
+      "materias": [
+        {
+          "id": "CFP2222",
           "nombre": "Seguridad Informática",
-          "creditos": 3,
-          "prerrequisitos": ["SIS502"],
+          "creditos": 2,
+          "prerrequisitos": [],
           "desbloquea": []
         },
         {
-          "id": "SIS603",
+          "id": "FC72737",
+          "nombre": "Formación Humana",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP2223",
           "nombre": "Inteligencia Artificial",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP2212"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP2224",
+          "nombre": "Gestión de Proyectos Informáticos",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "EL22001",
+          "nombre": "Electiva I",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP2225",
+          "nombre": "Profundización I",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "CFP2230"
+          ]
+        },
+        {
+          "id": "FN24038",
+          "nombre": "Inglés VI",
+          "creditos": 2,
+          "prerrequisitos": [
+            "FN24037"
+          ],
+          "desbloquea": []
+        }
+      ]
+    },
+    {
+      "numero": 8,
+      "materias": [
+        {
+          "id": "CFP2226",
+          "nombre": "Auditoría de Sistemas",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP2227",
+          "nombre": "Trabajo de Grado I",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFBD239"
+          ],
+          "desbloquea": [
+            "CFP2232"
+          ]
+        },
+        {
+          "id": "CFP2228",
+          "nombre": "Simulación Digital",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP2205"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP2229",
+          "nombre": "Seminario Taller Creación de Empresas",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFP2221"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "EL22002",
+          "nombre": "Electiva II",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP2230",
+          "nombre": "Profundización II",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP2225"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP2231",
+          "nombre": "Fundamentos de Ecología y Medio Ambiente",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        }
+      ]
+    },
+    {
+      "numero": 9,
+      "materias": [
+        {
+          "id": "CFP2232",
+          "nombre": "Trabajo de Grado II",
           "creditos": 4,
-          "prerrequisitos": ["SIS402"],
+          "prerrequisitos": [
+            "CFP2227"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFBN221",
+          "nombre": "Ética y Legislación Informática",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP2233",
+          "nombre": "Sistemas de Información General",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP2221"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "EL22003",
+          "nombre": "Electiva III",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP2234",
+          "nombre": "Diseño de Soluciones STEM",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP2219"
+          ],
+          "desbloquea": [
+            "CFP2236"
+          ]
+        },
+        {
+          "id": "FC72738",
+          "nombre": "Formación Humana III",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        }
+      ]
+    },
+    {
+      "numero": 10,
+      "materias": [
+        {
+          "id": "CFP2235",
+          "nombre": "Práctica Empresarial",
+          "creditos": 6,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "EL22004",
+          "nombre": "Electiva IV",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP2236",
+          "nombre": "Profundización III",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP2234"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "FC72739",
+          "nombre": "Formación Humana IV",
+          "creditos": 2,
+          "prerrequisitos": [],
           "desbloquea": []
         }
       ]
