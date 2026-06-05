@@ -663,47 +663,48 @@ body.dark-mode .legend-item {
 
   .mallas-header-left {
     padding-left: 36px;
-    gap: 6px;
+    gap: 4px;
     flex-direction: column;
     align-items: flex-start;
   }
 
   .mallas-header-left h2 {
-    font-size: 18px;
-    /* Reducido de 24px */
+    font-size: 16px;
+    /* Reducido de 18px */
   }
 
   .mallas-selector-container {
-    gap: 6px;
+    gap: 4px;
+    width: 100%;
   }
 
   .mallas-selector-container label {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .mallas-select {
-    font-size: 12px;
-    padding: 6px 10px;
+    font-size: 11px;
+    padding: 4px 8px;
     min-width: 100%;
   }
 
   .mallas-modal-header {
     flex-direction: column;
     align-items: stretch;
-    gap: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+    gap: 6px;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
   }
 
   .mallas-header-right {
     flex-direction: column;
     align-items: stretch;
-    gap: 10px;
+    gap: 6px;
   }
 
   .mallas-search-box input {
-    font-size: 12px;
-    padding: 6px 32px;
+    font-size: 11px;
+    padding: 4px 28px;
     width: 100%;
   }
 
@@ -712,21 +713,21 @@ body.dark-mode .legend-item {
   }
 
   .mallas-stats {
-    padding: 4px 10px;
-    gap: 10px;
+    padding: 2px 8px;
+    gap: 6px;
     justify-content: space-around;
   }
 
   .malla-stat-item {
-    min-width: 50px;
+    min-width: 45px;
   }
 
   .malla-stat-val {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .malla-stat-lbl {
-    font-size: 9px;
+    font-size: 8.5px;
   }
 
   .malla-grid-container {
@@ -738,48 +739,50 @@ body.dark-mode .legend-item {
      */
     padding: 4px 0 8px 0;
     margin-bottom: 4px;
+    overflow-y: auto; /* Scroll vertical solo si el contenido es demasiado grande */
+    -webkit-overflow-scrolling: touch;
   }
 
   .malla-semestre-col {
-    width: 165px;
-    min-width: 165px;
-    padding: 8px;
-    gap: 6px;
+    width: 145px;
+    min-width: 145px;
+    padding: 6px;
+    gap: 4px;
     border-radius: 8px;
   }
 
   .malla-semestre-header {
-    padding-bottom: 4px;
+    padding-bottom: 2px;
   }
 
   .malla-semestre-header h4 {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .malla-semestre-credits {
-    font-size: 9px;
+    font-size: 8px;
   }
 
   .malla-materia-card {
-    padding: 5px 6px;
-    gap: 3px;
-    border-radius: 6px;
+    padding: 3px 4px;
+    gap: 1px;
+    border-radius: 5px;
   }
 
   .malla-materia-id {
-    font-size: 7.5px;
+    font-size: 6.5px;
   }
 
   .malla-materia-name {
-    font-size: 10px;
-    min-height: 22px;
-    line-height: 1.15;
+    font-size: 8.5px;
+    min-height: 18px;
+    line-height: 1.1;
   }
 
   .malla-materia-credits {
-    font-size: 8.5px;
-    padding: 0px 3px;
-    border-radius: 3px;
+    font-size: 7.5px;
+    padding: 0px 2px;
+    border-radius: 2px;
   }
 
   .mallas-modal-footer {
@@ -802,7 +805,7 @@ body.dark-mode .legend-item {
   }
 
   .legend-item {
-    font-size: 10px;
+    font-size: 9.5px;
     gap: 4px;
   }
 
@@ -812,6 +815,6 @@ body.dark-mode .legend-item {
   }
 
   .mallas-instruction {
-    font-size: 10px;
+    font-size: 9.5px;
   }
 }
