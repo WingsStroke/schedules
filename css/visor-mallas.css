@@ -662,20 +662,26 @@ body.dark-mode .legend-item {
   }
 
   .mallas-header-left {
-    padding-left: 36px;
+    padding-left: 0;
     gap: 4px;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    width: 100%;
   }
 
   .mallas-header-left h2 {
     font-size: 16px;
-    /* Reducido de 18px */
+    text-align: center;
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
   }
 
   .mallas-selector-container {
     gap: 4px;
     width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .mallas-selector-container label {
@@ -685,7 +691,10 @@ body.dark-mode .legend-item {
   .mallas-select {
     font-size: 11px;
     padding: 4px 8px;
-    min-width: 100%;
+    width: auto;
+    min-width: 180px;
+    max-width: 80%;
+    text-align-last: center;
   }
 
   .mallas-modal-header {
@@ -737,8 +746,8 @@ body.dark-mode .legend-item {
      * uses as much vertical space as possible. The safe-area padding
      * on the modal content already handles the bottom browser toolbar gap.
      */
-    padding: 4px 0 8px 0;
-    margin-bottom: 4px;
+    padding: 4px 0 16px 0; /* Padding inferior aumentado para el respiro estético */
+    margin-bottom: 0;
     overflow-y: auto; /* Scroll vertical solo si el contenido es demasiado grande */
     -webkit-overflow-scrolling: touch;
   }
@@ -749,6 +758,8 @@ body.dark-mode .legend-item {
     padding: 6px;
     gap: 4px;
     border-radius: 8px;
+    height: 100%; /* Estirar las columnas para ocupar todo el alto disponible */
+    box-sizing: border-box;
   }
 
   .malla-semestre-header {
@@ -767,6 +778,10 @@ body.dark-mode .legend-item {
     padding: 3px 4px;
     gap: 1px;
     border-radius: 5px;
+    flex: 1; /* Estirar materias de forma uniforme dentro del semestre */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Mantener estructura interna alineada */
   }
 
   .malla-materia-id {
