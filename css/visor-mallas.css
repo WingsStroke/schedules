@@ -308,14 +308,14 @@
 }
 
 .malla-materia-id {
-  font-size: 7.5px;
+  font-size: calc(9.5px - var(--max-materias, 7) * 0.25px);
   font-weight: 600;
   color: #94a3b8;
   letter-spacing: 0.5px;
 }
 
 .malla-materia-name {
-  font-size: 10px;
+  font-size: calc(13px - var(--max-materias, 7) * 0.4px);
   font-weight: 600;
   color: #0f172a;
   line-height: 1.15;
@@ -328,19 +328,22 @@
 }
 
 .malla-materia-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: block;
   margin-top: 0px;
+  padding: 0;
 }
 
 .malla-materia-credits {
-  font-size: 8px;
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  font-size: calc(9.5px - var(--max-materias, 7) * 0.2px);
   font-weight: 500;
   color: #475569;
   background: #f1f5f9;
-  padding: 1px 3px;
+  padding: 1px 4px;
   border-radius: 4px;
+  line-height: 1;
 }
 
 /* =========================================================
@@ -792,19 +795,23 @@ body.dark-mode .legend-item {
   }
 
   .malla-materia-id {
-    font-size: 6.5px;
+    font-size: calc(8px - var(--max-materias, 7) * 0.2px);
   }
 
   .malla-materia-name {
-    font-size: 8.5px;
+    font-size: calc(11px - var(--max-materias, 7) * 0.35px);
     min-height: 0;
     line-height: 1.1;
   }
 
   .malla-materia-credits {
-    font-size: 7.5px;
-    padding: 0px 2px;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: calc(9px - var(--max-materias, 7) * 0.2px);
+    padding: 1px 3px;
     border-radius: 2px;
+    line-height: 1;
   }
 
   .mallas-modal-footer {
