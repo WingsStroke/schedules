@@ -227,7 +227,7 @@
 /* Columnas de Semestres */
 .malla-semestre-col {
   display: grid;
-  grid-template-rows: auto repeat(var(--max-materias, 7), 1fr);
+  grid-template-rows: auto repeat(var(--max-materias, 7), minmax(0, 1fr));
   width: 185px;
   min-width: 185px;
   height: 100%;
@@ -319,7 +319,7 @@
   font-weight: 600;
   color: #0f172a;
   line-height: 1.15;
-  min-height: 22px;
+  min-height: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -758,7 +758,7 @@ body.dark-mode .legend-item {
 
   .malla-semestre-col {
     display: grid;
-    grid-template-rows: auto repeat(var(--max-materias, 7), 1fr);
+    grid-template-rows: auto repeat(var(--max-materias, 7), minmax(0, 1fr));
     width: 145px;
     min-width: 145px;
     padding: 6px;
@@ -797,7 +797,7 @@ body.dark-mode .legend-item {
 
   .malla-materia-name {
     font-size: 8.5px;
-    min-height: 18px;
+    min-height: 0;
     line-height: 1.1;
   }
 
