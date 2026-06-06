@@ -219,6 +219,15 @@ export const VisorMallas = {
       return;
     }
 
+    // Calcular el número máximo de materias en cualquier semestre para adaptar el grid responsivo
+    let maxMaterias = 7;
+    data.semestres.forEach(sem => {
+      if (sem.materias && sem.materias.length > maxMaterias) {
+        maxMaterias = sem.materias.length;
+      }
+    });
+    this.elements.gridContainer.style.setProperty('--max-materias', maxMaterias);
+
     data.semestres.forEach(sem => {
       const semCol = document.createElement('div');
       semCol.className = 'malla-semestre-col';

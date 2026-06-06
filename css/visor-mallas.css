@@ -226,11 +226,12 @@
 
 /* Columnas de Semestres */
 .malla-semestre-col {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto repeat(var(--max-materias, 7), 1fr);
   width: 185px;
   min-width: 185px;
-  height: max-content;
+  height: 100%;
+  box-sizing: border-box;
   /* Cubre exactamente las materias sin espacio sobrante abajo */
   background: rgba(255, 255, 255, 0.45);
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -281,7 +282,10 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 3px;
+  height: 100%;
+  box-sizing: border-box;
   user-select: none;
   /*
    * PERF: Hint the browser to promote each card to its own compositor layer.
@@ -753,6 +757,8 @@ body.dark-mode .legend-item {
   }
 
   .malla-semestre-col {
+    display: grid;
+    grid-template-rows: auto repeat(var(--max-materias, 7), 1fr);
     width: 145px;
     min-width: 145px;
     padding: 6px;
@@ -778,7 +784,8 @@ body.dark-mode .legend-item {
     padding: 3px 4px;
     gap: 1px;
     border-radius: 5px;
-    flex: 1; /* Estirar materias de forma uniforme dentro del semestre */
+    height: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Mantener estructura interna alineada */

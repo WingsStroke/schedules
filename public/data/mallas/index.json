@@ -4,6 +4,11 @@
       "id": "sistemas",
       "nombre": "Ingeniería de Sistemas",
       "archivo": "sistemas.json"
+    },
+    {
+      "id": "alimentos",
+      "nombre": "Ingeniería de Alimentos",
+      "archivo": "alimentos.json"
     }
   ]
 }

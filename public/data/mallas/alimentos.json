@@ -1,29 +1,72 @@
 {
-  "carrera": "Ciencia y Tecnología de Alimentos",
+  "carrera": "Ingeniería de Alimentos",
   "semestres": [
     {
       "numero": 1,
       "materias": [
         {
-          "id": "ALI101",
-          "nombre": "Química General",
-          "creditos": 4,
+          "id": "CFBD001",
+          "nombre": "Fundamentos de Matemáticas",
+          "creditos": 2,
           "prerrequisitos": [],
-          "desbloquea": ["ALI201"]
+          "desbloquea": [
+            "CFBD222"
+          ]
         },
         {
-          "id": "ALI102",
-          "nombre": "Introducción a la Ciencia de Alimentos",
+          "id": "CFBD002",
+          "nombre": "Cálculo Diferencial",
           "creditos": 3,
           "prerrequisitos": [],
-          "desbloquea": ["ALI202"]
+          "desbloquea": [
+            "CFBD221"
+          ]
         },
         {
-          "id": "ALI103",
-          "nombre": "Matemática Aplicada",
+          "id": "CFBD006",
+          "nombre": "Introducción a la Ingeniería de Alimentos",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFBF007",
+          "nombre": "Química General y Laboratorio",
           "creditos": 3,
           "prerrequisitos": [],
-          "desbloquea": ["ALI203"]
+          "desbloquea": []
+        },
+        {
+          "id": "FN23001",
+          "nombre": "Producción y Comprensión Textual I",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "FN23004"
+          ]
+        },
+        {
+          "id": "FN23002",
+          "nombre": "Cátedra Institucional",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "FN23003",
+          "nombre": "Inglés I",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "FN24033"
+          ]
+        },
+        {
+          "id": "FH10002",
+          "nombre": "Desafíos Digitales y Lucha de Atención",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
         }
       ]
     },
@@ -31,46 +74,88 @@
       "numero": 2,
       "materias": [
         {
-          "id": "ALI201",
-          "nombre": "Química Orgánica",
+          "id": "CFBD221",
+          "nombre": "Cálculo Integral",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFBD002"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFBD222",
+          "nombre": "Álgebra Líneal",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFBD001"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFBD223",
+          "nombre": "Física Mecánica y Laboratorio",
           "creditos": 4,
-          "prerrequisitos": ["ALI101"],
-          "desbloquea": ["ALI301"]
+          "prerrequisitos": [],
+          "desbloquea": []
         },
         {
-          "id": "ALI202",
-          "nombre": "Microbiología General",
+          "id": "CFBD112",
+          "nombre": "Química Orgánica y Laboratorio",
           "creditos": 3,
-          "prerrequisitos": ["ALI102"],
-          "desbloquea": ["ALI302"]
+          "prerrequisitos": [],
+          "desbloquea": []
         },
         {
-          "id": "ALI203",
-          "nombre": "Bioestadística",
-          "creditos": 3,
-          "prerrequisitos": ["ALI103"],
+          "id": "FN23004",
+          "nombre": "Producción y Comprensión Textual II",
+          "creditos": 2,
+          "prerrequisitos": [
+            "FN23001"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "FN24033",
+          "nombre": "Inglés II",
+          "creditos": 2,
+          "prerrequisitos": [
+            "FN23003"
+          ],
           "desbloquea": []
         }
       ]
     },
     {
       "numero": 3,
-      "materias": [
-        {
-          "id": "ALI301",
-          "nombre": "Bioquímica de Alimentos",
-          "creditos": 4,
-          "prerrequisitos": ["ALI201"],
-          "desbloquea": []
-        },
-        {
-          "id": "ALI302",
-          "nombre": "Microbiología de Alimentos",
-          "creditos": 4,
-          "prerrequisitos": ["ALI202"],
-          "desbloquea": []
-        }
-      ]
+      "materias": []
+    },
+    {
+      "numero": 4,
+      "materias": []
+    },
+    {
+      "numero": 5,
+      "materias": []
+    },
+    {
+      "numero": 6,
+      "materias": []
+    },
+    {
+      "numero": 7,
+      "materias": []
+    },
+    {
+      "numero": 8,
+      "materias": []
+    },
+    {
+      "numero": 9,
+      "materias": []
+    },
+    {
+      "numero": 10,
+      "materias": []
     }
   ]
 }
