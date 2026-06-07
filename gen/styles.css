@@ -188,7 +188,7 @@ body {
 .materia-card {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid var(--glass-border);
-  padding: calc(7px - var(--max-materias, 7) * 0.4px) 8px; /* Padding dinámico */
+  padding: calc(6px - var(--max-materias, 7) * 0.3px) 8px; /* Padding dinámico optimizado */
   border-radius: 6px;
   cursor: pointer;
   user-select: none;
@@ -199,7 +199,7 @@ body {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* Alinear arriba para aprovechar el flex */
   overflow: hidden;
 }
 
@@ -232,10 +232,11 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;
-  margin-top: calc(5px - var(--max-materias, 7) * 0.3px); /* Margen dinámico */
+  margin-top: calc(4px - var(--max-materias, 7) * 0.2px); /* Margen superior dinámico optimizado */
   font-weight: 500;
   line-height: 1.1;
   font-size: calc(12px - var(--max-materias, 7) * 0.25px);
+  flex: 1; /* Ocupa todo el espacio vertical restante */
 }
 
 .link-mode-active .materia-card {

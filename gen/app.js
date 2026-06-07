@@ -88,7 +88,7 @@ function renderMallasGrid() {
       card.className = `materia-card ${sourceNodeId === mat.id ? 'linking-source' : ''}`;
       card.id = `node-${mat.id}`;
       card.innerHTML = `
-        <strong>${mat.id}</strong><br>
+        <strong>${mat.id}</strong>
         <span class="materia-name">${mat.nombre}</span>
         <small style="opacity: 0.7;">${mat.creditos} CR</small>
       `;
