@@ -346,10 +346,16 @@ export const VisorMallas = {
       // Toggle off if clicking the already selected card
       this.state.pinnedSubjectId = null;
       this.clearHighlight();
+      if (this.elements.searchInput.value) {
+        this.handleSearch(this.elements.searchInput.value);
+      }
     } else {
       // Select new card
       this.state.pinnedSubjectId = subjectId;
       this.highlightChain(subjectId);
+      if (this.elements.searchInput.value) {
+        this.elements.gridContainer.classList.add('has-search');
+      }
     }
   },
 

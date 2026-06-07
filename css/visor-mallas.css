@@ -372,6 +372,15 @@
   pointer-events: auto !important;
 }
 
+/* Cuando hay AMBOS estados activos: search-match + highlight ganan sobre el dimming */
+.malla-grid-container.has-highlight.has-search .malla-materia-card.search-match,
+.malla-grid-container.has-highlight.has-search .malla-materia-card.highlight-selected,
+.malla-grid-container.has-highlight.has-search .malla-materia-card.highlight-prereq,
+.malla-grid-container.has-highlight.has-search .malla-materia-card.highlight-unlocks {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
 /* 1. Tarjeta Seleccionada (Activa) */
 .malla-materia-card.highlight-selected {
   border-color: #0f172a !important;

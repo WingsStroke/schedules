@@ -144,13 +144,6 @@
           ]
         },
         {
-          "id": "NUEVO-211",
-          "nombre": "Nueva Materia",
-          "creditos": 3,
-          "prerrequisitos": [],
-          "desbloquea": []
-        },
-        {
           "id": "FC72737",
           "nombre": "Formación Humana II",
           "creditos": 2,

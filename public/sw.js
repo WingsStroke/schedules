@@ -53,8 +53,6 @@ const ASSETS_TO_CACHE = [
 // FASE 1: INSTALACIÓN SILENCIOSA
 // FASE 1: INSTALACIÓN SILENCIOSA Y "CACHE BUSTING"
 self.addEventListener('install', (event) => {
-  self.skipWaiting(); 
-  
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       // Nueva versión siendo cacheada
@@ -146,5 +144,12 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       caches.match(event.request).then((res) => res || fetch(event.request))
     );
+  }
+});
+
+// Escuchar mensajes para forzar la activación (skipWaiting)
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
   }
 });

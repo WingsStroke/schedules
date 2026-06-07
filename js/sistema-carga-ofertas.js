@@ -26,6 +26,9 @@ export const SistemaCargaOfertas = {
 
       await this.cargarOfertasDeSemestre(this.semestreActual);
       this.cargado = true;
+      window.dispatchEvent(new CustomEvent('ofertas:listo', {
+        detail: { semestreActual: this.semestreActual }
+      }));
       return true;
 
     } catch (error) {

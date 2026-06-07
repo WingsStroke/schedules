@@ -760,19 +760,43 @@
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("./sw.js", { scope: "./" })
           .then(reg => {
+            // Función para mostrar el aviso de actualización
+            const notifyUpdate = (worker) => {
+              if (typeof Toast !== 'undefined' && typeof Toast.showAction === 'function') {
+                Toast.showAction(
+                  "Nueva versión disponible.",
+                  "Actualizar ahora",
+                  () => {
+                    worker.postMessage({ type: "SKIP_WAITING" });
+                  }
+                );
+              } else if (typeof Toast !== 'undefined') {
+                Toast.show("Nueva versión disponible. Recarga la página para actualizar.", "info", 8000);
+              }
+            };
+
+            // 1. Si ya hay un worker esperando
+            if (reg.waiting && navigator.serviceWorker.controller) {
+              notifyUpdate(reg.waiting);
+            }
+
+            // 2. Si se encuentra un nuevo worker instalándose
             reg.addEventListener("updatefound", () => {
               const newWorker = reg.installing;
-              newWorker.addEventListener("statechange", () => {
-                if (newWorker.state === "activated" && navigator.serviceWorker.controller) {
-                  // Nueva versión disponible - notificar sin forzar recarga
-                  if (typeof Toast !== 'undefined') {
-                    Toast.show("Nueva versión disponible. Recarga la página para actualizar.", "info", 8000);
+              if (newWorker) {
+                newWorker.addEventListener("statechange", () => {
+                  if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+                    notifyUpdate(newWorker);
                   }
-                  // NO forzamos reload - esperamos a que el usuario recargue manualmente
-                }
-              });
+                });
+              }
             });
           });
+
+        // Recargar la página automáticamente cuando el nuevo SW toma el control
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+          window.location.reload();
+        });
       });
     }
   </script>

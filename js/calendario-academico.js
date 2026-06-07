@@ -64,8 +64,17 @@ export const CalendarioAcademico = {
     // Register ActionBar event
     ActionBar.onAction('calendario', () => this.open());
 
-    // Run pro-active alerts check once on app launch (after a tiny delay to let other systems load)
-    setTimeout(() => this.checkProactiveAlerts(), 1000);
+    // Listen for the custom event when SistemaCargaOfertas finishes loading
+    window.addEventListener('ofertas:listo', () => {
+      this.loadSemestersList();
+      this.checkProactiveAlerts();
+    }, { once: true });
+
+    // Fallback: in case SistemaCargaOfertas loaded before CalendarioAcademico.init() was called
+    if (SistemaCargaOfertas && SistemaCargaOfertas.cargado) {
+      this.loadSemestersList();
+      this.checkProactiveAlerts();
+    }
   },
 
   /**
