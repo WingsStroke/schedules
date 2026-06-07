@@ -66,6 +66,17 @@ function renderMallasGrid() {
   const container = document.getElementById('semesters-container');
   container.innerHTML = '';
 
+  // Calcular el número máximo de materias para adaptar el grid de forma responsiva
+  let maxMaterias = 1;
+  if (mallaData.semestres) {
+    mallaData.semestres.forEach(sem => {
+      if (sem.materias && sem.materias.length > maxMaterias) {
+        maxMaterias = sem.materias.length;
+      }
+    });
+  }
+  container.style.setProperty('--max-materias', maxMaterias);
+
   // Renderizar Columnas existentes
   mallaData.semestres.forEach(sem => {
     const col = document.createElement('div');
