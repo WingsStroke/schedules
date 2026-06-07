@@ -141,7 +141,8 @@ body {
 .grid-canvas {
   position: relative;
   flex: 1;
-  overflow: hidden; /* Sin scroll para ver toda la malla y líneas en el viewport */
+  overflow-x: auto;
+  overflow-y: hidden; /* Sin scroll vertical para evitar fatiga visual */
   padding: 1rem;
 }
 
@@ -155,19 +156,17 @@ body {
 
 .semesters-container {
   display: flex;
-  gap: 1rem; /* Gap reducido para mayor espacio responsivo */
+  gap: 1.5rem;
   position: relative;
   z-index: 2;
-  width: 100%;
+  min-width: max-content;
   height: 100%; /* Alto completo */
   padding: 3.5rem 0; /* Respiro superior amplio e inferior para conexiones */
   box-sizing: border-box;
 }
 
 .semester-col {
-  flex: 1;
-  min-width: 0;
-  max-width: 200px;
+  width: 200px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 10px;
@@ -309,9 +308,7 @@ body {
 }
 
 .add-semester-col {
-  flex: 1;
-  min-width: 0;
-  max-width: 200px;
+  width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
