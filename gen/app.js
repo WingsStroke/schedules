@@ -322,13 +322,12 @@ function drawLine(el1, el2, svg, sourceId, targetId) {
     }
 
     pathData = `M ${x1} ${y1} ` +
-               `C ${x1 + 25} ${y1}, ${x1 + 10} ${yRef}, ${x1 + 35} ${yRef} ` +
-               `L ${x2 - 35} ${yRef} ` +
-               `C ${x2 - 10} ${yRef}, ${x2 - 25} ${y2}, ${x2} ${y2}`;
+               `L ${x1 + 15} ${yRef} ` +
+               `L ${x2 - 15} ${yRef} ` +
+               `L ${x2} ${y2}`;
   } else {
     // Direct link between adjacent columns
-    const offset = 40;
-    pathData = `M ${x1} ${y1} C ${x1 + offset} ${y1}, ${x2 - offset} ${y2}, ${x2} ${y2}`;
+    pathData = `M ${x1} ${y1} L ${x2} ${y2}`;
   }
 
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");

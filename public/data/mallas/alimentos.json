@@ -10,7 +10,8 @@
           "creditos": 2,
           "prerrequisitos": [],
           "desbloquea": [
-            "CFBD222"
+            "CFBD222",
+            "CFBD221"
           ]
         },
         {
@@ -19,7 +20,8 @@
           "creditos": 3,
           "prerrequisitos": [],
           "desbloquea": [
-            "CFBD221"
+            "CFBD221",
+            "CFBD223"
           ]
         },
         {
@@ -34,7 +36,9 @@
           "nombre": "Química General y Laboratorio",
           "creditos": 3,
           "prerrequisitos": [],
-          "desbloquea": []
+          "desbloquea": [
+            "CFBD112"
+          ]
         },
         {
           "id": "FN23001",
@@ -62,8 +66,8 @@
           ]
         },
         {
-          "id": "FH10002",
-          "nombre": "Desafíos Digitales y Lucha de Atención",
+          "id": "FC72731",
+          "nombre": "Formación Humana I",
           "creditos": 2,
           "prerrequisitos": [],
           "desbloquea": []
@@ -78,9 +82,12 @@
           "nombre": "Cálculo Integral",
           "creditos": 3,
           "prerrequisitos": [
-            "CFBD002"
+            "CFBD002",
+            "CFBD001"
           ],
-          "desbloquea": []
+          "desbloquea": [
+            "CCFBD224"
+          ]
         },
         {
           "id": "CFBD222",
@@ -89,21 +96,30 @@
           "prerrequisitos": [
             "CFBD001"
           ],
-          "desbloquea": []
+          "desbloquea": [
+            "CCFBD224"
+          ]
         },
         {
           "id": "CFBD223",
           "nombre": "Física Mecánica y Laboratorio",
           "creditos": 4,
-          "prerrequisitos": [],
+          "prerrequisitos": [
+            "CFBD002"
+          ],
           "desbloquea": []
         },
         {
           "id": "CFBD112",
           "nombre": "Química Orgánica y Laboratorio",
           "creditos": 3,
-          "prerrequisitos": [],
-          "desbloquea": []
+          "prerrequisitos": [
+            "CFBF007"
+          ],
+          "desbloquea": [
+            "CFBD114",
+            "CFP1103"
+          ]
         },
         {
           "id": "FN23004",
@@ -112,7 +128,9 @@
           "prerrequisitos": [
             "FN23001"
           ],
-          "desbloquea": []
+          "desbloquea": [
+            "CFP2132"
+          ]
         },
         {
           "id": "FN24033",
@@ -121,41 +139,587 @@
           "prerrequisitos": [
             "FN23003"
           ],
+          "desbloquea": [
+            "FN24035"
+          ]
+        },
+        {
+          "id": "NUEVO-211",
+          "nombre": "Nueva Materia",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "FC72737",
+          "nombre": "Formación Humana II",
+          "creditos": 2,
+          "prerrequisitos": [],
           "desbloquea": []
         }
       ]
     },
     {
       "numero": 3,
-      "materias": []
+      "materias": [
+        {
+          "id": "CCFBD224",
+          "nombre": "Cálculo Vectorial",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFBD221",
+            "CFBD222"
+          ],
+          "desbloquea": [
+            "CFBD228"
+          ]
+        },
+        {
+          "id": "CFBD113",
+          "nombre": "Biología Aplicada y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "CFBD288"
+          ]
+        },
+        {
+          "id": "CFBD226",
+          "nombre": "Electromagnetismo y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "CFP1101"
+          ]
+        },
+        {
+          "id": "CFBD114",
+          "nombre": "Bioquímica de Alimentos y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFBD112"
+          ],
+          "desbloquea": [
+            "CFP1122",
+            "CFP1102",
+            "CFP1115"
+          ]
+        },
+        {
+          "id": "CFBD116",
+          "nombre": "Informática y Programación",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP2231",
+          "nombre": "Fundamentos de Ecología y Contaminación",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "FN24035",
+          "nombre": "Inglés III",
+          "creditos": 2,
+          "prerrequisitos": [
+            "FN24033"
+          ],
+          "desbloquea": [
+            "FN24036"
+          ]
+        },
+        {
+          "id": "FC72738",
+          "nombre": "Formación Humana III",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        }
+      ]
     },
     {
       "numero": 4,
-      "materias": []
+      "materias": [
+        {
+          "id": "CFBD228",
+          "nombre": "Ecuaciones Diferenciales",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CCFBD224"
+          ],
+          "desbloquea": [
+            "CFP1108",
+            "CFP1105"
+          ]
+        },
+        {
+          "id": "CFP1101",
+          "nombre": "Termodinamica General",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFBD226"
+          ],
+          "desbloquea": [
+            "CFP1107"
+          ]
+        },
+        {
+          "id": "CFP2132",
+          "nombre": "Metodología de la Investigación",
+          "creditos": 2,
+          "prerrequisitos": [
+            "FN23004"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1102",
+          "nombre": "Química de Alimentos y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFBD114"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1103",
+          "nombre": "Análisis de Alimentos y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFBD112"
+          ],
+          "desbloquea": [
+            "CFP1111",
+            "CFP1125",
+            "CFP1132"
+          ]
+        },
+        {
+          "id": "CFBD227",
+          "nombre": "Probabilidad y Estadística",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "CFP1106",
+            "CFP1119"
+          ]
+        },
+        {
+          "id": "FN24036",
+          "nombre": "Inglés IV",
+          "creditos": 2,
+          "prerrequisitos": [
+            "FN24035"
+          ],
+          "desbloquea": [
+            "FN24037"
+          ]
+        },
+        {
+          "id": "FC72739",
+          "nombre": "Formación Humana IV",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        }
+      ]
     },
     {
       "numero": 5,
-      "materias": []
+      "materias": [
+        {
+          "id": "CFBD288",
+          "nombre": "Microbiología General y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFBD113"
+          ],
+          "desbloquea": [
+            "CFP1114"
+          ]
+        },
+        {
+          "id": "CFP1105",
+          "nombre": "Balance de Materia y Energía",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFBD228"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1107",
+          "nombre": "Fisicoquímica y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP1101"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1108",
+          "nombre": "Mecánica de Fluidos y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFBD228"
+          ],
+          "desbloquea": [
+            "CFP1116"
+          ]
+        },
+        {
+          "id": "CFP1104",
+          "nombre": "Administración General",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "CFP1112"
+          ]
+        },
+        {
+          "id": "CFP1106",
+          "nombre": "Diseño de Experimentos",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFBD227"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "FN24037",
+          "nombre": "Inglés V",
+          "creditos": 2,
+          "prerrequisitos": [
+            "FN24036"
+          ],
+          "desbloquea": [
+            "FN24038"
+          ]
+        }
+      ]
     },
     {
       "numero": 6,
-      "materias": []
+      "materias": [
+        {
+          "id": "CFP1114",
+          "nombre": "Microbiología de Alimentos y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFBD288"
+          ],
+          "desbloquea": [
+            "CFP1124"
+          ]
+        },
+        {
+          "id": "CFP1116",
+          "nombre": "Tranferencia de Calor y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP1108"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1115",
+          "nombre": "Reología y Textura de Alimentos y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFBD114"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1113",
+          "nombre": "Métodos y Tiempos de Trabajo",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1112",
+          "nombre": "Contabilidad y Costos",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFP1104"
+          ],
+          "desbloquea": [
+            "CFP1120"
+          ]
+        },
+        {
+          "id": "CFP1111",
+          "nombre": "Ciencia y Tecnología de Carnes y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP1103"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1110",
+          "nombre": "Ciencia y Tecnología de Pescados y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": []
+        }
+      ]
     },
     {
       "numero": 7,
-      "materias": []
+      "materias": [
+        {
+          "id": "CFP1123",
+          "nombre": "Operaciones Unitarias I y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "CFP1130",
+            "CFP1126"
+          ]
+        },
+        {
+          "id": "CFP1121",
+          "nombre": "Normas y Regulación de Alimentos",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "CFP1131",
+            "CFP1137"
+          ]
+        },
+        {
+          "id": "CFP1122",
+          "nombre": "Nutrición",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFBD114"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1119",
+          "nombre": "Evaluación Sensorial y Laboratorio",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFBD227"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1118",
+          "nombre": "Electiva de Formación Profesional I",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1120",
+          "nombre": "Ingeniería Económica",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFP1112"
+          ],
+          "desbloquea": [
+            "CFP1129",
+            "CFP1127"
+          ]
+        },
+        {
+          "id": "CFP1117",
+          "nombre": "Ciencia y Tecnología de Frutas y Hortalizas y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "FN24038",
+          "nombre": "Inglés VI",
+          "creditos": 2,
+          "prerrequisitos": [
+            "FN24037"
+          ],
+          "desbloquea": []
+        }
+      ]
     },
     {
       "numero": 8,
-      "materias": []
+      "materias": [
+        {
+          "id": "CFP1130",
+          "nombre": "Operaciones Unitarias II",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP1123"
+          ],
+          "desbloquea": [
+            "CFP1133"
+          ]
+        },
+        {
+          "id": "CFP1124",
+          "nombre": "Biotecnología y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP1114"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1126",
+          "nombre": "Control de Procesos Industriales",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFP1123"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1131",
+          "nombre": "Sistemas de Aseguramiento de la Calidad",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFP1121"
+          ],
+          "desbloquea": [
+            "CFP1139"
+          ]
+        },
+        {
+          "id": "CFP1128",
+          "nombre": "Electiva de Formación Profesional II",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1129",
+          "nombre": "Investigación de Mercados",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFP1120"
+          ],
+          "desbloquea": [
+            "CFP1136"
+          ]
+        },
+        {
+          "id": "CFP1125",
+          "nombre": "Ciencia y Tecnología de cereales y Oleaginosas y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP1103"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1127",
+          "nombre": "Desarollo Empresarial",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFP1120"
+          ],
+          "desbloquea": []
+        }
+      ]
     },
     {
       "numero": 9,
-      "materias": []
+      "materias": [
+        {
+          "id": "CFP1133",
+          "nombre": "Diseño de Planta de Alimentos",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP1130"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1137",
+          "nombre": "Materiales y Empaques",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFP1121"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1138",
+          "nombre": "Seminario de Investigación",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": [
+            "CFP1140"
+          ]
+        },
+        {
+          "id": "CFP1134",
+          "nombre": "Electiva de Formación Profesional III",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1135",
+          "nombre": "Electiva de Formación Profesional IV",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "FN24040",
+          "nombre": "Constitución y Ética",
+          "creditos": 2,
+          "prerrequisitos": [],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1132",
+          "nombre": "Ciencia y Tecnología de Lácteos y Laboratorio",
+          "creditos": 3,
+          "prerrequisitos": [
+            "CFP1103"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1136",
+          "nombre": "Evaluación y Formulación de Proyectos de Ingeniería",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFP1129"
+          ],
+          "desbloquea": []
+        }
+      ]
     },
     {
       "numero": 10,
-      "materias": []
+      "materias": [
+        {
+          "id": "CFP1139",
+          "nombre": "Prácticas Empresariales",
+          "creditos": 8,
+          "prerrequisitos": [
+            "CFP1131"
+          ],
+          "desbloquea": []
+        },
+        {
+          "id": "CFP1140",
+          "nombre": "Trabajo de Grado",
+          "creditos": 2,
+          "prerrequisitos": [
+            "CFP1138"
+          ],
+          "desbloquea": []
+        }
+      ]
     }
   ]
 }
