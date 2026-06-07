@@ -271,7 +271,7 @@ function drawConnections() {
   svg.innerHTML = '';
   const container = document.getElementById('grid-canvas');
   svg.style.width = `${container.scrollWidth}px`;
-  svg.style.height = `${container.scrollHeight}px`;
+  svg.style.height = `${container.clientHeight}px`;
 
   mallaData.semestres.forEach(sem => {
     sem.materias.forEach(mat => {
@@ -326,10 +326,11 @@ function drawLine(el1, el2, svg, sourceId, targetId) {
     
     let yRef;
     if (goAbove) {
-      yRef = topLimit - 12 - offsetVal;
-      if (yRef < 12) yRef = 12;
+      // Route inside the top padding (56px) of semesters-container
+      yRef = topLimit + 12 + offsetVal;
     } else {
-      yRef = bottomLimit + 12 + offsetVal;
+      // Route inside the bottom padding (56px) of semesters-container
+      yRef = bottomLimit - 12 - offsetVal;
     }
 
     // Trayectoria ortogonal ("carretera") que sube/baja por canal exterior

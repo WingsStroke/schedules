@@ -141,8 +141,7 @@ body {
 .grid-canvas {
   position: relative;
   flex: 1;
-  overflow-x: auto;
-  overflow-y: hidden; /* Sin scroll vertical para evitar fatiga visual */
+  overflow: hidden; /* Sin scroll para ver toda la malla y líneas en el viewport */
   padding: 1rem;
 }
 
@@ -156,17 +155,19 @@ body {
 
 .semesters-container {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem; /* Gap reducido para mayor espacio responsivo */
   position: relative;
   z-index: 2;
-  min-width: max-content;
+  width: 100%;
   height: 100%; /* Alto completo */
   padding: 3.5rem 0; /* Respiro superior amplio e inferior para conexiones */
   box-sizing: border-box;
 }
 
 .semester-col {
-  width: 200px;
+  flex: 1;
+  min-width: 0;
+  max-width: 200px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 10px;
@@ -298,6 +299,7 @@ body {
   cursor: pointer;
   transition: all 0.2s;
   font-size: calc(13px - var(--max-materias, 7) * 0.3px);
+  grid-row: -1;
 }
 
 .add-materia-btn:hover {
@@ -307,7 +309,9 @@ body {
 }
 
 .add-semester-col {
-  width: 200px;
+  flex: 1;
+  min-width: 0;
+  max-width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -317,7 +321,8 @@ body {
   cursor: pointer;
   color: rgba(255, 255, 255, 0.5);
   transition: all 0.2s;
-  min-height: 150px;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .add-semester-col:hover {
