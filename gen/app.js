@@ -321,13 +321,20 @@ function drawLine(el1, el2, svg, sourceId, targetId) {
       yRef = bottomLimit + 12 + offsetVal;
     }
 
+    // Trayectoria ortogonal ("carretera") que sube/baja por canal exterior
     pathData = `M ${x1} ${y1} ` +
+               `L ${x1 + 15} ${y1} ` +
                `L ${x1 + 15} ${yRef} ` +
                `L ${x2 - 15} ${yRef} ` +
+               `L ${x2 - 15} ${y2} ` +
                `L ${x2} ${y2}`;
   } else {
-    // Direct link between adjacent columns
-    pathData = `M ${x1} ${y1} L ${x2} ${y2}`;
+    // Direct link between adjacent columns (escalón de 90 grados)
+    const xMid = (x1 + x2) / 2;
+    pathData = `M ${x1} ${y1} ` +
+               `L ${xMid} ${y1} ` +
+               `L ${xMid} ${y2} ` +
+               `L ${x2} ${y2}`;
   }
 
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
