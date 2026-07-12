@@ -15,11 +15,11 @@
       <h2>Gestión Académica Interactiva</h2>
     </header>
     <div class="home-container">
-      <div class="bento-card" onclick="switchView('view-mallas')">
+      <div class="bento-card" data-view-target="view-mallas">
         <h3>Mallas Académicas</h3>
         <p style="opacity: 0.7; margin-top: 0.5rem;">Crea planes de estudio y vincula prerrequisitos.</p>
       </div>
-      <div class="bento-card" onclick="switchView('view-calendarios')">
+      <div class="bento-card" data-view-target="view-calendarios">
         <h3>Calendarios Académicos</h3>
         <p style="opacity: 0.7; margin-top: 0.5rem;">Crea calendarios de eventos y actividades académicas.</p>
       </div>
@@ -29,13 +29,13 @@
   <div id="view-mallas" class="view">
     <header class="glass-panel">
       <div>
-        <button class="btn btn-secondary" onclick="switchView('view-home')">Volver</button>
+        <button class="btn btn-secondary" data-view-target="view-home">Volver</button>
         <input type="text" id="input-carrera-nombre" value="Ingeniería de Sistemas" class="glass-input"
           style="width: 250px; margin-left: 1rem; display: inline-block; margin-top: 0; padding: 0.4rem;">
       </div>
       <div class="actions">
         <button id="btn-link-mode" class="btn btn-secondary">Modo Vincular: OFF</button>
-        <button id="btn-import-malla" class="btn btn-primary" onclick="document.getElementById('input-file-malla').click()">Importar JSON</button>
+        <button id="btn-import-malla" class="btn btn-primary">Importar JSON</button>
         <button id="btn-export-malla" class="btn btn-success">Exportar JSON</button>
         <input type="file" id="input-file-malla" accept=".json" style="display: none;">
       </div>
@@ -49,7 +49,7 @@
   <div id="view-calendarios" class="view">
     <header class="glass-panel">
       <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-        <button class="btn btn-secondary" onclick="switchView('view-home')">Volver</button>
+        <button class="btn btn-secondary" data-view-target="view-home">Volver</button>
         <input type="text" id="input-calendario-nombre" value="2026-1" class="glass-input"
           style="width: 150px; margin-left: 0.5rem; display: inline-block; margin-top: 0; padding: 0.4rem;" placeholder="Semestre (Ej: 2026-1)">
         <input type="number" id="input-calendario-anio" value="2026" class="glass-input"
@@ -70,7 +70,7 @@
         <span class="month-badge" data-month="11">Dic</span>
       </div>
       <div class="actions">
-        <button id="btn-import-calendario" class="btn btn-primary" onclick="document.getElementById('input-file-calendario').click()">Importar JSON</button>
+        <button id="btn-import-calendario" class="btn btn-primary">Importar JSON</button>
         <button id="btn-export-calendario" class="btn btn-success">Exportar JSON</button>
         <input type="file" id="input-file-calendario" accept=".json" style="display: none;">
       </div>
@@ -100,9 +100,9 @@
       </div>
 
       <div class="modal-actions">
-        <button class="btn btn-danger" onclick="deleteCurrentMateria()" style="margin-right: auto;">Eliminar</button>
-        <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
-        <button class="btn btn-primary" onclick="saveMateria()">Guardar Cambios</button>
+        <button id="btn-delete-materia" class="btn btn-danger" style="margin-right: auto;">Eliminar</button>
+        <button id="btn-cancel-materia" class="btn btn-secondary">Cancelar</button>
+        <button id="btn-save-materia" class="btn btn-primary">Guardar Cambios</button>
       </div>
     </div>
   </div>
@@ -115,14 +115,14 @@
         <!-- JavaScript will inject event blocks here -->
       </div>
 
-      <div id="btn-add-event-block" style="margin-top: 1.5rem; border: 2px dashed var(--glass-border); padding: 1.5rem; border-radius: 8px; text-align: center; cursor: pointer; color: rgba(255,255,255,0.7); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='var(--accent-color)'; this.style.color='var(--accent-color)'" onmouseout="this.style.background='transparent'; this.style.borderColor='var(--glass-border)'; this.style.color='rgba(255,255,255,0.7)'" onclick="addNewEventBlock()">
+      <div id="btn-add-event-block" style="margin-top: 1.5rem; border: 2px dashed var(--glass-border); padding: 1.5rem; border-radius: 8px; text-align: center; cursor: pointer; color: rgba(255,255,255,0.7); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.2s;">
         <div style="font-size: 2rem; margin-bottom: 0.5rem; line-height: 1;">+</div>
         <div>Añadir otro evento este mismo día</div>
       </div>
 
       <div class="modal-actions" style="margin-top: 1.5rem; border-top: 1px solid var(--glass-border); padding-top: 1rem; position: sticky; bottom: 0; background: var(--bg-dark); z-index: 10;">
-        <button class="btn btn-secondary" onclick="closeEventModal()">Cancelar</button>
-        <button class="btn btn-primary" onclick="saveEvent()">Guardar Cambios</button>
+        <button id="btn-cancel-event" class="btn btn-secondary">Cancelar</button>
+        <button id="btn-save-event" class="btn btn-primary">Guardar Cambios</button>
       </div>
     </div>
   </div>

@@ -141,11 +141,10 @@ function _poblarSelectorSemestre() {
       searchBtn.title = '';
     }
 
-    if (exito) {
-      Toast.show(`Período ${periodo} cargado`, 'success', 2500);
-    } else {
+    if (!exito) {
       Toast.show('No se pudo cargar el período seleccionado', 'error', 4000);
     }
+
   });
 }
 

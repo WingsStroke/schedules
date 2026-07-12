@@ -57,7 +57,7 @@ export const SistemaCargaOfertas = {
   // ──────────────────────────────────────────
   async cargarIndiceGlobal() {
     const baseUrl = APP_CONFIG.R2_BUCKET_URL.replace(/\/$/, '');
-    const response = await fetch(`${baseUrl}/index.json`);
+    const response = await fetch(`${baseUrl}/index.json`, { cache: 'no-store' });
 
     if (!response.ok) {
       throw new Error(`No se pudo cargar el índice global (index.json): HTTP ${response.status}`);
@@ -86,7 +86,7 @@ export const SistemaCargaOfertas = {
     const promesas = programasActivos.map(async (programa) => {
       try {
         const url = `${baseUrl}/${periodo}/${programa.archivo}`;
-        const response = await fetch(url);
+        const response = await fetch(url, { cache: 'no-store' });
 
         if (!response.ok) {
           console.warn(`[SistemaCargaOfertas] No se pudo cargar: ${url}`);

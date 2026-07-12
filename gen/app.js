@@ -47,6 +47,74 @@ function switchView(viewId) {
   if (viewId === 'view-calendarios') setTimeout(renderCalendariosGrid, 100);
 }
 
+function toggleAlertDaysVisibility(block, isVisible) {
+  const daysContainer = block.querySelector('.block-dias-container');
+  if (daysContainer) {
+    daysContainer.style.display = isVisible ? 'block' : 'none';
+  }
+}
+
+function initStaticEventHandlers() {
+  document.querySelectorAll('[data-view-target]').forEach(element => {
+    element.addEventListener('click', () => switchView(element.dataset.viewTarget));
+  });
+
+  const importMallaBtn = document.getElementById('btn-import-malla');
+  const importMallaInput = document.getElementById('input-file-malla');
+  if (importMallaBtn && importMallaInput) {
+    importMallaBtn.addEventListener('click', () => importMallaInput.click());
+  }
+
+  const importCalendarioBtn = document.getElementById('btn-import-calendario');
+  const importCalendarioInput = document.getElementById('input-file-calendario');
+  if (importCalendarioBtn && importCalendarioInput) {
+    importCalendarioBtn.addEventListener('click', () => importCalendarioInput.click());
+  }
+
+  const deleteMateriaBtn = document.getElementById('btn-delete-materia');
+  const cancelMateriaBtn = document.getElementById('btn-cancel-materia');
+  const saveMateriaBtn = document.getElementById('btn-save-materia');
+  const addEventBlockBtn = document.getElementById('btn-add-event-block');
+  const cancelEventBtn = document.getElementById('btn-cancel-event');
+  const saveEventBtn = document.getElementById('btn-save-event');
+  const eventBlocksContainer = document.getElementById('events-blocks-container');
+
+  deleteMateriaBtn?.addEventListener('click', () => window.deleteCurrentMateria());
+  cancelMateriaBtn?.addEventListener('click', () => closeModal());
+  saveMateriaBtn?.addEventListener('click', () => window.saveMateria());
+  addEventBlockBtn?.addEventListener('click', () => window.addNewEventBlock());
+  cancelEventBtn?.addEventListener('click', () => closeEventModal());
+  saveEventBtn?.addEventListener('click', () => window.saveEvent());
+
+  addEventBlockBtn?.addEventListener('mouseenter', () => {
+    addEventBlockBtn.style.background = 'rgba(255,255,255,0.05)';
+    addEventBlockBtn.style.borderColor = 'var(--accent-color)';
+    addEventBlockBtn.style.color = 'var(--accent-color)';
+  });
+  addEventBlockBtn?.addEventListener('mouseleave', () => {
+    addEventBlockBtn.style.background = 'transparent';
+    addEventBlockBtn.style.borderColor = 'var(--glass-border)';
+    addEventBlockBtn.style.color = 'rgba(255,255,255,0.7)';
+  });
+
+  eventBlocksContainer?.addEventListener('click', (event) => {
+    const removeButton = event.target.closest('.btn-remove-event-block');
+    if (removeButton) {
+      removeButton.closest('.event-block')?.remove();
+    }
+  });
+
+  eventBlocksContainer?.addEventListener('change', (event) => {
+    const alertCheckbox = event.target.closest('.block-alerta');
+    if (alertCheckbox) {
+      const eventBlock = alertCheckbox.closest('.event-block');
+      if (eventBlock) {
+        toggleAlertDaysVisibility(eventBlock, alertCheckbox.checked);
+      }
+    }
+  });
+}
+
 /* =========================================
    LÓGICA DE MALLAS ACADÉMICAS
    ========================================= */
@@ -308,7 +376,7 @@ function drawLine(el1, el2, svg, sourceId, targetId) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
   }
   const hue = Math.abs(hash) % 360;
-  const isDark = document.body.classList.contains('dark-mode') || true;
+    const isDark = document.body.classList.contains('dark-mode');
   const lightness = isDark ? 62 : 46;
   const color = `hsl(${hue}, 85%, ${lightness}%)`;
 
@@ -665,7 +733,7 @@ function getEventBlockHTML(ev, defaultDateStr) {
 
   return `
   <div class="event-block" data-id="${id}" style="border: 1px solid var(--glass-border); padding: 1.5rem; border-radius: 8px; background: rgba(0,0,0,0.2); position: relative;">
-    <button type="button" class="btn btn-danger" onclick="this.closest('.event-block').remove()" style="position: absolute; top: 1rem; right: 1rem; padding: 0.4rem 0.8rem; font-size: 0.8rem;">Eliminar</button>
+    <button type="button" class="btn btn-danger btn-remove-event-block" style="position: absolute; top: 1rem; right: 1rem; padding: 0.4rem 0.8rem; font-size: 0.8rem;">Eliminar</button>
     <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
       <div style="flex: 1.2; min-width: 280px; display: flex; flex-direction: column; gap: 1rem;">
         <input type="hidden" class="block-id" value="${id}">
@@ -698,10 +766,10 @@ function getEventBlockHTML(ev, defaultDateStr) {
         </div>
         <div style="border: 1px solid var(--glass-border); padding: 0.8rem; border-radius: 8px; background: rgba(255,255,255,0.02); display: flex; flex-direction: column; gap: 0.6rem;">
           <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <input type="checkbox" id="alerta-${blockId}" class="block-alerta" style="width: 16px; height: 16px; cursor: pointer;" ${alerta ? 'checked' : ''} onchange="document.getElementById('dias-${blockId}').style.display = this.checked ? 'block' : 'none'">
+            <input type="checkbox" id="alerta-${blockId}" class="block-alerta" style="width: 16px; height: 16px; cursor: pointer;" ${alerta ? 'checked' : ''}>
             <label for="alerta-${blockId}" style="margin-bottom: 0; cursor: pointer; user-select: none; font-size: 0.9rem;">Activar Alerta de Notificación</label>
           </div>
-          <div id="dias-${blockId}" style="display: ${alerta ? 'block' : 'none'};">
+          <div id="dias-${blockId}" class="block-dias-container" style="display: ${alerta ? 'block' : 'none'};">
             <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-top: 0.2rem;">
               <span style="font-size: 0.8rem; color: rgba(255,255,255,0.7);">Días de anticipación:</span>
               <input type="number" class="block-dias glass-input" min="0" max="30" value="${diasAlerta}" style="width: 70px; margin-top: 0; padding: 0.2rem 0.4rem; font-size: 0.85rem; text-align: center;">
@@ -952,5 +1020,6 @@ document.addEventListener('keydown', (e) => {
 });
 
 // Arrancar la app en el Home por defecto
+initStaticEventHandlers();
 switchView('view-home');
 renderMallasGrid();

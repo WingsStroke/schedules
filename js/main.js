@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   ErrorHandler.init();
   if (typeof DarkMode !== 'undefined') DarkMode.initialize();
   initExportEngine();
-  if (typeof DarkMode !== 'undefined') DarkMode.initialize();
   
   if (typeof initializeState === 'function') {
       await initializeState();

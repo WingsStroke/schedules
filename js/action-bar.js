@@ -72,7 +72,6 @@ export const ActionBar = {
     if (!bar || !toggleBtn) return;
 
     const isCollapsed = bar.classList.toggle('collapsed');
-    localStorage.setItem('homeActionBarCollapsed', isCollapsed);
 
     if (isCollapsed) {
       toggleBtn.setAttribute('aria-label', 'Mostrar herramientas');

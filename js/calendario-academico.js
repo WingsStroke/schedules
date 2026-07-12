@@ -25,6 +25,27 @@ export const CalendarioAcademico = {
     alertCheckDone: false
   },
 
+  escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, (char) => {
+      const entityMap = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      };
+      return entityMap[char] || char;
+    });
+  },
+
+  normalizeEventColor(value) {
+    const color = String(value ?? '').trim();
+    if (/^var\(--[a-z0-9-]+\)$/i.test(color)) return color;
+    if (/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(color)) return color;
+    if (/^(rgb|rgba|hsl|hsla)\([^\)]+\)$/i.test(color)) return color;
+    return 'var(--cal-academico)';
+  },
+
   /**
    * Initializes the CalendarioAcademico component
    */
@@ -316,7 +337,7 @@ export const CalendarioAcademico = {
           dot.style.width = '5px';
           dot.style.height = '5px';
           dot.style.borderRadius = '50%';
-          dot.style.backgroundColor = ev.color_css;
+          dot.style.backgroundColor = this.normalizeEventColor(ev.color_css);
           dotsContainer.appendChild(dot);
         });
 
@@ -382,15 +403,18 @@ export const CalendarioAcademico = {
       const badgeHtml = badgeText
         ? `<span class="tooltip-event-badge badge-${badgeText.toLowerCase()}">${badgeText}</span>`
         : '';
+      const safeTitle = this.escapeHtml(ev.titulo);
+      const safeDescription = this.escapeHtml(ev.descripcion || 'Sin descripción adicional.');
+      const safeColor = this.normalizeEventColor(ev.color_css);
 
       html += `
         <div class="tooltip-event-card">
           ${badgeHtml}
           <div class="tooltip-title">
-            <span class="tooltip-color-indicator" style="background: ${ev.color_css};"></span>
-            ${ev.titulo}
+            <span class="tooltip-color-indicator" style="background: ${safeColor};"></span>
+            ${safeTitle}
           </div>
-          <p class="tooltip-desc">${ev.descripcion || 'Sin descripción adicional.'}</p>
+          <p class="tooltip-desc">${safeDescription}</p>
         </div>
       `;
 
@@ -399,11 +423,11 @@ export const CalendarioAcademico = {
       const endCell = document.querySelector(`.mini-day-cell[data-date="${ev.fin}"]`);
       if (startCell) {
         startCell.classList.add('event-highlight');
-        startCell.style.setProperty('--glow-color', ev.color_css);
+        startCell.style.setProperty('--glow-color', safeColor);
       }
       if (endCell) {
         endCell.classList.add('event-highlight');
-        endCell.style.setProperty('--glow-color', ev.color_css);
+        endCell.style.setProperty('--glow-color', safeColor);
       }
     });
 

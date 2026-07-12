@@ -50,6 +50,28 @@ const ASSETS_TO_CACHE = [
   './assets/icon-512.png'
 ];
 
+async function precacheAssets(cache) {
+  const failures = [];
+
+  await Promise.all(
+    ASSETS_TO_CACHE.map(async (url) => {
+      try {
+        const response = await fetch(new Request(url, { cache: 'reload' }));
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        await cache.put(url, response);
+      } catch (error) {
+        failures.push({ url, error: error instanceof Error ? error.message : String(error) });
+      }
+    })
+  );
+
+  if (failures.length > 0) {
+    console.warn('[SW] Precaching completed with missing assets:', failures);
+  }
+}
+
 // FASE 1: INSTALACIÓN SILENCIOSA
 // FASE 1: INSTALACIÓN SILENCIOSA Y "CACHE BUSTING"
 self.addEventListener('install', (event) => {
@@ -57,15 +79,7 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME).then((cache) => {
       // Nueva versión siendo cacheada
       // Usamos cache: 'reload' para obligar al navegador a ir al servidor, saltándose la caché HTTP
-      return Promise.allSettled(
-        ASSETS_TO_CACHE.map(url => {
-          return fetch(new Request(url, { cache: 'reload' }))
-            .then(response => {
-              if (!response.ok) throw new Error(`Fetch falló para ${url}`);
-              return cache.put(url, response);
-            });
-        })
-      );
+      return precacheAssets(cache);
     })
   );
 });
@@ -103,20 +117,22 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
   // 1. Manejo específico para el bucket R2 (Ofertas Académicas JSON)
-  // Estrategia: Stale-While-Revalidate (devuelve rápido de caché, actualiza en fondo)
+  // Estrategia: Network-First (si hay internet, siempre intenta traer la versión más nueva;
+  // si falla, usa la caché como respaldo offline)
   if (url.hostname === 'pub-ed2a196c92624cfbadea4f7a02c13d95.r2.dev') {
     event.respondWith(
       caches.open(CACHE_NAME).then((cache) => {
-        return cache.match(event.request).then((cachedResponse) => {
-          const fetchPromise = fetch(event.request).then((networkResponse) => {
+        return fetch(event.request, { cache: 'no-cache' })
+          .then((networkResponse) => {
             if (networkResponse.ok) {
               cache.put(event.request, networkResponse.clone());
             }
             return networkResponse;
-          }).catch((err) => console.warn('[SW] Modo offline para R2', err));
-          
-          return cachedResponse || fetchPromise;
-        });
+          })
+          .catch((err) => {
+            console.warn('[SW] Modo offline para R2, usando caché si existe', err);
+            return cache.match(event.request);
+          });
       })
     );
     return;
