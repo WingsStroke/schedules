@@ -44,6 +44,7 @@ const ASSETS_TO_CACHE = [
   './data/mallas/index.json',
   './data/mallas/sistemas.json',
   './data/mallas/alimentos.json',
+  './data/calendario/index.json',
   './data/calendario/2026-1.json',
   // Assets
   './assets/icon-192.png',

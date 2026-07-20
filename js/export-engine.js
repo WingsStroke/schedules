@@ -35,7 +35,28 @@ export function initExportEngine() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     const body = buildSubjectsScheduleData().map(i => [i.name, i.schedule, i.group || "", i.program || ""]);
-    doc.autoTable({ head: [["Asignatura", "Horario", "Grupo", "Programa"]], body: body, theme: "grid" });
+    doc.autoTable({
+      head: [["Asignatura", "Horario", "Grupo", "Programa"]],
+      body: body,
+      theme: "grid",
+      styles: {
+        textColor: [0, 0, 0],
+        lineColor: [0, 0, 0],
+        lineWidth: 0.2
+      },
+      headStyles: {
+        fillColor: [255, 255, 255],
+        textColor: [0, 0, 0],
+        fontStyle: "normal",
+        lineColor: [0, 0, 0],
+        lineWidth: 0.2
+      },
+      bodyStyles: {
+        textColor: [0, 0, 0],
+        lineColor: [0, 0, 0],
+        lineWidth: 0.2
+      }
+    });
     doc.save("Formato_UdeC.pdf");
     document.getElementById("exportPdfModal").classList.remove("active");
   });

@@ -25,6 +25,39 @@ export const CalendarioAcademico = {
     alertCheckDone: false
   },
 
+  async fetchCalendarIndex() {
+    const baseUrl = APP_CONFIG.R2_BUCKET_URL.replace(/\/$/, '');
+
+    // 1. Try Cloudflare R2 index first
+    try {
+      const r2IndexUrl = `${baseUrl}/calendario/index.json`;
+      const response = await fetch(r2IndexUrl, { cache: 'no-store' });
+      if (response.ok) {
+        const data = await response.json();
+        if (data && Array.isArray(data.semestres) && data.semestres.length > 0) {
+          return data;
+        }
+      }
+    } catch (err) {
+      console.warn('CalendarioAcademico: R2 calendar index unavailable, trying local fallback.', err);
+    }
+
+    // 2. Local fallback index
+    try {
+      const localResponse = await fetch('./data/calendario/index.json');
+      if (localResponse.ok) {
+        const data = await localResponse.json();
+        if (data && Array.isArray(data.semestres) && data.semestres.length > 0) {
+          return data;
+        }
+      }
+    } catch (err) {
+      console.warn('CalendarioAcademico: local calendar index unavailable.', err);
+    }
+
+    return null;
+  },
+
   escapeHtml(value) {
     return String(value ?? '').replace(/[&<>"']/g, (char) => {
       const entityMap = {
@@ -126,16 +159,31 @@ export const CalendarioAcademico = {
   /**
    * Populates the semester selector dropdown using active state
    */
-  loadSemestersList() {
-    // Attempt to load from global offers system
-    if (SistemaCargaOfertas && SistemaCargaOfertas.indice && SistemaCargaOfertas.indice.semestres) {
-      this.state.semestres = SistemaCargaOfertas.indice.semestres.map(s => ({
-        periodo: s.periodo,
-        label: s.label
-      }));
-    } else {
-      // Default fallback
-      this.state.semestres = [{ periodo: '2026-1', label: '2026 - Semestre 1' }];
+  async loadSemestersList() {
+    const calendarIndex = await this.fetchCalendarIndex();
+    const hasCalendarIndex = !!(calendarIndex && Array.isArray(calendarIndex.semestres) && calendarIndex.semestres.length > 0);
+
+    // Primary source: dedicated calendario index
+    if (hasCalendarIndex) {
+      this.state.semestres = calendarIndex.semestres
+        .filter(s => s && s.periodo)
+        .map(s => ({
+          periodo: s.periodo,
+          label: s.label || s.periodo
+        }));
+    }
+
+    // Compatibility fallback: offers index
+    if (!this.state.semestres || this.state.semestres.length === 0) {
+      if (SistemaCargaOfertas && SistemaCargaOfertas.indice && SistemaCargaOfertas.indice.semestres) {
+        this.state.semestres = SistemaCargaOfertas.indice.semestres.map(s => ({
+          periodo: s.periodo,
+          label: s.label
+        }));
+      } else {
+        // Absolute fallback
+        this.state.semestres = [{ periodo: '2026-1', label: '2026 - Semestre 1' }];
+      }
     }
 
     this.elements.select.innerHTML = '';
@@ -146,9 +194,22 @@ export const CalendarioAcademico = {
       this.elements.select.appendChild(opt);
     });
 
-    // Set initial selected option matching global active semester
-    if (SistemaCargaOfertas && SistemaCargaOfertas.semestreActual) {
-      this.elements.select.value = SistemaCargaOfertas.semestreActual;
+    // Set initial selected option
+    const desiredSemester = SistemaCargaOfertas && SistemaCargaOfertas.semestreActual
+      ? SistemaCargaOfertas.semestreActual
+      : null;
+
+    const hasDesired = desiredSemester
+      ? this.state.semestres.some(s => s.periodo === desiredSemester)
+      : false;
+
+    if (hasCalendarIndex && this.state.semestres.length > 0) {
+      // Requirement: open with the most recently added calendar by default
+      this.elements.select.value = this.state.semestres[this.state.semestres.length - 1].periodo;
+    } else if (hasDesired) {
+      this.elements.select.value = desiredSemester;
+    } else if (this.state.semestres.length > 0) {
+      this.elements.select.value = this.state.semestres[0].periodo;
     }
   },
 
@@ -165,7 +226,7 @@ export const CalendarioAcademico = {
     // 1. Try to fetch from Cloudflare R2
     try {
       const r2Url = `${APP_CONFIG.R2_BUCKET_URL}/calendario/${semester}.json`;
-      const response = await fetch(r2Url);
+      const response = await fetch(r2Url, { cache: 'no-store' });
       if (response.ok) {
         fetchedData = await response.json();
       }
@@ -487,7 +548,7 @@ export const CalendarioAcademico = {
   async checkProactiveAlerts() {
     if (this.state.alertCheckDone) return;
 
-    let activeSemester = '2026-1'; // Default fallback
+    let activeSemester = this.elements.select?.value || this.state.currentSemester || '2026-1';
     if (SistemaCargaOfertas && SistemaCargaOfertas.semestreActual) {
       activeSemester = SistemaCargaOfertas.semestreActual;
     }
@@ -497,7 +558,7 @@ export const CalendarioAcademico = {
     // Fetch calendar JSON
     try {
       const r2Url = `${APP_CONFIG.R2_BUCKET_URL}/calendario/${activeSemester}.json`;
-      const response = await fetch(r2Url);
+      const response = await fetch(r2Url, { cache: 'no-store' });
       if (response.ok) {
         const data = await response.json();
         events = data.eventos || [];
