@@ -2,6 +2,7 @@ import { getSubjectColor } from './core.js';
 import { Toast } from './toast-system.js';
 import { currentScheduleIndex, schedules } from './state-manager.js';
 import { DOMRenderer } from './dom-renderer.js';
+import { MotorCombinaciones } from './motor-combinaciones.js';
 
 export const CargadorCombinaciones = {
 
@@ -84,7 +85,9 @@ export const CargadorCombinaciones = {
     }
 
     // Limpiar selección de asignaturas
-    MotorCombinaciones.limpiarAsignaturas();
+    if (typeof MotorCombinaciones !== 'undefined') {
+      MotorCombinaciones.limpiarAsignaturas();
+    }
     if (typeof SidebarPanel !== 'undefined') {
       SidebarPanel.actualizarAsignaturasSeleccionadas();
     }
