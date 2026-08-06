@@ -260,6 +260,14 @@ body.dark-mode .mini-celda.ocupada .mini-asig-nombre {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+/* ===== CONTADORES DE ASIGNATURAS/CRÉDITOS (VIEW APP) ===== */
+body.dark-mode #scheduleInfo,
+body.dark-mode #scheduleInfo span,
+body.dark-mode #subjectCountInfo,
+body.dark-mode #totalCreditsInfo {
+  color: #cbd5e1 !important;
+}
+
 /* Tags de asignaturas en cada combinación */
 body.dark-mode .mini-asignatura-tag {
   background: rgba(255, 255, 255, 0.08) !important;

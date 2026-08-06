@@ -9,11 +9,37 @@ import { currentScheduleIndex, schedules } from './state-manager.js';
 
 export function initExportEngine() {
   // --- EXPORTACIÓN A PDF (FORMATO UdeC) ---
+  function deriveTimeRangeFromGrid(sub) {
+    if (!sub || typeof sub.row !== "number" || typeof sub.blocks !== "number") return null;
+
+    const isNocturna = sub.jornada === "nocturna";
+    const blockMinutes = isNocturna ? 90 : 100;
+    const baseStart = isNocturna ? (17 * 60) : (7 * 60);
+    const startMinutes = baseStart + (sub.row * blockMinutes);
+    const endMinutes = startMinutes + (sub.blocks * blockMinutes);
+
+    return { startMinutes, endMinutes };
+  }
+
   function buildSubjectsScheduleData() {
     if (currentScheduleIndex === null) return [];
     const map = {};
     schedules[currentScheduleIndex].subjects.forEach(sub => {
-      const timeText = `${diasSemana[sub.day]} ${minutesToTime(sub.startMinutes)} - ${minutesToTime(sub.endMinutes)}`;
+      const dayIndex = Number.isInteger(Number(sub.day)) ? Number(sub.day) : Number(sub.col);
+      if (!Number.isInteger(dayIndex) || dayIndex < 0 || dayIndex > 5) return;
+
+      let startMinutes = sub.startMinutes;
+      let endMinutes = sub.endMinutes;
+
+      if (typeof startMinutes !== "number" || typeof endMinutes !== "number") {
+        const fallback = deriveTimeRangeFromGrid(sub);
+        if (!fallback) return;
+        startMinutes = fallback.startMinutes;
+        endMinutes = fallback.endMinutes;
+      }
+
+      const dayName = diasSemana[dayIndex] || "Día";
+      const timeText = `${dayName} ${minutesToTime(startMinutes)} - ${minutesToTime(endMinutes)}`;
       const key = `${sub.name}||${sub.group}||${sub.program}||${sub.color}`;
       if (!map[key]) map[key] = { name: sub.name, group: sub.group || "", program: sub.program || "", times: [] };
       map[key].times.push(timeText);

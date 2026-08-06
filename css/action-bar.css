@@ -69,19 +69,28 @@
 
 /* Icono del toggle con rotación dinámica y tamaño incrementado */
 .action-bar-toggle .toggle-icon {
-  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
   font-size: 24px; /* Incrementado de 16px */
   font-weight: bold;
   line-height: 1;
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
   transition: transform 0.3s ease;
 }
 
 .home-action-bar.collapsed .action-bar-toggle .toggle-icon {
-  transform: rotate(0deg);
+  transform: translate(-50%, -50%) rotate(0deg);
 }
 
 .home-action-bar:not(.collapsed) .action-bar-toggle .toggle-icon {
-  transform: rotate(180deg);
+  transform: translate(-50%, -50%) rotate(180deg);
 }
 
 /* Badge numérico desactivado — las notificaciones se muestran únicamente como toasts */
@@ -249,16 +258,16 @@ body.dark-mode .action-btn-icon {
   /* Icono más grande y centrado en móvil */
   .action-bar-toggle .toggle-icon {
     font-size: 20px;
-    line-height: 0.8;
+    line-height: 1;
   }
 
   /* Ajustar rotación en móvil con alta especificidad para corregir la flecha */
   .home-action-bar.collapsed .action-bar-toggle .toggle-icon {
-    transform: rotate(90deg); /* Apunta hacia ARRIBA cuando está cerrado */
+    transform: translate(-50%, -50%) rotate(90deg); /* Apunta hacia ARRIBA cuando está cerrado */
   }
 
   .home-action-bar:not(.collapsed) .action-bar-toggle .toggle-icon {
-    transform: rotate(270deg); /* Apunta hacia ABAJO cuando está abierto */
+    transform: translate(-50%, -50%) rotate(270deg); /* Apunta hacia ABAJO cuando está abierto */
   }
 
   .action-btn-label {

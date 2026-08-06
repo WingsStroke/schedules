@@ -1,10 +1,10 @@
-# 🪟 Sistema de Modales - Documentación Completa
+# Sistema de Modales - Documentación Completa
 
 > Guía detallada del sistema de modales del proyecto, su arquitectura, patrones y cómo trabajar con ellos.
 
 ---
 
-## 📋 **Catálogo de Modales**
+## Catálogo de Modales
 
 ### **1. subjectModal** - Crear/Editar Asignatura
 **ID:** `#subjectModal`  
@@ -44,7 +44,8 @@
 
 **Funciones JS:**
 - Se abre desde home view
-- Crea schedule y llama `createSchedule(name, [])`
+- Guarda nuevo horario desde `main.js`
+- Soporta confirmación con tecla `Enter`
 
 ---
 
@@ -60,8 +61,9 @@
 - Guardar nombre
 
 **Funciones JS:**
-- `openRenameModal(index)`
-- Llama `renameSchedule(index, newName)`
+- Abre modal de renombre desde la tarjeta en Home
+- Guarda nuevo nombre desde `main.js`
+- Soporta confirmación con tecla `Enter`
 
 ---
 
@@ -185,7 +187,7 @@
 
 ---
 
-## 🏗️ **Arquitectura de Modales**
+## Arquitectura de Modales
 
 ### **Estructura HTML Estándar**
 
@@ -337,7 +339,7 @@ actionBtn.addEventListener("click", () => {
 
 ---
 
-## 🎨 **Estilos Dark Mode**
+## Estilos Dark Mode
 
 ### **Patrón Estándar**
 
@@ -747,7 +749,7 @@ document.addEventListener("keydown", (e) => {
 
 ---
 
-## 🎨 **Variantes de Diseño**
+## Variantes de Diseño
 
 ### **Modal Pequeño (Confirmación)**
 ```css
@@ -780,7 +782,7 @@ document.addEventListener("keydown", (e) => {
 
 ---
 
-## ✅ **Checklist: Crear Nuevo Modal**
+## Checklist: Crear Nuevo Modal
 
 ```
 □ HTML: Estructura con .modal y .modal-content

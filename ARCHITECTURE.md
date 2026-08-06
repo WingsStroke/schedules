@@ -1,10 +1,10 @@
-# 🏗️ Arquitectura Técnica - Sistema Horarios UdeC
+# Arquitectura Técnica - Sistema Horarios UdeC
 
 > Documentación técnica completa de la arquitectura, patrones de diseño y decisiones técnicas del sistema.
 
 ---
 
-## 📐 **Visión General de la Arquitectura**
+## Visión General de la Arquitectura
 
 ### **Patrón de Diseño: ES Modules (ES6)**
 
@@ -35,7 +35,7 @@ El sistema está construido como una aplicación frontend moderna basada en **ES
 
 ---
 
-## 🎯 **Capas de la Aplicación**
+## Capas de la Aplicación
 
 ### **1. Data Layer (Persistencia y Origen de Datos)**
 
@@ -149,7 +149,7 @@ Administra el panel lateral interactivo:
 Maneja el input de texto de búsqueda en el sidebar. Ejecuta normalización de texto (eliminando tildes y mayúsculas) sobre el catálogo de asignaturas cargado para garantizar resultados exactos y amigables.
 
 #### **D. Barra de Herramientas del Home ([`js/action-bar.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/action-bar.js))**
-Administra la barra de herramientas lateral deslizable en la vista de inicio. Controla el estado de expansión/colapso, la persistencia en `localStorage`, y gestiona el badge de notificaciones del calendario.
+Administra la barra de herramientas lateral deslizable en la vista de inicio. Controla el estado de expansión/colapso y emite eventos para abrir utilidades como el visor de mallas y el calendario académico.
 
 #### **E. Visor de Mallas Académicas ([`js/visor-mallas.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/visor-mallas.js))**
 Gestiona la descarga y parseo de mallas curriculares locales, renderiza la grilla interactiva de asignaturas ordenadas por semestre, e implementa el algoritmo de grafo recursivo para iluminar las cadenas completas de prerrequisitos y desbloqueos.
@@ -159,7 +159,7 @@ Obtiene y renderiza las fechas académicas desde Cloudflare R2 (con fallback loc
 
 ---
 
-## 🔄 **Flujos de Datos Críticos**
+## Flujos de Datos Críticos
 
 ### **Flujo 1: Crear Asignatura Manualmente**
 
@@ -227,7 +227,7 @@ state-manager.js:createSchedule() ──> Guarda en IndexedDB y activa nuevo hor
 
 ---
 
-## 🎨 **Sistema de Estilos y Responsividad**
+## Sistema de Estilos y Responsividad
 
 ### **Estructura CSS Desacoplada**
 
@@ -240,7 +240,7 @@ El diseño se basa en una arquitectura modular sin dependencias de frameworks CS
 
 ---
 
-## 🧪 **Testing Integrado con Vitest**
+## Testing Integrado con Vitest
 
 El proyecto cuenta con una suite de pruebas unitarias configurada mediante **Vitest** y **JSDOM** para garantizar la validez de los algoritmos críticos sin necesidad de un navegador completo.
 
@@ -254,7 +254,7 @@ npm test
 
 ---
 
-## 🛠️ **Entorno de Desarrollo y Despliegue**
+## Entorno de Desarrollo y Despliegue
 
 ### **Desarrollo con Vite**
 El proyecto usa **Vite** como servidor de desarrollo rápido y empaquetador para producción.
@@ -268,7 +268,14 @@ El despliegue está automatizado mediante GitHub Actions. Al realizar un push a 
 
 ---
 
-## 🔮 **Decisiones de Diseño Clave**
+## Decisiones de Diseño Clave
+
+## Cambios Relevantes de Agosto 2026
+
+- La normalización de horarios repara automáticamente tiempos inconsistentes (`startMinutes/endMinutes`) usando la grilla real por jornada.
+- La capa de cálculo de aguinaldo usa una única lógica diaria para `trips` y `hasGaps`, reduciendo discrepancias.
+- La traducción de combinaciones persiste campos canónicos de tiempo/día para consumo consistente por exportadores y cálculos.
+- La exportación PDF incluye fallback seguro para datos legacy incompletos.
 
 1. **¿Por qué ES Modules y Vite en lugar de Vanilla estático sin dependencias?**
    A medida que el código creció a 18 archivos JS, los imports/exports nativos facilitaron el mantenimiento y la separación de responsabilidades. Vite provee un servidor de desarrollo ultra-rápido y optimiza el despliegue a producción compilando a un bundle unificado.

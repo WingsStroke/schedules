@@ -171,19 +171,24 @@ document.getElementById("createScheduleBtn").onclick = () => {
     nameModal.classList.add("active"); 
 };
 
-nameModal.querySelector("button:not(.close-btn)").onclick = () => {
+function submitNewScheduleName() {
   const name = nameModal.querySelector("input").value.trim();
   if(!name) return Toast.show("Debes escribir un nombre", "error");
   schedules.push({ name, created: Date.now(), subjects: [], schemaVersion: APP_CONFIG.SCHEMA_VERSION });
   saveData(); nameModal.classList.remove("active"); renderSchedules();
-};
+}
 
-renameModal.querySelector("button:not(.close-btn)").onclick = () => {
+nameModal.querySelector("button:not(.close-btn)").onclick = submitNewScheduleName;
+
+function submitRenameSchedule() {
   const name = renameModal.querySelector("input").value.trim();
-  if(!name) return;
+  if(!name) return Toast.show("Debes escribir un nombre", "error");
+  if (selectedScheduleIndex === null || !schedules[selectedScheduleIndex]) return;
   schedules[selectedScheduleIndex].name = name;
   saveData(); renameModal.classList.remove("active"); renderSchedules();
-};
+}
+
+renameModal.querySelector("button:not(.close-btn)").onclick = submitRenameSchedule;
 
 deleteModal.querySelector("button:not(.close-btn)").onclick = () => {
   schedules.splice(selectedScheduleIndex, 1);
@@ -673,6 +678,23 @@ document.querySelectorAll(".close-btn").forEach(btn => {
 });
 
 document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    const activeModal = document.querySelector(".modal.active");
+    if (!activeModal) return;
+
+    if (activeModal.id === "newScheduleModal") {
+      e.preventDefault();
+      submitNewScheduleName();
+      return;
+    }
+
+    if (activeModal.id === "renameScheduleModal") {
+      e.preventDefault();
+      submitRenameSchedule();
+      return;
+    }
+  }
+
   if (e.key === "Escape") {
     if (state.isDuplicating()) { state.cancelDuplication(); return; }
     if (typeof SidebarPanel !== "undefined" && SidebarPanel.isOpen) return;

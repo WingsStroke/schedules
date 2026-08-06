@@ -1,5 +1,14 @@
 [
   {
+    "version": "2.0.1",
+    "date": "6/08/2026",
+    "changes": [
+      "Se hicieron correcciones con el motor de detección de huecos y viajes.",
+      "Se corrigió un error de importación en horarios generados a la tabla principal.",
+      "Se agregó atajo para crear y renombrar horario con la tecla ENTER."
+    ]
+  },
+  {
     "version": "2.0.0",
     "date": "19/07/2026",
     "changes": [

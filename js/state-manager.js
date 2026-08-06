@@ -1,6 +1,7 @@
 "use strict";
 
 import { ErrorHandler } from './core.js';
+import { bloquesDiurnos, bloquesNocturnos } from './core.js';
 import { StorageDB } from './storage-db.js';
 import { removeGhostSubject, clearDuplicateVisualState, setDuplicateCursor } from './dom-renderer.js';
 
@@ -23,6 +24,9 @@ export async function initializeState() {
       schedules = data;
       schedules.forEach(schedule => {
         if (typeof schedule.schemaVersion !== "number") schedule.schemaVersion = 1;
+        if (Array.isArray(schedule.subjects)) {
+          schedule.subjects = schedule.subjects.map(normalizeSubject);
+        }
       });
     }
   } catch (error) {
@@ -77,11 +81,42 @@ export const JORNADA_BASE = {
   nocturna: { startMinutes: 17 * 60, blockMinutes: 90 } 
 };
 
+function getCanonicalRangeFromGrid(subject) {
+  if (!subject) return null;
+
+  const row = Number(subject.row);
+  const blocks = Number(subject.blocks);
+  const safeBlocks = Number.isFinite(blocks) && blocks > 0 ? Math.floor(blocks) : 1;
+
+  if (!Number.isFinite(row) || row < 0 || !subject.jornada) return null;
+
+  if (subject.jornada === 'diurna') {
+    const startIndex = Math.floor(row);
+    const endIndex = startIndex + safeBlocks - 1;
+    if (startIndex < 0 || endIndex >= bloquesDiurnos.length) return null;
+    return {
+      startMinutes: bloquesDiurnos[startIndex].startMinutes,
+      endMinutes: bloquesDiurnos[endIndex].endMinutes
+    };
+  }
+
+  if (subject.jornada === 'nocturna') {
+    const diurnaOffset = bloquesDiurnos.length;
+    // Compatibilidad: soporta filas nocturnas globales y locales.
+    const localRow = row >= diurnaOffset ? Math.floor(row - diurnaOffset) : Math.floor(row);
+    const endIndex = localRow + safeBlocks - 1;
+    if (localRow < 0 || endIndex >= bloquesNocturnos.length) return null;
+    return {
+      startMinutes: bloquesNocturnos[localRow].startMinutes,
+      endMinutes: bloquesNocturnos[endIndex].endMinutes
+    };
+  }
+
+  return null;
+}
+
 export function getTimeRangePure(subject) {
-  if (!subject || typeof subject.row !== "number" || typeof subject.blocks !== "number" || !JORNADA_BASE[subject.jornada]) return null;
-  const base = JORNADA_BASE[subject.jornada];
-  const startMinutes = base.startMinutes + subject.row * base.blockMinutes;
-  return { startMinutes, endMinutes: startMinutes + subject.blocks * base.blockMinutes };
+  return getCanonicalRangeFromGrid(subject);
 }
 
 // Definir ScheduleTimeModel ANTES de normalizeSubject para evitar forward reference
@@ -100,26 +135,41 @@ export const ScheduleTimeModel = {
 };
 
 export function normalizeSubject(subject) {
-  const day = Number.isInteger(Number(subject.day)) ? Number(subject.day) : Number(subject.col);
+  const col = Number(subject.col);
+  const dayFromSubject = Number(subject.day);
+  const day = Number.isInteger(col) ? col : dayFromSubject;
+
+  const normalizedRow = Number(subject.row);
+  const normalizedBlocksRaw = Number(subject.blocks);
+  const normalizedBlocks = Number.isFinite(normalizedBlocksRaw) && normalizedBlocksRaw > 0
+    ? Math.floor(normalizedBlocksRaw)
+    : 1;
+
   const normalized = {
     id: subject.id ?? crypto.randomUUID(), name: subject.name ?? "", color: subject.color ?? "#1d4ed8",
-    row: Number(subject.row), col: Number(subject.col), blocks: Number(subject.blocks),
+    row: normalizedRow, col: col, blocks: normalizedBlocks,
     group: subject.group ?? "", program: subject.program ?? "", aula: subject.aula ?? "", credits: subject.credits ?? 0,
     jornada: subject.jornada, day: day, startMinutes: subject.startMinutes, endMinutes: subject.endMinutes,
     showCredits: subject.showCredits ?? false, showGroup: subject.showGroup ?? false, showProgram: subject.showProgram ?? false, showAula: subject.showAula ?? false
   };
-  
-  if (typeof normalized.startMinutes !== "number") {
-    const timeRange = ScheduleTimeModel.getSubjectTimeRange(normalized);
-    if (timeRange) { normalized.startMinutes = timeRange.startMinutes; normalized.endMinutes = timeRange.endMinutes; }
+
+  const timeRange = getTimeRangePure(normalized);
+  const hasNumericRange = typeof normalized.startMinutes === "number" && typeof normalized.endMinutes === "number";
+
+  // Repara registros legacy/inconsistentes usando la grilla como fuente de verdad.
+  if (timeRange && (!hasNumericRange || normalized.startMinutes !== timeRange.startMinutes || normalized.endMinutes !== timeRange.endMinutes)) {
+    normalized.startMinutes = timeRange.startMinutes;
+    normalized.endMinutes = timeRange.endMinutes;
   }
+
   return normalized;
 }
 
 export function normalizeSubjectsForCalculation(subjects) {
-  return subjects.filter(s => typeof s.day === "number" && typeof s.startMinutes === "number").map(s => ({
-    day: s.day, startMinutes: s.startMinutes, endMinutes: s.endMinutes, jornada: s.jornada
-  }));
+  return subjects
+    .map(normalizeSubject)
+    .filter(s => Number.isInteger(s.day) && typeof s.startMinutes === "number" && typeof s.endMinutes === "number")
+    .map(s => ({ day: s.day, startMinutes: s.startMinutes, endMinutes: s.endMinutes, jornada: s.jornada }));
 }
 
 export const ScheduleLogic = {

@@ -1,26 +1,28 @@
-# 📅 Sistema de Horarios Académicos - UdeC
+# Sistema de Horarios Académicos - UdeC
 
 > Aplicación web responsiva de alto rendimiento construida en Vanilla JS (ES Modules) para crear, gestionar y optimizar horarios universitarios, con generación automática de combinaciones de asignaturas libres de choques.
 
 ---
 
-## 🎯 **Descripción**
+## Descripción
 
-Sistema completo de gestión y optimización de horarios académicos diseñado para la Universidad de Concepción (UdeC) y extensible a otros currículos. Permite:
+Sistema completo de gestión y optimización de horarios académicos diseñado para la Universidad de Cartagena (UdeC) y extensible a otros currículos. Permite:
 
-- ✅ **Crear y gestionar múltiples horarios** en paralelo.
-- ✅ **Importación dinámica de ofertas académicas** desde **Cloudflare R2** con soporte para múltiples períodos académicos.
-- ✅ **Generación automática de combinaciones** de horarios libres de choques en segundo plano (**Web Workers**).
-- ✅ **Filtrado inteligente** en tiempo real por grupos, carreras y profesores.
-- ✅ **Calculadora mensual de costos** de transporte y alimentación (detectando huecos entre clases y festivos nacionales).
-- ✅ **Visualización interactiva de mini-horarios** para previsualizar combinaciones rápidamente.
-- ✅ **Modo nocturno completo** con diseño *glassmorphic*.
-- ✅ **Exportación multiplataforma** de horarios como Imagen (PNG) y PDF (formato oficial de matrícula).
-- ✅ **Optimización de rendering** mediante sistema de Virtual DOM ligero.
+- **Crear y gestionar múltiples horarios** en paralelo.
+- **Importación dinámica de ofertas académicas** desde **Cloudflare R2** con soporte para múltiples períodos académicos.
+- **Generación automática de combinaciones** de horarios libres de choques en segundo plano (**Web Workers**).
+- **Filtrado inteligente** en tiempo real por grupos, carreras y profesores.
+- **Calculadora mensual de costos** de transporte y alimentación (detectando huecos entre clases y festivos nacionales).
+- **Visualización interactiva de mini-horarios** para previsualizar combinaciones rápidamente.
+- **Modo nocturno completo** con diseño *glassmorphic*.
+- **Exportación multiplataforma** de horarios como Imagen (PNG) y PDF (formato oficial de matrícula).
+- **Optimización de rendering** mediante sistema de Virtual DOM ligero.
+- **Visor de mallas académicas** con exploración interactiva de prerrequisitos.
+- **Calendario académico** con alertas proactivas por proximidad de eventos.
 
 ---
 
-## 🏗️ **Arquitectura del Proyecto**
+## Arquitectura del Proyecto
 
 El proyecto está estructurado de forma modular utilizando módulos nativos de ES6 y un flujo de empaquetado moderno con **Vite**.
 
@@ -40,7 +42,7 @@ horarios-udec/
 │   └── responsive.css                  # Breakpoints para Tablet y Móvil
 │
 ├── js/                                 # Capa de Lógica (ES Modules)
-│   ├── main.js                         # ⭐ Orquestador y punto de entrada
+│   ├── main.js                         # Orquestador y punto de entrada
 │   ├── core.js                         # Constantes (R2), utilidades y Handler de errores
 │   ├── storage-db.js                   # Motor IndexedDB asíncrono para almacenamiento local
 │   ├── state-manager.js                # Única fuente de verdad para el estado de horarios
@@ -69,7 +71,7 @@ horarios-udec/
 │   ├── motor-combinaciones.test.js     # Pruebas del algoritmo y choques
 │   └── calculadora-aguinaldo.test.js   # Pruebas de la calculadora financiera
 │
-├── docs/                               # 📚 Documentación Técnica Detallada
+├── docs/                               # Documentación técnica detallada
 │   ├── MODAL_SYSTEM.md                 # Arquitectura y diseño del sistema de modales
 │   ├── PERSISTENCE.md                  # Detalles del paso de LocalStorage a IndexedDB
 │   └── QUICK_DEV_GUIDE.md              # Guía de desarrollo rápido paso a paso
@@ -79,7 +81,7 @@ horarios-udec/
 
 ---
 
-## 🚀 **Inicio Rápido (Desarrollo)**
+## Inicio Rápido (Desarrollo)
 
 ### **Requisitos**
 - **Node.js** (versión 18 o superior recomendada)
@@ -119,7 +121,7 @@ npm run build
 
 ---
 
-## 💾 **Tecnologías Clave**
+## Tecnologías Clave
 
 - **Compilador/Build:** [Vite](https://vite.dev/) (empaquetado eficiente y recarga en caliente HMR).
 - **Entorno de Pruebas:** [Vitest](https://vitest.dev/) con JSDOM para pruebas unitarias rápidas.
@@ -130,7 +132,7 @@ npm run build
 
 ---
 
-## ☁️ **Origen de Ofertas Académicas (Cloudflare R2)**
+## Origen de Ofertas Académicas (Cloudflare R2)
 
 Para evitar saturar el repositorio y permitir actualizaciones dinámicas en tiempo real sin desplegar el código del frontend, la aplicación descarga las ofertas académicas desde un bucket de Cloudflare R2:
 
@@ -140,11 +142,11 @@ Para evitar saturar el repositorio y permitir actualizaciones dinámicas en tiem
    ```
 2. **Ofertas por programa**: Ubicados en carpetas con el nombre del período (ej. `2026-1/sistemas.xlsx.json`), contienen el listado de materias, grupos y horarios del respectivo programa académico.
 
-La URL base del bucket está definida en `APP_CONFIG.R2_BUCKET_URL` dentro de [`js/core.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/core.js).
+La URL base del bucket está definida en `APP_CONFIG.R2_BUCKET_URL` dentro de `js/core.js`.
 
 ---
 
-## 🔍 **Flujo de Datos Principal**
+## Flujo de Datos Principal
 
 El siguiente diagrama detalla cómo interactúan los diferentes módulos para generar combinaciones e integrarlas al horario del usuario:
 
@@ -205,7 +207,7 @@ El siguiente diagrama detalla cómo interactúan los diferentes módulos para ge
 
 ---
 
-## 📖 **Documentación Adicional**
+## Documentación Adicional
 
 Para profundizar en la implementación de componentes específicos:
 
@@ -218,10 +220,20 @@ Para profundizar en la implementación de componentes específicos:
 
 ---
 
-## 👥 **Despliegue Continuo (CI/CD)**
+## Despliegue Continuo (CI/CD)
+
+## Actualizaciones de Agosto 2026
+
+- Unificación del cálculo de huecos y viajes en la calculadora de aguinaldo para evitar inconsistencias visuales y numéricas.
+- Cobertura de regresión ampliada en pruebas de aguinaldo para casos diurna/nocturna y transiciones mixtas.
+- Corrección de aplicación de combinaciones para persistir campos canónicos (`day`, `startMinutes`, `endMinutes`) y evitar `undefined/NaN` en exportación PDF.
+- Endurecimiento de exportación PDF con fallback seguro para datos legacy incompletos.
+- Integración de índice dedicado para calendario académico (`public/data/calendario/index.json`) con selección por período más reciente.
+- Ajustes de UI: tecla Enter en modales de crear/renombrar horario, centrado de flecha del Action Bar y mejora de contraste de contadores en modo oscuro.
+- Mejoras en caché y frescura de datos: estrategias de fetch para ofertas y calendario priorizando actualización en reinicios.
 
 Cualquier cambio empujado a la rama `main` activa el flujo de trabajo de GitHub Actions configurado en `.github/workflows/deploy.yml`, el cual compila los archivos estáticos mediante Vite y los despliega automáticamente en la rama `gh-pages` para actualizar la versión pública del generador de horarios.
 
 ---
 
-**Última actualización:** Mayo 2026
+**Última actualización:** Agosto 2026

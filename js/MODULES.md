@@ -11,7 +11,7 @@ El proyecto utiliza un sistema de **Módulos de ES6 (ES Modules)** en lugar del 
 * **[`toast-system.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/toast-system.js):** Sistema liviano de notificaciones tipo Toast en pantalla.
 
 ## 2. Estado Global y Lógica Pura
-* **[`state-manager.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/state-manager.js):** Única fuente de verdad para el estado de la aplicación (`schedules`, `editorState`). Valida e importa esquemas de horarios y gestiona el auto-guardado en `StorageDB`.
+* **[`state-manager.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/state-manager.js):** Única fuente de verdad para el estado de la aplicación (`schedules`, `editorState`). Valida e importa esquemas de horarios, normaliza tiempos canónicos (`day`, `startMinutes`, `endMinutes`) y gestiona el auto-guardado en `StorageDB`.
 * **[`calculadora-aguinaldo.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/calculadora-aguinaldo.js):** Lógica de cálculo de costos (transporte, alimentación, conteo de días activos y detección de huecos/viajes adicionales) y utilidades de días festivos.
 
 ## 3. Ofertas Académicas (Cloudflare R2 & Web Workers)
@@ -26,6 +26,9 @@ El proyecto utiliza un sistema de **Módulos de ES6 (ES Modules)** en lugar del 
 * **[`minihorarios-ui.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/minihorarios-ui.js):** Componente para la renderización de las miniaturas de horarios resultantes de las combinaciones en el sidebar.
 * **[`integracion-busqueda.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/integracion-busqueda.js):** Buscador inteligente de asignaturas en la oferta académica cargada (búsquedas insensibles a mayúsculas y tildes).
 * **[`dark-mode.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/dark-mode.js):** Control del tema visual (claro/oscuro) y persistencia del estado en `SafeStorage`.
+* **[`action-bar.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/action-bar.js):** Barra lateral de utilidades en Home con eventos para abrir herramientas auxiliares.
+* **[`visor-mallas.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/visor-mallas.js):** Visor interactivo de mallas académicas por programa con búsqueda y resaltado de prerrequisitos.
+* **[`calendario-academico.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/calendario-academico.js):** Módulo de calendario académico con carga por índice, render mensual y alertas proactivas.
 * **[`export-engine.js`](file:///c:/Users/redbo/Downloads/Angel/proyectos/proyecto%20horarios%20udec/schedules/js/export-engine.js):** Motor de exportación del horario actual a formato de Imagen (PNG) y PDF (formato de matrícula UdeC).
 
 ## 5. El Orquestador

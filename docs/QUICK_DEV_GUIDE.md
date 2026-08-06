@@ -1,10 +1,10 @@
-# ⚡ Guía de Desarrollo Rápido
+# Guía de Desarrollo Rápido
 
 > Referencia rápida para tareas comunes de desarrollo. Si necesitas hacer algo específico, busca aquí primero.
 
 ---
 
-## 📋 **Índice de Tareas**
+## Índice de Tareas
 
 1. [Agregar Campo a Asignatura](#agregar-campo-a-asignatura)
 2. [Crear Nuevo Modal](#crear-nuevo-modal)
@@ -131,7 +131,7 @@ body.dark-mode .subject-profesor {
 
 ---
 
-### **✅ Checklist**
+### **Checklist**
 ```
 □ HTML: Input agregado
 □ JS: Variable declarada
@@ -316,7 +316,7 @@ backdrop-filter: blur(10px);
 }
 ```
 
-⚠️ **También actualizar en JavaScript:**
+Nota: también actualizar en JavaScript:
 ```javascript
 // js/dom-renderer.js, función createSubjectDiv
 const height = subject.blocks * getCellHeight();  // Cambiar multiplicador
@@ -503,7 +503,7 @@ const ExportadorPDF = {
 <script src="js/export-pdf.js"></script>
 ```
 
-⚠️ **Orden de carga importa:** Si usa otros módulos, cargar después de dependencias.
+Nota: el orden de carga importa. Si usa otros módulos, cargar después de dependencias.
 
 ---
 
@@ -562,16 +562,16 @@ console.log("Tiene clase active:", modal.classList.contains("active"));
 ```javascript
 // 1. Verificar que saveData() se llama
 function saveData() {
-  console.log("💾 Guardando datos...");
+  console.log("Guardando datos...");
   console.log("Schedules:", schedules);
   SafeStorage.setItem("schedules", JSON.stringify(schedules));
-  console.log("✅ Guardado completo");
+  console.log("Guardado completo");
 }
 
 // 2. Verificar quota
 try {
   SafeStorage.setItem("test", "test");
-  console.log("✅ LocalStorage disponible");
+  console.log("LocalStorage disponible");
 } catch (e) {
   console.error("❌ Error de localStorage:", e.name);
 }
@@ -664,7 +664,7 @@ console.log("Dark mode activo:", DarkMode.isEnabled());
 
 ---
 
-## 🎯 **Atajos Útiles**
+## Atajos Útiles
 
 ### **Re-renderizar todo:**
 ```javascript
@@ -763,7 +763,13 @@ Seguir el checklist de la Sección 1, pero usar `.subject-label-row` en lugar de
 
 ---
 
-## 📚 **Referencias Rápidas** (actualizado)
+## Referencias Rápidas (actualizado)
+
+## Cambios Recientes (Agosto 2026)
+
+- Al extender o depurar cálculos de aguinaldo, normalizar siempre los subjects antes de calcular (`normalizeSubjectsForCalculation`).
+- En conversión de combinaciones, persistir siempre `day`, `startMinutes` y `endMinutes` para evitar inconsistencias en exportación y métricas.
+- Para modales de nombre de horario, considerar `Enter` como acción de confirmación para consistencia UX.
 
 - **Agregar campo:** Sección 1 + Sección 9 (patrón actualizado de subjectModal)
 - **Modal nuevo:** Sección 2

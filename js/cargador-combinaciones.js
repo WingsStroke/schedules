@@ -4,6 +4,31 @@ import { currentScheduleIndex, schedules } from './state-manager.js';
 import { DOMRenderer } from './dom-renderer.js';
 import { MotorCombinaciones } from './motor-combinaciones.js';
 
+const BLOQUES_DIURNOS = [
+  { startMinutes: 420, endMinutes: 470 },
+  { startMinutes: 470, endMinutes: 520 },
+  { startMinutes: 520, endMinutes: 570 },
+  { startMinutes: 570, endMinutes: 620 },
+  { startMinutes: 620, endMinutes: 670 },
+  { startMinutes: 680, endMinutes: 730 },
+  { startMinutes: 730, endMinutes: 780 },
+  { startMinutes: 780, endMinutes: 830 },
+  { startMinutes: 830, endMinutes: 880 },
+  { startMinutes: 880, endMinutes: 930 },
+  { startMinutes: 930, endMinutes: 980 },
+  { startMinutes: 980, endMinutes: 1030 },
+  { startMinutes: 1030, endMinutes: 1080 }
+];
+
+const BLOQUES_NOCTURNOS = [
+  { startMinutes: 1050, endMinutes: 1095 },
+  { startMinutes: 1095, endMinutes: 1140 },
+  { startMinutes: 1140, endMinutes: 1185 },
+  { startMinutes: 1185, endMinutes: 1230 },
+  { startMinutes: 1230, endMinutes: 1275 },
+  { startMinutes: 1275, endMinutes: 1320 }
+];
+
 export const CargadorCombinaciones = {
 
   cargarCombinacion(combinacion, indice) {
@@ -241,6 +266,10 @@ export const CargadorCombinaciones = {
 
       const { row, column } = this.calcularPosicion(horario);
 
+      if (row < 0 || column < 0) {
+        continue;
+      }
+
       // Calcular blocks
       const duracionMin = finMin - inicioMin;
       const bloqueMin = jornada === 'diurna' ? 50 : 45;
@@ -262,11 +291,14 @@ export const CargadorCombinaciones = {
         group: grupo.grupo,
         program: grupo.programa || (asignatura.programas && asignatura.programas[0]) || '',
         professor: grupo.profesor || '',
-        location: grupo.ubicacion || '',
+        aula: grupo.ubicacion || '',
         color: color,
+        day: column,
         col: column,
         row: row,
         blocks: numBloques,
+        startMinutes: inicioMin,
+        endMinutes: finMin,
         jornada: jornada,
         showCredits: tieneCreditos,
         showGroup: true,
@@ -314,26 +346,26 @@ export const CargadorCombinaciones = {
     const column = diaAColumna[horario.dia];
 
     if (column === undefined) {
-
-      return { row: 0, column: 0 };
+      return { row: -1, column: -1 };
     }
 
-    const horaInicio = horario.inicio.split(':');
-    const horas = parseInt(horaInicio[0]);
-    const minutos = parseInt(horaInicio[1]);
+    const inicioMin = this.horaAMinutos(horario.inicio);
+    if (inicioMin <= 0) {
+      return { row: -1, column: -1 };
+    }
 
     const jornada = horario.jornada || 'diurna';
+    const bloques = jornada === 'diurna' ? BLOQUES_DIURNOS : BLOQUES_NOCTURNOS;
+    const rowInSection = bloques.findIndex(b => inicioMin >= b.startMinutes && inicioMin < b.endMinutes);
 
-    let row;
-    if (jornada === 'diurna') {
-      const minutosDesdeInicio = (horas - 7) * 60 + minutos;
-      row = Math.floor(minutosDesdeInicio / 50);
-    } else {
-      const minutosDesdeInicio = (horas * 60 + minutos) - (17 * 60 + 30);
-      row = Math.floor(minutosDesdeInicio / 45);
+    if (rowInSection === -1) {
+      return { row: -1, column };
     }
 
-    return { row: Math.max(0, row), column };
+    const offset = jornada === 'nocturna' ? BLOQUES_DIURNOS.length : 0;
+    const row = offset + rowInSection;
+
+    return { row, column };
   },
 
   calcularMinutos(horarios) {

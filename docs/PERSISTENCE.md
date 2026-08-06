@@ -1,6 +1,6 @@
-# Sistema de Persistencia (IndexedDB & LocalStorage)
+# Sistema de Persistencia (IndexedDB y LocalStorage)
 
-A partir de la versión 2.0.0dev, el proyecto migró de `localStorage` síncrono a **IndexedDB** asíncrono para superar el límite estricto de 5MB y permitir el almacenamiento de múltiples ofertas académicas pesadas.
+A partir de la versión 2.0.0, el proyecto migró de `localStorage` síncrono a **IndexedDB** asíncrono para superar el límite estricto de 5MB y permitir el almacenamiento de múltiples ofertas académicas pesadas.
 
 ## Motor Principal: `StorageDB` (IndexedDB)
 Ubicado en `js/storage-db.js`.
@@ -16,3 +16,16 @@ Cuando un usuario de la v1.0.8 entra a la v2.0.0dev, `StorageDB.init()` busca la
 
 ## Capa de Seguridad: `SafeStorage`
 Ubicado en `js/core.js`. Actúa como fallback y maneja configuraciones menores (como el changelog version) que no requieren IndexedDB.
+
+## Normalización de Datos al Cargar
+Durante `initializeState()`, cada subject persistido se normaliza mediante `normalizeSubject` para mantener consistencia entre:
+
+- coordenadas visuales (`row`, `col`, `blocks`, `jornada`),
+- campos canónicos de cálculo (`day`, `startMinutes`, `endMinutes`).
+
+Esto permite reparar automáticamente registros legacy o inconsistentes sin intervención manual del usuario.
+
+## Notas de Agosto 2026
+
+- Se reforzó la normalización para recalcular tiempos cuando no coinciden con la grilla real.
+- Esta reparación evita errores en cálculo de huecos y en exportaciones que dependen de horas canónicas.

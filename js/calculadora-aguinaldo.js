@@ -1,5 +1,4 @@
 import { diasSemana } from './core.js';
-import { ScheduleTimeModel } from './state-manager.js';
 
 let holidayCache = {};
 
@@ -62,15 +61,28 @@ function buildDailySubjects(subjects) {
   return map;
 }
 
-function calculateTripsForDay(subjectsOfDay, minGapMinutes) {
-  if (!subjectsOfDay || subjectsOfDay.length === 0) return 0;
+function analyzeDayCommute(subjectsOfDay, minGapMinutes) {
+  if (!subjectsOfDay || subjectsOfDay.length === 0) return { trips: 0, gapCount: 0, hasGaps: false };
+
   let trips = 1;
-  if (minGapMinutes <= 0) return trips;
+  let gapCount = 0;
+
+  if (minGapMinutes <= 0) return { trips, gapCount, hasGaps: false };
+
   for (let i = 0; i < subjectsOfDay.length - 1; i++) {
-    if (subjectsOfDay[i].jornada === "nocturna" && subjectsOfDay[i+1].jornada === "nocturna") continue;
-    if (subjectsOfDay[i+1].startMinutes - subjectsOfDay[i].endMinutes >= minGapMinutes) trips++;
+    const current = subjectsOfDay[i];
+    const next = subjectsOfDay[i + 1];
+    const isNocturnaToNocturna = current.jornada === "nocturna" && next.jornada === "nocturna";
+
+    if (isNocturnaToNocturna) continue;
+
+    if (next.startMinutes - current.endMinutes >= minGapMinutes) {
+      trips++;
+      gapCount++;
+    }
   }
-  return trips;
+
+  return { trips, gapCount, hasGaps: gapCount > 0 };
 }
 
 export function calculateMonthlyCost(subjects, config, excludedDaysSet) {
@@ -86,8 +98,8 @@ export function calculateMonthlyCost(subjects, config, excludedDaysSet) {
       if (!excludedDaysSet.has(dateString)) {
         const subjectsToday = dailyMap[dayIndex];
         if (subjectsToday && subjectsToday.length > 0) {
-          const trips = calculateTripsForDay(subjectsToday, config.minGapMinutes);
-          const hasGaps = config.minGapMinutes > 0 && ScheduleTimeModel.calculateGaps(subjectsToday, config.minGapMinutes) > 0;
+          const dayCommute = analyzeDayCommute(subjectsToday, config.minGapMinutes);
+          const { trips, hasGaps } = dayCommute;
           totalTrips += trips; totalSnackDays++;
           dailyDetails.push({ date: new Date(date), dayName: diasSemana[dayIndex], trips, hasGaps });
         }

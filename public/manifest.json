@@ -2,7 +2,7 @@
   "id": "./",
   "name": "Horarios Académicos UdeC",
   "short_name": "Horarios UdeC",
-  "description": "Gestor de horarios académicos para la Universidad de Caldas",
+  "description": "Gestor de horarios académicos para la Universidad de Cartagena",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#dde8f0",
