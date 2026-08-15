@@ -24,16 +24,16 @@ describe('Motor de Combinaciones - Gestión de Asignaturas', () => {
     expect(MotorCombinaciones.asignaturasSeleccionadas.length).toBe(1);
   });
 
-  it('debería respetar el límite máximo de asignaturas (7)', () => {
-    for (let i = 1; i <= 7; i++) {
+  it('debería respetar el límite máximo de asignaturas', () => {
+    for (let i = 1; i <= MotorCombinaciones.MAX_ASIGNATURAS; i++) {
       MotorCombinaciones.agregarAsignatura({ id: `a${i}`, nombre: `Materia ${i}`, grupos: [] });
     }
     
-    const extra = { id: 'a8', nombre: 'Materia Extra', grupos: [] };
+    const extra = { id: `a${MotorCombinaciones.MAX_ASIGNATURAS + 1}`, nombre: 'Materia Extra', grupos: [] };
     const resultadoExtra = MotorCombinaciones.agregarAsignatura(extra);
     
     expect(resultadoExtra).toBe('limite');
-    expect(MotorCombinaciones.asignaturasSeleccionadas.length).toBe(7);
+    expect(MotorCombinaciones.asignaturasSeleccionadas.length).toBe(MotorCombinaciones.MAX_ASIGNATURAS);
   });
 });
 
@@ -128,5 +128,34 @@ describe('Motor de Combinaciones - Generación', () => {
     expect(resultado.exito).toBe(true);
     expect(resultado.totalGeneradas).toBe(2);
     expect(resultado.totalValidas).toBe(1); // Solo la combinación g1+g3 es válida
+  });
+
+  it('debería muestrear de forma reproducible cuando el espacio supera el presupuesto', () => {
+    const asignaturas = Array.from({ length: 4 }, (_, subjectIndex) => ({
+      id: `large-${subjectIndex}`,
+      nombre: `Materia ${subjectIndex}`,
+      grupos: Array.from({ length: 11 }, (_, groupIndex) => ({
+        id: `large-${subjectIndex}-${groupIndex}`,
+        horarios: [{ dia: subjectIndex + 1, inicio: '08:00', fin: '09:00', jornada: 'diurna' }]
+      }))
+    }));
+
+    asignaturas.forEach(asignatura => MotorCombinaciones.agregarAsignatura(asignatura));
+
+    const firstResult = MotorCombinaciones.generarCombinaciones();
+    const firstIds = MotorCombinaciones.todasLasCombinaciones.map(combinacion => combinacion.combinacionId);
+
+    expect(firstResult.totalTeoricas).toBe(14641);
+    expect(firstResult.totalExploradas).toBe(10000);
+    expect(firstResult.totalValidas).toBe(10000);
+    expect(firstResult.esParcial).toBe(true);
+    expect(firstResult.usaMuestreo).toBe(true);
+    expect(firstResult.totalDisponibles).toBe(1000);
+
+    const secondResult = MotorCombinaciones.generarCombinaciones();
+    const secondIds = MotorCombinaciones.todasLasCombinaciones.map(combinacion => combinacion.combinacionId);
+
+    expect(secondResult.esParcial).toBe(true);
+    expect(secondIds).toEqual(firstIds);
   });
 });

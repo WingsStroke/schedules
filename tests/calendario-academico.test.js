@@ -1,5 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import { CalendarioAcademico } from '../js/calendario-academico.js';
+import { escapeHtml } from '../js/core.js';
+
+describe('Seguridad HTML', () => {
+  it('escapa texto dinámico antes de insertarlo en HTML', () => {
+    expect(escapeHtml('<img src=x onerror="alert(1)">')).toBe('&lt;img src=x onerror=&quot;alert(1)&quot;&gt;');
+    expect(escapeHtml(null)).toBe('');
+    expect(escapeHtml(undefined)).toBe('');
+  });
+});
 
 describe('CalendarioAcademico - hardening helpers', () => {
   it('escapa HTML peligroso en textos del tooltip', () => {

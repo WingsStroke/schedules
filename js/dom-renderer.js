@@ -58,14 +58,21 @@ export const DOMRenderer = {
     const scheduleBody = document.querySelector("#schedule tbody");
     const header = document.createElement("tr");
     header.dataset.jornada = jornada;
-    header.innerHTML = `<td colspan="${diasSemana.length + 1}" class="jornada-header ${jornada === 'nocturna' ? 'nocturna-divider' : ''}">${titulo}</td>`;
+    const headerCell = document.createElement("td");
+    headerCell.colSpan = diasSemana.length + 1;
+    headerCell.className = `jornada-header ${jornada === 'nocturna' ? 'nocturna-divider' : ''}`;
+    headerCell.textContent = titulo;
+    header.appendChild(headerCell);
     scheduleBody.appendChild(header);
 
     bloques.forEach((bloque) => {
       const rowIndex = editorState.globalRowIndex++;
       const row = document.createElement("tr");
       row.dataset.jornada = jornada;
-      row.innerHTML = `<td class="time">${minutesToTime(bloque.startMinutes)} - ${minutesToTime(bloque.endMinutes)}</td>`;
+      const timeCell = document.createElement("td");
+      timeCell.className = "time";
+      timeCell.textContent = `${minutesToTime(bloque.startMinutes)} - ${minutesToTime(bloque.endMinutes)}`;
+      row.appendChild(timeCell);
       const matrixRow = [];
 
       diasSemana.forEach((dia, colIndex) => {
@@ -144,16 +151,45 @@ export const DOMRenderer = {
       div.className = "subject";
       div.setAttribute("data-subject-id", sub.id);
       div.style.cssText = `position: absolute; top: 3px; left: 3px; width: calc(100% - 6px); height: calc(${sub.blocks * this.getCellHeight()}px - 6px); box-sizing: border-box; background: ${sub.color}; box-shadow: 0 2px 6px rgba(0,0,0,0.08); border-radius: 6px;`;
-      
-      div.innerHTML = `
-        <div class="subject-content" style="background: ${sub.color}">
-          <div title="${sub.name}">${this.truncarNombre(sub.name)}</div>
-          ${sub.showProgram && sub.program ? `<div class="subject-program">${sub.program}</div>` : ""}
-          ${sub.showAula && sub.aula ? `<div class="subject-aula">${sub.aula}</div>` : ""}
-          ${sub.showGroup && sub.group ? `<span class="subject-info subject-group">${sub.group}</span>` : ""}
-          ${sub.showCredits && sub.credits ? `<span class="subject-info subject-credits">${sub.credits} cr</span>` : ""}
-        </div>
-      `;
+
+      const content = document.createElement("div");
+      content.className = "subject-content";
+      content.style.background = sub.color;
+
+      const name = document.createElement("div");
+      name.title = sub.name ?? "";
+      name.textContent = this.truncarNombre(sub.name ?? "");
+      content.appendChild(name);
+
+      if (sub.showProgram && sub.program) {
+        const program = document.createElement("div");
+        program.className = "subject-program";
+        program.textContent = sub.program;
+        content.appendChild(program);
+      }
+
+      if (sub.showAula && sub.aula) {
+        const aula = document.createElement("div");
+        aula.className = "subject-aula";
+        aula.textContent = sub.aula;
+        content.appendChild(aula);
+      }
+
+      if (sub.showGroup && sub.group) {
+        const group = document.createElement("span");
+        group.className = "subject-info subject-group";
+        group.textContent = sub.group;
+        content.appendChild(group);
+      }
+
+      if (sub.showCredits && sub.credits) {
+        const credits = document.createElement("span");
+        credits.className = "subject-info subject-credits";
+        credits.textContent = `${sub.credits} cr`;
+        content.appendChild(credits);
+      }
+
+      div.appendChild(content);
       
       // Asignar eventos de nuevo
       div.onclick = (e) => { 

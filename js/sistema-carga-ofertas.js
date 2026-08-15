@@ -1,4 +1,5 @@
-import { APP_CONFIG } from './core.js';
+import { APP_CONFIG, safeFetch } from './core.js';
+import { validateIndexSchema, validateProgramSchema } from './schema-validator.js';
 
 export const SistemaCargaOfertas = {
 
@@ -57,13 +58,12 @@ export const SistemaCargaOfertas = {
   // ──────────────────────────────────────────
   async cargarIndiceGlobal() {
     const baseUrl = APP_CONFIG.R2_BUCKET_URL.replace(/\/$/, '');
-    const response = await fetch(`${baseUrl}/index.json`, { cache: 'no-store' });
+    const response = await safeFetch(`${baseUrl}/index.json`, { cache: 'no-store', timeout: 10000 });
+    const data = await response.json();
+    const validation = validateIndexSchema(data);
+    if (validation !== true) throw validation;
 
-    if (!response.ok) {
-      throw new Error(`No se pudo cargar el índice global (index.json): HTTP ${response.status}`);
-    }
-
-    this.indice = await response.json();
+    this.indice = data;
     return this.indice;
   },
 
@@ -86,14 +86,13 @@ export const SistemaCargaOfertas = {
     const promesas = programasActivos.map(async (programa) => {
       try {
         const url = `${baseUrl}/${periodo}/${programa.archivo}`;
-        const response = await fetch(url, { cache: 'no-store' });
-
-        if (!response.ok) {
-          console.warn(`[SistemaCargaOfertas] No se pudo cargar: ${url}`);
+        const response = await safeFetch(url, { cache: 'no-store', timeout: 30000 });
+        const data = await response.json();
+        const validation = validateProgramSchema(data);
+        if (validation !== true) {
+          console.warn(`[SistemaCargaOfertas] Esquema inválido en ${url}:`, validation.message);
           return;
         }
-
-        const data = await response.json();
 
         this.ofertas.push({
           programaId: programa.id,

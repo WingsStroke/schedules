@@ -1,6 +1,6 @@
 {
   "name": "schedules",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "description": "> Aplicación web para crear, gestionar y optimizar horarios universitarios con generación automática de combinaciones libres de choques.",
   "main": "sw.js",
   "directories": {
@@ -19,7 +19,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/WingsStroke/schedules/issues"
   },

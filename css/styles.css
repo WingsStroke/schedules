@@ -743,7 +743,7 @@ th {
   padding: 0 50px;
 }
 
-.modal-content input,
+.modal-content input:not([type="checkbox"]),
 .modal-content select {
   width: 100%;
   padding: 12px 16px;
@@ -761,7 +761,7 @@ th {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.modal-content input:focus,
+.modal-content input:not([type="checkbox"]):focus,
 .modal-content select:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.7);
@@ -1250,7 +1250,6 @@ button:disabled {
   gap: 5px !important;
   margin-top: 10px !important;
   margin-bottom: 24px !important;
-  /* Aumentado a 24px para más respiro */
 }
 
 #calendarGrid .calendar-day {
@@ -1266,6 +1265,42 @@ button:disabled {
   transform: none !important;
   font-size: 13px !important;
   padding: 4px !important;
+}
+
+@media (min-width: 769px) {
+  #excludeDaysModal .modal-content {
+    padding: 16px 20px;
+  }
+
+  #excludeDaysModal #calendarGrid {
+    max-width: 400px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    gap: 4px !important;
+    margin-top: 6px !important;
+    margin-bottom: 8px !important;
+  }
+
+  #calendarGrid .calendar-day {
+    padding: 2px !important;
+    border-radius: 4px !important;
+    font-size: 12px !important;
+  }
+
+  #excludeDaysModal .calendar-header {
+    margin-bottom: 8px;
+  }
+
+  #excludeDaysModal .calendar-legend {
+    margin-top: 6px;
+    margin-bottom: 4px;
+    padding: 6px 8px;
+    gap: 14px;
+  }
+
+  #excludeDaysModal .calendar-note {
+    font-size: 12px;
+  }
 }
 
 #excludeDaysModal .calendar-day-header {
@@ -1861,6 +1896,61 @@ button:disabled {
 .export-option-row input[type="checkbox"] {
   width: auto;
   cursor: pointer;
+}
+
+.export-theme-toggle-row {
+  justify-content: space-between;
+}
+
+/* Switch de tema para exportar imagen: mismo aspecto en modo claro y oscuro, sin cambio de color al presionar o alternar (solo se desplaza la palanca) */
+.export-theme-toggle,
+.export-theme-toggle:hover,
+.export-theme-toggle:active,
+.export-theme-toggle:checked,
+.export-theme-toggle:checked:hover,
+.export-theme-toggle:checked:active {
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  position: relative;
+  flex: 0 0 auto;
+  width: 38px !important;
+  height: 22px;
+  margin: 0;
+  border: 2px solid #8a94a6 !important;
+  border-radius: 999px;
+  background: #64748b;
+  box-shadow: 0 0 0 1px rgba(138, 148, 166, 0.3);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.export-theme-toggle::after {
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+  top: 1px;
+  left: 1px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #8a94a6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.export-theme-toggle:checked::after {
+  transform: translateX(16px);
+}
+
+.export-theme-toggle:focus {
+  outline: none;
+}
+
+.export-theme-toggle:focus-visible {
+  outline: 2px solid #8a94a6;
+  outline-offset: 3px;
 }
 
 .export-divider {

@@ -1,6 +1,6 @@
 "use strict";
 
-import { getSubjectColor } from './core.js';
+import { escapeHtml, getSubjectColor } from './core.js';
 import { Toast } from './toast-system.js';
 import { SistemaCargaOfertas } from './sistema-carga-ofertas.js';
 import { MotorCombinaciones } from './motor-combinaciones.js';
@@ -254,29 +254,32 @@ function renderizarResultadosBusqueda(resultados) {
   let html = '';
   for (const asignatura of resultados) {
     const color = getSubjectColor(asignatura.nombre); // Reutilizamos tu función centralizada
-    const programasTexto = asignatura.programas.join(', ');
+    const programasTexto = (asignatura.programas || []).join(', ');
     
     html += `
       <div class="search-result-card">
         <div class="search-result-card-color" style="background: ${color}"></div>
         <div class="search-result-card-content">
           <div class="search-result-card-header">
-            <h4>${asignatura.nombre}</h4>
-            <button class="btn-select-subject" onclick="seleccionarAsignatura('${asignatura.id}')">
+            <h4>${escapeHtml(asignatura.nombre)}</h4>
+              <button class="btn-select-subject" data-asignatura-id="${escapeHtml(asignatura.id)}">
               Seleccionar
             </button>
           </div>
           <p class="search-result-card-info">
-            ${asignatura.totalGrupos} grupo${asignatura.totalGrupos !== 1 ? 's' : ''} 
-            en ${asignatura.totalProgramas} programa${asignatura.totalProgramas !== 1 ? 's' : ''}
+            ${Number(asignatura.totalGrupos) || 0} grupo${asignatura.totalGrupos !== 1 ? 's' : ''} 
+            en ${Number(asignatura.totalProgramas) || 0} programa${asignatura.totalProgramas !== 1 ? 's' : ''}
           </p>
-          <p class="search-result-card-programs">${programasTexto}</p>
+          <p class="search-result-card-programs">${escapeHtml(programasTexto)}</p>
         </div>
       </div>
     `;
   }
   
   searchResults.innerHTML = html;
+  searchResults.querySelectorAll('[data-asignatura-id]').forEach(button => {
+    button.addEventListener('click', () => seleccionarAsignatura(button.dataset.asignaturaId));
+  });
 }
 
 // 8. ACCIONES DE ASIGNATURAS

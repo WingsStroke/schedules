@@ -77,6 +77,15 @@ export const SafeStorage = {
 
 export function safeJSONParse(jsonString, defaultValue = null) { try { return JSON.parse(jsonString); } catch (e) { return defaultValue; } }
 export function safeJSONStringify(obj, defaultValue = '{}') { try { return JSON.stringify(obj, null, 2); } catch (e) { return defaultValue; } }
+export function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>'"]/g, character => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    "'": '&#39;',
+    '"': '&quot;'
+  })[character]);
+}
 export async function safeFetch(url, options = {}) {
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), options.timeout || 10000);

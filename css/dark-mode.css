@@ -332,8 +332,8 @@ body.dark-mode .modal-content select {
   color: #e0e0e0;
 }
 
-/* Checkboxes en dark-mode: solo el control nativo, sin fondo añadido */
-body.dark-mode input[type="checkbox"] {
+/* Checkboxes en dark-mode: solo el control nativo, sin fondo añadido (el switch de exportar imagen mantiene su propio estilo) */
+body.dark-mode input[type="checkbox"]:not(.export-theme-toggle) {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -367,9 +367,9 @@ body.dark-mode .sidebar-search-input::placeholder {
   color: #808080;
 }
 
-body.dark-mode input:focus,
+body.dark-mode input:not(.export-theme-toggle):focus,
 body.dark-mode select:focus,
-body.dark-mode .modal-content input:focus,
+body.dark-mode .modal-content input:not([type="checkbox"]):focus,
 body.dark-mode .modal-content select:focus {
   background: rgba(50, 50, 50, 0.7);
   border-color: rgba(255, 255, 255, 0.3);
@@ -1010,6 +1010,8 @@ body.dark-mode .export-section-label {
 body.dark-mode .export-divider {
   border-top-color: rgba(255, 255, 255, 0.08);
 }
+
+/* export-theme-toggle: estilo intencionalmente idéntico en ambos modos, definido una sola vez en styles.css */
 
 body.dark-mode .export-pdf-subtitle {
   color: #808080;

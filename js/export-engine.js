@@ -4,7 +4,7 @@
 // EXPORT ENGINE (PDF & IMAGEN)
 // ==========================================
 
-import { diasSemana, minutesToTime } from './core.js';
+import { diasSemana, escapeHtml, minutesToTime } from './core.js';
 import { currentScheduleIndex, schedules } from './state-manager.js';
 
 export function initExportEngine() {
@@ -53,7 +53,16 @@ export function initExportEngine() {
     const tbody = document.getElementById("exportPdfPreviewBody");
     tbody.innerHTML = "";
     if (data.length === 0) tbody.innerHTML = `<tr><td colspan="4" class="export-pdf-empty">No hay asignaturas</td></tr>`;
-    else data.forEach(item => { tbody.innerHTML += `<tr><td>${item.name}</td><td>${item.schedule}</td><td style="text-align:center">${item.group || "-"}</td><td>${item.program || "-"}</td></tr>`; });
+    else data.forEach(item => {
+      const row = document.createElement('tr');
+      [item.name, item.schedule, item.group || '-', item.program || '-'].forEach((value, index) => {
+        const cell = document.createElement('td');
+        cell.textContent = value;
+        if (index === 2) cell.style.textAlign = 'center';
+        row.appendChild(cell);
+      });
+      tbody.appendChild(row);
+    });
     document.getElementById("exportPdfModal").classList.add("active");
   });
 
@@ -97,11 +106,26 @@ export function initExportEngine() {
     if (previewImg) previewImg.src = "";
   }
 
+  function syncExportThemeToggle() {
+    const themeToggle = document.getElementById("exportLightMode");
+    const themeLabel = document.getElementById("exportThemeLabel");
+    if (!themeToggle) return;
+
+    const pageIsDark = document.body.classList.contains("dark-mode");
+    themeToggle.checked = pageIsDark;
+    if (themeLabel) {
+      themeLabel.textContent = themeToggle.checked
+        ? "Usar modo oscuro en la imagen"
+        : "Usar modo claro en la imagen";
+    }
+  }
+
   async function actualizarPreviewImagen() {
     const includeDiurna = document.getElementById("exportDiurna").checked;
     const includeNocturna = document.getElementById("exportNocturna").checked;
     const enhancedExport = document.getElementById("exportEnhanced").checked;
     const hideEmptyCols = document.getElementById("exportHideEmpty").checked;
+    const exportDarkMode = document.getElementById("exportLightMode").checked;
     
     const previewImg = document.getElementById("exportImagePreviewImg");
     const previewLoading = document.getElementById("exportImagePreviewLoading");
@@ -114,7 +138,7 @@ export function initExportEngine() {
       return;
     }
 
-    const cacheKey = `${currentScheduleIndex}:${includeDiurna}:${includeNocturna}:${enhancedExport}:${hideEmptyCols}`;
+    const cacheKey = `${currentScheduleIndex}:${includeDiurna}:${includeNocturna}:${enhancedExport}:${hideEmptyCols}:${exportDarkMode}`;
     
     if (window._previewCache[cacheKey]) {
       previewImg.src = window._previewCache[cacheKey]; 
@@ -133,7 +157,7 @@ export function initExportEngine() {
     await new Promise(r => setTimeout(r, 50));
 
     try {
-      const dataUrl = await generarCanvasExport(includeDiurna, includeNocturna, enhancedExport, hideEmptyCols);
+      const dataUrl = await generarCanvasExport(includeDiurna, includeNocturna, enhancedExport, hideEmptyCols, exportDarkMode);
       
       // NUEVO: Evitar que el cache crezca infinitamente saturando la RAM
       if (Object.keys(window._previewCache).length > 3) {
@@ -155,12 +179,22 @@ export function initExportEngine() {
   document.getElementById("exportBtn").onclick = () => {
     if (currentScheduleIndex === null) return;
     flushPreviewCache(); // <-- Liberamos RAM de sesiones anteriores
+    syncExportThemeToggle();
     document.getElementById("exportImageModal").classList.add("active");
     actualizarPreviewImagen();
   };
 
-  ["exportDiurna", "exportNocturna", "exportHideEmpty", "exportEnhanced"].forEach(id => {
+  ["exportDiurna", "exportNocturna", "exportHideEmpty", "exportEnhanced", "exportLightMode"].forEach(id => {
     document.getElementById(id).addEventListener("change", () => {
+      if (id === "exportLightMode") {
+        const themeToggle = document.getElementById("exportLightMode");
+        const themeLabel = document.getElementById("exportThemeLabel");
+        if (themeLabel) {
+          themeLabel.textContent = themeToggle.checked
+            ? "Usar modo oscuro en la imagen"
+            : "Usar modo claro en la imagen";
+        }
+      }
       if (document.getElementById("exportImageModal").classList.contains("active")) actualizarPreviewImagen();
     });
   });
@@ -183,11 +217,16 @@ export function initExportEngine() {
     closeImageModalBtn.addEventListener("click", flushPreviewCache);
   }
 
-  async function generarCanvasExport(includeDiurna, includeNocturna, enhancedExport, hideEmptyCols) {
+  async function generarCanvasExport(includeDiurna, includeNocturna, enhancedExport, hideEmptyCols, exportDarkMode) {
     const originalTable = document.getElementById("schedule");
     const activeDays = new Set(schedules[currentScheduleIndex].subjects.map(s => s.day));
     const numCols = hideEmptyCols ? (1 + activeDays.size) : 7;
     const cellHeight = enhancedExport ? 100 : 70; 
+    const tableBackground = exportDarkMode ? "#121212" : "#ffffff";
+    const headerBackground = exportDarkMode ? "#202020" : "#000000";
+    const timeBackground = exportDarkMode ? "#2b2b2b" : "#f5f5f5";
+    const timeColor = exportDarkMode ? "#e0e0e0" : "#333333";
+    const borderColor = exportDarkMode ? "#555555" : "#dddddd";
 
     const ghostContainer = document.createElement("div");
     ghostContainer.style.cssText = `position: absolute; top: 0; left: -9999px; width: 1200px; z-index: -1; visibility: visible;`;
@@ -195,7 +234,7 @@ export function initExportEngine() {
     const cloneTable = document.createElement("table");
     cloneTable.id = "scheduleExportClone"; 
     cloneTable.className = originalTable.className;
-    cloneTable.style.cssText = "width: 1200px !important; min-width: 1200px !important; table-layout: fixed; border-collapse: collapse; background: white;";
+    cloneTable.style.cssText = `width: 1200px !important; min-width: 1200px !important; table-layout: fixed; border-collapse: collapse; background: ${tableBackground}; color: ${exportDarkMode ? '#e0e0e0' : '#111111'};`;
 
     const cloneThead = document.createElement("thead");
     const newHeadRow = document.createElement("tr");
@@ -205,7 +244,7 @@ export function initExportEngine() {
         const th = document.createElement("th");
         th.textContent = text;
         // INYECCIÓN DE FUENTE: 18px en Alta legibilidad, 14px en Normal
-        th.style.cssText = `background: #000; color: #fff; padding: 10px; border: 1px solid #ddd; text-align: center; font-size: ${enhancedExport ? '18px' : '14px'}; font-weight: bold;`;
+        th.style.cssText = `background: ${headerBackground}; color: #fff; padding: 10px; border: 1px solid ${borderColor}; text-align: center; font-size: ${enhancedExport ? '18px' : '14px'}; font-weight: bold;`;
         newHeadRow.appendChild(th);
       }
     });
@@ -240,7 +279,7 @@ export function initExportEngine() {
       if (originalTimeCell) {
         const timeCell = originalTimeCell.cloneNode(true);
         // 3. FORZAR TAMAÑO EN LAS HORAS LATERALES (6:00, 7:00...)
-        timeCell.style.cssText = `position: static; background: #f5f5f5; border: 1px solid #ddd; text-align: center; height: ${cellHeight}px; font-size: ${enhancedExport ? '18px' : '14px'}; font-weight: 600; color: #333; box-sizing: border-box;`;
+        timeCell.style.cssText = `position: static; background: ${timeBackground}; border: 1px solid ${borderColor}; text-align: center; height: ${cellHeight}px; font-size: ${enhancedExport ? '18px' : '14px'}; font-weight: 600; color: ${timeColor}; box-sizing: border-box;`;
         cloneRow.appendChild(timeCell);
       }
 
@@ -248,7 +287,7 @@ export function initExportEngine() {
         if (!hideEmptyCols || activeDays.has(i)) {
           const newCell = document.createElement("td");
           newCell.className = "cell";
-          newCell.style.cssText = `position: relative; border: 1px solid #ddd; height: ${cellHeight}px; padding: 0; box-sizing: border-box;`;
+          newCell.style.cssText = `position: relative; border: 1px solid ${borderColor}; height: ${cellHeight}px; padding: 0; box-sizing: border-box; background: ${tableBackground};`;
           
           const originalCell = originalRow.querySelectorAll(".cell")[i];
           if (originalCell && originalCell.innerHTML !== "") {
@@ -291,7 +330,7 @@ export function initExportEngine() {
 
     try {
       const dataUrl = await htmlToImage.toPng(cloneTable, {
-        backgroundColor: document.body.classList.contains("dark-mode") ? "#121212" : "#ffffff",
+        backgroundColor: tableBackground,
         pixelRatio: 2,
         width: 1200,
         style: { transform: 'scale(1)', transformOrigin: 'top left' }

@@ -186,6 +186,15 @@ export const CalendarioAcademico = {
       }
     }
 
+    this.state.semestres.sort((first, second) => {
+      const firstMatch = String(first.periodo).match(/^(\d{4})-(\d+)$/);
+      const secondMatch = String(second.periodo).match(/^(\d{4})-(\d+)$/);
+      if (firstMatch && secondMatch) {
+        return Number(secondMatch[1]) - Number(firstMatch[1]) || Number(secondMatch[2]) - Number(firstMatch[2]);
+      }
+      return String(second.periodo).localeCompare(String(first.periodo));
+    });
+
     this.elements.select.innerHTML = '';
     this.state.semestres.forEach(sem => {
       const opt = document.createElement('option');
@@ -204,8 +213,8 @@ export const CalendarioAcademico = {
       : false;
 
     if (hasCalendarIndex && this.state.semestres.length > 0) {
-      // Requirement: open with the most recently added calendar by default
-      this.elements.select.value = this.state.semestres[this.state.semestres.length - 1].periodo;
+      // The list and default selection both use the newest academic period first.
+      this.elements.select.value = this.state.semestres[0].periodo;
     } else if (hasDesired) {
       this.elements.select.value = desiredSemester;
     } else if (this.state.semestres.length > 0) {

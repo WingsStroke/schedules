@@ -4,9 +4,19 @@ export const MotorCombinaciones = {
   maxCombinaciones: 5,
   combinaciones: [],
   todasLasCombinaciones: [],  // Todas las combinaciones generadas
-  combinacionesDescartadas: [],  // Índices de combinaciones descartadas
+  combinacionesDescartadas: [],  // IDs de combinaciones descartadas
+  siguienteCombinacionId: 1,
+  MAX_COMBINACIONES_EXPLORADAS: 10000,
+  MAX_COMBINACIONES_MUESTRA: 1000,
+  estadisticasGeneracion: {
+    totalTeoricas: 0,
+    totalExploradas: 0,
+    totalValidasExploradas: 0,
+    esParcial: false,
+    usaMuestreo: false
+  },
   
-  MAX_ASIGNATURAS: 7,
+  MAX_ASIGNATURAS: 8,
 
   agregarAsignatura(asignatura) {
     const existe = this.asignaturasSeleccionadas.find(a => a.id === asignatura.id);
@@ -122,12 +132,9 @@ export const MotorCombinaciones = {
     const totalGruposMin = Math.min(...gruposPorAsignatura.map(g => g.grupos.length));
 
     
-    const combinacionesGeneradas = this.generarTodasLasCombinaciones(gruposPorAsignatura);
-
-    
-    const combinacionesValidas = combinacionesGeneradas.filter(comb => {
-      return !this.tieneConflictos(comb);
-    });
+    this.siguienteCombinacionId = 1;
+    const resultadoGeneracion = this.generarTodasLasCombinaciones(gruposPorAsignatura);
+    const combinacionesValidas = resultadoGeneracion.combinaciones;
     
 
     
@@ -144,6 +151,13 @@ export const MotorCombinaciones = {
     
     // Guardar TODAS las combinaciones disponibles
     this.todasLasCombinaciones = combinacionesOrdenadas;
+    this.estadisticasGeneracion = {
+      totalTeoricas: resultadoGeneracion.totalTeoricas,
+      totalExploradas: resultadoGeneracion.totalExploradas,
+      totalValidasExploradas: resultadoGeneracion.totalValidas,
+      esParcial: resultadoGeneracion.esParcial,
+      usaMuestreo: resultadoGeneracion.usaMuestreo
+    };
     
     // Reiniciar descartadas al generar nuevas combinaciones
     this.combinacionesDescartadas = [];
@@ -161,9 +175,13 @@ export const MotorCombinaciones = {
       exito: true,
       mensaje: 'Combinaciones generadas correctamente',
       combinaciones: combinacionesLimitadas,
-      totalGeneradas: combinacionesGeneradas.length,
-      totalValidas: combinacionesValidas.length,
-      totalDisponibles: this.todasLasCombinaciones.length
+      totalGeneradas: resultadoGeneracion.totalExploradas,
+      totalValidas: resultadoGeneracion.totalValidas,
+      totalDisponibles: this.todasLasCombinaciones.length,
+      totalTeoricas: resultadoGeneracion.totalTeoricas,
+      totalExploradas: resultadoGeneracion.totalExploradas,
+      esParcial: resultadoGeneracion.esParcial,
+      usaMuestreo: resultadoGeneracion.usaMuestreo
     };
   },
   
@@ -177,12 +195,9 @@ export const MotorCombinaciones = {
 
     
     // Marcar como descartada
-    const indexEnTodasLasCombinaciones = this.todasLasCombinaciones.findIndex(
-      comb => JSON.stringify(comb) === JSON.stringify(this.combinaciones[index])
-    );
-    
-    if (indexEnTodasLasCombinaciones !== -1) {
-      this.combinacionesDescartadas.push(indexEnTodasLasCombinaciones);
+    const combinacion = this.combinaciones[index];
+    if (combinacion && combinacion.combinacionId !== undefined) {
+      this.combinacionesDescartadas.push(combinacion.combinacionId);
     }
     
     // Eliminar de las mostradas
@@ -206,13 +221,14 @@ export const MotorCombinaciones = {
   obtenerSiguienteCombinacion() {
     for (let i = 0; i < this.todasLasCombinaciones.length; i++) {
       // Saltar si está descartada
-      if (this.combinacionesDescartadas.includes(i)) {
+      const combinacion = this.todasLasCombinaciones[i];
+      if (this.combinacionesDescartadas.includes(combinacion.combinacionId)) {
         continue;
       }
       
       // Saltar si ya está en las mostradas
       const yaEstaMostrada = this.combinaciones.some(
-        comb => JSON.stringify(comb) === JSON.stringify(this.todasLasCombinaciones[i])
+        comb => comb.combinacionId === combinacion.combinacionId
       );
       
       if (!yaEstaMostrada) {
@@ -248,35 +264,33 @@ export const MotorCombinaciones = {
       mostradas: this.combinaciones.length,
       descartadas: this.combinacionesDescartadas.length,
       disponibles: this.todasLasCombinaciones.length,
-      restantes: this.todasLasCombinaciones.length - this.combinacionesDescartadas.length - this.combinaciones.length
+      restantes: this.todasLasCombinaciones.length - this.combinacionesDescartadas.length - this.combinaciones.length,
+      ...this.estadisticasGeneracion
     };
   },
   
   generarTodasLasCombinaciones(gruposPorAsignatura) {
-    if (gruposPorAsignatura.length === 0) return [];
-    if (gruposPorAsignatura.length === 1) {
-      return gruposPorAsignatura[0].grupos.map(g => [{
-        asignatura: gruposPorAsignatura[0].asignatura,
-        grupo: g
-      }]);
+    if (gruposPorAsignatura.length === 0) {
+      return { combinaciones: [], totalTeoricas: 0, totalExploradas: 0, totalValidas: 0, esParcial: false, usaMuestreo: false };
     }
-    
-    const combinaciones = [];
+
     const indices = new Array(gruposPorAsignatura.length).fill(0);
     const maxIndices = gruposPorAsignatura.map(g => g.grupos.length);
-    
-    let limite = 1;
-    for (const max of maxIndices) {
-      limite *= max;
-    }
-    
-    if (limite > 1000) {
-      limite = 1000;
-    }
-    
-    for (let i = 0; i < limite; i++) {
+
+    const totalTeoricas = maxIndices.reduce((total, max) => total * max, 1);
+    const limiteExploracion = Math.min(totalTeoricas, this.MAX_COMBINACIONES_EXPLORADAS);
+    const muestra = [];
+    let totalValidas = 0;
+    let randomState = this.obtenerSemilla(gruposPorAsignatura);
+
+    const siguienteAleatorio = () => {
+      randomState = (randomState * 1664525 + 1013904223) >>> 0;
+      return randomState / 4294967296;
+    };
+
+    for (let i = 0; i < limiteExploracion; i++) {
       const combinacion = [];
-      
+
       for (let j = 0; j < gruposPorAsignatura.length; j++) {
         const grupo = gruposPorAsignatura[j].grupos[indices[j]];
         combinacion.push({
@@ -284,9 +298,19 @@ export const MotorCombinaciones = {
           grupo: grupo
         });
       }
-      
-      combinaciones.push(combinacion);
-      
+
+      if (!this.tieneConflictos(combinacion)) {
+        const combinacionConId = this.crearCombinacion(combinacion);
+        totalValidas++;
+
+        if (muestra.length < this.MAX_COMBINACIONES_MUESTRA) {
+          muestra.push(combinacionConId);
+        } else {
+          const indiceMuestra = Math.floor(siguienteAleatorio() * totalValidas);
+          if (indiceMuestra < this.MAX_COMBINACIONES_MUESTRA) muestra[indiceMuestra] = combinacionConId;
+        }
+      }
+
       for (let k = gruposPorAsignatura.length - 1; k >= 0; k--) {
         indices[k]++;
         if (indices[k] < maxIndices[k]) {
@@ -295,8 +319,33 @@ export const MotorCombinaciones = {
         indices[k] = 0;
       }
     }
-    
-    return combinaciones;
+
+    return {
+      combinaciones: muestra,
+      totalTeoricas,
+      totalExploradas: limiteExploracion,
+      totalValidas,
+      esParcial: totalTeoricas > limiteExploracion,
+      usaMuestreo: totalValidas > this.MAX_COMBINACIONES_MUESTRA
+    };
+  },
+
+  obtenerSemilla(gruposPorAsignatura) {
+    const source = gruposPorAsignatura
+      .flatMap(entry => entry.grupos.map(group => `${entry.asignatura.id}:${group.id || group.grupo}`))
+      .join('|');
+    let hash = 2166136261;
+    for (let index = 0; index < source.length; index++) {
+      hash ^= source.charCodeAt(index);
+      hash = Math.imul(hash, 16777619);
+    }
+    return hash >>> 0;
+  },
+
+  crearCombinacion(items) {
+    const combinacion = [...items];
+    combinacion.combinacionId = this.siguienteCombinacionId++;
+    return combinacion;
   },
   
   tieneConflictos(combinacion) {
@@ -441,6 +490,13 @@ export const MotorCombinaciones = {
           this.combinaciones = e.data.payload.combinaciones;
           this.todasLasCombinaciones = e.data.payload.todasLasCombinaciones || [];
           this.combinacionesDescartadas = e.data.payload.combinacionesDescartadas || [];
+          this.estadisticasGeneracion = {
+            totalTeoricas: e.data.payload.totalTeoricas || 0,
+            totalExploradas: e.data.payload.totalExploradas || e.data.payload.totalGeneradas || 0,
+            totalValidasExploradas: e.data.payload.totalValidas || 0,
+            esParcial: e.data.payload.esParcial === true,
+            usaMuestreo: e.data.payload.usaMuestreo === true
+          };
           resolve(e.data.payload);
         } else if (e.data.type === 'ERROR') {
           resolve({ exito: false, mensaje: e.data.payload, combinaciones: [] });

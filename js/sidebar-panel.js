@@ -1,6 +1,7 @@
 import { MotorCombinaciones } from './motor-combinaciones.js';
 import { MinihorariosUI } from './minihorarios-ui.js';
 import { buscarAsignatura, seleccionarAsignatura, generarYMostrarCombinaciones } from './integracion-busqueda.js';
+import { escapeHtml } from './core.js';
 
 export const SidebarPanel = {
   
@@ -229,14 +230,18 @@ export const SidebarPanel = {
     }
     
     resultsContainer.innerHTML = resultados.map(asig => `
-      <div class="sidebar-search-result-item" onclick="SidebarPanel.seleccionarAsignaturaDesdeBusqueda('${asig.id}')">
-        <div class="sidebar-search-result-name">${asig.nombre}</div>
+      <div class="sidebar-search-result-item" data-asignatura-id="${escapeHtml(asig.id)}">
+        <div class="sidebar-search-result-name">${escapeHtml(asig.nombre)}</div>
         <div class="sidebar-search-result-info">
-          ${asig.totalGrupos} grupo${asig.totalGrupos !== 1 ? 's' : ''} • 
-          ${asig.programas.join(', ')}
+          ${Number(asig.totalGrupos) || 0} grupo${asig.totalGrupos !== 1 ? 's' : ''} • 
+          ${escapeHtml((asig.programas || []).join(', '))}
         </div>
       </div>
     `).join('');
+
+    resultsContainer.querySelectorAll('[data-asignatura-id]').forEach(result => {
+      result.addEventListener('click', () => this.seleccionarAsignaturaDesdeBusqueda(result.dataset.asignaturaId));
+    });
   },
   
   // Seleccionar asignatura desde bÃºsqueda integrada
@@ -366,7 +371,7 @@ export const SidebarPanel = {
         <div class="asignatura-seleccionada-item-sidebar ${estaExpandida ? 'is-expanded' : ''}">
           <div class="asignatura-header">
             <span class="asignatura-seleccionada-nombre">
-              ${asig.nombre}
+              ${escapeHtml(asig.nombre)}
               ${tieneFiltros ? '<span class="badge-filtrado">FILTRADO</span>' : ''}
             </span>
             <button 
@@ -425,7 +430,7 @@ export const SidebarPanel = {
           >
             &#215;
           </button>
-          <h3 class="modal-titulo-asignatura">${asignatura.nombre}</h3>
+          <h3 class="modal-titulo-asignatura">${escapeHtml(asignatura.nombre)}</h3>
           ${this.tieneFiltros(asignatura) ? '<span class="badge-filtrado">FILTRADO</span>' : ''}
         </div>
         
@@ -772,6 +777,10 @@ export const SidebarPanel = {
         counter.textContent = stats.mostradas;
         counter.title = `Mostrando ${stats.mostradas} combinaciones de ${stats.disponibles} posibles`;
       }
+
+      if (stats.esParcial || stats.usaMuestreo) {
+        counter.title += ` Resultado parcial: se exploraron ${stats.totalExploradas} de ${stats.totalTeoricas} combinaciones teóricas mediante muestreo reproducible.`;
+      }
     } else {
       counter.textContent = '0';
     }
@@ -812,6 +821,14 @@ export const SidebarPanel = {
         ).join('')}
       </div>
     `;
+
+    const stats = MotorCombinaciones.obtenerEstadisticasCombinaciones();
+    if (stats.esParcial || stats.usaMuestreo) {
+      const notice = document.createElement('p');
+      notice.className = 'combinaciones-partial-notice';
+      notice.textContent = `Resultado parcial: se exploraron ${stats.totalExploradas} de ${stats.totalTeoricas} combinaciones teóricas. Se muestran opciones mediante muestreo reproducible.`;
+      container.prepend(notice);
+    }
     
     this.actualizarContadorCombinaciones();
   },

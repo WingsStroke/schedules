@@ -145,11 +145,11 @@
 
     <div id="mobileFabContainer" class="mobile-only">
       <div id="mobileFabMenu" class="fab-menu">
-        <button onclick="document.getElementById('exportScheduleBtn').click()">Exportar JSON</button>
-        <button onclick="document.getElementById('exportPdfBtn').click()">Exportar PDF</button>
-        <button onclick="document.getElementById('exportBtn').click()">Exportar Imagen</button>
-        <button onclick="document.getElementById('calculateMonthlyBtn').click()">Calcular Aguinaldo</button>
-        <button onclick="document.getElementById('searchSubjectBtn').click()">Generar Horario</button>
+        <button type="button" data-mobile-action="exportScheduleBtn">Exportar JSON</button>
+        <button type="button" data-mobile-action="exportPdfBtn">Exportar PDF</button>
+        <button type="button" data-mobile-action="exportBtn">Exportar Imagen</button>
+        <button type="button" data-mobile-action="calculateMonthlyBtn">Calcular Aguinaldo</button>
+        <button type="button" data-mobile-action="searchSubjectBtn">Generar Horario</button>
       </div>
 
       <button id="mainFabBtn" class="main-fab">
@@ -265,7 +265,7 @@
     </div>
   </div>
 
-  <!--MESADA-->
+  <!--AGUINALDO-->
 
   <div class="modal" id="monthlyModal">
     <div class="modal-content">
@@ -413,6 +413,12 @@
             <span class="export-tooltip-trigger"
               title="Aumenta el tamaño de las celdas y el texto para que la imagen exportada sea más fácil de leer">?</span>
           </label>
+
+          <div class="export-option-row export-theme-toggle-row">
+            <input type="checkbox" id="exportLightMode" class="export-theme-toggle"
+              aria-label="Usar modo oscuro en la imagen">
+            <span id="exportThemeLabel">Usar modo oscuro en la imagen</span>
+          </div>
 
           <button id="confirmExportImageBtn" class="export-confirm-btn">Descargar imagen</button>
         </div>

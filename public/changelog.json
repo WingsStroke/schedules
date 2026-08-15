@@ -1,5 +1,14 @@
 [
   {
+    "version": "2.0.2",
+    "date": "",
+    "changes": [
+      "Se optimizó el motor de combinaciones de horarios.",
+      "Se agregó opción para cambiar el diseño del horario al momento de exportar a imagen.",
+      ""
+    ]
+  },
+  {
     "version": "2.0.1",
     "date": "6/08/2026",
     "changes": [

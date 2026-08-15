@@ -1,4 +1,4 @@
-import { ErrorHandler, APP_CONFIG, diasSemana, minutesToTime, getSubjectColor, SafeStorage } from './core.js';
+import { ErrorHandler, APP_CONFIG, diasSemana, escapeHtml, minutesToTime, getSubjectColor, SafeStorage } from './core.js';
 import { StorageDB } from './storage-db.js';
 import { state, editorState, schedules, currentScheduleIndex, setCurrentScheduleIndex, saveData, initializeState, isCellOccupied, normalizeSubject, normalizeSubjectsForCalculation, validateScheduleSchema } from './state-manager.js';
 import { isHoliday, isHolyWeek, calculateMonthlyCost } from './calculadora-aguinaldo.js';
@@ -128,7 +128,7 @@ function renderSchedules() {
     const subjectText = subjectCount === 1 ? "asignatura" : "asignaturas";
 
     card.innerHTML = `
-      <h3>${schedule.name}</h3>
+      <h3>${escapeHtml(schedule.name)}</h3>
       <span>${new Date(schedule.created).toLocaleDateString()}</span>
       <span class="subject-count">${subjectCount} ${subjectText}</span>
       <div class="card-actions">
@@ -627,9 +627,9 @@ changelogBtn.addEventListener("click", async () => {
     const data = await res.json();
     document.getElementById("changelogContent").innerHTML = data.map(entry => `
       <div class="changelog-entry">
-        <h3>Versión ${entry.version}</h3>
-        <ul>${entry.changes.map(c => `<li>${c}</li>`).join("")}</ul>
-        <div class="date">Fecha: ${entry.date}</div>
+        <h3>Versión ${escapeHtml(entry.version)}</h3>
+        <ul>${(entry.changes || []).map(c => `<li>${escapeHtml(c)}</li>`).join("")}</ul>
+        <div class="date">Fecha: ${escapeHtml(entry.date)}</div>
       </div>
     `).join("");
     SafeStorage.setItem(APP_CONFIG.LAST_VERSION_KEY, data[0].version);
@@ -656,10 +656,12 @@ function toggleFabMenu() {
 fabBtn.addEventListener("click", toggleFabMenu);
 fabOverlay.addEventListener("click", toggleFabMenu);
 
-// Cerrar menú al hacer clic en cualquier opción
-document.querySelectorAll(".fab-menu button").forEach(btn => {
+// Ejecutar la acción antes de cerrar el menú para evitar que el FAB intercepte el modal.
+document.querySelectorAll(".fab-menu button[data-mobile-action]").forEach(btn => {
   btn.addEventListener("click", () => {
+    const action = document.getElementById(btn.dataset.mobileAction);
     toggleFabMenu();
+    action?.click();
   });
 });
 
